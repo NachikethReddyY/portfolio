@@ -86,40 +86,49 @@ const jsonLd = {
 import { BubbleMenu } from "@/components/ui/bubble-menu";
 import Image from "next/image";
 
+import { ThemeProvider } from "@/components/theme-provider";
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className={`${inter.className} bg-[#f5f5f5]`}>
-        <BubbleMenu
-          useFixedPosition
-          logo={
-            <div className="h-10 w-10 overflow-hidden rounded-full">
-              <Image
-                src="/mesquare.png"
-                alt="NR"
-                width={40}
-                height={40}
-                className="object-cover h-full w-full"
-              />
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+      <body className={`${inter.className} bg-[#f5f5f5] dark:bg-zinc-950 transition-colors duration-300`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <BubbleMenu
+            useFixedPosition
+            logo={
+              <div className="h-10 w-10 overflow-hidden rounded-full">
+                <Image
+                  src="/mesquare.png"
+                  alt="NR"
+                  width={40}
+                  height={40}
+                  className="object-cover h-full w-full"
+                />
+              </div>
+            }
+            className="top-4 right-4 md:right-8 z-50"
+          />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          />
+          {children}
+          <footer className="py-12 text-center text-sm text-muted-foreground border-t border-zinc-200/50 bg-[#f5f5f5] dark:bg-zinc-950 dark:border-zinc-800 transition-colors duration-300">
+            <div className="max-w-7xl mx-auto px-6 space-y-2">
+              <p className="font-medium">&copy; {new Date().getFullYear()} Nachiketh Reddy.</p>
+              <p className="text-xs text-zinc-400 uppercase tracking-widest">Built for documentation of work and display.</p>
             </div>
-          }
-          className="top-4 right-4 md:right-8 z-50"
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-        {children}
-        <footer className="py-12 text-center text-sm text-muted-foreground border-t border-zinc-200/50 bg-[#f5f5f5]">
-          <div className="max-w-7xl mx-auto px-6 space-y-2">
-            <p className="font-medium">&copy; {new Date().getFullYear()} Nachiketh Reddy.</p>
-            <p className="text-xs text-zinc-400 uppercase tracking-widest">Built for documentation of work and display.</p>
-          </div>
-        </footer>
+          </footer>
+        </ThemeProvider>
       </body>
     </html>
   );

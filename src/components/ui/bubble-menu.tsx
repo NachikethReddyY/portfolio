@@ -2,8 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { useTheme } from "next-themes";
-import { Moon, Sun } from "lucide-react";
+import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
 import { gsap } from 'gsap';
 import './bubble-menu.css';
 
@@ -178,6 +177,23 @@ export function BubbleMenu({
                         {logo}
                     </span>
                 </div>
+
+                <AnimatedThemeToggler
+                    className="bubble theme-bubble"
+                    style={{
+                        background: menuBg,
+                        color: menuContentColor,
+                        marginRight: '8px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        width: '40px',
+                        height: '40px',
+                        padding: 0,
+                        border: 'none',
+                        cursor: 'pointer'
+                    }}
+                />
 
                 <button
                     type="button"
