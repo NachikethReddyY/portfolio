@@ -39,6 +39,13 @@ You do not need to install a separate app. The studio is embedded in your Next.j
 3.  **Login**:
     Log in with the GitHub, Google, or Email account you used to create the Sanity project.
 
+### Accessing in Production
+Once deployed, your Studio lives at the same path on your live domain:
+👉 **https://ynr.vercel.app/studio**
+
+You can log in there to manage content for your live website.
+
+
 ---
 
 ## 3. Managing Content
