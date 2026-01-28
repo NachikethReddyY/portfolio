@@ -6,8 +6,78 @@ import { Navbar } from "@/components/layout/navbar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Nachiketh Reddy | Frontend Developer",
-  description: "Portfolio of Nachiketh Reddy, a Frontend Developer based in Singapore.",
+  title: {
+    default: "Nachiketh Reddy | Full Stack Developer in Singapore",
+    template: "%s | Nachiketh Reddy"
+  },
+  description: "Portfolio of Nachiketh Reddy, a Full Stack Developer based in Singapore specializing in Next.js, React, and modern web systems.",
+  keywords: ["Nachiketh Reddy", "Full Stack Developer", "Singapore", "Frontend Developer", "Next.js", "React", "Node.js", "Web Development", "Software Engineer"],
+  authors: [{ name: "Nachiketh Reddy" }],
+  creator: "Nachiketh Reddy",
+  publisher: "Nachiketh Reddy",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL("https://ynr.vercel.app"),
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Nachiketh Reddy | Full Stack Developer in Singapore",
+    description: "Verified portfolio of Nachiketh Reddy. Building practical web systems with APIs and clean architecture.",
+    url: "https://ynr.vercel.app",
+    siteName: "Nachiketh Reddy Portfolio",
+    locale: "en_SG",
+    type: "website",
+    images: [
+      {
+        url: "https://ynr.vercel.app/mesquare.png", // Using absolute URL for better compatibility
+        width: 800,
+        height: 800,
+        alt: "Nachiketh Reddy",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Nachiketh Reddy | Full Stack Developer",
+    description: "Based in Singapore. Building modern web systems.",
+    images: ["https://ynr.vercel.app/mesquare.png"],
+    creator: "@NachikethReddyY",
+  },
+  other: {
+    "geo.region": "SG",
+    "geo.placename": "Singapore",
+    "geo.position": "1.3521;103.8198",
+    "ICBM": "1.3521, 103.8198",
+  },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Nachiketh Reddy",
+  "jobTitle": "Full Stack Developer",
+  "url": "https://ynr.vercel.app",
+  "image": "https://ynr.vercel.app/mesquare.png",
+  "homeLocation": {
+    "@type": "Place",
+    "name": "Singapore"
+  },
+  "sameAs": [
+    "https://linkedin.com/in/ynr-nachiketh-reddy",
+    "https://github.com/NachikethReddyY"
+  ],
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Singapore Polytechnic"
+  },
+  "alumniOf": {
+    "@type": "EducationalOrganization",
+    "name": "Singapore Polytechnic"
+  }
 };
 
 import { BubbleMenu } from "@/components/ui/bubble-menu";
@@ -35,6 +105,10 @@ export default function RootLayout({
             </div>
           }
           className="top-4 left-1/2 -translate-x-1/2 md:left-auto md:right-8 md:translate-x-0 z-50"
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         {children}
       </body>
