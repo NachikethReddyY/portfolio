@@ -33,8 +33,8 @@ export function SearchableGrid({ projects }: SearchableGridProps) {
     return (
         <div className="space-y-12">
             {/* SEARCH & FILTERS */}
-            <div className="sticky top-6 z-30">
-                <div className="bg-white/80 backdrop-blur-xl border border-white/20 shadow-sm p-2 pl-4 rounded-full flex flex-col md:flex-row gap-2 items-center justify-between max-w-4xl mx-auto ring-1 ring-zinc-200/50">
+            <div className="sticky top-6 z-30 px-4 md:px-0">
+                <div className="bg-white/80 backdrop-blur-xl border border-white/20 shadow-sm p-3 md:p-2 md:pl-4 rounded-3xl md:rounded-full flex flex-col md:flex-row gap-3 items-center justify-between max-w-4xl mx-auto ring-1 ring-zinc-200/50">
                     <div className="relative w-full md:w-80">
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 h-4 w-4" />
                         <input
@@ -44,13 +44,13 @@ export function SearchableGrid({ projects }: SearchableGridProps) {
                             onChange={(e) => setQuery(e.target.value)}
                         />
                     </div>
-                    <div className="flex bg-zinc-100 rounded-full p-1 gap-1">
+                    <div className="flex bg-zinc-100 rounded-xl md:rounded-full p-1 gap-1 w-full md:w-auto overflow-x-auto no-scrollbar">
                         {(["all", "real-world", "personal", "academic"] as const).map((f) => (
                             <button
                                 key={f}
                                 onClick={() => setFilter(f)}
                                 className={`
-                                    px-4 py-1.5 rounded-full text-xs font-medium transition-all
+                                    px-4 py-2 md:py-1.5 rounded-lg md:rounded-full text-xs font-medium transition-all whitespace-nowrap flex-1 md:flex-none
                                     ${filter === f
                                         ? "bg-white text-zinc-900 shadow-sm"
                                         : "text-zinc-500 hover:text-zinc-700"
