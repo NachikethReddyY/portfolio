@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Github, ArrowLeft, Calendar, User, Clock, Share2 } from "lucide-react";
+import { ExternalLink, Github, ArrowLeft, Calendar, User, Clock, Share2, PlayCircle } from "lucide-react";
 import { notFound } from "next/navigation";
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
@@ -21,6 +21,7 @@ interface ProjectDetail {
     problem: string;
     solution: any;
     liveUrl?: string;
+    projectUrl?: string;
     repoUrl?: string;
     techStack: { name: string; category: string }[];
 }
@@ -72,6 +73,7 @@ export default async function ProjectDetail(props: { params: Promise<{ slug: str
         problem,
         solution,
         liveUrl,
+        projectUrl,
         repoUrl,
         "techStack": techStack[]->{name, category}
     }`;
@@ -160,7 +162,12 @@ export default async function ProjectDetail(props: { params: Promise<{ slug: str
                     <div className="flex gap-3">
                         {project.liveUrl && (
                             <Link href={project.liveUrl} target="_blank" className="flex items-center gap-1.5 font-medium text-blue-600 hover:underline">
-                                <ExternalLink className="h-4 w-4" /> View Project
+                                <ExternalLink className="h-4 w-4" /> Visit Site
+                            </Link>
+                        )}
+                        {project.projectUrl && (
+                            <Link href={project.projectUrl} target="_blank" className="flex items-center gap-1.5 font-medium text-indigo-600 hover:underline">
+                                <PlayCircle className="h-4 w-4" /> View Project
                             </Link>
                         )}
                         {project.repoUrl && (

@@ -22,6 +22,7 @@ export interface Project {
     repoUrl?: string;
     isFeatured: boolean;
     publishedAt?: string;
+    projectUrl?: string;
 }
 
 export interface ExperienceItem {
