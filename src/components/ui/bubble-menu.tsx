@@ -178,39 +178,6 @@ export function BubbleMenu({
                     </span>
                 </div>
 
-                <AnimatedThemeToggler
-                    className="bubble theme-bubble"
-                    style={{
-                        background: menuBg,
-                        color: menuContentColor,
-                        marginRight: '8px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        width: '40px',
-                        height: '40px',
-                        padding: 0,
-                        border: 'none',
-                        cursor: 'pointer'
-                    }}
-                />
-
-                <button
-                    type="button"
-                    className="bubble theme-bubble"
-                    onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                    style={{ background: menuBg, marginRight: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-                    aria-label="Toggle theme"
-                >
-                    {mounted && (
-                        theme === 'dark' ? (
-                            <Sun size={18} color={menuContentColor} />
-                        ) : (
-                            <Moon size={18} color={menuContentColor} />
-                        )
-                    )}
-                </button>
-
                 <button
                     type="button"
                     className={`bubble toggle-bubble menu-btn ${isMenuOpen ? 'open' : ''}`}
@@ -222,6 +189,23 @@ export function BubbleMenu({
                     <span className="menu-line" style={{ background: menuContentColor }} />
                     <span className="menu-line short" style={{ background: menuContentColor }} />
                 </button>
+
+                <AnimatedThemeToggler
+                    className="bubble theme-bubble"
+                    style={{
+                        background: menuBg,
+                        color: menuContentColor,
+                        marginLeft: '8px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        width: '40px',
+                        height: '40px',
+                        padding: 0,
+                        border: 'none',
+                        cursor: 'pointer'
+                    }}
+                />
             </nav>
             {showOverlay && (
                 <div
