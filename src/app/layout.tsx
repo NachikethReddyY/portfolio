@@ -24,9 +24,9 @@ export default function RootLayout({
         <BubbleMenu
           useFixedPosition
           logo={
-            <div className="h-10 w-10 overflow-hidden rounded-full bg-white flex items-center justify-center">
+            <div className="h-10 w-10 overflow-hidden rounded-full">
               <Image
-                src="/logo.svg"
+                src="/mesquare.png"
                 alt="NR"
                 width={40}
                 height={40}

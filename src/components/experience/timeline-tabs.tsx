@@ -13,11 +13,11 @@ interface TimelineTabsProps {
 
 export function TimelineTabs({ workExperience, education }: TimelineTabsProps) {
     return (
-        <div className="max-w-4xl mx-auto w-full">
+        <div className="max-w-full mx-auto w-full">
             <Tabs defaultValue="education" className="w-full">
-                <TabsList className="grid w-full grid-cols-2 mb-8 h-12 border border-zinc-200 rounded-lg bg-transparent p-1">
-                    <TabsTrigger value="work" className="text-base font-medium data-[state=active]:bg-background data-[state=active]:shadow-sm">Work Experience</TabsTrigger>
-                    <TabsTrigger value="education" className="text-base font-medium data-[state=active]:bg-background data-[state=active]:shadow-sm">Education</TabsTrigger>
+                <TabsList className="grid w-full grid-cols-2 mb-6 h-10 border border-zinc-200 rounded-lg bg-transparent p-1">
+                    <TabsTrigger value="work" className="text-sm font-medium data-[state=active]:bg-background data-[state=active]:shadow-sm">Work Experience</TabsTrigger>
+                    <TabsTrigger value="education" className="text-sm font-medium data-[state=active]:bg-background data-[state=active]:shadow-sm">Education</TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="work">
@@ -33,25 +33,25 @@ export function TimelineTabs({ workExperience, education }: TimelineTabsProps) {
 
 function TimelineList({ items, type }: { items: any[], type: "work" | "education" }) {
     if (!items || items.length === 0) {
-        return <div className="text-center text-muted-foreground py-10">No entries found.</div>
+        return <div className="text-center text-muted-foreground py-6">No entries found.</div>
     }
 
     return (
         <Card className="border shadow-sm">
-            <CardContent className="p-6 md:p-8">
-                <div className="relative space-y-12">
+            <CardContent className="p-4 md:p-6">
+                <div className="relative space-y-8">
                     {/* Vertical Line */}
-                    <div className="absolute top-4 bottom-4 left-[27px] w-px bg-border md:left-[35px]" />
+                    <div className="absolute top-3 bottom-3 left-[23px] w-px bg-border md:left-[27px]" />
 
                     {items.map((item, idx) => (
-                        <div key={idx} className="relative flex gap-6 md:gap-8">
+                        <div key={idx} className="relative flex gap-4 md:gap-6">
                             {/* Logo / Icon */}
                             <div className="relative z-10 shrink-0">
-                                <div className="h-14 w-14 rounded-full border bg-background flex items-center justify-center md:h-18 md:w-18 shadow-sm">
+                                <div className="h-12 w-12 rounded-full border bg-background flex items-center justify-center md:h-14 md:w-14 shadow-sm">
                                     {type === "work" ? (
-                                        <Briefcase className="h-6 w-6 text-primary" />
+                                        <Briefcase className="h-5 w-5 text-primary" />
                                     ) : (
-                                        <GraduationCap className="h-6 w-6 text-primary" />
+                                        <GraduationCap className="h-5 w-5 text-primary" />
                                     )}
                                 </div>
                             </div>

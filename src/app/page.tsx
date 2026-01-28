@@ -15,7 +15,7 @@ export default function Home() {
     <main className="min-h-screen bg-[#f5f5f5] font-sans mb-20 relative">
 
 
-      <div className="max-w-5xl mx-auto px-6 md:px-12 pt-8 md:pt-16 relative z-10 space-y-10">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 pt-20 md:pt-32 relative z-10 space-y-8">
 
         {/* 2. PROFILE & INTRO */}
         <div className="space-y-6">
@@ -47,14 +47,13 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="space-y-6 max-w-3xl">
+          <div className="space-y-6 w-full">
             <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-foreground leading-tight">
               Hi, I&apos;m Nachiketh Reddy.
             </h1>
-            <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl">
+            <p className="text-xl text-muted-foreground leading-relaxed">
               I am a Full Stack Developer building practical web systems with APIs and clean architecture using modern JavaScript frameworks. I&apos;m a 17-year-old student at <span className="font-medium text-foreground">Singapore Polytechnic 🇸🇬</span>, pursuing my Diploma in Computer Science. While I&apos;m just starting my academic journey (Class of &apos;28), I spend my free time exploring full-stack development and system architecture.
             </p>
-
             <div className="flex flex-row items-center gap-6 pt-4 text-sm font-medium text-muted-foreground">
               <div className="flex items-center gap-2">
                 <MapPin className="h-4 w-4" />
@@ -78,22 +77,20 @@ export default function Home() {
         </div>
 
         {/* 4. SKILLS SECTION */}
-        <div className="pt-4">
+        <div>
           <SkillsGrid />
         </div>
 
         {/* 5. EXPERIENCE SECTION */}
-        <section id="experience" className="scroll-mt-24 pt-8">
-          <div className="mb-8">
-          </div>
+        <section id="experience" className="scroll-mt-24">
           <TimelineTabs
             workExperience={MOCK_EXPERIENCE_FOLDERS.find(f => f.title === 'work')!}
             education={MOCK_EXPERIENCE_FOLDERS.find(f => f.title === 'education')!}
           />
         </section>
 
-        {/* 3. FEATURED PROJECTS SECTION (Moved Below Experience) */}
-        <section id="projects" className="space-y-8 scroll-mt-24">
+        {/* 3. FEATURED PROJECTS SECTION */}
+        <section id="projects" className="space-y-6 scroll-mt-24">
           <div className="flex items-center justify-between">
             <div className="space-y-1">
               <h2 className="text-2xl font-bold tracking-tight">Featured Projects</h2>
