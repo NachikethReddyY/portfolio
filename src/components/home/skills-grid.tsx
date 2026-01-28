@@ -1,42 +1,51 @@
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import {
-    SiHtml5,
-    SiCss3,
-    SiJavascript,
-    SiGit,
-    SiReact,
-    SiPython
-} from "react-icons/si";
+"use client";
 
-const SKILLS = [
-    { name: "HTML5", icon: <SiHtml5 className="h-5 w-5 text-[#E34F26]" />, status: "current" },
-    { name: "CSS3", icon: <SiCss3 className="h-5 w-5 text-[#1572B6]" />, status: "current" },
-    { name: "JavaScript", icon: <SiJavascript className="h-5 w-5 text-[#F7DF1E]" />, status: "current" },
-    { name: "Python", icon: <SiPython className="h-5 w-5 text-[#3776AB]" />, status: "learning" },
-    { name: "Git", icon: <SiGit className="h-5 w-5 text-[#F05032]" />, status: "learning" },
-    { name: "React", icon: <SiReact className="h-5 w-5 text-[#61DAFB]" />, status: "learning" },
-    { name: "React Native", icon: <SiReact className="h-5 w-5 text-[#61DAFB]" />, status: "learning" },
-];
+import {
+    SiHtml5, SiCss3, SiJavascript, SiTypescript,
+    SiReact, SiNextdotjs, SiTailwindcss, SiGit,
+    SiPython, SiNodedotjs, SiSupabase, SiPostgresql
+} from "react-icons/si";
 
 export function SkillsGrid() {
     return (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3">
-            {SKILLS.map((skill) => (
-                <Card key={skill.name} className="relative flex flex-col items-center justify-center p-3 gap-2 hover:border-primary/50 transition-colors cursor-default text-center h-24 overflow-visible group">
+        <div className="space-y-8">
+            {/* Primary Stack */}
+            <div className="space-y-4">
+                <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+                    Currently Working With
+                </h3>
+                <div className="flex flex-wrap gap-3">
+                    <SkillBadge icon={SiJavascript} name="JavaScript" color="#F7DF1E" />
+                    <SkillBadge icon={SiTypescript} name="TypeScript" color="#3178C6" />
+                    <SkillBadge icon={SiReact} name="React" color="#61DAFB" />
+                    <SkillBadge icon={SiNextdotjs} name="Next.js" color="#000000" />
+                    <SkillBadge icon={SiTailwindcss} name="Tailwind" color="#06B6D4" />
+                    <SkillBadge icon={SiNodedotjs} name="Node.js" color="#339933" />
+                    <SkillBadge icon={SiGit} name="Git" color="#F05032" />
+                    <SkillBadge icon={SiSupabase} name="Supabase" color="#3ECF8E" />
+                </div>
+            </div>
 
-                    {skill.status === "learning" && (
-                        <Badge className="absolute -top-2 -right-2 px-1.5 py-0.5 text-[10px] uppercase font-bold bg-blue-100 text-blue-700 hover:bg-blue-100 dark:bg-blue-900 dark:text-blue-300 pointer-events-none shadow-sm">
-                            Learning
-                        </Badge>
-                    )}
+            {/* Secondary / Exploring */}
+            <div className="space-y-4">
+                <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+                    Exploring Next
+                </h3>
+                <div className="flex flex-wrap gap-3 opacity-80">
+                    <SkillBadge icon={SiPython} name="Python" color="#3776AB" />
+                    <SkillBadge icon={SiPostgresql} name="PostgreSQL" color="#4169E1" />
+                    {/* Add more as needed */}
+                </div>
+            </div>
+        </div>
+    );
+}
 
-                    <div className="h-8 w-8 rounded-md bg-secondary/50 flex items-center justify-center">
-                        {skill.icon}
-                    </div>
-                    <span className="font-medium text-xs text-muted-foreground">{skill.name}</span>
-                </Card>
-            ))}
+function SkillBadge({ icon: Icon, name, color }: { icon: any, name: string, color: string }) {
+    return (
+        <div className="flex items-center gap-2 px-4 py-2 bg-white border border-zinc-200 rounded-lg shadow-sm hover:shadow-md transition-all">
+            <Icon className="h-5 w-5" style={{ color }} />
+            <span className="font-medium text-sm text-zinc-700">{name}</span>
         </div>
     );
 }

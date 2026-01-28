@@ -36,7 +36,7 @@ export default function Home() {
 
             <div className="flex gap-2 mb-2">
               <Button variant="outline" size="sm" asChild>
-                <Link href="https://linkedin.com" target="_blank"><Linkedin className="h-4 w-4" /></Link>
+                <Link href="https://linkedin.com/in/ynr-nachiketh-reddy" target="_blank"><Linkedin className="h-4 w-4" /></Link>
               </Button>
               <Button variant="outline" size="sm" asChild>
                 <Link href="https://github.com/NachikethReddyY" target="_blank"><Github className="h-4 w-4" /></Link>
@@ -47,35 +47,50 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="space-y-4 max-w-2xl">
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-foreground">
-              Hey, I&apos;m Nachiketh.
+          <div className="space-y-6 max-w-3xl">
+            <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-foreground leading-tight">
+              Full Stack Developer.
             </h1>
-            <p className="text-xl text-muted-foreground leading-relaxed">
-              I&apos;m a 17-year-old student at <span className="text-foreground font-medium">Singapore Polytechnic 🇸🇬</span>, pursuing my Diploma in Computer Science.
+            <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl">
+              I build practical web systems with APIs and clean architecture using modern JavaScript frameworks.
             </p>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              While I&apos;m just starting my academic journey (Class of &apos;28), I spend my free time exploring full-stack development and system architecture.
-            </p>
-          </div>
 
-          <div className="pt-4">
-            <SkillsGrid />
+            <div className="flex flex-wrap gap-3 pt-2">
+              <Badge variant="secondary" className="px-3 py-1 text-sm font-medium"><MapPin className="mr-1 h-3 w-3" /> Based in Singapore</Badge>
+              <Badge variant="secondary" className="px-3 py-1 text-sm font-medium bg-green-100 text-green-700 hover:bg-green-100"><div className="mr-2 h-2 w-2 rounded-full bg-green-600 animate-pulse" /> Available to work</Badge>
+            </div>
+
+            <div className="pt-4">
+              <Button size="lg" asChild className="font-semibold text-base px-8">
+                <Link href="#projects">View Case Studies &rarr;</Link>
+              </Button>
+            </div>
           </div>
         </div>
 
-        {/* 3. EXPERIENCE SECTION */}
+        {/* 4. SKILLS SECTION */}
+        <div className="pt-4">
+          <SkillsGrid />
+        </div>
+
+        {/* 5. EXPERIENCE SECTION */}
         <section id="experience" className="scroll-mt-24 pt-8">
+          <div className="mb-8">
+            <h2 className="text-2xl font-bold tracking-tight mb-2">Professional Journey</h2>
+          </div>
           <TimelineTabs
             workExperience={MOCK_EXPERIENCE_FOLDERS.find(f => f.title === 'work')!}
             education={MOCK_EXPERIENCE_FOLDERS.find(f => f.title === 'education')!}
           />
         </section>
 
-        {/* 4. FEATURED PROJECTS SECTION */}
-        <section id="projects" className="space-y-8">
+        {/* 3. FEATURED PROJECTS SECTION (Moved Below Experience) */}
+        <section id="projects" className="space-y-8 scroll-mt-24">
           <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-bold tracking-tight">Featured Projects</h2>
+            <div className="space-y-1">
+              <h2 className="text-2xl font-bold tracking-tight">Featured Projects</h2>
+              <p className="text-muted-foreground">Real-world applications and technical implementations.</p>
+            </div>
             <Button variant="ghost" asChild className="hidden md:flex">
               <Link href="/projects">View Archive &rarr;</Link>
             </Button>
