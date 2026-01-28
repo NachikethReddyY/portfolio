@@ -122,10 +122,10 @@ export default function RootLayout({
             dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
           />
           {children}
-          <footer className="py-12 text-center text-sm text-muted-foreground border-t border-zinc-200/50 bg-[#f5f5f5] dark:bg-zinc-950 dark:border-zinc-800 transition-colors duration-300">
+          <footer className="py-12 text-center text-sm text-muted-foreground border-t border-border bg-background transition-colors duration-300">
             <div className="max-w-7xl mx-auto px-6 space-y-2">
               <p className="font-medium">&copy; {new Date().getFullYear()} Nachiketh Reddy.</p>
-              <p className="text-xs text-zinc-400 uppercase tracking-widest">Built for documentation of work and display.</p>
+              <p className="text-xs text-muted-foreground/60 uppercase tracking-widest">Built for documentation of work and display.</p>
             </div>
           </footer>
         </ThemeProvider>
