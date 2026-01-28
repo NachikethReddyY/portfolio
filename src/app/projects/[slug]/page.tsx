@@ -160,7 +160,7 @@ export default async function ProjectDetail(props: { params: Promise<{ slug: str
                     <div className="flex gap-3">
                         {project.liveUrl && (
                             <Link href={project.liveUrl} target="_blank" className="flex items-center gap-1.5 font-medium text-blue-600 hover:underline">
-                                <ExternalLink className="h-4 w-4" /> Visit Site
+                                <ExternalLink className="h-4 w-4" /> View Project
                             </Link>
                         )}
                         {project.repoUrl && (
