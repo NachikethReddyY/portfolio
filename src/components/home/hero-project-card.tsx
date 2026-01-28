@@ -20,7 +20,7 @@ import Image from "next/image";
 
 export function HeroProjectCard({ title, category, description, tags, href, imageUrl, date, repoUrl }: HeroProjectCardProps) {
     return (
-        <Card className="h-full overflow-hidden border-0 bg-white text-zinc-900 shadow-xl transition-all hover:scale-[1.01] hover:shadow-2xl relative group">
+        <Card className="h-full overflow-hidden border border-border/60 bg-card text-card-foreground shadow-xl transition-all hover:scale-[1.01] hover:shadow-2xl relative group">
             {/* Clickable Overlay */}
             <Link href={href} className="absolute inset-0 z-10 focus:outline-none focus:ring-2 ring-primary/50 rounded-xl" />
 
@@ -30,11 +30,11 @@ export function HeroProjectCard({ title, category, description, tags, href, imag
                 <div className="p-6 relative flex flex-col gap-1">
                     <div className="flex justify-between items-start mb-1">
                         <div className="flex items-center gap-3">
-                            <Badge variant="secondary" className="text-[10px] tracking-wider font-bold uppercase bg-zinc-100 text-zinc-600 hover:bg-zinc-200">
+                            <Badge variant="secondary" className="text-[10px] tracking-wider font-bold uppercase">
                                 {category}
                             </Badge>
                             {date && (
-                                <span className="text-xs font-medium text-zinc-400">
+                                <span className="text-xs font-medium text-muted-foreground">
                                     {date}
                                 </span>
                             )}
@@ -46,7 +46,7 @@ export function HeroProjectCard({ title, category, description, tags, href, imag
                                 <Link
                                     href={repoUrl}
                                     target="_blank"
-                                    className="p-2 -mt-2 -mr-2 text-zinc-400 hover:text-zinc-900 transition-colors rounded-full hover:bg-zinc-100"
+                                    className="p-2 -mt-2 -mr-2 text-muted-foreground hover:text-foreground transition-colors rounded-full hover:bg-muted"
                                     onClick={(e) => e.stopPropagation()}
                                     title="View Source Code"
                                 >
@@ -66,7 +66,7 @@ export function HeroProjectCard({ title, category, description, tags, href, imag
 
                 {/* Image Area (Bottom) */}
                 <div className="mt-auto px-6 pb-6 w-full">
-                    <div className="aspect-video w-full rounded-xl bg-zinc-800 relative overflow-hidden ring-1 ring-zinc-900/5 group-hover:ring-zinc-900/10 transition-all">
+                    <div className="aspect-video w-full rounded-xl bg-muted relative overflow-hidden ring-1 ring-border/60 group-hover:ring-border transition-all">
                         {imageUrl ? (
                             <Image
                                 src={imageUrl}

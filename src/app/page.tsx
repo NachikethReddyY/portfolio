@@ -31,7 +31,7 @@ export default async function Home() {
   `);
 
   return (
-    <main className="min-h-screen bg-[#f5f5f5] font-sans mb-20 relative">
+    <main className="min-h-screen bg-background font-sans mb-20 relative">
 
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 pt-20 md:pt-32 relative z-10 space-y-8">
@@ -41,7 +41,7 @@ export default async function Home() {
           {/* Avatar + Status */}
           <div className="flex items-end justify-between">
             <div className="relative">
-              <div className="h-32 w-32 rounded-full border-4 border-[#f5f5f5] bg-white overflow-hidden shadow-sm flex items-center justify-center relative">
+              <div className="h-32 w-32 rounded-full border-4 border-border bg-card overflow-hidden shadow-sm flex items-center justify-center relative">
                 <Image
                   src="/mesquare.png"
                   alt="Nachiketh Profile"
@@ -50,7 +50,7 @@ export default async function Home() {
                   className="object-cover w-full h-full"
                 />
               </div>
-              <div className="absolute bottom-2 right-2 h-5 w-5 bg-green-500 rounded-full border-4 border-[#f5f5f5] z-10" title="Available for work" />
+              <div className="absolute bottom-2 right-2 h-5 w-5 bg-green-500 rounded-full border-4 border-border z-10" title="Available for work" />
             </div>
 
             <div className="flex gap-2 mb-2">
@@ -135,7 +135,7 @@ export default async function Home() {
               />
             ))}
             {featuredProjects.length === 0 && (
-              <div className="col-span-1 md:col-span-2 text-center py-12 text-muted-foreground border rounded-xl bg-white">
+              <div className="col-span-1 md:col-span-2 text-center py-12 text-muted-foreground border border-border rounded-xl bg-card">
                 No featured projects found. Add them in Sanity Studio!
               </div>
             )}

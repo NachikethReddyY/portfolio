@@ -34,19 +34,19 @@ export function SearchableGrid({ projects }: SearchableGridProps) {
         <div className="space-y-12">
             {/* SEARCH & FILTERS */}
             <div className="sticky top-6 z-30 px-4 md:px-0">
-                <div className="max-w-4xl mx-auto flex flex-col md:flex-row gap-3 md:items-center md:justify-between md:bg-white/80 md:backdrop-blur-xl md:border md:border-white/20 md:shadow-sm md:p-2 md:pl-4 md:rounded-full md:ring-1 md:ring-zinc-200/50">
+                <div className="max-w-4xl mx-auto flex flex-col md:flex-row gap-3 md:items-center md:justify-between md:bg-background/80 md:backdrop-blur-xl md:border md:border-border/60 md:shadow-sm md:p-2 md:pl-4 md:rounded-full md:ring-1 md:ring-border/40">
 
-                    <div className="relative w-full md:w-80 bg-white/80 backdrop-blur-xl border border-white/20 shadow-sm rounded-full p-0.5 ring-1 ring-zinc-200/50 md:bg-transparent md:backdrop-blur-none md:border-none md:shadow-none md:ring-0 md:p-0">
-                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 h-4 w-4" />
+                    <div className="relative w-full md:w-80 bg-background/80 backdrop-blur-xl border border-border/60 shadow-sm rounded-full p-0.5 ring-1 ring-border/40 md:bg-transparent md:backdrop-blur-none md:border-none md:shadow-none md:ring-0 md:p-0">
+                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground h-4 w-4" />
                         <input
                             placeholder="Search archives..."
-                            className="w-full bg-transparent border-none focus:ring-0 pl-9 text-sm h-10 placeholder:text-zinc-400"
+                            className="w-full bg-transparent border-none focus:ring-0 pl-9 text-sm h-10 text-foreground placeholder:text-muted-foreground"
                             value={query}
                             onChange={(e) => setQuery(e.target.value)}
                         />
                     </div>
 
-                    <div className="flex bg-zinc-100 rounded-xl md:rounded-full p-1 gap-1 w-full md:w-auto overflow-x-auto no-scrollbar shadow-sm ring-1 ring-zinc-200/50 md:shadow-none md:ring-0">
+                    <div className="flex bg-muted rounded-xl md:rounded-full p-1 gap-1 w-full md:w-auto overflow-x-auto no-scrollbar shadow-sm ring-1 ring-border/40 md:shadow-none md:ring-0">
                         {(["all", "real-world", "personal", "academic"] as const).map((f) => (
                             <button
                                 key={f}
@@ -54,8 +54,8 @@ export function SearchableGrid({ projects }: SearchableGridProps) {
                                 className={`
                                     px-4 py-2 md:py-1.5 rounded-lg md:rounded-full text-xs font-medium transition-all whitespace-nowrap flex-1 md:flex-none
                                     ${filter === f
-                                        ? "bg-white text-zinc-900 shadow-sm"
-                                        : "text-zinc-500 hover:text-zinc-700"
+                                        ? "bg-background text-foreground shadow-sm"
+                                        : "text-muted-foreground hover:text-foreground"
                                     }
                                     capitalize
                                 `}
@@ -95,7 +95,7 @@ export function SearchableGrid({ projects }: SearchableGridProps) {
             </motion.div>
 
             {filteredProjects.length === 0 && (
-                <div className="text-center py-32 text-muted-foreground bg-white rounded-3xl border border-zinc-100">
+                <div className="text-center py-32 text-muted-foreground bg-card rounded-3xl border border-border">
                     <p className="text-lg">No projects match your criteria.</p>
                     <Button variant="link" onClick={() => { setQuery(""); setFilter("all") }} className="mt-2">
                         Clear all filters

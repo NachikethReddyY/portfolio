@@ -21,7 +21,7 @@ export default async function ProjectsPage() {
     const projects = await client.fetch(query);
 
     return (
-        <main className="min-h-screen bg-[#f5f5f5] font-sans">
+        <main className="min-h-screen bg-background font-sans">
             <div className="max-w-7xl mx-auto px-6 md:px-12 pt-20 md:pt-32 space-y-12">
                 <div className="space-y-6 max-w-3xl">
                     <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-foreground leading-[1.1]">

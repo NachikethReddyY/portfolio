@@ -46,7 +46,7 @@ const ptComponents = {
     types: {
         image: ({ value }: any) => {
             return (
-                <div className="relative w-full aspect-video my-8 rounded-xl overflow-hidden bg-zinc-100 border">
+                <div className="relative w-full aspect-video my-8 rounded-xl overflow-hidden bg-muted border border-border">
                     <Image
                         src={urlFor(value).url()}
                         alt={value.alt || 'Project Content Image'}
@@ -88,7 +88,7 @@ export default async function ProjectDetail(props: { params: Promise<{ slug: str
     const dateDisplay = formatDateRange(project.startDate, project.endDate);
 
     return (
-        <main className="min-h-screen bg-white">
+        <main className="min-h-screen bg-background">
             <article className="max-w-4xl mx-auto px-6 py-12 md:py-24 space-y-12">
 
                 {/* Top Nav / Breadcrumb */}
@@ -109,7 +109,7 @@ export default async function ProjectDetail(props: { params: Promise<{ slug: str
                 </div>
 
                 {/* Hero Image */}
-                <div className="rounded-3xl overflow-hidden border bg-zinc-50 shadow-sm aspect-video relative">
+                <div className="rounded-3xl overflow-hidden border border-border bg-card shadow-sm aspect-video relative">
                     {project.coverImage ? (
                         <Image
                             src={urlFor(project.coverImage).width(1200).height(675).url()}
@@ -126,7 +126,7 @@ export default async function ProjectDetail(props: { params: Promise<{ slug: str
                 </div>
 
                 {/* Metadata Row */}
-                <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 border-y py-6 text-sm md:text-base">
+                <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 border-y border-border py-6 text-sm md:text-base">
                     <div className="flex items-center gap-2">
                         <div className="h-10 w-10 rounded-full overflow-hidden border">
                             <Image
@@ -140,7 +140,7 @@ export default async function ProjectDetail(props: { params: Promise<{ slug: str
                         <span className="font-semibold text-foreground">Nachiketh Reddy</span>
                     </div>
 
-                    <div className="h-1 w-1 rounded-full bg-zinc-300 hidden md:block" />
+                    <div className="h-1 w-1 rounded-full bg-border hidden md:block" />
 
                     <div className="flex items-center gap-2 text-muted-foreground">
                         <Calendar className="h-4 w-4" />
@@ -149,7 +149,7 @@ export default async function ProjectDetail(props: { params: Promise<{ slug: str
 
                     {(project.startDate || project.endDate) && (
                         <>
-                            <div className="h-1 w-1 rounded-full bg-zinc-300 hidden md:block" />
+                            <div className="h-1 w-1 rounded-full bg-border hidden md:block" />
                             <div className="flex items-center gap-2 text-muted-foreground">
                                 <Clock className="h-4 w-4" />
                                 <span>{dateDisplay}</span>
@@ -157,24 +157,25 @@ export default async function ProjectDetail(props: { params: Promise<{ slug: str
                         </>
                     )}
 
-                    <div className="h-1 w-1 rounded-full bg-zinc-300 hidden md:block" />
+                    <div className="h-1 w-1 rounded-full bg-border hidden md:block" />
 
                     <div className="flex gap-3">
                         {project.liveUrl && (
-                            <Link href={project.liveUrl} target="_blank" className="flex items-center gap-1.5 font-medium text-blue-600 hover:underline">
+                            <Link href={project.liveUrl} target="_blank" className="flex items-center gap-1.5 font-medium text-blue-600 dark:text-blue-400 hover:underline">
                                 <ExternalLink className="h-4 w-4" /> Visit Site
                             </Link>
                         )}
                         {project.projectUrl && (
-                            <Link href={project.projectUrl} target="_blank" className="flex items-center gap-1.5 font-medium text-indigo-600 hover:underline">
+                            <Link href={project.projectUrl} target="_blank" className="flex items-center gap-1.5 font-medium text-indigo-600 dark:text-indigo-400 hover:underline">
                                 <PlayCircle className="h-4 w-4" /> View Project
                             </Link>
                         )}
                         {project.repoUrl && (
-                            <Link href={project.repoUrl} target="_blank" className="flex items-center gap-1.5 font-medium text-foreground hover:text-blue-600 transition-colors">
+                            <Link href={project.repoUrl} target="_blank" className="flex items-center gap-1.5 font-medium text-foreground hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                                 <Github className="h-4 w-4" /> Code
                             </Link>
                         )}
+
                     </div>
                 </div>
 
