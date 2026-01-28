@@ -88,7 +88,7 @@ export default async function Home() {
             </div>
 
             <div className="pt-4">
-              <Button size="lg" asChild className="font-semibold text-base px-8">
+              <Button size="lg" asChild className="font-semibold text-base px-8 dark:bg-transparent dark:border dark:border-white dark:text-white dark:hover:bg-white/10">
                 <Link href="#projects">View Case Studies &rarr;</Link>
               </Button>
             </div>
