@@ -34,8 +34,9 @@ export function SearchableGrid({ projects }: SearchableGridProps) {
         <div className="space-y-12">
             {/* SEARCH & FILTERS */}
             <div className="sticky top-6 z-30 px-4 md:px-0">
-                <div className="bg-white/80 backdrop-blur-xl border border-white/20 shadow-sm p-3 md:p-2 md:pl-4 rounded-3xl md:rounded-full flex flex-col md:flex-row gap-3 items-center justify-between max-w-4xl mx-auto ring-1 ring-zinc-200/50">
-                    <div className="relative w-full md:w-80">
+                <div className="max-w-4xl mx-auto flex flex-col md:flex-row gap-3 md:items-center md:justify-between md:bg-white/80 md:backdrop-blur-xl md:border md:border-white/20 md:shadow-sm md:p-2 md:pl-4 md:rounded-full md:ring-1 md:ring-zinc-200/50">
+
+                    <div className="relative w-full md:w-80 bg-white/80 backdrop-blur-xl border border-white/20 shadow-sm rounded-full p-0.5 ring-1 ring-zinc-200/50 md:bg-transparent md:backdrop-blur-none md:border-none md:shadow-none md:ring-0 md:p-0">
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 h-4 w-4" />
                         <input
                             placeholder="Search archives..."
@@ -44,7 +45,8 @@ export function SearchableGrid({ projects }: SearchableGridProps) {
                             onChange={(e) => setQuery(e.target.value)}
                         />
                     </div>
-                    <div className="flex bg-zinc-100 rounded-xl md:rounded-full p-1 gap-1 w-full md:w-auto overflow-x-auto no-scrollbar">
+
+                    <div className="flex bg-zinc-100 rounded-xl md:rounded-full p-1 gap-1 w-full md:w-auto overflow-x-auto no-scrollbar shadow-sm ring-1 ring-zinc-200/50 md:shadow-none md:ring-0">
                         {(["all", "real-world", "personal", "academic"] as const).map((f) => (
                             <button
                                 key={f}
