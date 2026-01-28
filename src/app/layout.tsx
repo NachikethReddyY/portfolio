@@ -107,7 +107,7 @@ export default function RootLayout({
               />
             </div>
           }
-          className="top-4 left-1/2 -translate-x-1/2 md:left-auto md:right-8 md:translate-x-0 z-50"
+          className="top-4 right-4 md:right-8 z-50"
         />
         <script
           type="application/ld+json"
