@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Nachiketh Reddy - Portfolio
 
-## Getting Started
+A high-performance, hireability-focused personal portfolio website built for [Nachiketh Reddy](https://github.com/NachikethReddyY).
 
-First, run the development server:
+![Portfolio Preview](./public/mesquare.png)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Built With
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+-   **Framework**: [Next.js 14](https://nextjs.org/) (App Router)
+-   **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+-   **UI Components**: [Shadcn UI](https://ui.shadcn.com/)
+-   **Animations**: [Framer Motion](https://www.framer.com/motion/) & [ReactBits](https://reactbits.dev/)
+-   **CMS**: [Sanity.io](https://www.sanity.io/) (Headless CMS)
+-   **Icons**: [Lucide React](https://lucide.dev/) & [React Icons](https://react-icons.github.io/react-icons/)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ✨ Key Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+-   **Bubble Menu Navigation**: A sticky, interactive floating menu for seamless navigation.
+-   **Fuzzy Text 404**: Custom animated error page.
+-   **Sanity Integration**: Dynamic project and blog content management.
+-   **Hireability-First Layout**:
+    -   **Scan-Friendly Hero**: Clear value proposition.
+    -   **Skills Grid**: Categorized by "Working With" vs "Exploring".
+    -   **Timeline**: Distinct views for Work and Education.
+    -   **Project Case Studies**: Detailed breakdown of technical challenges and outcomes.
+-   **Performance**: Optimized images and code splitting.
 
-## Learn More
+## 🛠️ Getting Started
 
-To learn more about Next.js, take a look at the following resources:
+1.  **Clone the repository**:
+    ```bash
+    git clone https://github.com/NachikethReddyY/portfolio.git
+    cd portfolio
+    ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2.  **Install dependencies**:
+    ```bash
+    npm install
+    ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3.  **Run the development server**:
+    ```bash
+    npm run dev
+    ```
 
-## Deploy on Vercel
+4.  **Open the CMS**:
+    Visit `http://localhost:3000/studio` to manage content.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📄 License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is licensed under the MIT License.
