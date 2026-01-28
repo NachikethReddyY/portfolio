@@ -15,7 +15,7 @@ export default function Home() {
     <main className="min-h-screen bg-[#f5f5f5] font-sans mb-20 relative">
 
 
-      <div className="max-w-5xl mx-auto px-6 md:px-12 pt-12 md:pt-24 relative z-10 space-y-16">
+      <div className="max-w-5xl mx-auto px-6 md:px-12 pt-8 md:pt-16 relative z-10 space-y-10">
 
         {/* 2. PROFILE & INTRO */}
         <div className="space-y-6">
@@ -55,9 +55,18 @@ export default function Home() {
               I am a Full Stack Developer building practical web systems with APIs and clean architecture using modern JavaScript frameworks. I&apos;m a 17-year-old student at <span className="font-medium text-foreground">Singapore Polytechnic 🇸🇬</span>, pursuing my Diploma in Computer Science. While I&apos;m just starting my academic journey (Class of &apos;28), I spend my free time exploring full-stack development and system architecture.
             </p>
 
-            <div className="flex flex-wrap gap-3 pt-2">
-              <Badge variant="secondary" className="px-3 py-1 text-sm font-medium"><MapPin className="mr-1 h-3 w-3" /> Based in Singapore</Badge>
-              <Badge variant="secondary" className="px-3 py-1 text-sm font-medium bg-green-100 text-green-700 hover:bg-green-100"><div className="mr-2 h-2 w-2 rounded-full bg-green-600 animate-pulse" /> Available to work</Badge>
+            <div className="flex flex-row items-center gap-6 pt-4 text-sm font-medium text-muted-foreground">
+              <div className="flex items-center gap-2">
+                <MapPin className="h-4 w-4" />
+                <span>Based in Singapore</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+                </span>
+                <span className="text-green-600 dark:text-green-400">Available to work</span>
+              </div>
             </div>
 
             <div className="pt-4">
@@ -76,7 +85,6 @@ export default function Home() {
         {/* 5. EXPERIENCE SECTION */}
         <section id="experience" className="scroll-mt-24 pt-8">
           <div className="mb-8">
-            <h2 className="text-2xl font-bold tracking-tight mb-2">Professional Journey</h2>
           </div>
           <TimelineTabs
             workExperience={MOCK_EXPERIENCE_FOLDERS.find(f => f.title === 'work')!}
