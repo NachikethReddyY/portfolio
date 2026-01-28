@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Github, Linkedin, MapPin, ArrowRight } from "lucide-react";
+import { Github, Linkedin, MapPin, Mail } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { TimelineTabs } from "@/components/experience/timeline-tabs";
@@ -42,17 +42,17 @@ export default function Home() {
                 <Link href="https://github.com/NachikethReddyY" target="_blank"><Github className="h-4 w-4" /></Link>
               </Button>
               <Button variant="outline" size="sm" asChild>
-                <Link href="mailto:contact@nachiketh.com"><ArrowRight className="h-4 w-4 -rotate-45" /></Link>
+                <Link href="mailto:ynrdevs@gmail.com"><Mail className="h-4 w-4" /></Link>
               </Button>
             </div>
           </div>
 
           <div className="space-y-6 max-w-3xl">
             <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-foreground leading-tight">
-              Full Stack Developer.
+              Hi, I&apos;m Nachiketh Reddy.
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl">
-              I build practical web systems with APIs and clean architecture using modern JavaScript frameworks.
+              I am a Full Stack Developer building practical web systems with APIs and clean architecture using modern JavaScript frameworks. I&apos;m a 17-year-old student at <span className="font-medium text-foreground">Singapore Polytechnic 🇸🇬</span>, pursuing my Diploma in Computer Science. While I&apos;m just starting my academic journey (Class of &apos;28), I spend my free time exploring full-stack development and system architecture.
             </p>
 
             <div className="flex flex-wrap gap-3 pt-2">
