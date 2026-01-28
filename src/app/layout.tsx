@@ -114,6 +114,12 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         {children}
+        <footer className="py-12 text-center text-sm text-muted-foreground border-t border-zinc-200/50 bg-[#f5f5f5]">
+          <div className="max-w-7xl mx-auto px-6 space-y-2">
+            <p className="font-medium">&copy; {new Date().getFullYear()} Nachiketh Reddy.</p>
+            <p className="text-xs text-zinc-400 uppercase tracking-widest">Built for documentation of work and display.</p>
+          </div>
+        </footer>
       </body>
     </html>
   );
