@@ -172,34 +172,35 @@ export function BubbleMenu({
                     </span>
                 </div>
 
-                <button
-                    type="button"
-                    className={`bubble toggle-bubble menu-btn ${isMenuOpen ? 'open' : ''}`}
-                    onClick={handleToggle}
-                    aria-label={menuAriaLabel}
-                    aria-pressed={isMenuOpen}
-                    style={{ background: menuBg }}
-                >
-                    <span className="menu-line" style={{ background: menuContentColor }} />
-                    <span className="menu-line short" style={{ background: menuContentColor }} />
-                </button>
+                <div className="flex items-center gap-2">
+                    <button
+                        type="button"
+                        className={`bubble toggle-bubble menu-btn ${isMenuOpen ? 'open' : ''}`}
+                        onClick={handleToggle}
+                        aria-label={menuAriaLabel}
+                        aria-pressed={isMenuOpen}
+                        style={{ background: menuBg }}
+                    >
+                        <span className="menu-line" style={{ background: menuContentColor }} />
+                        <span className="menu-line short" style={{ background: menuContentColor }} />
+                    </button>
 
-                <AnimatedThemeToggler
-                    className="bubble theme-bubble"
-                    style={{
-                        background: menuBg,
-                        color: menuContentColor,
-                        marginLeft: '8px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        width: '40px',
-                        height: '40px',
-                        padding: 0,
-                        border: 'none',
-                        cursor: 'pointer'
-                    }}
-                />
+                    <AnimatedThemeToggler
+                        className="bubble theme-bubble"
+                        style={{
+                            background: menuBg,
+                            color: menuContentColor,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            width: '40px',
+                            height: '40px',
+                            padding: 0,
+                            border: 'none',
+                            cursor: 'pointer'
+                        }}
+                    />
+                </div>
             </nav>
             {showOverlay && (
                 <div
