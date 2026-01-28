@@ -1,143 +1,209 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { ExternalLink, Github, ArrowLeft } from "lucide-react";
+import { ExternalLink, Github, ArrowLeft, Calendar, User, Clock, Share2 } from "lucide-react";
 import { notFound } from "next/navigation";
+import { client } from "@/sanity/lib/client";
+import { urlFor } from "@/sanity/lib/image";
+import { PortableText } from "@portabletext/react";
 
-// Mock Data Type for Build (Replace with Sanity Query later)
-const MOCK_PROJECT_DETAILS: Record<string, any> = {
-    "zero-waste": {
-        title: "Zero Waste Gallery",
-        tagline: "Interactive circular navigation engine teaching sustainability principles.",
-        problem: "Users find static educational content boring and disengaging. We needed an engaging way to teach the '5 Rs' of Zero Waste that encouraged active exploration rather than passive reading.",
-        solution: [
-            "Architected a custom interactive gallery component using Vanilla JavaScript and DOM manipulation.",
-            "Implemented a circular linked-list logic for infinite next/prev arrow navigation.",
-            "Utilized data attributes for efficient state management (Active vs Inactive) without heavy framework overhead.",
-            "Optimized CSS animations for smooth transitions between content states."
-        ],
-        features: ["Circular Navigation Logic", "Fade/Scale Animations", "Mobile-Responsive Layout", "Keyboard Accessibility"],
-        techStack: ["JavaScript", "HTML5", "CSS3", "DOM API"],
-        liveUrl: "https://github.com/NachikethReddyY/FEDCA1",
-        repoUrl: "https://github.com/NachikethReddyY/FEDCA1",
-    },
-    // Fallback for others to avoid 404 during review
-    "edu-portal": {
-        title: "EduPortal Platform",
-        tagline: "Multi-page education management system with client-side validation.",
-        problem: "Traditional course listings are cluttered. Needed a clean, searchable, and responsive way to manage educational events and course signups.",
-        solution: ["Built a modular multi-page static site structure.", "Implemented robust HTML5 form validation for user signups.", "Designed a responsive CSS Grid layout for course catalogs."],
-        features: ["Form Validation", "Responsive Grid", "Semantic HTML"],
-        techStack: ["HTML5", "CSS Grid", "JavaScript"],
-        liveUrl: "",
-        repoUrl: ""
-    }
+// Cache revalidation for Sanity data
+export const revalidate = 60; // Revalidate every 60 seconds
+
+interface ProjectDetail {
+    title: string;
+    tagline: string;
+    slug: { current: string };
+    coverImage: any;
+    startDate?: string;
+    endDate?: string;
+    publishedAt: string;
+    problem: string;
+    solution: any;
+    liveUrl?: string;
+    repoUrl?: string;
+    techStack: { name: string; category: string }[];
 }
 
-export default function ProjectDetail({ params }: { params: { slug: string } }) {
-    // In real app: const project = await client.fetch(query, { slug: params.slug })
-    const project = MOCK_PROJECT_DETAILS[params.slug];
+function formatDateRange(start?: string, end?: string) {
+    if (!start) return '2025';
+    const startDate = new Date(start).toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+    const endDate = end ? new Date(end).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : 'Present';
+    return `${startDate} - ${endDate}`;
+}
+
+const ptComponents = {
+    block: {
+        h3: ({ children }: any) => <h3 className="text-2xl font-bold mt-8 mb-4">{children}</h3>,
+        h4: ({ children }: any) => <h4 className="text-xl font-bold mt-6 mb-3">{children}</h4>,
+        normal: ({ children }: any) => <p className="mb-4 leading-relaxed text-muted-foreground">{children}</p>,
+    },
+    list: {
+        bullet: ({ children }: any) => <ul className="list-disc pl-5 mb-4 space-y-2 text-muted-foreground">{children}</ul>,
+        number: ({ children }: any) => <ol className="list-decimal pl-5 mb-4 space-y-2 text-muted-foreground">{children}</ol>,
+    },
+    types: {
+        image: ({ value }: any) => {
+            return (
+                <div className="relative w-full aspect-video my-8 rounded-xl overflow-hidden bg-zinc-100 border">
+                    <Image
+                        src={urlFor(value).url()}
+                        alt={value.alt || 'Project Content Image'}
+                        fill
+                        className="object-cover"
+                    />
+                </div>
+            );
+        }
+    }
+};
+
+export default async function ProjectDetail(props: { params: Promise<{ slug: string }> }) {
+    const params = await props.params;
+
+    const query = `*[_type == "project" && slug.current == $slug][0]{
+        title,
+        tagline,
+        slug,
+        coverImage,
+        startDate,
+        endDate,
+        publishedAt,
+        problem,
+        solution,
+        liveUrl,
+        repoUrl,
+        "techStack": techStack[]->{name, category}
+    }`;
+
+    const project: ProjectDetail = await client.fetch(query, { slug: params.slug });
+
 
     if (!project) {
-        // Return a generic placeholder for unknown projects so the reviewer doesn't hit 404
-        // In production, use notFound()
-        return (
-            <div className="min-h-screen flex items-center justify-center flex-col gap-4">
-                <h1 className="text-2xl font-bold">Project Content Coming Soon</h1>
-                <p>The content for &quot;{params.slug}&quot; is currently being authored in Sanity CMS.</p>
-                <Button asChild><Link href="/projects">Back to Projects</Link></Button>
-            </div>
-        )
+        return notFound();
     }
 
+    const dateDisplay = formatDateRange(project.startDate, project.endDate);
+
     return (
-        <main className="min-h-screen max-w-5xl mx-auto p-4 md:p-8 space-y-12">
-            {/* Navigation */}
-            <Button variant="ghost" size="sm" asChild className="-ml-4 text-muted-foreground">
-                <Link href="/projects"><ArrowLeft className="mr-2 h-4 w-4" /> Back to Archives</Link>
-            </Button>
+        <main className="min-h-screen bg-white">
+            <article className="max-w-4xl mx-auto px-6 py-12 md:py-24 space-y-12">
 
-            {/* Header */}
-            <div className="space-y-6">
-                <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight">{project.title}</h1>
-                <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl leading-relaxed">
-                    {project.tagline}
-                </p>
-                <div className="flex gap-4">
-                    {project.liveUrl && (
-                        <Button size="lg" asChild>
-                            <Link href={project.liveUrl} target="_blank">
-                                <ExternalLink className="mr-2 h-4 w-4" /> Live Demo
-                            </Link>
-                        </Button>
-                    )}
-                    {project.repoUrl && (
-                        <Button size="lg" variant="outline" asChild>
-                            <Link href={project.repoUrl} target="_blank">
-                                <Github className="mr-2 h-4 w-4" /> View Code
-                            </Link>
-                        </Button>
-                    )}
-                </div>
-            </div>
+                {/* Top Nav / Breadcrumb */}
+                <div className="flex flex-col items-center gap-6 text-center">
+                    <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
+                        <Link href="/projects" className="hover:text-foreground transition-colors">Projects</Link>
+                        <span>/</span>
+                        <span className="text-foreground">Case Study</span>
+                    </div>
 
-            {/* Hero Image Area */}
-            <div className="aspect-video w-full bg-secondary/30 rounded-xl border flex items-center justify-center text-muted-foreground">
-                {/* Sanity Image would go here */}
-                Project Screenshot / Video Demo
-            </div>
+                    <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-foreground leading-[1.1] max-w-3xl">
+                        {project.title}
+                    </h1>
 
-            {/* Case Study Content */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-
-                {/* Left Column: Context */}
-                <div className="md:col-span-2 space-y-10">
-                    <section>
-                        <h2 className="text-2xl font-bold mb-4">The Problem</h2>
-                        <p className="text-lg leading-relaxed text-muted-foreground">
-                            {project.problem}
-                        </p>
-                    </section>
-
-                    <section>
-                        <h2 className="text-2xl font-bold mb-4">Technical Approach</h2>
-                        <ul className="space-y-4">
-                            {project.solution.map((point: string, i: number) => (
-                                <li key={i} className="flex gap-3 items-start text-muted-foreground">
-                                    <div className="h-2 w-2 rounded-full bg-primary mt-2 shrink-0" />
-                                    <span className="text-lg leading-relaxed">{point}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    </section>
+                    <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl leading-relaxed">
+                        {project.tagline}
+                    </p>
                 </div>
 
-                {/* Right Column: Meta */}
-                <div className="space-y-8">
-                    <div className="p-6 bg-secondary/20 rounded-xl border space-y-6">
-                        <div>
-                            <h3 className="font-semibold mb-3">Tech Stack</h3>
-                            <div className="flex flex-wrap gap-2">
-                                {project.techStack.map((tech: string) => (
-                                    <Badge key={tech} variant="secondary">{tech}</Badge>
-                                ))}
+                {/* Hero Image */}
+                <div className="rounded-3xl overflow-hidden border bg-zinc-50 shadow-sm aspect-video relative">
+                    {project.coverImage ? (
+                        <Image
+                            src={urlFor(project.coverImage).width(1200).height(675).url()}
+                            alt={project.title}
+                            fill
+                            className="object-cover"
+                            priority
+                        />
+                    ) : (
+                        <div className="w-full h-full flex items-center justify-center text-muted-foreground">
+                            No Preview Image
+                        </div>
+                    )}
+                </div>
+
+                {/* Metadata Row */}
+                <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 border-y py-6 text-sm md:text-base">
+                    <div className="flex items-center gap-2">
+                        <div className="h-10 w-10 rounded-full overflow-hidden border">
+                            <Image
+                                src="/mesquare.png"
+                                alt="Nachiketh"
+                                width={40}
+                                height={40}
+                                className="object-cover w-full h-full"
+                            />
+                        </div>
+                        <span className="font-semibold text-foreground">Nachiketh Reddy</span>
+                    </div>
+
+                    <div className="h-1 w-1 rounded-full bg-zinc-300 hidden md:block" />
+
+                    <div className="flex items-center gap-2 text-muted-foreground">
+                        <Calendar className="h-4 w-4" />
+                        <span>Published: {project.publishedAt ? new Date(project.publishedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'N/A'}</span>
+                    </div>
+
+                    {(project.startDate || project.endDate) && (
+                        <>
+                            <div className="h-1 w-1 rounded-full bg-zinc-300 hidden md:block" />
+                            <div className="flex items-center gap-2 text-muted-foreground">
+                                <Clock className="h-4 w-4" />
+                                <span>{dateDisplay}</span>
                             </div>
-                        </div>
+                        </>
+                    )}
 
-                        <div>
-                            <h3 className="font-semibold mb-3">Key Features</h3>
-                            <ul className="space-y-2 text-sm text-muted-foreground">
-                                {project.features.map((feature: string) => (
-                                    <li key={feature} className="flex items-center gap-2">
-                                        <div className="h-1.5 w-1.5 rounded-full bg-muted-foreground" />
-                                        {feature}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+                    <div className="h-1 w-1 rounded-full bg-zinc-300 hidden md:block" />
+
+                    <div className="flex gap-3">
+                        {project.liveUrl && (
+                            <Link href={project.liveUrl} target="_blank" className="flex items-center gap-1.5 font-medium text-blue-600 hover:underline">
+                                <ExternalLink className="h-4 w-4" /> Visit Site
+                            </Link>
+                        )}
+                        {project.repoUrl && (
+                            <Link href={project.repoUrl} target="_blank" className="flex items-center gap-1.5 font-medium text-foreground hover:text-blue-600 transition-colors">
+                                <Github className="h-4 w-4" /> Code
+                            </Link>
+                        )}
                     </div>
                 </div>
-            </div>
+
+                {/* Content */}
+                <div className="space-y-12">
+                    {project.problem && (
+                        <div className="prose prose-lg prose-zinc max-w-none">
+                            <h2 className="text-3xl font-bold mb-4 tracking-tight text-foreground">The Problem</h2>
+                            <p className="text-xl text-muted-foreground leading-relaxed">{project.problem}</p>
+                        </div>
+                    )}
+
+                    {project.solution && (
+                        <div className="prose prose-lg prose-zinc max-w-none">
+                            <h2 className="text-3xl font-bold mb-4 tracking-tight text-foreground">The Solution</h2>
+                            <PortableText value={project.solution} components={ptComponents} />
+                        </div>
+                    )}
+
+                    {!project.problem && !project.solution && (
+                        <p className="text-center text-muted-foreground italic py-12">
+                            Detailed case study content coming soon...
+                        </p>
+                    )}
+                </div>
+
+                {/* Bottom Navigation */}
+                <div className="pt-12 border-t text-center">
+                    <Button variant="ghost" asChild>
+                        <Link href="/projects" className="text-muted-foreground hover:text-foreground">
+                            &larr; Back to all projects
+                        </Link>
+                    </Button>
+                </div>
+
+            </article>
         </main>
     );
 }

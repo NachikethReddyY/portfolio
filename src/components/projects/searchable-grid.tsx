@@ -3,12 +3,11 @@
 import { useState, useMemo } from "react";
 import { Project } from "@/lib/types";
 import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Github, ExternalLink, Search } from "lucide-react";
-import Link from "next/link";
+import { Search } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { urlFor } from "@/sanity/lib/image";
+import { HeroProjectCard } from "@/components/home/hero-project-card";
 
 interface SearchableGridProps {
     projects: Project[];
@@ -32,94 +31,73 @@ export function SearchableGrid({ projects }: SearchableGridProps) {
     }, [query, filter, projects]);
 
     return (
-        <div className="space-y-8">
+        <div className="space-y-12">
             {/* SEARCH & FILTERS */}
-            <div className="flex flex-col md:flex-row gap-4 items-center justify-between bg-secondary/30 p-4 rounded-xl backdrop-blur-sm sticky top-20 z-10 border">
-                <div className="relative w-full md:w-96">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground h-4 w-4" />
-                    <Input
-                        placeholder="Search projects, stacks, or keywords..."
-                        className="pl-9 bg-background"
-                        value={query}
-                        onChange={(e) => setQuery(e.target.value)}
-                    />
-                </div>
-                <div className="flex gap-2">
-                    {(["all", "real-world", "personal", "academic"] as const).map((f) => (
-                        <Button
-                            key={f}
-                            variant={filter === f ? "default" : "outline"}
-                            size="sm"
-                            onClick={() => setFilter(f)}
-                            className="capitalize"
-                        >
-                            {f.replace("-", " ")}
-                        </Button>
-                    ))}
+            <div className="sticky top-6 z-30">
+                <div className="bg-white/80 backdrop-blur-xl border border-white/20 shadow-sm p-2 pl-4 rounded-full flex flex-col md:flex-row gap-2 items-center justify-between max-w-4xl mx-auto ring-1 ring-zinc-200/50">
+                    <div className="relative w-full md:w-80">
+                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 h-4 w-4" />
+                        <input
+                            placeholder="Search archives..."
+                            className="w-full bg-transparent border-none focus:ring-0 pl-9 text-sm h-10 placeholder:text-zinc-400"
+                            value={query}
+                            onChange={(e) => setQuery(e.target.value)}
+                        />
+                    </div>
+                    <div className="flex bg-zinc-100 rounded-full p-1 gap-1">
+                        {(["all", "real-world", "personal", "academic"] as const).map((f) => (
+                            <button
+                                key={f}
+                                onClick={() => setFilter(f)}
+                                className={`
+                                    px-4 py-1.5 rounded-full text-xs font-medium transition-all
+                                    ${filter === f
+                                        ? "bg-white text-zinc-900 shadow-sm"
+                                        : "text-zinc-500 hover:text-zinc-700"
+                                    }
+                                    capitalize
+                                `}
+                            >
+                                {f.replace("-", " ")}
+                            </button>
+                        ))}
+                    </div>
                 </div>
             </div>
 
             {/* GRID */}
-            <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <motion.div layout className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <AnimatePresence>
                     {filteredProjects.map((project) => (
                         <motion.div
                             layout
-                            initial={{ opacity: 0, scale: 0.9 }}
+                            initial={{ opacity: 0, scale: 0.95 }}
                             animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0.9 }}
+                            exit={{ opacity: 0, scale: 0.95 }}
+                            transition={{ duration: 0.2 }}
                             key={project._id}
                         >
-                            <Card className="h-full flex flex-col group hover:border-primary/50 transition-colors">
-                                <div className="aspect-video bg-muted relative overflow-hidden">
-                                    {/* Image placeholder - would use Sanity Image here */}
-                                    <div className="absolute inset-0 flex items-center justify-center text-muted-foreground bg-secondary/50">
-                                        {project.title} Preview
-                                    </div>
-                                </div>
-                                <CardHeader>
-                                    <div className="flex justify-between items-start">
-                                        <div>
-                                            <CardTitle className="leading-tight">{project.title}</CardTitle>
-                                            <CardDescription className="mt-2 line-clamp-2">{project.tagline}</CardDescription>
-                                        </div>
-                                    </div>
-                                </CardHeader>
-                                <CardContent className="mt-auto space-y-4">
-                                    <div className="flex flex-wrap gap-2">
-                                        {project.techStack?.map((bg) => (
-                                            <Badge key={bg.name} variant="secondary" className="text-xs">
-                                                {bg.name}
-                                            </Badge>
-                                        ))}
-                                    </div>
-                                    <div className="flex gap-2 pt-2">
-                                        {project.liveUrl && (
-                                            <Button size="sm" className="w-full" asChild>
-                                                <Link href={project.liveUrl} target="_blank">
-                                                    <ExternalLink className="mr-2 h-4 w-4" /> Live Demo
-                                                </Link>
-                                            </Button>
-                                        )}
-                                        {project.repoUrl && (
-                                            <Button size="sm" variant="outline" className="w-full" asChild>
-                                                <Link href={project.repoUrl} target="_blank">
-                                                    <Github className="mr-2 h-4 w-4" /> Code
-                                                </Link>
-                                            </Button>
-                                        )}
-                                    </div>
-                                </CardContent>
-                            </Card>
+                            <HeroProjectCard
+                                title={project.title}
+                                category={project.type}
+                                description={project.tagline}
+                                tags={project.techStack?.map(t => t.name) || []}
+                                href={`/projects/${project.slug.current}`}
+                                imageUrl={project.coverImage ? urlFor(project.coverImage).width(800).url() : undefined}
+                                date={project.publishedAt ? new Date(project.publishedAt).toLocaleDateString("en-US", { month: "short", year: "numeric" }) : undefined}
+                                repoUrl={project.repoUrl}
+                            />
                         </motion.div>
                     ))}
                 </AnimatePresence>
             </motion.div>
 
             {filteredProjects.length === 0 && (
-                <div className="text-center py-20 text-muted-foreground">
-                    <p>No projects found matching &quot;{query}&quot;</p>
-                    <Button variant="link" onClick={() => { setQuery(""); setFilter("all") }}>Clear filters</Button>
+                <div className="text-center py-32 text-muted-foreground bg-white rounded-3xl border border-zinc-100">
+                    <p className="text-lg">No projects match your criteria.</p>
+                    <Button variant="link" onClick={() => { setQuery(""); setFilter("all") }} className="mt-2">
+                        Clear all filters
+                    </Button>
                 </div>
             )}
         </div>

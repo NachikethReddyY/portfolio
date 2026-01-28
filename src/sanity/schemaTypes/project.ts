@@ -44,6 +44,22 @@ export const project = defineType({
             initialValue: false,
         }),
         defineField({
+            name: 'publishedAt',
+            title: 'Published at',
+            type: 'datetime',
+            initialValue: () => new Date().toISOString(),
+        }),
+        defineField({
+            name: 'startDate',
+            title: 'Start Date',
+            type: 'date',
+        }),
+        defineField({
+            name: 'endDate',
+            title: 'End Date',
+            type: 'date',
+        }),
+        defineField({
             name: 'coverImage',
             title: 'Cover Image',
             type: 'image',
@@ -77,7 +93,20 @@ export const project = defineType({
             name: 'solution',
             title: 'The Solution (Technical Approach)',
             type: 'array',
-            of: [{ type: 'block' }],
+            of: [
+                { type: 'block' },
+                {
+                    type: 'image',
+                    options: { hotspot: true },
+                    fields: [
+                        {
+                            name: 'alt',
+                            type: 'string',
+                            title: 'Alternative Text',
+                        }
+                    ]
+                }
+            ],
         }),
         defineField({
             name: 'features',

@@ -13,10 +13,15 @@ export interface Project {
     tagline: string;
     type: 'real-world' | 'personal' | 'academic';
     coverImage?: any;
+    startDate?: string;
+    endDate?: string;
+    problem?: string;
+    solution?: any;
     techStack: TechSkill[];
     liveUrl?: string;
     repoUrl?: string;
     isFeatured: boolean;
+    publishedAt?: string;
 }
 
 export interface ExperienceItem {

@@ -10,7 +10,26 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { BubbleMenu } from "@/components/ui/bubble-menu";
 
-export default function Home() {
+import { client } from "@/sanity/lib/client";
+import { urlFor } from "@/sanity/lib/image";
+
+export const revalidate = 60;
+
+export default async function Home() {
+  const featuredProjects = await client.fetch(`
+    *[_type == "project" && isFeatured == true] | order(publishedAt desc)[0...3] {
+      _id,
+      title,
+      slug,
+      tagline,
+      coverImage,
+      publishedAt,
+      repoUrl,
+      "type": coalesce(type, "personal"),
+      "techStack": techStack[]->name
+    }
+  `);
+
   return (
     <main className="min-h-screen bg-[#f5f5f5] font-sans mb-20 relative">
 
@@ -102,27 +121,24 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <HeroProjectCard
-              title="Zero Waste Gallery"
-              category="Academic"
-              description="Custom JS circular navigation system for complex UIs."
-              tags={["JavaScript", "DOM API"]}
-              href="/projects/zero-waste"
-            />
-            <HeroProjectCard
-              title="EduPortal Platform"
-              category="Academic"
-              description="End-to-end education platform with raw form validation."
-              tags={["HTML5 Forms", "CSS Grid"]}
-              href="/projects/edu-portal"
-            />
-            <HeroProjectCard
-              title="Iris Lite v2"
-              category="Personal"
-              description="High-performance landing page (100 Lighthouse score)."
-              tags={["Responsive", "Performance"]}
-              href="/projects/iris-lite"
-            />
+            {featuredProjects.map((project: any) => (
+              <HeroProjectCard
+                key={project._id}
+                title={project.title}
+                category={project.type}
+                description={project.tagline}
+                tags={project.techStack || []}
+                href={`/projects/${project.slug.current}`}
+                imageUrl={project.coverImage ? urlFor(project.coverImage).width(800).url() : undefined}
+                date={project.publishedAt ? new Date(project.publishedAt).toLocaleDateString("en-US", { month: "short", year: "numeric" }) : undefined}
+                repoUrl={project.repoUrl}
+              />
+            ))}
+            {featuredProjects.length === 0 && (
+              <div className="col-span-1 md:col-span-2 text-center py-12 text-muted-foreground border rounded-xl bg-white">
+                No featured projects found. Add them in Sanity Studio!
+              </div>
+            )}
           </div>
 
           <div className="md:hidden pt-4 text-center">

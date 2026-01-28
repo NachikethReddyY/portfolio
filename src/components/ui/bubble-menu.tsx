@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { gsap } from 'gsap';
 import './bubble-menu.css';
 
@@ -64,8 +65,11 @@ export function BubbleMenu({
     animationDuration = 0.5,
     staggerDelay = 0.12
 }: BubbleMenuProps) {
+    const pathname = usePathname();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [showOverlay, setShowOverlay] = useState(false);
+
+    if (pathname?.startsWith('/studio')) return null;
 
     const overlayRef = useRef<HTMLDivElement>(null);
     const bubblesRef = useRef<(HTMLElement | null)[]>([]);
