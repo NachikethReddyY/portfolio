@@ -2,6 +2,8 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
+import { useTheme } from "next-themes";
+import { Moon, Sun } from "lucide-react";
 import { gsap } from 'gsap';
 import './bubble-menu.css';
 
@@ -68,6 +70,12 @@ export function BubbleMenu({
     const pathname = usePathname();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [showOverlay, setShowOverlay] = useState(false);
+    const { theme, setTheme } = useTheme();
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     if (pathname?.startsWith('/studio')) return null;
 
@@ -170,6 +178,22 @@ export function BubbleMenu({
                         {logo}
                     </span>
                 </div>
+
+                <button
+                    type="button"
+                    className="bubble theme-bubble"
+                    onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                    style={{ background: menuBg, marginRight: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                    aria-label="Toggle theme"
+                >
+                    {mounted && (
+                        theme === 'dark' ? (
+                            <Sun size={18} color={menuContentColor} />
+                        ) : (
+                            <Moon size={18} color={menuContentColor} />
+                        )
+                    )}
+                </button>
 
                 <button
                     type="button"
