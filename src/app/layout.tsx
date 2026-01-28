@@ -24,6 +24,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  verification: {
+    google: "googlea94d6c0964e8d3d9",
+  },
   openGraph: {
     title: "Nachiketh Reddy | Full Stack Developer in Singapore",
     description: "Verified portfolio of Nachiketh Reddy. Building practical web systems with APIs and clean architecture.",
