@@ -80,13 +80,12 @@ function TimelineList({ items, type }: { items: any[], type: "work" | "education
 
                                 {/* Tags/Chips */}
                                 <div className="flex flex-wrap gap-2">
-                                    {type === "education" && (
-                                        <>
-                                            <Badge variant="secondary" className="font-normal text-xs">
+                                    {type === "education" && item.projectUrl && (
+                                        <Badge variant="secondary" className="font-normal text-xs hover:bg-secondary/80 transition-colors">
+                                            <a href={item.projectUrl} target="_blank" rel="noopener noreferrer" className="flex items-center">
                                                 <Globe className="mr-1 h-3 w-3" /> Final Year Project
-                                            </Badge>
-                                            {/* Placeholder logic for Dean's list etc. if data exists */}
-                                        </>
+                                            </a>
+                                        </Badge>
                                     )}
                                     {type === "work" && item.skillsDemonstrated?.map((skill: any) => (
                                         <Badge key={skill._id} variant="outline" className="font-normal text-xs">
