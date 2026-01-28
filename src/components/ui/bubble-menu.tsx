@@ -173,6 +173,20 @@ export function BubbleMenu({
                 </div>
 
                 <div className="flex items-center gap-2">
+                    <AnimatedThemeToggler
+                        className="bubble theme-bubble"
+                        style={{
+                            background: menuBg,
+                            color: menuContentColor,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            padding: 0,
+                            border: 'none',
+                            cursor: 'pointer'
+                        }}
+                    />
+
                     <button
                         type="button"
                         className={`bubble toggle-bubble menu-btn ${isMenuOpen ? 'open' : ''}`}
@@ -184,22 +198,6 @@ export function BubbleMenu({
                         <span className="menu-line" style={{ background: menuContentColor }} />
                         <span className="menu-line short" style={{ background: menuContentColor }} />
                     </button>
-
-                    <AnimatedThemeToggler
-                        className="bubble theme-bubble"
-                        style={{
-                            background: menuBg,
-                            color: menuContentColor,
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            width: '40px',
-                            height: '40px',
-                            padding: 0,
-                            border: 'none',
-                            cursor: 'pointer'
-                        }}
-                    />
                 </div>
             </nav>
             {showOverlay && (

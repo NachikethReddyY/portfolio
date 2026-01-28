@@ -20,7 +20,7 @@
 }
 
 .bubble-menu .bubble {
-  --bubble-size: 48px;
+  --bubble-size: 56px;
   width: var(--bubble-size);
   height: var(--bubble-size);
   border-radius: 50%;
