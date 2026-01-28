@@ -69,12 +69,6 @@ export function BubbleMenu({
     const pathname = usePathname();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [showOverlay, setShowOverlay] = useState(false);
-    const { theme, setTheme } = useTheme();
-    const [mounted, setMounted] = useState(false);
-
-    useEffect(() => {
-        setMounted(true);
-    }, []);
 
     if (pathname?.startsWith('/studio')) return null;
 
