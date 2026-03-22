@@ -47,104 +47,89 @@
 }
 
 :root {
-  --background: hsl(0 0% 100%);
-  --foreground: hsl(222.2 84% 4.9%);
+  --background: #faf8ff;
+  --foreground: #191b23;
 
-  --card: hsl(0 0% 100%);
-  --card-foreground: hsl(222.2 84% 4.9%);
+  --card: #ffffff;
+  --card-foreground: #191b23;
 
-  --popover: hsl(0 0% 100%);
-  --popover-foreground: hsl(222.2 84% 4.9%);
+  --popover: #ffffff;
+  --popover-foreground: #191b23;
 
-  --primary: hsl(222.2 47.4% 11.2%);
-  --primary-foreground: hsl(210 40% 98%);
+  --primary: #004ac6;
+  --primary-foreground: #ffffff;
+  --primary-container: #2563eb;
 
-  --secondary: hsl(210 40% 96.1%);
-  --secondary-foreground: hsl(222.2 47.4% 11.2%);
+  --secondary: #f0f0f5;
+  --secondary-foreground: #191b23;
 
-  --muted: hsl(210 40% 96.1%);
-  --muted-foreground: hsl(215.4 16.3% 46.9%);
+  --tertiary: #943700;
 
-  --accent: hsl(210 40% 96.1%);
-  --accent-foreground: hsl(222.2 47.4% 11.2%);
+  --muted: #f0f0f5;
+  --muted-foreground: #5c5e66;
+
+  --accent: #f0f0f5;
+  --accent-foreground: #004ac6;
 
   --destructive: hsl(0 84.2% 60.2%);
   --destructive-foreground: hsl(210 40% 98%);
 
-  --border: hsl(214.3 31.8% 91.4%);
-  --input: hsl(214.3 31.8% 91.4%);
-  --ring: hsl(222.2 84% 4.9%);
+  --border: transparent; /* No-Line Rule: use tonal shifts instead */
+  --input: #f0f0f5;
+  --ring: #2563eb;
 
-  --radius: 0.5rem;
+  --radius: 1.5rem; /* Signature Radius: 24px */
 
-  --chart-1: hsl(12 76% 61%);
-  --chart-2: hsl(173 58% 39%);
-  --chart-3: hsl(197 37% 24%);
-  --chart-4: hsl(43 74% 66%);
-  --chart-5: hsl(27 87% 67%);
+  --surface-container-low: hsl(240 20% 97%);
+  --surface-container-lowest: #ffffff;
 
-  --sidebar: hsl(0 0% 98%);
-  --sidebar-foreground: hsl(240 5.3% 26.1%);
-  --sidebar-primary: hsl(240 5.9% 10%);
-  --sidebar-primary-foreground: hsl(0 0% 98%);
-  --sidebar-accent: hsl(240 4.8% 95.9%);
-  --sidebar-accent-foreground: hsl(240 5.9% 10%);
-  --sidebar-border: hsl(220 13% 91%);
-  --sidebar-ring: hsl(217.2 91.2% 59.8%);
+  --font-serif: var(--font-noto-serif);
+  --font-sans: var(--font-inter);
 }
 
 .dark {
-  --background: hsl(0 0% 10%);
-  --foreground: hsl(210 40% 98%);
+  --background: #0d0e12;
+  --foreground: #e1e2e6;
 
-  --card: hsl(0 0% 8%);
-  --card-foreground: hsl(210 40% 98%);
+  --card: #191b23;
+  --card-foreground: #e1e2e6;
 
-  --popover: hsl(0 0% 8%);
-  --popover-foreground: hsl(210 40% 98%);
+  --popover: #191b23;
+  --popover-foreground: #e1e2e6;
 
-  --primary: hsl(213 94% 68%);
-  --primary-foreground: hsl(222.2 47.4% 11.2%);
+  --primary: #4d89ff;
+  --primary-foreground: #052b73;
+  --primary-container: #2563eb;
 
-  --secondary: hsl(0 0% 15%);
-  --secondary-foreground: hsl(210 40% 98%);
+  --secondary: #2a2c33;
+  --secondary-foreground: #e1e2e6;
 
-  --muted: hsl(0 0% 15%);
-  --muted-foreground: hsl(215 20.2% 65.1%);
+  --tertiary: #ffb48e;
 
-  --accent: hsl(0 0% 15%);
-  --accent-foreground: hsl(210 40% 98%);
+  --muted: #2a2c33;
+  --muted-foreground: #a0a2aa;
 
-  --destructive: hsl(0 62.8% 30.6%);
-  --destructive-foreground: hsl(210 40% 98%);
+  --accent: #2a2c33;
+  --accent-foreground: #4d89ff;
 
-  --border: hsl(0 0% 15%);
-  --input: hsl(0 0% 15%);
-  --ring: hsl(213 94% 68%);
-
-  --chart-1: hsl(220 70% 50%);
-  --chart-2: hsl(160 60% 45%);
-  --chart-3: hsl(30 80% 55%);
-  --chart-4: hsl(280 65% 60%);
-  --chart-5: hsl(340 75% 55%);
-
-  --sidebar: hsl(240 5.9% 10%);
-  --sidebar-foreground: hsl(240 4.8% 95.9%);
-  --sidebar-primary: hsl(213 94% 68%);
-  --sidebar-primary-foreground: hsl(222.2 47.4% 11.2%);
-  --sidebar-accent: hsl(240 3.7% 15.9%);
-  --sidebar-accent-foreground: hsl(240 4.8% 95.9%);
-  --sidebar-border: hsl(240 3.7% 15.9%);
-  --sidebar-ring: hsl(217.2 91.2% 59.8%);
+  --border: transparent;
+  --input: #2a2c33;
+  --ring: #4d89ff;
+    
+  --surface-container-low: #1c1e26;
+  --surface-container-lowest: #23252e;
 }
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    border-color: var(--border);
+    outline-color: color-mix(in srgb, var(--ring) 50%, transparent);
   }
 
   body {
-    @apply bg-background text-foreground;
+    background: var(--background);
+    color: var(--foreground);
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
 

@@ -3,7 +3,17 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/navbar";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ 
+  subsets: ["latin"],
+  variable: "--font-inter",
+});
+
+import { Noto_Serif } from "next/font/google";
+
+const notoSerif = Noto_Serif({
+  subsets: ["latin"],
+  variable: "--font-noto-serif",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -48,7 +58,7 @@ export const metadata: Metadata = {
     title: "Nachiketh Reddy | Full Stack Developer",
     description: "Based in Singapore. Building modern web systems.",
     images: ["https://ynr.vercel.app/mesquare.png"],
-    creator: "@NachikethReddyY",
+    creator: "@nachikethreddyy",
   },
   other: {
     "geo.region": "SG",
@@ -70,8 +80,8 @@ const jsonLd = {
     "name": "Singapore"
   },
   "sameAs": [
-    "https://linkedin.com/in/ynr-nachiketh-reddy",
-    "https://github.com/NachikethReddyY"
+    "https://linkedin.com/in/nachikethreddyy",
+    "https://github.com/nachikethreddyy"
   ],
   "worksFor": {
     "@type": "Organization",
@@ -95,7 +105,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
-      <body className={`${inter.className} bg-background text-foreground transition-colors duration-300`}>
+      <body className={`${inter.variable} ${notoSerif.variable} font-sans bg-background text-foreground transition-colors duration-300`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

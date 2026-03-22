@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 export function Navbar() {
     const pathname = usePathname();
@@ -16,29 +17,32 @@ export function Navbar() {
     ];
 
     return (
-        <header className="fixed top-0 left-0 right-0 z-50 border-b bg-background/80 backdrop-blur-md">
-            <div className="max-w-7xl mx-auto flex h-16 items-center justify-between px-4 md:px-8">
-                <Link href="/" className="font-bold text-xl tracking-tighter">
-                    Nachiketh<span className="text-primary">.</span>
+        <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-3rem)] max-w-5xl rounded-full bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.05)] border-none">
+            <div className="flex h-16 items-center justify-between px-8">
+                <Link href="/" className="font-serif font-bold text-2xl tracking-tight hover:text-primary transition-colors">
+                    Nachiketh<span className="text-primary italic">.</span>
                 </Link>
 
-                <nav className="flex items-center gap-1">
+                <nav className="flex items-center gap-2">
                     {links.map((link) => {
                         const isActive = pathname === link.href;
                         return (
                             <Button
                                 key={link.href}
-                                variant={isActive ? "secondary" : "ghost"}
+                                variant="ghost"
                                 size="sm"
                                 asChild
-                                className="relative"
+                                className={cn(
+                                    "relative rounded-full font-bold px-5 transition-all",
+                                    isActive ? "text-primary" : "text-muted-foreground hover:text-foreground hover:bg-primary/5"
+                                )}
                             >
                                 <Link href={link.href}>
                                     {link.label}
                                     {isActive && (
                                         <motion.div
                                             layoutId="navbar-indicator"
-                                            className="absolute inset-0 bg-primary/10 rounded-md -z-10"
+                                            className="absolute inset-0 bg-primary/10 rounded-full -z-10"
                                             transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                                         />
                                     )}

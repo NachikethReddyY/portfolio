@@ -15,9 +15,9 @@ export function TimelineTabs({ workExperience, education }: TimelineTabsProps) {
     return (
         <div className="max-w-full mx-auto w-full">
             <Tabs defaultValue="education" className="w-full">
-                <TabsList className="grid w-full grid-cols-2 mb-6 h-10 border border-zinc-200 rounded-lg bg-transparent p-1">
-                    <TabsTrigger value="work" className="text-sm font-medium data-[state=active]:bg-background data-[state=active]:shadow-sm">Work Experience</TabsTrigger>
-                    <TabsTrigger value="education" className="text-sm font-medium data-[state=active]:bg-background data-[state=active]:shadow-sm">Education</TabsTrigger>
+                <TabsList className="grid w-full grid-cols-2 mb-10 h-14 bg-surface-container-low rounded-full p-1.5 border-none shadow-inner">
+                    <TabsTrigger value="work" className="text-sm font-bold tracking-tight rounded-full transition-all data-[state=active]:bg-background data-[state=active]:text-primary data-[state=active]:shadow-lg py-3">Work Experience</TabsTrigger>
+                    <TabsTrigger value="education" className="text-sm font-bold tracking-tight rounded-full transition-all data-[state=active]:bg-background data-[state=active]:text-primary data-[state=active]:shadow-lg py-3">Education</TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="work">
@@ -33,62 +33,62 @@ export function TimelineTabs({ workExperience, education }: TimelineTabsProps) {
 
 function TimelineList({ items, type }: { items: any[], type: "work" | "education" }) {
     if (!items || items.length === 0) {
-        return <div className="text-center text-muted-foreground py-6">No entries found.</div>
+        return <div className="text-center text-muted-foreground/60 py-12 font-serif italic text-lg">No entries found.</div>
     }
 
     return (
-        <Card className="border shadow-sm">
-            <CardContent className="p-4 md:p-6">
-                <div className="relative space-y-8">
+        <Card className="border-none shadow-[0_20px_40px_-15px_rgba(0,0,0,0.04)] bg-card rounded-[3rem]">
+            <CardContent className="p-8 md:p-12">
+                <div className="relative space-y-12">
                     {/* Vertical Line */}
-                    <div className="absolute top-3 bottom-3 left-[23px] w-px bg-border md:left-[27px]" />
+                    <div className="absolute top-4 bottom-4 left-[27px] w-0.5 bg-primary/10 md:left-[35px]" />
 
                     {items.map((item, idx) => (
-                        <div key={idx} className="relative flex gap-4 md:gap-6">
+                        <div key={idx} className="relative flex gap-8 md:gap-10">
                             {/* Logo / Icon */}
                             <div className="relative z-10 shrink-0">
-                                <div className="h-12 w-12 rounded-full border bg-background flex items-center justify-center md:h-14 md:w-14 shadow-sm">
+                                <div className="h-14 w-14 rounded-2xl border-none bg-surface-container-low flex items-center justify-center md:h-18 md:w-18 shadow-sm transition-transform hover:scale-110 duration-300">
                                     {type === "work" ? (
-                                        <Briefcase className="h-5 w-5 text-primary" />
+                                        <Briefcase className="h-6 w-6 text-primary" />
                                     ) : (
-                                        <GraduationCap className="h-5 w-5 text-primary" />
+                                        <GraduationCap className="h-6 w-6 text-primary" />
                                     )}
                                 </div>
                             </div>
 
                             {/* Content */}
                             <div className="flex-1 pt-1">
-                                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 mb-2">
-                                    <div>
-                                        <h3 className="text-2xl font-bold text-foreground leading-tight">
+                                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
+                                    <div className="space-y-1">
+                                        <h3 className="text-2xl md:text-3xl font-serif font-bold text-foreground leading-tight tracking-tight">
                                             {item.company || item.institution || "Organization"}
                                         </h3>
-                                        <p className="text-lg text-muted-foreground font-medium">
+                                        <p className="text-lg md:text-xl text-primary font-medium font-sans">
                                             {item.role || item.degree}
                                         </p>
                                     </div>
-                                    <div className="shrink-0 text-sm font-medium text-muted-foreground bg-secondary/50 px-3 py-1 rounded-full w-fit">
+                                    <div className="shrink-0 text-sm font-bold tracking-tight text-muted-foreground/80 bg-surface-container-high px-4 py-2 rounded-full w-fit shadow-xs">
                                         {item.startDate} - {item.endDate || "Present"}
                                     </div>
                                 </div>
 
-                                <ul className="list-disc list-outside ml-4 md:ml-5 space-y-2 text-muted-foreground mb-4 leading-relaxed">
+                                <ul className="list-disc list-outside ml-6 space-y-3 text-muted-foreground/90 mb-6 leading-relaxed font-sans">
                                     {item.description?.map((desc: string, i: number) => (
                                         <li key={i}>{desc}</li>
                                     ))}
                                 </ul>
 
                                 {/* Tags/Chips */}
-                                <div className="flex flex-wrap gap-2">
+                                <div className="flex flex-wrap gap-2.5">
                                     {type === "education" && item.projectUrl && (
-                                        <Badge variant="secondary" className="font-normal text-xs hover:bg-secondary/80 transition-colors">
+                                        <Badge variant="secondary" className="font-bold text-xs hover:bg-primary/5 hover:text-primary transition-all rounded-full px-4 py-1">
                                             <a href={item.projectUrl} target="_blank" rel="noopener noreferrer" className="flex items-center">
-                                                <Globe className="mr-1 h-3 w-3" /> Final Year Project
+                                                <Globe className="mr-2 h-3.5 w-3.5" /> Final Year Project
                                             </a>
                                         </Badge>
                                     )}
                                     {type === "work" && item.skillsDemonstrated?.map((skill: any) => (
-                                        <Badge key={skill._id} variant="outline" className="font-normal text-xs">
+                                        <Badge key={skill._id} variant="outline" className="font-medium text-[10px] uppercase tracking-widest rounded-full px-3 py-1 bg-surface-container-low border-none text-muted-foreground">
                                             {skill.name}
                                         </Badge>
                                     ))}
