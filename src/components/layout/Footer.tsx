@@ -25,7 +25,7 @@ export function Footer({ settings }: FooterProps) {
     <footer className="cyber-footer px-4 py-8 sm:px-6 lg:px-8">
       <div className="footer-console mx-auto max-w-7xl">
         <div className="grid min-h-[24rem] lg:grid-cols-[9rem_1fr]">
-          <div className="grid place-items-center border-b border-[var(--footer-line)] p-6 lg:border-b-0 lg:border-r">
+          <div className="grid place-items-start border-b border-[var(--footer-line)] p-6 lg:place-items-center lg:border-b-0 lg:border-r">
             <Link to="/" className="footer-mark" aria-label={`${settings.name} home`}>
               <img src="/assets/nachiketh-dark-profile-v3.png" alt="" className="site-logo-img" />
             </Link>
