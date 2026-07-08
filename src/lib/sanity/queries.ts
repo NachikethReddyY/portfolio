@@ -33,6 +33,15 @@ export const socialFields = `
   kind
 `;
 
+export const richTextBodyFields = `
+  body[] {
+    ...,
+    _type == "fileBlock" => {
+      "url": asset->url
+    }
+  }
+`;
+
 export const authorFields = `
   _id,
   name,
@@ -73,7 +82,7 @@ export const projectFields = `
   demoUrl,
   "lessonsLearned": coalesce(lessonsLearned, []),
   "futureImprovements": coalesce(futureImprovements, []),
-  body,
+  ${richTextBodyFields},
   seoTitle,
   seoDescription,
   seoImage {
@@ -96,7 +105,7 @@ export const postFields = `
   categories[]->{
     ${categoryFields}
   },
-  body,
+  ${richTextBodyFields},
   seoTitle,
   seoDescription,
   seoImage {

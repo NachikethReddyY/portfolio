@@ -13,6 +13,7 @@
     "typecheck": "tsc -b"
   },
   "dependencies": {
+    "@portabletext/plugin-markdown-shortcuts": "^8.0.31",
     "@portabletext/react": "^6.2.0",
     "@portabletext/types": "^4.0.2",
     "@sanity/client": "^7.23.0",
@@ -20,7 +21,9 @@
     "@sanity/vision": "^6.4.0",
     "@tailwindcss/vite": "^4.3.2",
     "@vitejs/plugin-react": "^6.0.3",
+    "katex": "^0.17.0",
     "lucide-react": "^1.23.0",
+    "mermaid": "^11.16.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-router-dom": "^7.18.1",

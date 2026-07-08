@@ -2,7 +2,7 @@
 
 @theme {
   --font-display: 'Russo One', ui-sans-serif, system-ui, sans-serif;
-  --font-body: 'Courier Prime', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-body: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
   --font-tech: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
   --color-bg: oklch(0.145 0.022 286);
@@ -11,7 +11,7 @@
   --color-terminal: oklch(0.075 0.018 286);
   --color-terminal-soft: oklch(0.12 0.022 286);
   --color-ink: oklch(0.89 0.026 292);
-  --color-muted: oklch(0.72 0.03 292);
+  --color-muted: #cbc9dc;
   --color-soft: oklch(0.58 0.035 292);
   --color-primary: oklch(0.78 0.155 225);
   --color-primary-strong: oklch(0.84 0.075 225);
