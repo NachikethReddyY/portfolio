@@ -48,7 +48,6 @@ export function AboutPage() {
               strokeWidth={2.5}
             />
             <div className="mt-8 max-w-[60ch] space-y-4 text-base font-semibold leading-7 text-[var(--about-ink)] text-pretty">
-              <p>{settings.shortBio}</p>
               <p>
                 I am a <span className="gold-link">Year 2 IT Diploma student</span> at Singapore
                 Polytechnic building toward full-stack and AI roles where product thinking matters:
