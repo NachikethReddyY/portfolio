@@ -11,7 +11,7 @@ const commandRows = [
   ['/divider', '---'],
   ['/quote', '> Quote'],
   ['/link', '[label](https://example.com)'],
-  ['/highlight', '==highlighted text=='],
+  ['/highlight', '==Text== or ==g: green text=='],
   ['/code', '```ts'],
   ['/mermaid', 'Add Mermaid diagram block'],
   ['/math', 'Add LaTeX block or inline equation'],

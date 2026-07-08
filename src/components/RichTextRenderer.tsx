@@ -2,7 +2,7 @@ import { PortableText, type PortableTextReactComponents } from '@portabletext/re
 import type { PortableTextBlock } from '@portabletext/types';
 import katex from 'katex';
 import mermaid from 'mermaid';
-import { useEffect, useId, useState } from 'react';
+import { useEffect, useId, useState, type ReactNode } from 'react';
 import 'katex/dist/katex.min.css';
 
 import { imageUrlFor } from '../lib/sanity/image';
@@ -100,6 +100,53 @@ const backgroundColors: Record<string, string> = {
   purple: 'rgba(168, 85, 247, 0.18)',
   slate: 'rgba(148, 163, 184, 0.18)',
 };
+
+const highlightColors: Record<string, string> = {
+  highlight: 'rgba(250, 204, 21, 0.35)',
+  highlightYellow: 'rgba(250, 204, 21, 0.35)',
+  highlightGreen: 'rgba(74, 222, 128, 0.28)',
+  highlightCyan: 'rgba(0, 210, 255, 0.24)',
+  highlightRed: 'rgba(248, 113, 113, 0.28)',
+  highlightPurple: 'rgba(168, 85, 247, 0.28)',
+};
+
+const highlightAliases: Record<string, string> = {
+  y: 'highlightYellow',
+  yellow: 'highlightYellow',
+  g: 'highlightGreen',
+  green: 'highlightGreen',
+  b: 'highlightCyan',
+  blue: 'highlightCyan',
+  c: 'highlightCyan',
+  cyan: 'highlightCyan',
+  r: 'highlightRed',
+  red: 'highlightRed',
+  p: 'highlightPurple',
+  purple: 'highlightPurple',
+};
+
+function parseHighlightText(text: string) {
+  const match = text.match(/^([a-z]+):\s+(.+)$/i);
+
+  if (!match) {
+    return { mark: 'highlight', text };
+  }
+
+  const mark = highlightAliases[match[1].toLowerCase()];
+
+  return mark ? { mark, text: match[2] } : { mark: 'highlight', text };
+}
+
+function HighlightMark({ children, mark = 'highlight' }: { children: ReactNode; mark?: string }) {
+  return (
+    <mark
+      className="box-decoration-clone rounded-none px-1 text-ink"
+      style={{ backgroundColor: highlightColors[mark] ?? highlightColors.highlight }}
+    >
+      {children}
+    </mark>
+  );
+}
 
 mermaid.initialize({
   startOnLoad: false,
@@ -240,9 +287,12 @@ const components: Partial<PortableTextReactComponents> = {
         {children}
       </code>
     ),
-    highlight: ({ children }) => (
-      <mark className="box-decoration-clone rounded-none bg-[#facc15]/35 px-1 text-ink">{children}</mark>
-    ),
+    highlight: ({ children }) => <HighlightMark>{children}</HighlightMark>,
+    highlightYellow: ({ children }) => <HighlightMark mark="highlightYellow">{children}</HighlightMark>,
+    highlightGreen: ({ children }) => <HighlightMark mark="highlightGreen">{children}</HighlightMark>,
+    highlightCyan: ({ children }) => <HighlightMark mark="highlightCyan">{children}</HighlightMark>,
+    highlightRed: ({ children }) => <HighlightMark mark="highlightRed">{children}</HighlightMark>,
+    highlightPurple: ({ children }) => <HighlightMark mark="highlightPurple">{children}</HighlightMark>,
     textColor: ({ children, value }) => {
       const color = textColors[(value as ColorMarkValue | undefined)?.color ?? 'default'];
 
@@ -547,10 +597,12 @@ function renderInlineMarkdown(text: string) {
     }
 
     if (part.startsWith('==') && part.endsWith('==')) {
+      const highlight = parseHighlightText(part.slice(2, -2));
+
       return (
-        <mark key={`${part}-${index}`} className="box-decoration-clone rounded-none bg-[#facc15]/35 px-1 text-ink">
-          {part.slice(2, -2)}
-        </mark>
+        <HighlightMark key={`${part}-${index}`} mark={highlight.mark}>
+          {highlight.text}
+        </HighlightMark>
       );
     }
 
@@ -686,7 +738,7 @@ function addMarkdownHighlightMarks(value: PortableTextBlock[]) {
 
       for (const match of matches) {
         const index = match.index ?? 0;
-        const highlightedText = match[1];
+        const highlight = parseHighlightText(match[1]);
 
         if (index > cursor) {
           parts.push({
@@ -699,8 +751,8 @@ function addMarkdownHighlightMarks(value: PortableTextBlock[]) {
         parts.push({
           ...span,
           _key: `${span._key ?? childIndex}-highlight-${matchIndex}`,
-          text: highlightedText,
-          marks: Array.from(new Set([...(span.marks ?? []), 'highlight'])),
+          text: highlight.text,
+          marks: Array.from(new Set([...(span.marks ?? []), highlight.mark])),
         });
 
         cursor = index + match[0].length;
