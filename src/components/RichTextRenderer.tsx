@@ -68,6 +68,17 @@ type MarkdownBlockValue = {
   source?: string;
 };
 
+type PortableTextSpan = {
+  _key?: string;
+  _type: 'span';
+  text?: string;
+  marks?: string[];
+};
+
+type RichTextBlock = PortableTextBlock & {
+  children?: Array<PortableTextSpan | Record<string, unknown>>;
+};
+
 type ColorMarkValue = {
   color?: string;
 };
@@ -653,6 +664,69 @@ function MarkdownRenderer({ value }: { value: string }) {
   );
 }
 
+function addMarkdownHighlightMarks(value: PortableTextBlock[]) {
+  return value.map((block) => {
+    const richBlock = block as RichTextBlock;
+
+    if (richBlock._type !== 'block' || !Array.isArray(richBlock.children)) {
+      return block;
+    }
+
+    let changed = false;
+    const children = richBlock.children.flatMap((child, childIndex) => {
+      if (child._type !== 'span' || typeof child.text !== 'string' || !child.text.includes('==')) {
+        return [child];
+      }
+
+      const span = child as PortableTextSpan;
+      const parts: PortableTextSpan[] = [];
+      const matches = span.text?.matchAll(/==([^=\n]+)==/g) ?? [];
+      let cursor = 0;
+      let matchIndex = 0;
+
+      for (const match of matches) {
+        const index = match.index ?? 0;
+        const highlightedText = match[1];
+
+        if (index > cursor) {
+          parts.push({
+            ...span,
+            _key: `${span._key ?? childIndex}-plain-${matchIndex}`,
+            text: span.text?.slice(cursor, index),
+          });
+        }
+
+        parts.push({
+          ...span,
+          _key: `${span._key ?? childIndex}-highlight-${matchIndex}`,
+          text: highlightedText,
+          marks: Array.from(new Set([...(span.marks ?? []), 'highlight'])),
+        });
+
+        cursor = index + match[0].length;
+        matchIndex += 1;
+      }
+
+      if (!parts.length) {
+        return [child];
+      }
+
+      if (span.text && cursor < span.text.length) {
+        parts.push({
+          ...span,
+          _key: `${span._key ?? childIndex}-plain-tail`,
+          text: span.text.slice(cursor),
+        });
+      }
+
+      changed = true;
+      return parts;
+    });
+
+    return changed ? { ...richBlock, children } : block;
+  });
+}
+
 export function RichTextRenderer({ value }: RichTextRendererProps) {
   if (!value?.length) {
     return null;
@@ -664,7 +738,7 @@ export function RichTextRenderer({ value }: RichTextRendererProps) {
 
   return (
     <div className="prose-content">
-      <PortableText value={value} components={components} />
+      <PortableText value={addMarkdownHighlightMarks(value)} components={components} />
     </div>
   );
 }
