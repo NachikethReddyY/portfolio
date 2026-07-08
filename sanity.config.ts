@@ -1,14 +1,15 @@
-import { defineConfig } from "sanity";
-import { structureTool } from "sanity/structure";
-import { visionTool } from "@sanity/vision";
-import { schemaTypes } from "./src/sanity/schemas";
+import { visionTool } from '@sanity/vision';
+import { defineConfig } from 'sanity';
+import { structureTool } from 'sanity/structure';
 
-const projectId = process.env.VITE_SANITY_PROJECT_ID ?? "replace-with-project-id";
-const dataset = process.env.VITE_SANITY_DATASET ?? "production";
+import { schemaTypes } from './sanity/schemaTypes';
+
+const projectId = process.env.SANITY_STUDIO_PROJECT_ID || 'your-project-id';
+const dataset = process.env.SANITY_STUDIO_DATASET || 'production';
 
 export default defineConfig({
-  name: "nachiketh-personal-site",
-  title: "Nachiketh Reddy",
+  name: 'nachiketh-portfolio',
+  title: 'Nachiketh Reddy Portfolio CMS',
   projectId,
   dataset,
   plugins: [structureTool(), visionTool()],

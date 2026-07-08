@@ -1,19 +1,14 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { App } from "./App";
-import { BlogIndex } from "./pages/BlogIndex";
-import { BlogPost } from "./pages/BlogPost";
-import "./styles.css";
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
+import App from './App';
+import './index.css';
+
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/blog" element={<BlogIndex />} />
-        <Route path="/blog/:slug" element={<BlogPost />} />
-      </Routes>
+      <App />
     </BrowserRouter>
-  </React.StrictMode>,
+  </StrictMode>,
 );
