@@ -21,12 +21,12 @@ const tones = [
     stroke: 'stroke-accent',
   },
   {
-    accent: 'bg-violet',
-    accentText: 'text-violet',
-    border: 'border-violet',
-    fill: 'fill-violet',
-    soft: 'bg-violet/20',
-    stroke: 'stroke-violet',
+    accent: 'bg-primary',
+    accentText: 'text-primary-strong',
+    border: 'border-primary',
+    fill: 'fill-primary',
+    soft: 'bg-primary/20',
+    stroke: 'stroke-primary',
   },
 ];
 
@@ -62,7 +62,7 @@ export function ProjectVisual({ title, status }: ProjectVisualProps) {
       aria-label={`${title} interface preview`}
       className="relative min-h-72 overflow-hidden bg-terminal p-4"
     >
-      <div className="flex items-center justify-between gap-3 border-b-2 border-ink pb-3">
+      <div className="flex items-center justify-between gap-3 border-b border-[#00d2ff]/30 pb-3">
         <div className="flex items-center gap-2">
           <span className="size-3 rounded-full bg-danger" />
           <span className="size-3 rounded-full bg-warning" />
@@ -72,7 +72,7 @@ export function ProjectVisual({ title, status }: ProjectVisualProps) {
       </div>
 
       <div className="mt-4 grid gap-4 sm:grid-cols-[0.95fr_1.05fr]">
-        <div className="text-on-ink min-w-0 sm:border-r-2 sm:border-ink sm:pr-4">
+        <div className="text-on-ink min-w-0 sm:border-r sm:border-[#00d2ff]/24 sm:pr-4">
           <div className="mb-4 flex min-w-0 items-center justify-between gap-3 font-tech text-[0.66rem]">
             <span className="text-on-ink-soft min-w-0 break-all">~/nachiketh/{repoSlug}</span>
             <span className={['shrink-0', tone.accentText].join(' ')}>main</span>
@@ -87,9 +87,9 @@ export function ProjectVisual({ title, status }: ProjectVisualProps) {
               </div>
             ))}
           </div>
-          <div className="mt-5 grid grid-cols-3 border-y border-ink/35 py-3">
+          <div className="mt-5 grid grid-cols-3 border-y border-[#00d2ff]/24 py-3">
             {['ui', 'api', 'ai'].map((label, index) => (
-              <div key={label} className="border-r border-ink/30 px-2 last:border-r-0">
+              <div key={label} className="border-r border-[#00d2ff]/20 px-2 last:border-r-0">
                 <span className="text-on-ink-soft block font-tech text-[0.6rem] uppercase">{label}</span>
                 <span
                   className={[
@@ -103,7 +103,7 @@ export function ProjectVisual({ title, status }: ProjectVisualProps) {
         </div>
 
         <div className="grid content-start gap-4">
-          <div className={['border-b-2 pb-3', tone.border].join(' ')}>
+          <div className={['border-b pb-3', tone.border].join(' ')}>
             <div className="flex items-center justify-between gap-3">
               <span className="font-tech text-[0.66rem] font-bold text-ink">runtime map</span>
               <span className={['font-tech text-[0.66rem]', tone.accentText].join(' ')}>
@@ -116,8 +116,8 @@ export function ProjectVisual({ title, status }: ProjectVisualProps) {
               role="img"
               aria-label={`${title} terminal graph wireframe`}
             >
-              <path d="M14 112H190M18 14V112" className="stroke-ink/45" strokeWidth="2" />
-              <path d="M18 82H190M18 52H190M18 22H190" className="stroke-ink/15" strokeWidth="1.5" />
+              <path d="M14 112H190M18 14V112" className="stroke-primary/45" strokeWidth="2" />
+              <path d="M18 82H190M18 52H190M18 22H190" className="stroke-primary/15" strokeWidth="1.5" />
               <polyline
                 points={graphPoints}
                 fill="none"
@@ -143,8 +143,8 @@ export function ProjectVisual({ title, status }: ProjectVisualProps) {
               </text>
             </svg>
           </div>
-          <div className="grid grid-cols-2 border-y border-ink/40 py-3">
-            <div className="border-r border-ink/35 px-3">
+          <div className="grid grid-cols-2 border-y border-[#00d2ff]/24 py-3">
+            <div className="border-r border-[#00d2ff]/20 px-3">
               <span className="font-tech text-[0.6rem] uppercase text-muted">scope</span>
               <span className="block font-tech text-[0.68rem] text-ink">full stack</span>
             </div>

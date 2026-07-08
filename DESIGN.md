@@ -11,7 +11,7 @@
 
 ### Color
 
-Global tokens still use OKLCH. The active About/footer direction adds scoped hex variables for a blue cyberpunk trial: obsidian black, dark navy panels, electric-blue lines, blue-gray shadows, off-white text, and cool slate muted text. Warm gold should not frame components; reserve it for inline emphasis such as learning highlights.
+Global tokens use the About page as the site-wide standard: obsidian black, dark navy panels, electric-blue lines, blue-gray shadows, off-white text, and cool slate muted text. Warm amber is reserved for inline emphasis and a few small content signals, not component framing.
 
 ```css
 :root {

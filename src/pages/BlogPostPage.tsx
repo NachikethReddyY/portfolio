@@ -26,7 +26,7 @@ export function BlogPostPage() {
       <Section className="pb-10 pt-14 sm:pt-20">
         <Link
           to="/blog"
-          className="pressable hover-text-on-accent inline-flex min-h-11 items-center rounded-md border-2 border-ink bg-surface px-3 text-sm font-bold text-ink hover:bg-violet"
+          className="pressable inline-flex min-h-11 items-center rounded-none border border-[#00d2ff] bg-[#0d1622] px-3 font-tech text-sm font-bold uppercase text-ink shadow-[5px_5px_0_#243a56] hover:-translate-x-0.5 hover:-translate-y-0.5"
         >
           Back to blog
         </Link>
@@ -35,7 +35,7 @@ export function BlogPostPage() {
             {post.categories.map((category) => (
               <span
                 key={category._id}
-                className="rounded-md border-2 border-ink bg-accent px-3 py-1 font-tech text-[0.68rem] font-bold text-on-accent"
+                className="rounded-none border border-[#00d2ff]/45 bg-terminal px-3 py-1 font-tech text-[0.68rem] font-bold text-primary-strong"
               >
                 {category.title}
               </span>
@@ -47,7 +47,7 @@ export function BlogPostPage() {
           <p className="mt-6 text-xl font-semibold leading-8 text-primary-strong text-pretty">
             {post.excerpt}
           </p>
-          <div className="mt-8 flex flex-wrap gap-x-4 gap-y-2 border-y-2 border-ink py-4 font-tech text-xs font-semibold text-muted">
+          <div className="mt-8 flex flex-wrap gap-x-4 gap-y-2 border-y border-[#00d2ff]/24 py-4 font-tech text-xs font-semibold text-muted">
             <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
             <span>{post.readingTime ?? getReadingTime(post.body)}</span>
             {post.author ? <span>{post.author.name}</span> : null}

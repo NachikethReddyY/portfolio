@@ -13,11 +13,11 @@
   --color-ink: oklch(0.89 0.026 292);
   --color-muted: oklch(0.72 0.03 292);
   --color-soft: oklch(0.58 0.035 292);
-  --color-primary: oklch(0.76 0.145 78);
-  --color-primary-strong: oklch(0.84 0.16 78);
-  --color-accent: oklch(0.82 0.075 305);
-  --color-violet: oklch(0.68 0.14 306);
-  --color-border: oklch(0.78 0.035 292);
+  --color-primary: oklch(0.78 0.155 225);
+  --color-primary-strong: oklch(0.84 0.075 225);
+  --color-accent: oklch(0.82 0.15 78);
+  --color-violet: oklch(0.68 0.06 225);
+  --color-border: oklch(0.64 0.08 225);
   --color-danger: oklch(0.67 0.2 28);
   --color-warning: oklch(0.78 0.16 78);
   --color-success: oklch(0.68 0.14 170);
@@ -38,8 +38,7 @@ body {
   min-width: 320px;
   margin: 0;
   background:
-    radial-gradient(circle at 82% 8%, color-mix(in oklch, var(--color-violet), transparent 76%) 0 18rem, transparent 34rem),
-    linear-gradient(180deg, color-mix(in oklch, var(--color-surface-strong), transparent 38%) 0%, var(--color-bg) 34rem),
+    linear-gradient(180deg, rgba(18, 18, 30, 0.64) 0%, var(--color-bg) 34rem),
     var(--color-bg);
   color: var(--color-ink);
   font-family: var(--font-body);
@@ -133,20 +132,23 @@ p {
 }
 
 .brutal-panel {
-  border: 2px solid var(--color-ink);
-  background: var(--color-surface);
-  box-shadow: 8px 8px 0 var(--color-primary);
+  border: 1px solid #00d2ff;
+  border-radius: 0;
+  background: #0c101a;
+  box-shadow: 8px 8px 0 #243a56;
 }
 
 .brutal-panel-soft {
-  border: 2px solid color-mix(in oklch, var(--color-ink), transparent 22%);
-  background: color-mix(in oklch, var(--color-surface), var(--color-bg) 8%);
+  border: 1px solid rgba(0, 210, 255, 0.24);
+  border-radius: 0;
+  background: color-mix(in srgb, #12121e, transparent 8%);
 }
 
 .stamp-panel {
-  border: 2px solid var(--color-ink);
-  background: var(--color-surface);
-  box-shadow: 5px 5px 0 var(--color-violet);
+  border: 1px solid rgba(0, 210, 255, 0.34);
+  border-radius: 0;
+  background: #0c101a;
+  box-shadow: 6px 6px 0 #243a56;
 }
 
 .dot-field {
@@ -157,9 +159,9 @@ p {
 .creator-art-frame {
   position: relative;
   overflow: hidden;
-  border: 2px solid var(--color-border);
+  border: 1px solid #00d2ff;
   background: var(--color-terminal);
-  box-shadow: 8px 8px 0 color-mix(in oklch, var(--color-violet), transparent 15%);
+  box-shadow: 10px 10px 0 #243a56;
 }
 
 .creator-art-frame::after {
@@ -168,7 +170,7 @@ p {
   content: '';
   background:
     linear-gradient(90deg, color-mix(in oklch, var(--color-terminal), transparent 12%), transparent 34%),
-    radial-gradient(circle at 78% 12%, color-mix(in oklch, var(--color-primary), transparent 72%), transparent 22rem);
+    linear-gradient(180deg, transparent 66%, rgba(0, 210, 255, 0.18));
   pointer-events: none;
 }
 
@@ -187,7 +189,7 @@ p {
 }
 
 .gold-link {
-  color: var(--color-primary-strong);
+  color: var(--color-accent);
 }
 
 .about-cyber {
@@ -221,12 +223,14 @@ p {
 .about-portrait-frame {
   position: relative;
   overflow: hidden;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  min-height: 20rem;
+  order: -1;
+  width: min(10rem, 46vw);
+  aspect-ratio: 1;
+  justify-self: start;
   border: 1px solid var(--about-blue);
+  border-radius: 999px;
   background: var(--about-surface);
-  box-shadow: 10px 10px 0 var(--about-shadow);
+  box-shadow: 0 0 0 4px rgba(0, 210, 255, 0.08);
 }
 
 .about-portrait-frame::after {
@@ -244,6 +248,17 @@ p {
   height: 100%;
   object-fit: cover;
   object-position: 50% 54%;
+}
+
+@media (min-width: 1024px) {
+  .about-portrait-frame {
+    order: 0;
+    width: 100%;
+    height: 586px;
+    aspect-ratio: auto;
+    border-radius: 0;
+    box-shadow: 10px 10px 0 var(--about-shadow);
+  }
 }
 
 .about-wire-icon {

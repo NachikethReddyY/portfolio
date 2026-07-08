@@ -11,16 +11,16 @@ type ButtonLinkProps = {
 
 const variants = {
   primary:
-    'border-2 border-ink bg-primary text-on-accent hover:-translate-y-0.5 hover:bg-primary-strong',
+    'border border-[#00d2ff] bg-[#0d1622] text-ink shadow-[6px_6px_0_#243a56] hover:-translate-x-0.5 hover:-translate-y-0.5',
   secondary:
-    'border-2 border-ink bg-transparent text-ink hover:-translate-y-0.5 hover:bg-primary hover-text-on-accent',
-  ghost: 'border-transparent text-muted hover:text-ink hover:bg-surface',
+    'border border-[#00d2ff] bg-transparent text-ink shadow-[6px_6px_0_#243a56] hover:-translate-x-0.5 hover:-translate-y-0.5',
+  ghost: 'border border-transparent text-muted hover:border-[#00d2ff]/40 hover:bg-terminal hover:text-ink',
 };
 
 const iconVariants = {
-  primary: 'bg-terminal text-on-ink',
-  secondary: 'bg-terminal text-on-ink group-hover:bg-violet group-hover-text-on-accent',
-  ghost: 'bg-surface-strong text-muted group-hover:text-accent',
+  primary: 'border border-[#00d2ff]/50 bg-terminal text-on-ink',
+  secondary: 'border border-[#00d2ff]/50 bg-terminal text-on-ink',
+  ghost: 'bg-surface-strong text-muted group-hover:text-primary',
 };
 
 export function ButtonLink({
@@ -32,12 +32,12 @@ export function ButtonLink({
   ...props
 }: ButtonLinkProps) {
   const classes = [
-    'pressable group inline-flex min-h-11 items-center justify-center gap-3 rounded-md border py-2 pl-5 pr-2 text-sm font-bold',
+    'pressable group inline-flex min-h-11 items-center justify-center gap-3 rounded-none py-2 pl-5 pr-2 font-tech text-sm font-extrabold uppercase',
     variants[variant],
     className,
   ].join(' ');
   const iconClasses = [
-    'grid size-8 shrink-0 place-items-center rounded-full transition-transform duration-300 ease-[var(--ease-premium)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:scale-105',
+    'grid size-8 shrink-0 place-items-center rounded-none transition-transform duration-300 ease-[var(--ease-premium)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5',
     iconVariants[variant],
   ].join(' ');
   const icon = (

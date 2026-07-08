@@ -50,7 +50,7 @@ export function ContactPage() {
             </div>
           </div>
 
-          <aside className="brutal-panel rounded-lg p-5 sm:p-6">
+          <aside className="brutal-panel p-5 sm:p-6">
             <h2 className="font-display text-2xl font-black text-ink">Useful links</h2>
             <div className="mt-5 grid gap-3">
               {settings.socialLinks.map((link) => {
@@ -61,7 +61,7 @@ export function ContactPage() {
                     href={link.url}
                     target={link.url.startsWith('http') ? '_blank' : undefined}
                     rel={link.url.startsWith('http') ? 'noreferrer' : undefined}
-                    className="pressable hover-text-on-accent flex min-h-14 items-center gap-3 rounded-md border-2 border-ink bg-surface px-4 font-bold text-ink hover:bg-accent"
+                    className="pressable flex min-h-14 items-center gap-3 rounded-none border border-[#00d2ff]/45 bg-terminal px-4 font-tech font-bold text-ink hover:border-[#00d2ff] hover:text-primary-strong"
                   >
                     <Icon aria-hidden="true" size={20} />
                     <span>{link.label}</span>
@@ -69,11 +69,11 @@ export function ContactPage() {
                 );
               })}
             </div>
-            <div className="mt-6 border-y-2 border-ink bg-primary py-4">
-              <p className="px-1 font-tech text-xs font-bold uppercase text-on-accent">Availability</p>
-              <p className="mt-2 px-1 font-semibold text-on-accent">{settings.availability}</p>
+            <div className="mt-6 border-y border-[#00d2ff]/35 bg-terminal py-4">
+              <p className="px-1 font-tech text-xs font-bold uppercase text-primary-strong">Availability</p>
+              <p className="mt-2 px-1 font-semibold text-ink">{settings.availability}</p>
               {settings.location ? (
-                <p className="text-on-accent-soft mt-2 px-1 text-sm font-semibold">{settings.location}</p>
+                <p className="mt-2 px-1 text-sm font-semibold text-muted">{settings.location}</p>
               ) : null}
             </div>
           </aside>

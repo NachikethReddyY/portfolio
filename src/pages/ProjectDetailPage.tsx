@@ -33,18 +33,18 @@ export function ProjectDetailPage() {
       <Section className="pb-10 pt-14 sm:pt-20">
         <Link
           to="/projects"
-          className="pressable hover-text-on-accent inline-flex min-h-11 items-center rounded-md border-2 border-ink bg-surface px-3 text-sm font-bold text-ink hover:bg-accent"
+          className="pressable inline-flex min-h-11 items-center rounded-none border border-[#00d2ff] bg-[#0d1622] px-3 font-tech text-sm font-bold uppercase text-ink shadow-[5px_5px_0_#243a56] hover:-translate-x-0.5 hover:-translate-y-0.5"
         >
           Back to projects
         </Link>
         <div className="mt-6 grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
           <div>
             <div className="flex flex-wrap gap-2">
-              <span className="rounded-md border-2 border-ink bg-accent px-2.5 py-1 font-tech text-[0.68rem] font-bold text-on-accent">
+              <span className="rounded-none border border-[#00d2ff]/45 bg-terminal px-2.5 py-1 font-tech text-[0.68rem] font-bold text-primary-strong">
                 {formatStatus(project.status)}
               </span>
               {project.featured ? (
-                <span className="rounded-md border-2 border-ink bg-surface px-2.5 py-1 font-tech text-[0.68rem] font-semibold text-ink">
+                <span className="rounded-none border border-[#00d2ff]/30 bg-surface px-2.5 py-1 font-tech text-[0.68rem] font-semibold text-ink">
                   Featured
                 </span>
               ) : null}
@@ -55,7 +55,7 @@ export function ProjectDetailPage() {
             <p className="mt-6 text-xl font-semibold leading-8 text-primary-strong text-pretty">
               {project.summary}
             </p>
-            <dl className="brutal-panel-soft mt-7 grid gap-3 rounded-lg p-4 sm:grid-cols-3">
+            <dl className="brutal-panel-soft mt-7 grid gap-3 p-4 sm:grid-cols-3">
               {project.role ? (
                 <div>
                   <dt className="font-tech text-[0.68rem] font-bold text-muted">Role</dt>
@@ -76,7 +76,7 @@ export function ProjectDetailPage() {
               ) : null}
             </dl>
             {project.impact ? (
-              <p className="mt-4 rounded-lg border-2 border-ink bg-accent p-4 font-semibold text-on-accent">
+              <p className="mt-4 rounded-none border border-[#00d2ff] bg-terminal p-4 font-semibold text-ink shadow-[5px_5px_0_#243a56]">
                 {project.impact}
               </p>
             ) : null}
@@ -99,11 +99,11 @@ export function ProjectDetailPage() {
 
       <Section className="py-8">
         <div className="grid gap-5 md:grid-cols-2">
-          <article className="brutal-panel-soft rounded-lg p-6">
+          <article className="brutal-panel-soft p-6">
             <h2 className="font-display text-3xl font-black text-ink">Problem</h2>
             <p className="mt-4 text-muted">{project.problem}</p>
           </article>
-          <article className="brutal-panel-soft rounded-lg p-6">
+          <article className="brutal-panel-soft p-6">
             <h2 className="font-display text-3xl font-black text-ink">Solution</h2>
             <p className="mt-4 text-muted">{project.solution}</p>
           </article>
@@ -121,7 +121,7 @@ export function ProjectDetailPage() {
                 ))}
               </div>
             </div>
-            <div className="brutal-panel-soft rounded-lg p-5">
+            <div className="brutal-panel-soft p-5">
               <h2 className="font-display text-2xl font-black text-ink">Links</h2>
               <div className="mt-4 grid gap-2">
                 {project.githubUrl ? (
@@ -129,7 +129,7 @@ export function ProjectDetailPage() {
                     href={project.githubUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="pressable hover-text-on-accent inline-flex min-h-11 items-center gap-2 rounded-md border-2 border-ink bg-surface px-3 font-bold text-ink hover:bg-accent"
+                    className="pressable inline-flex min-h-11 items-center gap-2 rounded-none border border-[#00d2ff] bg-[#0d1622] px-3 font-tech font-bold uppercase text-ink shadow-[5px_5px_0_#243a56] hover:-translate-x-0.5 hover:-translate-y-0.5"
                   >
                     <Code2 aria-hidden="true" size={18} />
                     Repository
@@ -140,7 +140,7 @@ export function ProjectDetailPage() {
                     href={project.demoUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="pressable hover-text-on-accent inline-flex min-h-11 items-center gap-2 rounded-md border-2 border-ink bg-surface px-3 font-bold text-ink hover:bg-primary"
+                    className="pressable inline-flex min-h-11 items-center gap-2 rounded-none border border-[#00d2ff] bg-[#0d1622] px-3 font-tech font-bold uppercase text-ink shadow-[5px_5px_0_#243a56] hover:-translate-x-0.5 hover:-translate-y-0.5"
                   >
                     <Globe2 aria-hidden="true" size={18} />
                     Live demo
@@ -169,12 +169,12 @@ function DetailList({ title, items }: { title: string; items: string[] }) {
   }
 
   return (
-    <section className="brutal-panel-soft rounded-lg p-6">
+    <section className="brutal-panel-soft p-6">
       <h2 className="font-display text-3xl font-black text-ink">{title}</h2>
       <ul className="mt-5 grid gap-3">
         {items.map((item) => (
           <li key={item} className="flex gap-3 text-muted">
-            <span aria-hidden="true" className="mt-2.5 size-3 shrink-0 rounded-sm bg-violet" />
+            <span aria-hidden="true" className="mt-2.5 size-3 shrink-0 rounded-none bg-primary" />
             <span>{item}</span>
           </li>
         ))}

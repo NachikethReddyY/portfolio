@@ -21,7 +21,7 @@ const components: Partial<PortableTextReactComponents> = {
     ),
     normal: ({ children }) => <p className="mt-5 text-pretty text-muted">{children}</p>,
     blockquote: ({ children }) => (
-      <blockquote className="mt-8 rounded-md border-2 border-ink bg-accent p-5 text-xl font-semibold text-on-accent">
+      <blockquote className="mt-8 rounded-none border border-[#00d2ff] bg-terminal p-5 text-xl font-semibold text-ink shadow-[6px_6px_0_#243a56]">
         {children}
       </blockquote>
     ),
@@ -34,14 +34,14 @@ const components: Partial<PortableTextReactComponents> = {
           href={href}
           target={href.startsWith('http') ? '_blank' : undefined}
           rel={href.startsWith('http') ? 'noreferrer' : undefined}
-          className="font-bold text-violet underline decoration-violet/50 underline-offset-4"
+          className="font-bold text-primary-strong underline decoration-primary/50 underline-offset-4"
         >
           {children}
         </a>
       );
     },
     code: ({ children }) => (
-      <code className="rounded-md border border-ink bg-surface-strong px-1.5 py-1 font-tech text-sm font-semibold text-ink">
+      <code className="rounded-none border border-[#00d2ff]/35 bg-surface-strong px-1.5 py-1 font-tech text-sm font-semibold text-ink">
         {children}
       </code>
     ),
@@ -59,7 +59,7 @@ const components: Partial<PortableTextReactComponents> = {
           <img
             src={src}
             alt={value.alt ?? ''}
-            className="w-full rounded-lg border-2 border-ink object-cover"
+            className="w-full rounded-none border border-[#00d2ff]/45 object-cover"
             loading="lazy"
           />
           {value.caption ? (
@@ -69,8 +69,8 @@ const components: Partial<PortableTextReactComponents> = {
       );
     },
     callout: ({ value }) => (
-      <aside className="stamp-panel my-8 rounded-lg p-5 text-ink">
-        <p className="font-tech text-xs font-bold text-violet">{value.tone ?? 'Insight'}</p>
+      <aside className="stamp-panel my-8 p-5 text-ink">
+        <p className="font-tech text-xs font-bold text-primary-strong">{value.tone ?? 'Insight'}</p>
         <p className="mt-2 text-pretty">{value.text}</p>
       </aside>
     ),

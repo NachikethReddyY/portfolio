@@ -13,9 +13,9 @@ type TerminalLineProps = {
 };
 
 const toneClasses = {
-  command: 'text-primary',
+  command: 'text-primary-strong',
   success: 'text-accent',
-  info: 'text-violet',
+  info: 'text-primary',
   muted: 'text-on-ink-soft',
 };
 
@@ -29,13 +29,13 @@ export function TerminalSequence({
       role="img"
       aria-label={label}
       className={[
-        'relative overflow-hidden rounded-md border-2 border-ink bg-terminal p-4 font-tech text-xs leading-6 text-on-ink sm:text-sm',
+        'relative overflow-hidden rounded-none border border-[#00d2ff]/45 bg-terminal p-4 font-tech text-xs leading-6 text-on-ink sm:text-sm',
         className,
       ].join(' ')}
     >
-      <div className="mb-3 flex items-center justify-between border-b border-surface/20 pb-2">
+      <div className="mb-3 flex items-center justify-between border-b border-[#00d2ff]/20 pb-2">
         <span className="text-on-ink-soft">portfolio.boot</span>
-        <span className="text-accent">live</span>
+        <span className="text-primary-strong">live</span>
       </div>
       <div className="grid gap-1">{children}</div>
     </div>

@@ -93,9 +93,9 @@ export function HomePage() {
                 </TerminalLine>
               </TerminalSequence>
             </div>
-            <div className="mt-4 flex items-center justify-between gap-3 border-b-2 border-ink pb-4">
+            <div className="mt-4 flex items-center justify-between gap-3 border-b border-[#00d2ff]/24 pb-4">
               <span className="font-tech text-xs font-bold text-muted">live build signal</span>
-              <span className="rounded-md border-2 border-ink bg-success px-2.5 py-1 font-tech text-[0.68rem] font-bold text-on-accent">
+              <span className="rounded-none border border-[#00d2ff]/45 bg-terminal px-2.5 py-1 font-tech text-[0.68rem] font-bold text-primary-strong">
                 GitHub backed
               </span>
             </div>
@@ -108,7 +108,7 @@ export function HomePage() {
                   <CheckCircle2
                     aria-hidden="true"
                     size={20}
-                    className="mt-0.5 shrink-0 text-violet"
+                    className="mt-0.5 shrink-0 text-primary"
                   />
                   <span className="font-semibold">{item}</span>
                 </div>
@@ -131,9 +131,9 @@ export function HomePage() {
             {positioningBullets.map((item, index) => (
               <div
                 key={`${item}-${index}`}
-                className="stamp-panel flex items-start gap-3 rounded-md px-4 py-3"
+                className="stamp-panel flex items-start gap-3 px-4 py-3"
               >
-                <span className="mt-1 grid size-6 shrink-0 place-items-center rounded-sm border-2 border-ink bg-accent font-tech text-[0.62rem] font-black text-on-accent">
+                <span className="mt-1 grid size-6 shrink-0 place-items-center rounded-none border border-[#00d2ff]/45 bg-terminal font-tech text-[0.62rem] font-black text-primary-strong">
                   {index + 1}
                 </span>
                 <span className="text-sm font-semibold leading-6 text-ink sm:text-base">
@@ -159,7 +159,7 @@ export function HomePage() {
           </div>
           <Link
             to="/projects"
-            className="pressable hover-text-on-accent inline-flex min-h-11 items-center gap-2 rounded-md border-2 border-ink bg-surface px-4 text-sm font-bold text-ink hover:bg-accent"
+            className="pressable inline-flex min-h-11 items-center gap-2 rounded-none border border-[#00d2ff] bg-[#0d1622] px-4 font-tech text-sm font-bold uppercase text-ink shadow-[6px_6px_0_#243a56] hover:-translate-x-0.5 hover:-translate-y-0.5"
           >
             See all projects <ArrowRight aria-hidden="true" size={16} />
           </Link>
@@ -203,7 +203,7 @@ export function HomePage() {
           </div>
           <div className="grid gap-4 lg:col-span-2">
             {home.focusAreas.map((focus) => (
-              <article key={focus.title} className="brutal-panel-soft rounded-lg p-5">
+              <article key={focus.title} className="brutal-panel-soft p-5">
                 <h3 className="font-display text-2xl font-black text-ink">{focus.title}</h3>
                 <p className="mt-2 text-muted">{focus.description}</p>
               </article>
@@ -225,7 +225,7 @@ export function HomePage() {
           </div>
           <Link
             to="/blog"
-            className="pressable hover-text-on-accent inline-flex min-h-11 items-center gap-2 rounded-md border-2 border-ink bg-surface px-4 text-sm font-bold text-ink hover:bg-violet"
+            className="pressable inline-flex min-h-11 items-center gap-2 rounded-none border border-[#00d2ff] bg-[#0d1622] px-4 font-tech text-sm font-bold uppercase text-ink shadow-[6px_6px_0_#243a56] hover:-translate-x-0.5 hover:-translate-y-0.5"
           >
             Read the blog <ArrowRight aria-hidden="true" size={16} />
           </Link>
@@ -238,7 +238,7 @@ export function HomePage() {
       </Section>
 
       <Section className="pb-24">
-        <div className="brutal-panel rounded-lg p-6 sm:p-8 lg:p-10">
+        <div className="brutal-panel p-6 sm:p-8 lg:p-10">
           <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div>
               <h2 className="font-display text-4xl font-black text-balance text-ink">
