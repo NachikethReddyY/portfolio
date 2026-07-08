@@ -96,6 +96,7 @@ export type ProjectType =
 
 export type Project = SeoFields & {
   _id: string;
+  createdAt?: string;
   title: string;
   slug: string;
   summary: string;
@@ -129,6 +130,7 @@ export type BlogPost = SeoFields & {
   featuredImage?: SanityImage;
   author?: Author;
   categories: Category[];
+  markdownBody?: string;
   body?: PortableTextBlock[];
   readingTime?: string;
 };

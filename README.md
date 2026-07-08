@@ -49,16 +49,19 @@ SANITY_STUDIO_DATASET=production
 
 ## CMS Setup
 
-1. Create a Sanity project.
-2. Add the project ID and dataset to `.env.local`.
-3. Run `npm run studio`.
-4. Import the seed content if useful:
+This repo is already connected to the Sanity `Portfolio` project (`508uqyvi`) and the
+`production` dataset. The public project ID is also used as a local default, so `.env.local` is
+optional unless you want to override the dataset or API version.
+
+1. Run `npm run studio`.
+2. Open `Blog Posts` or `Project Pages` in Studio.
+3. Import/reset the seed content if useful:
 
 ```bash
-npx sanity dataset import sanity/seed/portfolio.ndjson production
+npx sanity dataset import sanity/seed/portfolio.ndjson --dataset production --replace
 ```
 
-5. Edit `Site Settings`, `Homepage`, `Projects`, `Skills`, `Posts`, `Authors`, and `Social Links` in Studio.
+4. Edit `Site Settings`, `Homepage`, `Project Pages`, `Skills`, `Blog Posts`, `Authors`, and `Social Links` in Studio.
 
 ## Content Notes
 

@@ -45,6 +45,7 @@ export const authorFields = `
 
 export const projectFields = `
   _id,
+  "createdAt": _createdAt,
   title,
   "slug": slug.current,
   summary,
@@ -95,6 +96,7 @@ export const postFields = `
   categories[]->{
     ${categoryFields}
   },
+  markdownBody,
   body,
   seoTitle,
   seoDescription,
@@ -156,25 +158,51 @@ export const homePageQuery = `
 `;
 
 export const allProjectsQuery = `
-  *[_type == "project"] | order(featured desc, _createdAt desc) {
+  *[
+    _type == "project" &&
+    defined(title) &&
+    defined(slug.current) &&
+    defined(summary) &&
+    defined(status) &&
+    defined(problem) &&
+    defined(solution)
+  ] | order(featured desc, _createdAt desc) {
     ${projectFields}
   }
 `;
 
 export const projectBySlugQuery = `
-  *[_type == "project" && slug.current == $slug][0] {
+  *[
+    _type == "project" &&
+    slug.current == $slug &&
+    defined(summary) &&
+    defined(status) &&
+    defined(problem) &&
+    defined(solution)
+  ][0] {
     ${projectFields}
   }
 `;
 
 export const allPostsQuery = `
-  *[_type == "post"] | order(publishedAt desc) {
+  *[
+    _type == "post" &&
+    defined(title) &&
+    defined(slug.current) &&
+    defined(excerpt) &&
+    defined(publishedAt)
+  ] | order(publishedAt desc) {
     ${postFields}
   }
 `;
 
 export const postBySlugQuery = `
-  *[_type == "post" && slug.current == $slug][0] {
+  *[
+    _type == "post" &&
+    slug.current == $slug &&
+    defined(excerpt) &&
+    defined(publishedAt)
+  ][0] {
     ${postFields}
   }
 `;

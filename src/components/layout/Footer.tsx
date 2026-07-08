@@ -27,7 +27,7 @@ export function Footer({ settings }: FooterProps) {
         <div className="grid min-h-[24rem] lg:grid-cols-[9rem_1fr]">
           <div className="grid place-items-center border-b border-[var(--footer-line)] p-6 lg:border-b-0 lg:border-r">
             <Link to="/" className="footer-mark" aria-label={`${settings.name} home`}>
-              <img src="/assets/nachiketh-icon.png" alt="" className="site-logo-img" />
+              <img src="/assets/nachiketh-dark-profile-v3.png" alt="" className="site-logo-img" />
             </Link>
           </div>
 
@@ -146,7 +146,7 @@ export function Footer({ settings }: FooterProps) {
         <div className="flex items-center gap-5">
           <p>Copyright {year} © {settings.name}. All rights reserved.</p>
           <Link to="/" className="footer-monogram" aria-label={`${settings.name} home`}>
-            <img src="/assets/nachiketh-icon.png" alt="" className="site-logo-img" />
+            <img src="/assets/nachiketh-dark-profile-v3.png" alt="" className="site-logo-img" />
           </Link>
         </div>
       </div>

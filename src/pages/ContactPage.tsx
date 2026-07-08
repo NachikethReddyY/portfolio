@@ -69,11 +69,11 @@ export function ContactPage() {
                 );
               })}
             </div>
-            <div className="mt-6 border-y border-[#00d2ff]/35 bg-terminal py-4">
-              <p className="px-1 font-tech text-xs font-bold uppercase text-primary-strong">Availability</p>
-              <p className="mt-2 px-1 font-semibold text-ink">{settings.availability}</p>
+            <div className="mt-6 border-t border-[#00d2ff]/35 pt-4">
+              <p className="font-tech text-xs font-bold uppercase text-primary-strong">Availability</p>
+              <p className="mt-2 font-semibold text-ink">{settings.availability}</p>
               {settings.location ? (
-                <p className="mt-2 px-1 text-sm font-semibold text-muted">{settings.location}</p>
+                <p className="mt-2 text-sm font-semibold text-muted">{settings.location}</p>
               ) : null}
             </div>
           </aside>

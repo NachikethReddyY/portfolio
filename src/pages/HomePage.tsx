@@ -1,4 +1,4 @@
-import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Code2, GraduationCap, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 import { BlogCard } from '../components/cards/BlogCard';
@@ -21,20 +21,48 @@ export function HomePage() {
     homePageQuery,
     fallbackHomePage,
   );
-  const evidence = [
-    settings.education,
-    settings.publicRepoCount && settings.githubUsername
-      ? `${settings.publicRepoCount} public GitHub repositories as ${settings.githubUsername}`
-      : undefined,
-    settings.currentFocus,
-    settings.location ? `Based in ${settings.location}` : undefined,
-  ].filter(Boolean);
   const positioningBullets = (home.positioningStatement ?? '')
     .replace(': ', '. ')
     .split(/(?<=\.)\s+|,\s+and\s+|,\s+/)
     .map((item) => item.trim())
     .filter(Boolean)
     .map((item) => (item.endsWith('.') ? item : `${item}.`));
+  const githubLink = settings.socialLinks.find((link) => link.kind === 'github');
+  const linkedinLink = settings.socialLinks.find((link) => link.kind === 'linkedin');
+  const hireSignals = [
+    {
+      label: 'Education',
+      value: settings.education ?? 'Singapore Polytechnic IT student',
+      icon: GraduationCap,
+    },
+    {
+      label: 'Build evidence',
+      value:
+        settings.publicRepoCount && settings.githubUsername
+          ? `${settings.publicRepoCount} public repos on GitHub`
+          : 'Public project evidence on GitHub',
+      icon: Code2,
+    },
+    {
+      label: 'Location',
+      value: settings.location ? `${settings.location} + remote` : 'Singapore + remote',
+      icon: MapPin,
+    },
+  ];
+  const roleFit = [
+    {
+      title: 'Full-stack product work',
+      proof: 'React, Next.js, Node/Express, Supabase, PostgreSQL, auth, dashboards, and workflow UI.',
+    },
+    {
+      title: 'AI-adjacent builder',
+      proof: 'Local AI tools, roadmap generation, transcription experiments, fallback states, and model-aware UX.',
+    },
+    {
+      title: 'Security-minded learner',
+      proof: 'OWASP review, dependency scanning, SAST patterns, risk reporting, and fix documentation.',
+    },
+  ];
 
   return (
     <>
@@ -42,39 +70,86 @@ export function HomePage() {
         title={home.seoTitle ?? `${settings.name} | ${settings.role}`}
         description={home.seoDescription ?? home.subheadline}
       />
-      <Section className="pb-10 pt-10 sm:pt-16 lg:pb-20 lg:pt-20">
-        <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-          <div className="reveal">
-            <h1 className="max-w-5xl font-display text-5xl leading-[0.92] text-balance text-ink sm:text-6xl lg:text-7xl xl:text-8xl">
-              {home.headline}
-            </h1>
-            <p className="mt-5 max-w-2xl font-tech text-sm font-bold leading-6 text-primary-strong">
-              {settings.availability}
-            </p>
-            <p className="mt-6 max-w-3xl text-xl font-bold leading-8 text-primary-strong text-pretty">
-              {home.subheadline}
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <ButtonLink href={home.primaryCtaHref} variant="primary">
-                {home.primaryCtaLabel}
-              </ButtonLink>
-              <ButtonLink href={home.secondaryCtaHref} variant="secondary">
-                {home.secondaryCtaLabel}
-              </ButtonLink>
-            </div>
-          </div>
-
-          <div className="reveal reveal-delay-1">
-            <div className="creator-art-frame mb-4 h-[28rem]">
+      <Section className="pb-8 pt-8 sm:pt-12 lg:pb-16 lg:pt-16">
+        <div className="home-hero-grid reveal">
+          <aside className="home-profile-panel">
+            <div className="creator-art-frame h-64 sm:h-80 lg:h-[23rem]">
               <img
                 src="/assets/nachiketh-dark-profile-v3.png"
                 alt="Editorial portrait illustration of Nachiketh Reddy"
               />
             </div>
-            <div className="grid gap-4 border-y-2 border-ink bg-surface-strong py-4">
+            <div className="grid gap-3 p-4 sm:p-5">
+              <p className="font-tech text-xs font-bold uppercase text-primary-strong">
+                Currently available
+              </p>
+              <p className="text-sm font-semibold leading-6 text-ink">{settings.availability}</p>
+              <div className="flex flex-wrap gap-2 border-t border-[#00d2ff]/24 pt-4">
+                {githubLink ? (
+                  <ButtonLink href={githubLink.url} variant="ghost" external className="min-h-10">
+                    GitHub
+                  </ButtonLink>
+                ) : null}
+                {linkedinLink ? (
+                  <ButtonLink href={linkedinLink.url} variant="ghost" external className="min-h-10">
+                    LinkedIn
+                  </ButtonLink>
+                ) : null}
+              </div>
+            </div>
+          </aside>
+
+          <div className="grid content-center gap-8">
+            <div>
+              <p className="mb-4 max-w-[52ch] font-tech text-xs font-bold uppercase leading-5 text-primary-strong">
+                Full-stack student builder · AI tooling · Security curious
+              </p>
+              <h1 className="max-w-5xl font-display text-5xl leading-[0.96] text-balance text-ink sm:text-6xl lg:text-7xl">
+                {home.headline}
+              </h1>
+              <p className="mt-6 max-w-2xl text-xl font-bold leading-8 text-primary-strong text-pretty">
+                {home.subheadline}
+              </p>
+              <p className="mt-4 max-w-2xl text-base font-semibold leading-7 text-muted sm:text-lg">
+                Recruiters should be able to see the fit fast: student status, shipped projects,
+                real code, technical range, and a clear path to contact.
+              </p>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <ButtonLink href={home.primaryCtaHref} variant="primary">
+                  {home.primaryCtaLabel}
+                </ButtonLink>
+                <ButtonLink href={home.secondaryCtaHref} variant="secondary">
+                  {home.secondaryCtaLabel}
+                </ButtonLink>
+                {settings.resumeUrl ? (
+                  <ButtonLink href={settings.resumeUrl} variant="ghost" external>
+                    Resume
+                  </ButtonLink>
+                ) : null}
+              </div>
+            </div>
+
+            <div className="home-signal-grid">
+              {hireSignals.map((signal) => {
+                const Icon = signal.icon;
+                return (
+                  <div key={signal.label} className="home-signal">
+                    <Icon aria-hidden="true" size={19} className="text-primary" />
+                    <div>
+                      <p className="font-tech text-[0.68rem] font-bold uppercase text-soft">
+                        {signal.label}
+                      </p>
+                      <p className="mt-1 text-sm font-bold leading-6 text-ink">{signal.value}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="py-2">
               <TerminalSequence>
                 <TerminalLine tone="command" delay={80}>
-                  whoami
+                  match --role internship
                 </TerminalLine>
                 <TerminalLine tone="success" delay={220}>
                   {settings.name} · {settings.education ?? 'Singapore Polytechnic IT student'}
@@ -85,63 +160,75 @@ export function HomePage() {
                 <TerminalLine tone="info" delay={500}>
                   {settings.currentFocus ?? 'full-stack products + local AI tooling'}
                 </TerminalLine>
-                <TerminalLine tone="command" delay={640}>
-                  status --availability
-                </TerminalLine>
-                <TerminalLine tone="success" delay={780}>
-                  {settings.availability}
-                </TerminalLine>
               </TerminalSequence>
-            </div>
-            <div className="mt-4 flex items-center justify-between gap-3 border-b border-[#00d2ff]/24 pb-4">
-              <span className="font-tech text-xs font-bold text-muted">live build signal</span>
-              <span className="rounded-none border border-[#00d2ff]/45 bg-terminal px-2.5 py-1 font-tech text-[0.68rem] font-bold text-primary-strong">
-                GitHub backed
-              </span>
-            </div>
-            <div className="grid pt-2">
-              {evidence.map((item) => (
-                <div
-                  key={item}
-                  className="flex items-start gap-3 border-b border-ink/35 py-3 text-left last:border-b-0"
-                >
-                  <CheckCircle2
-                    aria-hidden="true"
-                    size={20}
-                    className="mt-0.5 shrink-0 text-primary"
-                  />
-                  <span className="font-semibold">{item}</span>
-                </div>
-              ))}
-            </div>
-            <div className="text-on-ink mt-4 border-y-2 border-ink bg-terminal px-4 py-3 font-tech text-xs">
-              <span className="text-accent">$</span> shipping useful software while learning the
-              hard parts in public
             </div>
           </div>
         </div>
       </Section>
 
       <Section className="py-10">
-        <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
-          <h2 className="font-display text-3xl font-black text-balance text-ink">
-            Built to answer the questions hiring teams actually ask.
-          </h2>
-          <div className="grid gap-3">
-            {positioningBullets.map((item, index) => (
-              <div
-                key={`${item}-${index}`}
-                className="stamp-panel flex items-start gap-3 px-4 py-3"
-              >
-                <span className="mt-1 grid size-6 shrink-0 place-items-center rounded-none border border-[#00d2ff]/45 bg-terminal font-tech text-[0.62rem] font-black text-primary-strong">
-                  {index + 1}
-                </span>
-                <span className="text-sm font-semibold leading-6 text-ink sm:text-base">
-                  {item}
-                </span>
-              </div>
+        <div className="hireability-board reveal reveal-delay-1">
+          <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
+            <div>
+              <h2 className="font-display text-3xl font-black text-balance text-ink sm:text-4xl">
+                Built to answer the questions hiring teams actually ask.
+              </h2>
+              <p className="mt-4 max-w-[60ch] text-muted">
+                Clear proof beats mystery: this page now leads with credibility, scope, project
+                evidence, and direct next actions.
+              </p>
+            </div>
+            <div className="grid gap-3">
+              {positioningBullets.map((item) => (
+                <div key={item} className="hire-check-row">
+                  <CheckCircle2
+                    aria-hidden="true"
+                    size={20}
+                    className="mt-0.5 shrink-0 text-primary"
+                  />
+                  <span className="text-sm font-semibold leading-6 text-ink sm:text-base">
+                    {item}
+                  </span>
+                </div>
+              ))}
+              {isFallback && error ? <ErrorState message={error} /> : null}
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      <Section className="py-10">
+        <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="grid content-between gap-6 border-y-2 border-ink py-6">
+            <div>
+              <h2 className="font-display text-4xl font-black text-balance text-ink">
+                Where I fit best
+              </h2>
+              <p className="mt-3 text-muted">
+                Internship and project teams get the most value when the work mixes product UI,
+                backend logic, AI experiments, and practical security thinking.
+              </p>
+            </div>
+            <TerminalSequence>
+              <TerminalLine tone="command" delay={80}>
+                ship --with proof
+              </TerminalLine>
+              <TerminalLine tone="info" delay={220}>
+                demos, GitHub repos, tradeoffs, lessons, and future improvements
+              </TerminalLine>
+            </TerminalSequence>
+          </div>
+          <div className="grid gap-4">
+            {roleFit.map((item) => (
+              <article key={item.title} className="role-fit-row">
+                <h3 className="font-display text-xl font-black leading-tight text-ink">
+                  {item.title}
+                </h3>
+                <p className="max-w-[60ch] text-sm font-semibold leading-6 text-muted">
+                  {item.proof}
+                </p>
+              </article>
             ))}
-            {isFallback && error ? <ErrorState message={error} /> : null}
           </div>
         </div>
       </Section>
@@ -163,6 +250,32 @@ export function HomePage() {
           >
             See all projects <ArrowRight aria-hidden="true" size={16} />
           </Link>
+        </div>
+        <div className="mb-8 grid gap-3 border-y-2 border-ink py-5">
+          {home.featuredProjects.slice(0, 3).map((project) => (
+            <Link
+              key={project._id}
+              to={`/projects/${project.slug}`}
+              className="project-proof-row group"
+            >
+              <div>
+                <p className="font-tech text-[0.68rem] font-bold uppercase text-soft">
+                  {project.projectType ?? project.status}
+                </p>
+                <h3 className="mt-1 font-display text-2xl font-black text-ink group-hover:text-primary-strong">
+                  {project.title}
+                </h3>
+              </div>
+              <p className="max-w-[64ch] text-sm font-semibold leading-6 text-muted">
+                {project.impact ?? project.summary}
+              </p>
+              <ArrowRight
+                aria-hidden="true"
+                size={18}
+                className="shrink-0 text-primary transition-transform duration-300 ease-[var(--ease-premium)] group-hover:translate-x-1"
+              />
+            </Link>
+          ))}
         </div>
         <div className="grid gap-8 md:grid-cols-[repeat(auto-fit,minmax(320px,1fr))]">
           {home.featuredProjects.map((project) => (
@@ -205,7 +318,7 @@ export function HomePage() {
             {home.focusAreas.map((focus) => (
               <article key={focus.title} className="brutal-panel-soft p-5">
                 <h3 className="font-display text-2xl font-black text-ink">{focus.title}</h3>
-                <p className="mt-2 text-muted">{focus.description}</p>
+                <p className="mt-2 max-w-[62ch] text-muted">{focus.description}</p>
               </article>
             ))}
           </div>

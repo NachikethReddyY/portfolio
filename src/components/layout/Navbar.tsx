@@ -40,7 +40,7 @@ export function Navbar({ settings }: NavbarProps) {
             aria-hidden="true"
             className="site-logo-shell grid size-12 shrink-0 place-items-center rounded-full"
           >
-            <img src="/assets/nachiketh-icon.png" alt="" className="site-logo-img" />
+            <img src="/assets/nachiketh-dark-profile-v3.png" alt="" className="site-logo-img" />
           </span>
           <span className="min-w-0 leading-tight">
             <span className="block truncate font-display text-base">

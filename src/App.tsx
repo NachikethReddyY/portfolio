@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { PageLayout } from './components/layout/PageLayout';
@@ -11,11 +12,23 @@ import { NotFoundPage } from './pages/NotFoundPage';
 import { ProjectDetailPage } from './pages/ProjectDetailPage';
 import { ProjectsIndexPage } from './pages/ProjectsIndexPage';
 
+const StudioPage = lazy(() =>
+  import('./pages/StudioPage').then((module) => ({ default: module.StudioPage })),
+);
+
 export default function App() {
   return (
     <>
       <ScrollToTop />
       <Routes>
+        <Route
+          path="studio/*"
+          element={
+            <Suspense fallback={null}>
+              <StudioPage />
+            </Suspense>
+          }
+        />
         <Route element={<PageLayout />}>
           <Route index element={<HomePage />} />
           <Route path="blog" element={<BlogIndexPage />} />

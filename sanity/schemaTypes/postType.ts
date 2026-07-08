@@ -63,6 +63,13 @@ export const postType = defineType({
         }),
       ],
     }),
+    defineField({
+      name: 'markdownBody',
+      title: 'Markdown body',
+      type: 'text',
+      rows: 18,
+      description: 'Optional. If filled, the site renders this Markdown instead of the Portable Text body.',
+    }),
     portableTextField,
     ...seoFields,
   ],

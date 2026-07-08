@@ -26,8 +26,8 @@ function extractText(value: unknown): string {
   return '';
 }
 
-export function getReadingTime(blocks?: PortableTextBlock[]) {
-  const text = extractText(blocks);
+export function getReadingTime(content?: PortableTextBlock[] | string) {
+  const text = extractText(content);
   const words = text.trim().split(/\s+/).filter(Boolean).length;
   const minutes = Math.max(1, Math.ceil(words / 220));
   return `${minutes} min read`;
