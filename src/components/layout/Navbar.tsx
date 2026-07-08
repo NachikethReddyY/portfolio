@@ -29,7 +29,7 @@ export function Navbar({ settings }: NavbarProps) {
       </a>
       <nav
         aria-label="Primary navigation"
-        className="mx-auto flex min-h-16 w-full max-w-7xl items-center justify-between border-2 border-border/70 bg-bg/80 px-3 py-2 shadow-[0_8px_0_var(--color-primary)] backdrop-blur sm:px-4"
+        className="cyber-shell mx-auto flex min-h-16 w-full max-w-7xl items-center justify-between px-3 py-2 backdrop-blur sm:px-4"
       >
         <Link
           to="/"
@@ -38,13 +38,9 @@ export function Navbar({ settings }: NavbarProps) {
         >
           <span
             aria-hidden="true"
-            className="grid size-12 shrink-0 place-items-center rounded-full border-2 border-ink bg-terminal font-display text-sm text-ink"
+            className="site-logo-shell grid size-12 shrink-0 place-items-center rounded-full"
           >
-            {settings.name
-              .split(' ')
-              .map((part) => part[0])
-              .join('')
-              .slice(0, 2)}
+            <img src="/assets/nachiketh-icon.png" alt="" className="site-logo-img" />
           </span>
           <span className="min-w-0 leading-tight">
             <span className="block truncate font-display text-base">
@@ -66,8 +62,8 @@ export function Navbar({ settings }: NavbarProps) {
                 [
                   'pressable min-h-11 rounded-md border-2 px-4 py-2 text-sm font-bold',
                   isActive
-                    ? 'border-ink bg-transparent text-primary-strong'
-                    : 'border-transparent text-muted hover:border-ink hover:bg-terminal hover:text-ink',
+                    ? 'border-[rgba(0,210,255,0.72)] bg-transparent text-[#00d2ff]'
+                    : 'border-transparent text-muted hover:border-[rgba(0,210,255,0.45)] hover:bg-terminal hover:text-ink',
                 ].join(' ')
               }
             >
@@ -80,7 +76,7 @@ export function Navbar({ settings }: NavbarProps) {
           type="button"
           aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
           aria-expanded={isOpen}
-          className="pressable grid size-11 place-items-center rounded-md border-2 border-ink bg-terminal text-ink md:hidden"
+          className="pressable grid size-11 place-items-center rounded-md border border-[rgba(0,210,255,0.5)] bg-terminal text-ink md:hidden"
           onClick={() => setIsOpen((current) => !current)}
         >
           {isOpen ? <X aria-hidden="true" size={20} /> : <Menu aria-hidden="true" size={20} />}
@@ -88,7 +84,7 @@ export function Navbar({ settings }: NavbarProps) {
       </nav>
 
       {isOpen ? (
-        <div className="brutal-panel mx-auto mt-2 max-w-7xl overflow-hidden rounded-none p-2 md:hidden">
+        <div className="cyber-shell mx-auto mt-2 max-w-7xl overflow-hidden rounded-none p-2 md:hidden">
           <div className="grid gap-1">
             {navItems.map((item) => (
               <NavLink
@@ -100,8 +96,8 @@ export function Navbar({ settings }: NavbarProps) {
                   [
                     'pressable min-h-12 rounded-md border-2 px-4 py-3 text-base font-bold',
                     isActive
-                      ? 'border-ink bg-primary text-on-accent'
-                      : 'border-transparent text-muted hover:border-ink hover:bg-terminal hover:text-ink',
+                      ? 'border-[rgba(0,210,255,0.72)] bg-[#00d2ff] text-[#0b0b12]'
+                      : 'border-transparent text-muted hover:border-[rgba(0,210,255,0.45)] hover:bg-terminal hover:text-ink',
                   ].join(' ')
                 }
               >

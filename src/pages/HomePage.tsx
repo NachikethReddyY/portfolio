@@ -67,8 +67,8 @@ export function HomePage() {
           <div className="reveal reveal-delay-1">
             <div className="creator-art-frame mb-4 h-[28rem]">
               <img
-                src="/assets/nachiketh-editorial-tech.png"
-                alt="Illustrated student developer at a laptop with Singapore skyline and AI network nodes"
+                src="/assets/nachiketh-dark-profile-v3.png"
+                alt="Editorial portrait illustration of Nachiketh Reddy"
               />
             </div>
             <div className="grid gap-4 border-y-2 border-ink bg-surface-strong py-4">

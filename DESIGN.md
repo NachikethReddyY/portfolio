@@ -4,14 +4,14 @@
 
 - Name: Nachiketh Reddy Portfolio
 - Register: brand
-- Scene: a Singapore Polytechnic student presents his work like a dark creator-learning site: cinematic tech illustration, oversized block display type, Courier-style body copy, terminal evidence, repo proof, and dotted retro texture.
-- Color strategy: NetworkChuck-inspired dark purple creator palette with pale lavender type, warm coffee-gold emphasis, muted lavender panels, and teal/green only as small technical signals.
+- Scene: a Singapore Polytechnic student presents his work like a dark creator-learning site: sharp blue cyberpunk linework, cinematic portrait media, block display type, Courier-style body copy, repo proof, and dotted retro texture.
+- Color strategy: deep obsidian surfaces with electric-blue structure, blue-gray shadows, crisp off-white type, cool slate muted text, and restrained amber only for inline learning emphasis.
 
 ## Foundations
 
 ### Color
 
-Use OKLCH tokens only. The deep purple surface carries focus; terminal readouts stay blacker than the page; pale lavender structure gives the editorial edge; warm gold carries action, links, and learning emphasis.
+Global tokens still use OKLCH. The active About/footer direction adds scoped hex variables for a blue cyberpunk trial: obsidian black, dark navy panels, electric-blue lines, blue-gray shadows, off-white text, and cool slate muted text. Warm gold should not frame components; reserve it for inline emphasis such as learning highlights.
 
 ```css
 :root {
@@ -61,7 +61,9 @@ Use OKLCH tokens only. The deep purple surface carries focus; terminal readouts 
 - Navbar: sticky transparent creator-site bar with outlined active states, small circular mark, and warm gold underline shadow.
 - CTA Button: gold primary button, thick outlined secondary button, nested icon target.
 - Project Card: strong luminous title, role, proof/impact line, status, neon tech badges, terminal readout and graph wireframe preview, links.
-- About Hero: large stacked block heading, gold highlighted story copy, dotted texture, icon links, and generated editorial tech illustration.
+- About Hero: two-column NetworkChuck-inspired structure with an 80px desktop `ABOUT ME` heading, top-right arrow mark, 60ch text column, dark rectangular GitHub/LinkedIn/Projects buttons, Devicon GitHub mark, and a blue-framed portrait with blue-gray shadow.
+- About Skills: bordered blue cyber panel with rectangular tags using Devicon icons for TypeScript, React, Node, Python, PostgreSQL, Linux/security, Expo, and Bash/CLI.
+- Footer: framed blue cyber directory inspired by the NetworkChuck footer layout, with an NR identity rail, About/Build/Focus/Connect columns, a dotted `NACHIKETH REDDY` wordmark strip at reduced opacity, and a lower legal bar without “Current Portfolio.”
 - Blog Card: publication-style article preview with date, reading time, tags, and image support.
 - Skill Badge: compact light-bordered dark chip with saturated category swatch and proficiency metadata.
 - Rich Text Renderer: accessible Sanity Portable Text with headings, callouts, links, code, and images.
