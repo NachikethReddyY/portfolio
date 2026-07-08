@@ -41,7 +41,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
           ) : null}
           <p className="mt-3 text-pretty text-muted">{project.summary}</p>
           {project.impact ? (
-            <p className="mt-3 rounded-md border-2 border-ink bg-surface-strong px-4 py-3 text-sm font-medium text-ink">
+            <p className="mt-4 border-y-2 border-ink/70 py-3 text-sm font-semibold leading-6 text-ink">
               {project.impact}
             </p>
           ) : null}

@@ -22,12 +22,12 @@ export function BlogCard({ post }: BlogCardProps) {
         ))}
       </div>
 
-      <h3 className="mt-5 font-display text-2xl font-black leading-tight text-balance text-ink">
+      <h3 className="mt-5 max-w-2xl font-display text-2xl font-black leading-[1.35] text-balance text-ink">
         <Link to={`/blog/${post.slug}`} className="hover:text-violet">
           {post.title}
         </Link>
       </h3>
-      <p className="mt-3 text-pretty text-muted">{post.excerpt}</p>
+      <p className="mt-3 max-w-[66ch] text-pretty text-muted">{post.excerpt}</p>
 
       <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 border-t-2 border-ink pt-4 font-tech text-xs font-semibold text-muted">
         <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>

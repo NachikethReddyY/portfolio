@@ -32,14 +32,16 @@ export function AboutPage() {
         <div className="relative grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
           <div className="dot-field absolute bottom-0 left-[18rem] hidden h-96 w-[42rem] opacity-45 lg:block" />
           <div className="relative z-10">
-            <p className="mb-5 font-tech text-sm font-bold text-primary-strong">{settings.role}</p>
             <h1 className="mega-heading text-ink">
               <span className="block">About</span>
               <span className="block">Me</span>
             </h1>
+            <p className="mt-5 max-w-xl font-tech text-sm font-bold leading-6 text-primary-strong">
+              {settings.role}
+            </p>
             <ArrowDownLeft
               aria-hidden="true"
-              className="mt-6 text-ink sm:ml-[24rem] sm:-mt-10"
+              className="mt-6 text-ink sm:ml-[24rem] sm:-mt-16"
               size={52}
               strokeWidth={2.5}
             />

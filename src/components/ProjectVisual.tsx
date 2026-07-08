@@ -60,22 +60,22 @@ export function ProjectVisual({ title, status }: ProjectVisualProps) {
   return (
     <div
       aria-label={`${title} interface preview`}
-      className="relative min-h-72 overflow-hidden rounded-lg border-2 border-ink bg-surface p-3"
+      className="relative min-h-72 overflow-hidden bg-terminal p-4"
     >
-      <div className="flex items-center justify-between border-b-2 border-ink pb-3">
+      <div className="flex items-center justify-between gap-3 border-b-2 border-ink pb-3">
         <div className="flex items-center gap-2">
           <span className="size-3 rounded-full bg-danger" />
           <span className="size-3 rounded-full bg-warning" />
           <span className="size-3 rounded-full bg-success" />
         </div>
-        <span className="font-tech text-[0.68rem] text-muted">{status}</span>
+        <span className="shrink-0 font-tech text-[0.68rem] text-muted">{status}</span>
       </div>
 
-      <div className="mt-4 grid gap-3 sm:grid-cols-[0.95fr_1.05fr]">
-        <div className="text-on-ink min-w-0 rounded-md border-2 border-ink bg-terminal p-3">
-          <div className="mb-4 flex items-center justify-between gap-3 font-tech text-[0.66rem]">
-            <span className="text-on-ink-soft truncate">~/nachiketh/{repoSlug}</span>
-            <span className={tone.accentText}>main</span>
+      <div className="mt-4 grid gap-4 sm:grid-cols-[0.95fr_1.05fr]">
+        <div className="text-on-ink min-w-0 sm:border-r-2 sm:border-ink sm:pr-4">
+          <div className="mb-4 flex min-w-0 items-center justify-between gap-3 font-tech text-[0.66rem]">
+            <span className="text-on-ink-soft min-w-0 break-all">~/nachiketh/{repoSlug}</span>
+            <span className={['shrink-0', tone.accentText].join(' ')}>main</span>
           </div>
           <div className="space-y-2 font-tech text-[0.66rem] leading-5">
             {terminalRows.map((row, index) => (
@@ -83,14 +83,14 @@ export function ProjectVisual({ title, status }: ProjectVisualProps) {
                 <span className={index === 0 ? tone.accentText : 'text-muted'}>
                   {index === 0 ? '$' : '>'}
                 </span>
-                <span className="text-on-ink truncate">{row}</span>
+                <span className="text-on-ink min-w-0 break-words">{row}</span>
               </div>
             ))}
           </div>
-          <div className="mt-5 grid grid-cols-3 gap-2">
+          <div className="mt-5 grid grid-cols-3 border-y border-ink/35 py-3">
             {['ui', 'api', 'ai'].map((label, index) => (
-              <div key={label} className="rounded-md border border-bg/25 px-2 py-2">
-                <span className="text-on-ink-soft block font-tech text-[0.6rem]">{label}</span>
+              <div key={label} className="border-r border-ink/30 px-2 last:border-r-0">
+                <span className="text-on-ink-soft block font-tech text-[0.6rem] uppercase">{label}</span>
                 <span
                   className={[
                     'mt-2 block h-1.5 rounded-full',
@@ -102,8 +102,8 @@ export function ProjectVisual({ title, status }: ProjectVisualProps) {
           </div>
         </div>
 
-        <div className="grid gap-3">
-          <div className={['rounded-md border-2 bg-bg p-3', tone.border].join(' ')}>
+        <div className="grid content-start gap-4">
+          <div className={['border-b-2 pb-3', tone.border].join(' ')}>
             <div className="flex items-center justify-between gap-3">
               <span className="font-tech text-[0.66rem] font-bold text-ink">runtime map</span>
               <span className={['font-tech text-[0.66rem]', tone.accentText].join(' ')}>
@@ -143,14 +143,16 @@ export function ProjectVisual({ title, status }: ProjectVisualProps) {
               </text>
             </svg>
           </div>
-          <div className="grid grid-cols-2 gap-3">
-            <div className={['rounded-md border-2 border-ink px-3 py-2', tone.soft].join(' ')}>
-              <span className="font-tech text-[0.6rem] text-muted">scope</span>
-              <span className="block truncate font-tech text-[0.68rem] text-ink">full stack</span>
+          <div className="grid grid-cols-2 border-y border-ink/40 py-3">
+            <div className="border-r border-ink/35 px-3">
+              <span className="font-tech text-[0.6rem] uppercase text-muted">scope</span>
+              <span className="block font-tech text-[0.68rem] text-ink">full stack</span>
             </div>
-            <div className="rounded-md border-2 border-ink bg-surface px-3 py-2">
-              <span className="font-tech text-[0.6rem] text-muted">mode</span>
-              <span className="block truncate font-tech text-[0.68rem] text-ink">shipped</span>
+            <div className="px-3">
+              <span className="font-tech text-[0.6rem] uppercase text-muted">mode</span>
+              <span className={['block font-tech text-[0.68rem]', tone.accentText].join(' ')}>
+                shipped
+              </span>
             </div>
           </div>
         </div>

@@ -20,11 +20,10 @@ export function BlogIndexPage() {
       />
       <Section className="pb-10 pt-14 sm:pt-20">
         <div className="max-w-4xl">
-          <p className="font-tech text-sm font-bold text-violet">Developer Publication</p>
-          <h1 className="mt-4 font-display text-5xl font-black leading-[0.98] text-balance text-ink sm:text-6xl">
+          <h1 className="font-display text-5xl font-black leading-[0.98] text-balance text-ink sm:text-6xl">
             Notes from learning full-stack and AI in public.
           </h1>
-          <p className="mt-6 text-xl font-semibold leading-8 text-primary-strong text-pretty">
+          <p className="mt-6 max-w-[62ch] text-xl font-semibold leading-8 text-primary-strong text-pretty">
             Writing about decisions, constraints, mistakes, and learning makes the work easier to
             trust. This is where technical notes become a record of growth.
           </p>
@@ -36,6 +35,7 @@ export function BlogIndexPage() {
         ) : null}
       </Section>
       <Section className="pt-4">
+        <h2 className="mb-6 font-display text-3xl font-black text-ink">Latest notes</h2>
         <div className="grid gap-8 md:grid-cols-[repeat(auto-fit,minmax(320px,1fr))]">
           {posts.map((post) => (
             <BlogCard key={post._id} post={post} />

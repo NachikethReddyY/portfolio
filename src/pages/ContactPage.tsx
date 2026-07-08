@@ -29,8 +29,7 @@ export function ContactPage() {
       <Section className="pb-16 pt-14 sm:pt-20">
         <div className="grid gap-10 lg:grid-cols-[1fr_0.9fr] lg:items-start">
           <div>
-            <p className="font-tech text-sm font-bold text-violet">Contact</p>
-            <h1 className="mt-4 font-display text-5xl font-black leading-[0.98] text-balance text-ink sm:text-6xl">
+            <h1 className="font-display text-5xl font-black leading-[0.98] text-balance text-ink sm:text-6xl">
               Have a role, project, or sharp piece of feedback?
             </h1>
             <p className="mt-6 max-w-2xl text-xl font-semibold leading-8 text-primary-strong text-pretty">
@@ -70,11 +69,11 @@ export function ContactPage() {
                 );
               })}
             </div>
-            <div className="mt-6 rounded-md border-2 border-ink bg-primary p-4">
-              <p className="font-tech text-xs font-bold text-on-accent">Availability</p>
-              <p className="mt-2 font-semibold text-on-accent">{settings.availability}</p>
+            <div className="mt-6 border-y-2 border-ink bg-primary py-4">
+              <p className="px-1 font-tech text-xs font-bold uppercase text-on-accent">Availability</p>
+              <p className="mt-2 px-1 font-semibold text-on-accent">{settings.availability}</p>
               {settings.location ? (
-                <p className="text-on-accent-soft mt-2 text-sm font-semibold">{settings.location}</p>
+                <p className="text-on-accent-soft mt-2 px-1 text-sm font-semibold">{settings.location}</p>
               ) : null}
             </div>
           </aside>

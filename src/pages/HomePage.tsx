@@ -45,12 +45,12 @@ export function HomePage() {
       <Section className="pb-10 pt-10 sm:pt-16 lg:pb-20 lg:pt-20">
         <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div className="reveal">
-            <p className="mb-5 max-w-xl font-tech text-sm font-bold text-primary-strong">
-              {settings.availability}
-            </p>
             <h1 className="max-w-5xl font-display text-5xl leading-[0.92] text-balance text-ink sm:text-6xl lg:text-7xl xl:text-8xl">
               {home.headline}
             </h1>
+            <p className="mt-5 max-w-2xl font-tech text-sm font-bold leading-6 text-primary-strong">
+              {settings.availability}
+            </p>
             <p className="mt-6 max-w-3xl text-xl font-bold leading-8 text-primary-strong text-pretty">
               {home.subheadline}
             </p>
@@ -64,14 +64,14 @@ export function HomePage() {
             </div>
           </div>
 
-          <div className="brutal-panel reveal reveal-delay-1 rounded-none p-4">
+          <div className="reveal reveal-delay-1">
             <div className="creator-art-frame mb-4 h-[28rem]">
               <img
                 src="/assets/nachiketh-editorial-tech.png"
                 alt="Illustrated student developer at a laptop with Singapore skyline and AI network nodes"
               />
             </div>
-            <div className="grid gap-4 border-y-2 border-ink bg-surface-strong p-4">
+            <div className="grid gap-4 border-y-2 border-ink bg-surface-strong py-4">
               <TerminalSequence>
                 <TerminalLine tone="command" delay={80}>
                   whoami
@@ -99,11 +99,11 @@ export function HomePage() {
                 GitHub backed
               </span>
             </div>
-            <div className="grid gap-4 pt-4">
+            <div className="grid pt-2">
               {evidence.map((item) => (
                 <div
                   key={item}
-                  className="flex items-start gap-3 rounded-md border-2 border-ink bg-surface p-4 text-left"
+                  className="flex items-start gap-3 border-b border-ink/35 py-3 text-left last:border-b-0"
                 >
                   <CheckCircle2
                     aria-hidden="true"
@@ -114,7 +114,7 @@ export function HomePage() {
                 </div>
               ))}
             </div>
-            <div className="text-on-ink mt-4 rounded-md border-2 border-ink bg-terminal px-4 py-3 font-tech text-xs">
+            <div className="text-on-ink mt-4 border-y-2 border-ink bg-terminal px-4 py-3 font-tech text-xs">
               <span className="text-accent">$</span> shipping useful software while learning the
               hard parts in public
             </div>

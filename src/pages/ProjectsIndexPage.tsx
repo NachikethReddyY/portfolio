@@ -20,11 +20,10 @@ export function ProjectsIndexPage() {
       />
       <Section className="pb-10 pt-14 sm:pt-20">
         <div className="max-w-4xl">
-          <p className="font-tech text-sm font-bold text-violet">Project Case Studies</p>
-          <h1 className="mt-4 font-display text-5xl font-black leading-[0.98] text-balance text-ink sm:text-6xl">
+          <h1 className="font-display text-5xl font-black leading-[0.98] text-balance text-ink sm:text-6xl">
             Full-stack apps, local AI tools, and security experiments.
           </h1>
-          <p className="mt-6 text-xl font-semibold leading-8 text-primary-strong text-pretty">
+          <p className="mt-6 max-w-[64ch] text-xl font-semibold leading-8 text-primary-strong text-pretty">
             The strongest projects here come from real repo evidence: shipped demos, hackathon
             builds, secure coding coursework, local model tooling, and experiments that show how I
             learn by building.
@@ -37,6 +36,7 @@ export function ProjectsIndexPage() {
         ) : null}
       </Section>
       <Section className="pt-4">
+        <h2 className="mb-6 font-display text-3xl font-black text-ink">Project case studies</h2>
         <div className="grid gap-8 md:grid-cols-[repeat(auto-fit,minmax(320px,1fr))]">
           {projects.map((project) => (
             <ProjectCard key={project._id} project={project} />

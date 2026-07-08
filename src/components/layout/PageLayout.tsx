@@ -36,7 +36,7 @@ export function PageLayout() {
           <circle cx="150" cy="244" r="12" stroke="currentColor" strokeWidth="3" />
           <circle cx="360" cy="134" r="12" stroke="currentColor" strokeWidth="3" />
         </svg>
-        <div className="dot-field absolute bottom-0 right-0 h-[34rem] w-[56rem] opacity-45" />
+        <div className="dot-field absolute bottom-0 right-0 h-[34rem] w-full max-w-[56rem] opacity-45" />
       </div>
       <div className="relative z-10">
         <Navbar settings={settings} />
