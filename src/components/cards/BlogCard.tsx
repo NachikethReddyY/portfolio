@@ -60,7 +60,7 @@ export function BlogCard({ post }: BlogCardProps) {
 
         <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-[#00d2ff]/24 pt-4 font-tech text-xs font-semibold text-muted">
           <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
-          <span>{post.readingTime ?? getReadingTime(post.markdownBody ?? post.body)}</span>
+          <span>{post.readingTime ?? getReadingTime(post.body)}</span>
           {post.author ? <span>{post.author.name}</span> : null}
         </div>
       </div>

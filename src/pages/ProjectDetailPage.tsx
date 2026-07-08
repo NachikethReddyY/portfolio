@@ -135,6 +135,7 @@ export function ProjectDetailPage() {
 
       <Section>
         <div className="article-body mx-auto grid max-w-5xl gap-8">
+          <ProjectGallery project={project} />
           <DetailList title="Features" items={project.features} />
           <DetailList title="What I personally built" items={project.whatIBuilt} />
           <DetailList title="Constraints and tradeoffs" items={project.constraints} />
@@ -144,6 +145,44 @@ export function ProjectDetailPage() {
         </div>
       </Section>
     </>
+  );
+}
+
+function ProjectGallery({ project }: { project: Project }) {
+  const images = (project.gallery ?? [])
+    .map((image) => ({
+      image,
+      url: imageUrlFor(image, 1400),
+    }))
+    .filter((item): item is { image: NonNullable<Project['gallery']>[number]; url: string } =>
+      Boolean(item.url),
+    );
+
+  if (!images.length) {
+    return null;
+  }
+
+  return (
+    <section className="grid gap-5">
+      <h2 className="font-display text-3xl font-black text-ink">Project images</h2>
+      <div className="grid gap-5">
+        {images.map(({ image, url }) => (
+          <figure key={url} className="brutal-panel-soft overflow-hidden">
+            <img
+              src={url}
+              alt={image.alt ?? `${project.title} screenshot`}
+              className="max-h-[42rem] w-full object-cover object-top"
+              loading="lazy"
+            />
+            {image.caption ? (
+              <figcaption className="border-t border-[#00d2ff]/24 p-4 text-sm text-muted">
+                {image.caption}
+              </figcaption>
+            ) : null}
+          </figure>
+        ))}
+      </div>
+    </section>
   );
 }
 

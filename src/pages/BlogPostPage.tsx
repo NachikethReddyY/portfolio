@@ -18,7 +18,7 @@ export function BlogPostPage() {
   const fallbackPost = fallbackPosts.find((post) => post.slug === slug) ?? fallbackPosts[0];
   const { data: post } = useSanityQuery<BlogPost>(postBySlugQuery, fallbackPost, { slug });
   const featuredImageUrl = imageUrlFor(post.featuredImage, 1600);
-  const bodyContent = post.markdownBody ?? post.body;
+  const bodyContent = post.body;
   const readingTime = post.readingTime ?? getReadingTime(bodyContent);
   const authorName = post.author?.name ?? settings.name;
   const authorImageUrl = imageUrlFor(post.author?.image, 160);

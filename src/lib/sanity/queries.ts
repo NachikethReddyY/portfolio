@@ -96,7 +96,6 @@ export const postFields = `
   categories[]->{
     ${categoryFields}
   },
-  markdownBody,
   body,
   seoTitle,
   seoDescription,

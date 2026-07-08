@@ -130,7 +130,6 @@ export type BlogPost = SeoFields & {
   featuredImage?: SanityImage;
   author?: Author;
   categories: Category[];
-  markdownBody?: string;
   body?: PortableTextBlock[];
   readingTime?: string;
 };

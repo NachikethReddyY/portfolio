@@ -65,6 +65,14 @@ export const fallbackSkills: Skill[] = [
     proficiency: 'learning',
     summary: 'Go, Python, shell, local-first file formats, terminal workflows, and agent-readable tools.',
   },
+  {
+    _id: 'skill-go-agent-systems',
+    title: 'Go / Agent Systems',
+    slug: 'go-agent-systems',
+    category: 'systems',
+    proficiency: 'learning',
+    summary: 'Learning Go by building context-efficient local AI agent tooling and terminal-first workflows.',
+  },
 ];
 
 export const fallbackSiteSettings: SiteSettings = {
@@ -108,6 +116,151 @@ export const fallbackSiteSettings: SiteSettings = {
 const skill = (title: string) => fallbackSkills.find((item) => item.title === title)!;
 
 export const fallbackProjects: Project[] = [
+  {
+    _id: 'project-lah',
+    title: 'LAH',
+    slug: 'lah',
+    summary:
+      'A context-efficient local AI harness for smaller models, built around knowledge bases, planning, compact transcripts, design tools, and custom extensions.',
+    status: 'building',
+    projectType: 'ai-tooling',
+    role: 'Co-builder learning Go and shaping the agent workflow',
+    period: 'Started Jul 2026',
+    impact:
+      'Targets the biggest pain point in consumer local AI coding setups: small context windows that cause constant compaction, forgotten plans, and inconsistent reasoning.',
+    featured: true,
+    coverImage: {
+      asset: {
+        url: '/assets/lah/SCR-20260704-ksda.jpeg',
+      },
+      alt: 'LAH product brief showing an agent control room with chat above and prompt below.',
+      caption: 'Early LAH product brief for a local-first agent control room.',
+    },
+    gallery: [
+      {
+        asset: {
+          url: '/assets/lah/SCR-20260704-ksda.jpeg',
+        },
+        alt: 'Agent control room concept with chat above and prompt below.',
+        caption: 'Agent control room concept with chat above and prompt below.',
+      },
+      {
+        asset: {
+          url: '/assets/lah/SCR-20260704-kser.jpeg',
+        },
+        alt: 'LAH workspace concept exploring local and cloud model control.',
+        caption: 'LAH workspace concept exploring local and cloud model control.',
+      },
+      {
+        asset: {
+          url: '/assets/lah/SCR-20260704-ksgb.jpeg',
+        },
+        alt: 'Early layout direction for compact agent context.',
+        caption: 'Early layout direction for compact agent context.',
+      },
+      {
+        asset: {
+          url: '/assets/lah/SCR-20260704-kshe.jpeg',
+        },
+        alt: 'Planning and context-management concept screen.',
+        caption: 'Planning and context-management concept screen.',
+      },
+      {
+        asset: {
+          url: '/assets/lah/SCR-20260704-kskj.jpeg',
+        },
+        alt: 'Longer LAH product brief section.',
+        caption: 'Longer LAH product brief section.',
+      },
+      {
+        asset: {
+          url: '/assets/lah/SCR-20260704-ksrc.jpeg',
+        },
+        alt: 'Agent workflow and tool orchestration notes.',
+        caption: 'Agent workflow and tool orchestration notes.',
+      },
+      {
+        asset: {
+          url: '/assets/lah/SCR-20260704-kstr.jpeg',
+        },
+        alt: 'Compact interface section from the LAH brief.',
+        caption: 'Compact interface section from the LAH brief.',
+      },
+      {
+        asset: {
+          url: '/assets/lah/SCR-20260704-ksvn.jpeg',
+        },
+        alt: 'TUI-first control surface concept.',
+        caption: 'TUI-first control surface concept.',
+      },
+      {
+        asset: {
+          url: '/assets/lah/SCR-20260704-ksxe.jpeg',
+        },
+        alt: 'LAH feature and extension concept.',
+        caption: 'LAH feature and extension concept.',
+      },
+      {
+        asset: {
+          url: '/assets/lah/SCR-20260704-ktby.jpeg',
+        },
+        alt: 'Context and transcript management concept.',
+        caption: 'Context and transcript management concept.',
+      },
+      {
+        asset: {
+          url: '/assets/lah/SCR-20260704-ktdh.jpeg',
+        },
+        alt: 'Local agent helper product direction.',
+        caption: 'Local agent helper product direction.',
+      },
+      {
+        asset: {
+          url: '/assets/lah/harness.jpeg',
+        },
+        alt: 'Full-length LAH product brief capture.',
+        caption: 'Full-length LAH product brief capture.',
+      },
+    ],
+    technologies: [skill('Go / Agent Systems'), skill('Python / Local AI'), skill('CLI / Systems Tools')],
+    problem:
+      'Local AI models can be useful on consumer hardware, but small context windows make serious agent workflows fragile: compaction happens constantly, plans get lost, and the model can spend minutes thinking without producing useful progress.',
+    solution:
+      'LAH is being designed as a local-first agent harness that keeps durable knowledge, plans, prompts, transcripts, tools, and extension state outside the model context so smaller models can work with less waste.',
+    whatIBuilt: [
+      'Early product direction for a TUI-first local agent workspace with a fixed prompt area, scrollable chat, model switching, cost/token visibility, and compact transcript exports.',
+      'A context-management strategy centered on durable knowledge, explicit plans, and selective recall instead of repeatedly stuffing the full conversation back into the model.',
+      'Initial design briefs and workflow sketches for built-in prototyping, design tools, custom extensions, and local/cloud model switching.',
+    ],
+    constraints: [
+      'The project is intentionally being written by hand while using AI as a teacher, not as the primary code generator.',
+      'Consumer machines need the system to be frugal with memory, storage, and token context.',
+      'Go is a learning choice for the team, which means the architecture has to stay simple enough to build while learning the language.',
+    ],
+    features: [
+      'Knowledge base for durable project memory',
+      'Context-efficient prompt and transcript management',
+      'Planning and review loops for agent work',
+      'Local model first workflow with room for cloud fallback',
+      'Built-in design and prototyping tools',
+      'Custom skills, instructions, and extensions',
+      'TUI-first agent control room',
+    ],
+    lessonsLearned: [
+      'Better prompts do not solve local AI context limits on their own.',
+      'Agent workflows need memory and planning systems that live outside the model window.',
+      'Learning the implementation language can be part of the product constraint, not a side quest.',
+    ],
+    futureImprovements: [
+      'Ship the first usable Go prototype.',
+      'Test context strategies against MLX local models on consumer Apple Silicon.',
+      'Decide whether extension authoring should stay in Go or move toward TypeScript for accessibility.',
+      'Benchmark transcript compaction, knowledge recall, and planning reliability against existing local agent flows.',
+    ],
+    seoTitle: 'LAH | Local Agent Helper',
+    seoDescription:
+      'A currently building local AI agent harness focused on better context management for consumer hardware and smaller local models.',
+  },
   {
     _id: 'project-roadrunners',
     title: 'RoadRunners',
@@ -489,17 +642,29 @@ export const fallbackProjects: Project[] = [
 
 export const fallbackPosts: BlogPost[] = [
   {
-    _id: 'post-local-ai-stack',
-    title: 'What Local AI Tools Are Teaching Me About Full-Stack Development',
-    slug: 'local-ai-tools-full-stack-development',
+    _id: 'post-currently-building-lah',
+    title: 'Currently Building: LAH',
+    slug: 'currently-building-lah',
     excerpt:
-      'Notes from building model storage, voice transcription, and fine-tuning experiments while studying IT at Singapore Polytechnic.',
-    publishedAt: '2026-07-01T09:00:00.000Z',
+      'Why local AI coding agents struggle on consumer hardware, and why we are building a context-efficient harness for smaller models.',
+    publishedAt: '2026-07-04T09:00:00.000Z',
+    featuredImage: {
+      asset: {
+        url: '/assets/lah/SCR-20260704-ksda.jpeg',
+      },
+      alt: 'LAH product brief showing an agent control room concept.',
+      caption: 'LAH started from a simple frustration: local agents need better context management.',
+    },
     categories: [
       {
         _id: 'cat-ai',
         title: 'AI',
         slug: 'ai',
+      },
+      {
+        _id: 'cat-projects',
+        title: 'Projects',
+        slug: 'projects',
       },
       {
         _id: 'cat-learning',
@@ -512,63 +677,96 @@ export const fallbackPosts: BlogPost[] = [
       name: 'Nachiketh Reddy',
       role: 'Full Stack Developer + Aspiring AI Developer',
     },
+    readingTime: '5 min read',
     body: [
       {
         _type: 'block',
-        _key: 'intro',
+        _key: 'lah-intro',
         style: 'normal',
         markDefs: [],
         children: [
           {
             _type: 'span',
             _key: 'span',
-            text: 'The more I build with local models, the more I realize AI development is still full-stack development: file systems, APIs, permissions, latency, interfaces, data quality, and clear recovery paths.',
+            text: 'Local AI setups have a problem. Well, at least the smaller ones do. We cannot give them the context window they actually need.',
             marks: [],
           },
         ],
       },
-    ],
-  },
-  {
-    _id: 'post-student-projects',
-    title: 'Making Student Projects Read Like Real Engineering Work',
-    slug: 'student-projects-real-engineering-work',
-    excerpt:
-      'How I am turning coursework, hackathons, and experiments into clearer proof of ownership, constraints, and technical growth.',
-    publishedAt: '2026-06-20T09:00:00.000Z',
-    categories: [
-      {
-        _id: 'cat-career',
-        title: 'Career',
-        slug: 'career',
-      },
-      {
-        _id: 'cat-projects',
-        title: 'Projects',
-        slug: 'projects',
-      },
-    ],
-    author: {
-      _id: 'author-nachiketh',
-      name: 'Nachiketh Reddy',
-      role: 'Full Stack Developer + Aspiring AI Developer',
-    },
-    body: [
       {
         _type: 'block',
-        _key: 'intro',
+        _key: 'lah-hardware',
         style: 'normal',
         markDefs: [],
         children: [
           {
             _type: 'span',
             _key: 'span',
-            text: 'I do not want my portfolio to just say that I am learning fast. I want each project to show what I personally built, what constraints shaped it, and what I would improve next.',
+            text: 'On consumer hardware, local models can be capable, but smaller context windows make serious agent workflows fragile: compaction happens constantly, plans get lost, and reasoning becomes inconsistent.',
+            marks: [],
+          },
+        ],
+      },
+      {
+        _type: 'block',
+        _key: 'lah-what-building-heading',
+        style: 'h2',
+        markDefs: [],
+        children: [
+          {
+            _type: 'span',
+            _key: 'span',
+            text: 'What we are building',
+            marks: [],
+          },
+        ],
+      },
+      {
+        _type: 'block',
+        _key: 'lah-what-building',
+        style: 'normal',
+        markDefs: [],
+        children: [
+          {
+            _type: 'span',
+            _key: 'span',
+            text: 'LAH is a context-efficient AI harness for local and smaller-model agent workflows, focused on knowledge bases, planning, compact transcripts, built-in design tools, and custom extensions.',
+            marks: [],
+          },
+        ],
+      },
+      {
+        _type: 'block',
+        _key: 'lah-hard-part-heading',
+        style: 'h2',
+        markDefs: [],
+        children: [
+          {
+            _type: 'span',
+            _key: 'span',
+            text: 'The hard part',
+            marks: [],
+          },
+        ],
+      },
+      {
+        _type: 'block',
+        _key: 'lah-hard-part',
+        style: 'normal',
+        markDefs: [],
+        children: [
+          {
+            _type: 'span',
+            _key: 'span',
+            text: 'We are learning Go and writing the implementation by hand, using AI mainly as a teacher. We are about to find out over the coming months whether we can pull it off.',
             marks: [],
           },
         ],
       },
     ],
+    seoTitle: 'Currently Building: LAH | Nachiketh Reddy',
+    seoDescription:
+      'A blog post about building LAH, a context-efficient local AI harness for smaller models and consumer hardware.',
   },
 ];
 
