@@ -1,68 +1,36 @@
-import { ArrowRight, CheckCircle2, Code2, GraduationCap, MapPin } from 'lucide-react';
+import { ArrowRight, Code2, GraduationCap, MapPin, Network } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 import { BlogCard } from '../components/cards/BlogCard';
 import { ProjectCard } from '../components/cards/ProjectCard';
 import { Seo } from '../components/Seo';
 import { ButtonLink } from '../components/ui/ButtonLink';
-import { ErrorState } from '../components/ui/ErrorState';
 import { Section } from '../components/ui/Section';
 import { SkillBadge } from '../components/ui/SkillBadge';
-import { TerminalLine, TerminalSequence } from '../components/ui/TerminalSequence';
 import { usePageSettings } from '../hooks/usePageSettings';
 import { useSanityQuery } from '../hooks/useSanityQuery';
 import { fallbackHomePage } from '../lib/fallbackData';
 import { homePageQuery } from '../lib/sanity/queries';
 import type { HomePageContent } from '../lib/types';
 
+const workingAreas = [
+  'Web applications',
+  'AI tools',
+  'Cloud and security',
+];
+
+const leadershipWork = [
+  'Lead the Apple Developer Society committee and help set its technical roadmap.',
+  'Plan workshops and major student activities, including the Swift Nano Bootcamp.',
+  'Teach Swift and SwiftUI, mentor participants, and help debug unfamiliar code.',
+];
+
 export function HomePage() {
   const settings = usePageSettings();
-  const { data: home, error, isFallback } = useSanityQuery<HomePageContent>(
-    homePageQuery,
-    fallbackHomePage,
-  );
-  const positioningBullets = (home.positioningStatement ?? '')
-    .replace(': ', '. ')
-    .split(/(?<=\.)\s+|,\s+and\s+|,\s+/)
-    .map((item) => item.trim())
-    .filter(Boolean)
-    .map((item) => (item.endsWith('.') ? item : `${item}.`));
+  const { data: home } = useSanityQuery<HomePageContent>(homePageQuery, fallbackHomePage);
   const githubLink = settings.socialLinks.find((link) => link.kind === 'github');
   const linkedinLink = settings.socialLinks.find((link) => link.kind === 'linkedin');
-  const hireSignals = [
-    {
-      label: 'Education',
-      value: settings.education ?? 'Singapore Polytechnic IT student',
-      icon: GraduationCap,
-    },
-    {
-      label: 'Build evidence',
-      value:
-        settings.publicRepoCount && settings.githubUsername
-          ? `${settings.publicRepoCount} public repos on GitHub`
-          : 'Public project evidence on GitHub',
-      icon: Code2,
-    },
-    {
-      label: 'Location',
-      value: settings.location ? `${settings.location} + remote` : 'Singapore + remote',
-      icon: MapPin,
-    },
-  ];
-  const roleFit = [
-    {
-      title: 'Full-stack product work',
-      proof: 'React, Next.js, Node/Express, Supabase, PostgreSQL, auth, dashboards, and workflow UI.',
-    },
-    {
-      title: 'AI-adjacent builder',
-      proof: 'Local AI tools, roadmap generation, transcription experiments, fallback states, and model-aware UX.',
-    },
-    {
-      title: 'Security-minded learner',
-      proof: 'OWASP review, dependency scanning, SAST patterns, risk reporting, and fix documentation.',
-    },
-  ];
+  const featuredProjects = home.featuredProjects.slice(0, 3);
 
   return (
     <>
@@ -70,21 +38,56 @@ export function HomePage() {
         title={home.seoTitle ?? `${settings.name} | ${settings.role}`}
         description={home.seoDescription ?? home.subheadline}
       />
-      <Section className="pb-8 pt-8 sm:pt-12 lg:pb-16 lg:pt-16">
-        <div className="home-hero-grid reveal">
-          <aside className="home-profile-panel">
-            <div className="creator-art-frame h-64 sm:h-80 lg:h-[23rem]">
-              <img
-                src="/assets/nachiketh-dark-profile-v3.png"
-                alt="Editorial portrait illustration of Nachiketh Reddy"
-              />
+
+      <Section className="pb-12 pt-4 sm:pt-6 lg:pb-16 lg:pt-8">
+        <div className="landing-hero reveal">
+          <div className="landing-portrait-image">
+            <img
+              src="/assets/nachiketh-dark-profile-v3.png"
+              alt="Portrait of Nachiketh Reddy"
+            />
+          </div>
+
+          <div className="landing-hero-copy">
+            <p className="font-tech text-xs font-semibold uppercase tracking-[0.18em] text-primary-strong">
+              Nachiketh Reddy · Singapore
+            </p>
+            <h1 className="mt-6 max-w-[15ch] font-display text-5xl font-semibold leading-[0.98] tracking-[-0.035em] text-ink sm:text-6xl lg:text-7xl">
+              {home.headline}
+            </h1>
+            <p className="mt-7 max-w-[62ch] text-lg leading-8 text-muted sm:text-xl">
+              {home.subheadline}
+            </p>
+
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <ButtonLink href={home.primaryCtaHref} variant="primary">
+                {home.primaryCtaLabel}
+              </ButtonLink>
+              <ButtonLink href={home.secondaryCtaHref} variant="secondary">
+                {home.secondaryCtaLabel}
+              </ButtonLink>
             </div>
-            <div className="grid gap-3 p-4 sm:p-5">
-              <p className="font-tech text-xs font-bold uppercase text-primary-strong">
-                Currently available
-              </p>
-              <p className="text-sm font-semibold leading-6 text-ink">{settings.availability}</p>
-              <div className="flex flex-wrap gap-2 border-t border-[#00d2ff]/24 pt-4">
+
+            <div className="landing-focus-list" aria-label="Areas of work">
+              {workingAreas.map((area, index) => (
+                <div key={area}>
+                  <span className="font-tech text-[0.68rem] text-primary-strong">0{index + 1}</span>
+                  <span>{area}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <aside className="landing-availability-panel">
+            <div className="grid gap-4 p-5">
+              <div className="flex items-center justify-between gap-4">
+                <p className="font-tech text-xs font-semibold uppercase text-primary-strong">
+                  Available for internships
+                </p>
+                <span aria-hidden="true" className="size-2 bg-emerald-300" />
+              </div>
+              <p className="text-sm leading-6 text-muted">{settings.availability}</p>
+              <div className="flex flex-wrap gap-2 border-t border-primary/20 pt-4">
                 {githubLink ? (
                   <ButtonLink href={githubLink.url} variant="ghost" external className="min-h-10">
                     GitHub
@@ -98,280 +101,161 @@ export function HomePage() {
               </div>
             </div>
           </aside>
-
-          <div className="grid content-center gap-8">
-            <div>
-              <p className="mb-4 max-w-[52ch] font-tech text-xs font-bold uppercase leading-5 text-primary-strong">
-                Full-stack student builder · AI tooling · Security curious
-              </p>
-              <h1 className="max-w-5xl font-display text-5xl leading-[0.96] text-balance text-ink sm:text-6xl lg:text-7xl">
-                {home.headline}
-              </h1>
-              <p className="mt-6 max-w-2xl text-xl font-bold leading-8 text-primary-strong text-pretty">
-                {home.subheadline}
-              </p>
-              <p className="mt-4 max-w-2xl text-base font-semibold leading-7 text-muted sm:text-lg">
-                Recruiters should be able to see the fit fast: student status, shipped projects,
-                real code, technical range, and a clear path to contact.
-              </p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <ButtonLink href={home.primaryCtaHref} variant="primary">
-                  {home.primaryCtaLabel}
-                </ButtonLink>
-                <ButtonLink href={home.secondaryCtaHref} variant="secondary">
-                  {home.secondaryCtaLabel}
-                </ButtonLink>
-                {settings.resumeUrl ? (
-                  <ButtonLink href={settings.resumeUrl} variant="ghost" external>
-                    Resume
-                  </ButtonLink>
-                ) : null}
-              </div>
-            </div>
-
-            <div className="home-signal-grid">
-              {hireSignals.map((signal) => {
-                const Icon = signal.icon;
-                return (
-                  <div key={signal.label} className="home-signal">
-                    <Icon aria-hidden="true" size={19} className="text-primary" />
-                    <div>
-                      <p className="font-tech text-[0.68rem] font-bold uppercase text-soft">
-                        {signal.label}
-                      </p>
-                      <p className="mt-1 text-sm font-bold leading-6 text-ink">{signal.value}</p>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-
-            <div className="py-2">
-              <TerminalSequence>
-                <TerminalLine tone="command" delay={80}>
-                  match --role internship
-                </TerminalLine>
-                <TerminalLine tone="success" delay={220}>
-                  {settings.name} · {settings.education ?? 'Singapore Polytechnic IT student'}
-                </TerminalLine>
-                <TerminalLine tone="command" delay={360}>
-                  focus --current
-                </TerminalLine>
-                <TerminalLine tone="info" delay={500}>
-                  {settings.currentFocus ?? 'full-stack products + local AI tooling'}
-                </TerminalLine>
-              </TerminalSequence>
-            </div>
-          </div>
         </div>
       </Section>
 
-      <Section className="py-10">
-        <div className="hireability-board reveal reveal-delay-1">
-          <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
-            <div>
-              <h2 className="font-display text-3xl font-black text-balance text-ink sm:text-4xl">
-                Built to answer the questions hiring teams actually ask.
-              </h2>
-              <p className="mt-4 max-w-[60ch] text-muted">
-                Clear proof beats mystery: this page now leads with credibility, scope, project
-                evidence, and direct next actions.
-              </p>
-            </div>
-            <div className="grid gap-3">
-              {positioningBullets.map((item) => (
-                <div key={item} className="hire-check-row">
-                  <CheckCircle2
-                    aria-hidden="true"
-                    size={20}
-                    className="mt-0.5 shrink-0 text-primary"
-                  />
-                  <span className="text-sm font-semibold leading-6 text-ink sm:text-base">
-                    {item}
-                  </span>
-                </div>
-              ))}
-              {isFallback && error ? <ErrorState message={error} /> : null}
-            </div>
-          </div>
-        </div>
-      </Section>
-
-      <Section className="py-10">
-        <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="grid content-between gap-6 border-y-2 border-ink py-6">
-            <div>
-              <h2 className="font-display text-4xl font-black text-balance text-ink">
-                Where I fit best
-              </h2>
-              <p className="mt-3 text-muted">
-                Internship and project teams get the most value when the work mixes product UI,
-                backend logic, AI experiments, and practical security thinking.
-              </p>
-            </div>
-            <TerminalSequence>
-              <TerminalLine tone="command" delay={80}>
-                ship --with proof
-              </TerminalLine>
-              <TerminalLine tone="info" delay={220}>
-                demos, GitHub repos, tradeoffs, lessons, and future improvements
-              </TerminalLine>
-            </TerminalSequence>
-          </div>
-          <div className="grid gap-4">
-            {roleFit.map((item) => (
-              <article key={item.title} className="role-fit-row">
-                <h3 className="font-display text-xl font-black leading-tight text-ink">
-                  {item.title}
-                </h3>
-                <p className="max-w-[60ch] text-sm font-semibold leading-6 text-muted">
-                  {item.proof}
-                </p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </Section>
-
-      <Section id="projects">
-        <div className="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+      <Section id="projects" className="py-14 lg:py-18">
+        <div className="section-heading-row">
           <div>
-            <h2 className="font-display text-4xl font-black text-balance text-ink">
-              Featured projects
+            <p className="font-tech text-xs font-semibold uppercase tracking-[0.18em] text-primary-strong">
+              Selected work
+            </p>
+            <h2 className="mt-3 max-w-[18ch] font-display text-4xl font-semibold tracking-[-0.025em] text-ink sm:text-5xl">
+              Recent projects.
             </h2>
-            <p className="mt-3 max-w-2xl text-muted">
-              Each project is structured as evidence: context, value, implementation choices, and
-              what improved after shipping.
+            <p className="mt-4 max-w-[65ch] text-muted">
+              Client work, team projects, and experiments, with clear notes on what I did and what
+              is still unfinished.
             </p>
           </div>
-          <Link
-            to="/projects"
-            className="pressable inline-flex min-h-11 items-center gap-2 rounded-none border border-[#00d2ff] bg-[#0d1622] px-4 font-tech text-sm font-bold uppercase text-ink shadow-[6px_6px_0_#243a56] hover:-translate-x-0.5 hover:-translate-y-0.5"
-          >
-            See all projects <ArrowRight aria-hidden="true" size={16} />
+          <Link to="/projects" className="section-link pressable">
+            View all work <ArrowRight aria-hidden="true" size={17} />
           </Link>
         </div>
-        <div className="mb-8 grid gap-3 border-y-2 border-ink py-5">
-          {home.featuredProjects.slice(0, 3).map((project) => (
-            <Link
-              key={project._id}
-              to={`/projects/${project.slug}`}
-              className="project-proof-row group"
-            >
-              <div>
-                <p className="font-tech text-[0.68rem] font-bold uppercase text-soft">
-                  {project.projectType ?? project.status}
-                </p>
-                <h3 className="mt-1 font-display text-2xl font-black text-ink group-hover:text-primary-strong">
-                  {project.title}
-                </h3>
-              </div>
-              <p className="max-w-[64ch] text-sm font-semibold leading-6 text-muted">
-                {project.impact ?? project.summary}
-              </p>
-              <ArrowRight
-                aria-hidden="true"
-                size={18}
-                className="shrink-0 text-primary transition-transform duration-300 ease-[var(--ease-premium)] group-hover:translate-x-1"
-              />
-            </Link>
-          ))}
-        </div>
-        <div className="grid gap-8 md:grid-cols-[repeat(auto-fit,minmax(320px,1fr))]">
-          {home.featuredProjects.map((project) => (
+
+        <div className="mt-9 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          {featuredProjects.map((project) => (
             <ProjectCard key={project._id} project={project} />
           ))}
         </div>
       </Section>
 
-      <Section className="py-12">
-        <div className="border-y-2 border-ink py-8">
-          <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
-            <div>
-              <h2 className="font-display text-3xl font-black text-ink">Skills with context</h2>
-              <p className="mt-3 text-muted">
-                Not a logo wall. These are the tools and practices I use to build and explain
-                reliable full-stack and AI-adjacent work.
-              </p>
-            </div>
-            <div className="flex flex-wrap gap-3">
+      <Section id="about" className="scroll-mt-24 py-14 lg:py-20">
+        <div className="about-landing-grid">
+          <div>
+            <p className="font-tech text-xs font-semibold uppercase tracking-[0.18em] text-primary-strong">
+              About
+            </p>
+            <h2 className="mt-4 max-w-[14ch] font-display text-4xl font-semibold leading-tight tracking-[-0.025em] text-ink sm:text-5xl">
+              I learn by building.
+            </h2>
+            <p className="mt-6 max-w-[62ch] text-lg leading-8 text-muted">
+              I&apos;m a Year 2 Information Technology student at Singapore Polytechnic,
+              specialising in cloud computing and cybersecurity. I mostly build web applications
+              and experiment with local AI tools.
+            </p>
+            <p className="mt-5 max-w-[62ch] leading-7 text-muted">
+              AI helps me prototype, research, and test ideas faster, but I still take
+              responsibility for understanding the implementation, checking its assumptions, and
+              maintaining what I build.
+            </p>
+            <div className="mt-7 flex flex-wrap gap-2">
               {home.skills.map((skill) => (
                 <SkillBadge key={skill._id} skill={skill} />
               ))}
             </div>
           </div>
-        </div>
-      </Section>
 
-      <Section>
-        <div className="grid gap-6 lg:grid-cols-3">
-          <div className="lg:col-span-1">
-            <h2 className="font-display text-4xl font-black text-balance text-ink">
-              Current focus
-            </h2>
-            <p className="mt-3 text-muted">
-              The work underneath the portfolio: full-stack apps, local AI tooling, secure coding,
-              and shipping steadily.
-            </p>
-          </div>
-          <div className="grid gap-4 lg:col-span-2">
-            {home.focusAreas.map((focus) => (
-              <article key={focus.title} className="brutal-panel-soft p-5">
-                <h3 className="font-display text-2xl font-black text-ink">{focus.title}</h3>
-                <p className="mt-2 max-w-[62ch] text-muted">{focus.description}</p>
-              </article>
-            ))}
+          <div className="about-fact-stack">
+            <article>
+              <GraduationCap aria-hidden="true" size={19} />
+              <div>
+                <p className="font-tech text-[0.68rem] uppercase text-soft">Education</p>
+                <h3>Diploma in Information Technology</h3>
+                <p>Singapore Polytechnic · Cloud Computing and Cybersecurity</p>
+              </div>
+            </article>
+            <article>
+              <Network aria-hidden="true" size={19} />
+              <div>
+                <p className="font-tech text-[0.68rem] uppercase text-soft">Leadership</p>
+                <h3>President, Apple Developer Society</h3>
+                <p>Technical workshops, mentoring, committee direction, and student events.</p>
+              </div>
+            </article>
+            <article>
+              <Code2 aria-hidden="true" size={19} />
+              <div>
+                <p className="font-tech text-[0.68rem] uppercase text-soft">Approach</p>
+                <h3>How I use AI</h3>
+                <p>I use it to explore ideas, then read, test, and maintain the code myself.</p>
+              </div>
+            </article>
+            <article>
+              <MapPin aria-hidden="true" size={19} />
+              <div>
+                <p className="font-tech text-[0.68rem] uppercase text-soft">Based in</p>
+                <h3>{settings.location ?? 'Singapore'}</h3>
+                <p>Open to full-stack internships and software projects.</p>
+              </div>
+            </article>
           </div>
         </div>
-      </Section>
 
-      <Section className="pt-8">
-        <div className="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+        <div className="leadership-strip">
           <div>
-            <h2 className="font-display text-4xl font-black text-balance text-ink">
-              Latest writing
-            </h2>
-            <p className="mt-3 max-w-2xl text-muted">
-              Notes on learning, project decisions, AI experiments, security, and the developer
-              journey.
+            <p className="font-tech text-xs font-semibold uppercase tracking-[0.18em] text-primary-strong">
+              Leadership and teaching
             </p>
+            <h2 className="mt-3 font-display text-3xl font-semibold text-ink">
+              What I do at Apple Developer Society.
+            </h2>
           </div>
-          <Link
-            to="/blog"
-            className="pressable inline-flex min-h-11 items-center gap-2 rounded-none border border-[#00d2ff] bg-[#0d1622] px-4 font-tech text-sm font-bold uppercase text-ink shadow-[6px_6px_0_#243a56] hover:-translate-x-0.5 hover:-translate-y-0.5"
-          >
-            Read the blog <ArrowRight aria-hidden="true" size={16} />
+          <ul>
+            {leadershipWork.map((item) => (
+              <li key={item}>
+                <span aria-hidden="true">↳</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Section>
+
+      <Section className="py-12 lg:py-16">
+        <div className="section-heading-row">
+          <div>
+            <p className="font-tech text-xs font-semibold uppercase tracking-[0.18em] text-primary-strong">
+              Writing
+            </p>
+            <h2 className="mt-3 font-display text-3xl font-semibold tracking-[-0.025em] text-ink sm:text-4xl">
+              Notes from my projects.
+            </h2>
+          </div>
+          <Link to="/blog" className="section-link pressable">
+            Search all writing <ArrowRight aria-hidden="true" size={17} />
           </Link>
         </div>
-        <div className="grid gap-5 lg:grid-cols-2">
-          {home.highlightedPosts.map((post) => (
-            <BlogCard key={post._id} post={post} />
+        <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          {home.highlightedPosts.slice(0, 3).map((post) => (
+            <BlogCard key={post._id} post={post} compact />
           ))}
         </div>
       </Section>
 
-      <Section className="pb-24">
-        <div className="brutal-panel p-6 sm:p-8 lg:p-10">
-          <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-            <div>
-              <h2 className="font-display text-4xl font-black text-balance text-ink">
-                Need someone who can build and explain the work?
-              </h2>
-              <p className="mt-4 max-w-2xl text-muted">
-                I am looking for internships, hackathons, and collaborators who value useful
-                full-stack products, AI curiosity, secure thinking, and clear communication.
-              </p>
-            </div>
-            <div className="flex flex-col gap-3 sm:flex-row lg:justify-end">
-              <ButtonLink href="/contact" variant="primary">
-                Contact Me
+      <Section className="pb-20 pt-12">
+        <div className="contact-panel">
+          <div>
+            <p className="font-tech text-xs font-semibold uppercase tracking-[0.18em] text-primary-strong">
+              Get in touch
+            </p>
+            <h2 className="mt-4 max-w-[20ch] font-display text-4xl font-semibold tracking-[-0.025em] text-ink sm:text-5xl">
+              Open to internships and project work.
+            </h2>
+            <p className="mt-4 max-w-[62ch] text-muted">
+              I want to work with experienced engineers, contribute code, and improve through real
+              project work.
+            </p>
+          </div>
+          <div className="flex flex-col gap-3 sm:flex-row lg:justify-end">
+            <ButtonLink href="/contact" variant="primary">
+              Get in Touch
+            </ButtonLink>
+            {linkedinLink ? (
+              <ButtonLink href={linkedinLink.url} variant="secondary" external>
+                LinkedIn
               </ButtonLink>
-              {settings.resumeUrl ? (
-                <ButtonLink href={settings.resumeUrl} variant="secondary" external>
-                  Resume
-                </ButtonLink>
-              ) : null}
-            </div>
+            ) : null}
           </div>
         </div>
       </Section>

@@ -1,11 +1,11 @@
-import { Code2, Globe2 } from 'lucide-react';
+import { ArrowRight, Code2, Globe2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 import { formatDate } from '../../lib/dates';
-import { getReadingTime } from '../../lib/readingTime';
 import { imageUrlFor } from '../../lib/sanity/image';
 import { formatProjectType, formatStatus } from '../../lib/status';
 import type { Project, ProjectStatus } from '../../lib/types';
+import { ProjectVisual } from '../ProjectVisual';
 import { SkillBadge } from '../ui/SkillBadge';
 
 type ProjectCardProps = {
@@ -19,104 +19,93 @@ const statusTagClasses: Record<ProjectStatus, string> = {
   experiment: 'border-red-400/65 bg-red-400/10 text-red-200',
 };
 
-function limitSentences(value: string, maxSentences = 3) {
+function limitSentences(value: string, maxSentences = 2) {
   const sentences = value.match(/[^.!?]+[.!?]+|[^.!?]+$/g)?.map((sentence) => sentence.trim()) ?? [];
 
   if (sentences.length <= maxSentences) {
     return value;
   }
 
-  return `${sentences.slice(0, maxSentences).join(' ')}...`;
+  return `${sentences.slice(0, maxSentences).join(' ')}…`;
 }
 
 export function ProjectCard({ project }: ProjectCardProps) {
-  const coverImageUrl = imageUrlFor(project.coverImage, 720);
+  const coverImageUrl = imageUrlFor(project.coverImage, 960);
   const dateLabel = project.period ?? (project.createdAt ? formatDate(project.createdAt) : null);
-  const readTime = getReadingTime(project.body);
 
   return (
-    <article className="brutal-panel-soft group grid h-full grid-rows-[auto_1fr] overflow-hidden transition duration-300 ease-[var(--ease-premium)] hover:-translate-x-0.5 hover:-translate-y-0.5">
-      {coverImageUrl ? (
-        <Link to={`/projects/${project.slug}`} className="block border-b border-[#00d2ff]/24">
+    <article className="project-card group relative">
+      <Link
+        to={`/projects/${project.slug}`}
+        className="absolute inset-0 z-10"
+        aria-label={`Read the ${project.title} case study`}
+      />
+
+      <div className="project-card-media">
+        {coverImageUrl ? (
           <img
             src={coverImageUrl}
             alt={project.coverImage?.alt ?? `${project.title} preview`}
-            className="h-[clamp(14rem,28vw,22rem)] w-full object-cover object-top"
+            loading="lazy"
           />
-        </Link>
-      ) : null}
+        ) : (
+          <ProjectVisual title={project.title} status={formatStatus(project.status)} />
+        )}
+      </div>
 
-      <div className="grid h-full grid-rows-[1fr_auto_auto] gap-3 p-4 sm:p-5">
-        <div>
-          <div className="mb-3 flex flex-wrap items-center gap-1.5 font-tech text-[0.64rem] font-bold">
-            <span
-              className={[
-                'rounded-none border px-2 py-0.5 font-tech text-[0.64rem] font-bold leading-5',
-                statusTagClasses[project.status],
-              ].join(' ')}
-            >
-              {formatStatus(project.status)}
-            </span>
-            <span className="rounded-none border border-[#00d2ff]/24 bg-surface px-2 py-0.5 leading-5 text-ink">
-              {formatProjectType(project.projectType)}
-            </span>
-            {project.featured ? (
-              <span className="rounded-none border border-[#00d2ff]/30 bg-surface px-2 py-0.5 font-tech text-[0.64rem] font-semibold leading-5 text-ink">
-                Featured
-              </span>
-            ) : null}
-          </div>
-          <h3 className="font-display text-xl font-black leading-[1.35] text-balance text-ink sm:text-2xl">
-            <Link to={`/projects/${project.slug}`} className="hover:text-primary-strong">
-              {project.title}
-            </Link>
-          </h3>
-          <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1 font-tech text-[0.72rem] font-semibold text-muted">
-            {dateLabel ? <span>{dateLabel}</span> : null}
-            <span>{readTime}</span>
-          </div>
-          {project.role ? (
-            <p className="mt-3 font-tech text-xs font-bold leading-5 text-primary-strong">
-              {project.role}
-            </p>
-          ) : null}
-          <p className="mt-3 text-sm leading-6 text-pretty text-muted">{limitSentences(project.summary)}</p>
-          {project.impact ? (
-            <p className="mt-4 border-y border-[#00d2ff]/24 py-3 text-xs font-semibold leading-6 text-ink sm:text-sm">
-              {limitSentences(project.impact)}
-            </p>
-          ) : null}
+      <div className="project-card-body">
+        <div className="flex flex-wrap items-center gap-1.5 font-tech text-[0.64rem] font-semibold">
+          <span className={['border px-2 py-0.5 leading-5', statusTagClasses[project.status]].join(' ')}>
+            {formatStatus(project.status)}
+          </span>
+          <span className="border border-primary/25 bg-surface px-2 py-0.5 leading-5 text-muted">
+            {formatProjectType(project.projectType)}
+          </span>
         </div>
 
-        <div className="flex flex-wrap gap-1.5 self-end">
-          {project.technologies.slice(0, 4).map((skill) => (
+        <div>
+          <h3 className="font-display text-2xl font-bold leading-tight tracking-[-0.02em] text-ink group-hover:text-primary-strong">
+            {project.title}
+          </h3>
+          <p className="mt-2 font-tech text-[0.7rem] text-soft">{dateLabel}</p>
+        </div>
+
+        <p className="text-sm leading-6 text-muted">{limitSentences(project.summary)}</p>
+
+        <div className="flex flex-wrap gap-1.5">
+          {project.technologies.slice(0, 3).map((skill) => (
             <SkillBadge key={skill._id} skill={skill} />
           ))}
         </div>
 
-        <div className="flex flex-wrap gap-2 border-t border-[#00d2ff]/24 pt-3">
-          {project.githubUrl ? (
-            <a
-              href={project.githubUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="pressable inline-flex min-h-8 items-center gap-1.5 rounded-none border border-[#00d2ff] bg-[#0d1622] px-2.5 font-tech text-[0.68rem] font-bold uppercase leading-none text-ink shadow-[3px_3px_0_#243a56] hover:-translate-x-0.5 hover:-translate-y-0.5"
-            >
-              <Code2 aria-hidden="true" size={14} />
-              Code
-            </a>
-          ) : null}
-          {project.demoUrl ? (
-            <a
-              href={project.demoUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="pressable inline-flex min-h-8 items-center gap-1.5 rounded-none border border-[#00d2ff] bg-[#0d1622] px-2.5 font-tech text-[0.68rem] font-bold uppercase leading-none text-ink shadow-[3px_3px_0_#243a56] hover:-translate-x-0.5 hover:-translate-y-0.5"
-            >
-              <Globe2 aria-hidden="true" size={14} />
-              Demo
-            </a>
-          ) : null}
+        <div className="project-card-actions">
+          <span className="project-card-case-study">
+            Case study <ArrowRight aria-hidden="true" size={15} />
+          </span>
+          <div className="relative z-20 flex gap-1">
+            {project.githubUrl ? (
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`${project.title} source code`}
+                className="project-card-icon pressable"
+              >
+                <Code2 aria-hidden="true" size={15} />
+              </a>
+            ) : null}
+            {project.demoUrl ? (
+              <a
+                href={project.demoUrl}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`${project.title} live demo`}
+                className="project-card-icon pressable"
+              >
+                <Globe2 aria-hidden="true" size={15} />
+              </a>
+            ) : null}
+          </div>
         </div>
       </div>
     </article>

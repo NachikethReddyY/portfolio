@@ -72,18 +72,20 @@ export function ProjectsIndexPage() {
   return (
     <>
       <Seo
-        title={`Projects | ${settings.name}`}
-        description="Project case studies with problem statements, solutions, tech stacks, screenshots, lessons learned, and next steps."
+        title={`Work | ${settings.name}`}
+        description="Projects by Nachiketh Reddy, with screenshots, technical notes, and lessons learned."
       />
-      <Section className="pb-10 pt-14 sm:pt-20">
+      <Section className="!pb-8 !pt-12 lg:!pb-10 lg:!pt-16">
         <div className="max-w-4xl">
-          <h1 className="font-display text-5xl font-black leading-[0.98] text-balance text-ink sm:text-6xl">
-            Full-stack apps, local AI tools, and security experiments.
+          <p className="font-tech text-xs font-semibold uppercase tracking-[0.18em] text-primary-strong">
+            Work
+          </p>
+          <h1 className="mt-4 max-w-[16ch] font-display text-5xl font-semibold leading-[0.98] tracking-[-0.035em] text-balance text-ink sm:text-6xl">
+            My work.
           </h1>
-          <p className="mt-6 max-w-[64ch] text-xl font-semibold leading-8 text-primary-strong text-pretty">
-            The strongest projects here come from real repo evidence: shipped demos, hackathon
-            builds, secure coding coursework, local model tooling, and experiments that show how I
-            learn by building.
+          <p className="mt-6 max-w-[64ch] text-lg leading-8 text-muted text-pretty sm:text-xl">
+            Projects from classes, client work, hackathons, and my own experiments. Each page
+            explains what I did and what I learned.
           </p>
         </div>
         {error ? (
@@ -92,9 +94,9 @@ export function ProjectsIndexPage() {
           </div>
         ) : null}
       </Section>
-      <Section className="pt-4">
-        <div className="mb-6 flex flex-col gap-5 border-y border-[#00d2ff]/24 py-5">
-          <div className="relative max-w-2xl">
+      <Section className="!pb-20 !pt-4 lg:!pb-24 lg:!pt-6">
+        <div className="mb-8 flex flex-col gap-4 border-b border-[#00d2ff]/24 pb-5">
+          <div className="relative w-full">
             <Search
               aria-hidden="true"
               className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted"
@@ -109,7 +111,7 @@ export function ProjectsIndexPage() {
             />
           </div>
 
-          <div className="grid gap-4 lg:grid-cols-[0.85fr_1.15fr]">
+          <div className="flex flex-wrap gap-x-8 gap-y-3">
             <FilterGroup label="Status">
               {statusOptions.map((option) => (
                 <button
@@ -117,7 +119,7 @@ export function ProjectsIndexPage() {
                   type="button"
                   onClick={() => setStatusFilter(option.value)}
                   className={[
-                    'pressable min-h-10 rounded-none border px-3 font-tech text-xs font-bold uppercase',
+                    'pressable min-h-10 rounded-none border px-2.5 font-tech text-[0.68rem] font-bold uppercase',
                     statusFilter === option.value
                       ? 'border-[#00d2ff] bg-[#00d2ff] text-[#07101a]'
                       : 'border-[#00d2ff]/35 bg-terminal text-ink hover:border-[#00d2ff]',
@@ -133,7 +135,7 @@ export function ProjectsIndexPage() {
                 type="button"
                 onClick={() => setTypeFilter('all')}
                 className={[
-                  'pressable min-h-10 rounded-none border px-3 font-tech text-xs font-bold uppercase',
+                  'pressable min-h-10 rounded-none border px-2.5 font-tech text-[0.68rem] font-bold uppercase',
                   typeFilter === 'all'
                     ? 'border-[#00d2ff] bg-[#00d2ff] text-[#07101a]'
                     : 'border-[#00d2ff]/35 bg-terminal text-ink hover:border-[#00d2ff]',
@@ -147,7 +149,7 @@ export function ProjectsIndexPage() {
                   type="button"
                   onClick={() => setTypeFilter(type)}
                   className={[
-                    'pressable min-h-10 rounded-none border px-3 font-tech text-xs font-bold uppercase',
+                    'pressable min-h-10 rounded-none border px-2.5 font-tech text-[0.68rem] font-bold uppercase',
                     typeFilter === type
                       ? 'border-[#00d2ff] bg-[#00d2ff] text-[#07101a]'
                       : 'border-[#00d2ff]/35 bg-terminal text-ink hover:border-[#00d2ff]',
@@ -160,15 +162,12 @@ export function ProjectsIndexPage() {
           </div>
         </div>
 
-        <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
-          <h2 className="font-display text-3xl font-black text-ink">Project case studies</h2>
-          <p className="font-tech text-xs font-bold text-muted">
-            {filteredProjects.length} / {projects.length} shown
-          </p>
+        <div className="mb-6">
+          <h2 className="font-display text-3xl font-semibold text-ink">Project case studies</h2>
         </div>
 
         {filteredProjects.length ? (
-          <div className="grid gap-5 md:grid-cols-[repeat(auto-fit,minmax(280px,1fr))]">
+          <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
             {filteredProjects.map((project) => (
               <ProjectCard key={project._id} project={project} />
             ))}

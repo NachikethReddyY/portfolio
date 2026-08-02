@@ -11,17 +11,20 @@ import { getReadingTime } from '../lib/readingTime';
 import { imageUrlFor } from '../lib/sanity/image';
 import { postBySlugQuery } from '../lib/sanity/queries';
 import type { BlogPost } from '../lib/types';
+import { NotFoundPage } from './NotFoundPage';
 
 export function BlogPostPage() {
   const { slug = '' } = useParams();
   const settings = usePageSettings();
-  const fallbackPost = fallbackPosts.find((post) => post.slug === slug) ?? fallbackPosts[0];
-  const { data: post } = useSanityQuery<BlogPost>(postBySlugQuery, fallbackPost, { slug });
+  const fallbackPost = fallbackPosts.find((post) => post.slug === slug) ?? null;
+  const { data: post } = useSanityQuery<BlogPost | null>(postBySlugQuery, fallbackPost, { slug });
+
+  if (!post) {
+    return <NotFoundPage />;
+  }
   const featuredImageUrl = imageUrlFor(post.featuredImage, 1600);
   const bodyContent = post.body;
   const readingTime = post.readingTime ?? getReadingTime(bodyContent);
-  const authorName = post.author?.name ?? settings.name;
-  const authorImageUrl = imageUrlFor(post.author?.image, 160);
 
   return (
     <>
@@ -41,13 +44,7 @@ export function BlogPostPage() {
             ) : null}
           </header>
 
-          <div className="article-meta-rail">
-            <div className="article-author">
-              <span className="article-avatar" aria-hidden="true">
-                <img src={authorImageUrl ?? '/assets/nachiketh-dark-profile-v3.png'} alt="" />
-              </span>
-              <span>{authorName}</span>
-            </div>
+          <div className="article-meta-rail justify-end">
             <div className="article-meta">
               <span>{readingTime}</span>
               <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>

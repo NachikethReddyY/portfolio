@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import { ProjectVisual } from '../components/ProjectVisual';
 import { RichTextRenderer } from '../components/RichTextRenderer';
 import { Seo } from '../components/Seo';
+import { ProjectCard } from '../components/cards/ProjectCard';
 import { Section } from '../components/ui/Section';
 import { SkillBadge } from '../components/ui/SkillBadge';
 import { usePageSettings } from '../hooks/usePageSettings';
@@ -15,23 +16,32 @@ import { imageUrlFor } from '../lib/sanity/image';
 import { projectBySlugQuery } from '../lib/sanity/queries';
 import { formatProjectType, formatStatus } from '../lib/status';
 import type { Project } from '../lib/types';
+import { NotFoundPage } from './NotFoundPage';
 
 export function ProjectDetailPage() {
   const { slug = '' } = useParams();
   const settings = usePageSettings();
-  const fallbackProject = fallbackProjects.find((project) => project.slug === slug) ?? fallbackProjects[0];
-  const { data: project } = useSanityQuery<Project>(projectBySlugQuery, fallbackProject, { slug });
+  const fallbackProject = fallbackProjects.find((project) => project.slug === slug) ?? null;
+  const { data: project } = useSanityQuery<Project | null>(projectBySlugQuery, fallbackProject, { slug });
 
   if (!project) {
-    return null;
+    return <NotFoundPage />;
   }
 
   const coverImageUrl = imageUrlFor(project.coverImage, 1600);
   const dateLabel = project.period ?? (project.createdAt ? formatDate(project.createdAt) : null);
   const readingTime = getReadingTime(project.body);
-  const routeLine = ['project', formatProjectType(project.projectType), formatStatus(project.status)]
-    .filter(Boolean)
-    .join(' / ');
+  const technologySlugs = new Set(project.technologies.map((technology) => technology.slug));
+  const relatedProjects = fallbackProjects
+    .filter((candidate) => candidate._id !== project._id)
+    .sort((left, right) => {
+      const score = (candidate: Project) =>
+        Number(candidate.projectType === project.projectType) * 3 +
+        candidate.technologies.filter((technology) => technologySlugs.has(technology.slug)).length;
+
+      return score(right) - score(left);
+    })
+    .slice(0, 3);
 
   return (
     <>
@@ -42,7 +52,11 @@ export function ProjectDetailPage() {
       <Section className="article-page pb-10 pt-12 sm:pt-18">
         <article className="mx-auto max-w-5xl">
           <header className="article-hero reveal">
-            <p className="article-route">{routeLine}</p>
+            <div className="project-detail-badges" aria-label="Project details">
+              <span>Case study</span>
+              <span>{formatProjectType(project.projectType)}</span>
+              <span>{formatStatus(project.status)}</span>
+            </div>
             <h1 className="article-title">{project.title}</h1>
             <p className="article-deck">{project.summary}</p>
             <div className="article-media">
@@ -54,16 +68,16 @@ export function ProjectDetailPage() {
             </div>
           </header>
 
-          <div className="article-meta-rail">
-            <div className="article-author">
-              <span className="article-avatar" aria-hidden="true">
-                <img src="/assets/nachiketh-dark-profile-v3.png" alt="" />
-              </span>
-              <span>{settings.name}</span>
-            </div>
+          <div className="article-meta-rail justify-end">
             <div className="article-meta">
-              {dateLabel ? <span>{dateLabel}</span> : null}
+              {dateLabel ? (
+                <>
+                  <span>{dateLabel}</span>
+                  <span aria-hidden="true">·</span>
+                </>
+              ) : null}
               <span>{readingTime}</span>
+              <span aria-hidden="true">·</span>
               <span>{formatStatus(project.status)}</span>
             </div>
           </div>
@@ -112,11 +126,11 @@ export function ProjectDetailPage() {
 
             <section className="project-story-pair">
               <article>
-                <h2>Problem</h2>
+                <h2>Why I built it</h2>
                 <p>{project.problem}</p>
               </article>
               <article>
-                <h2>Solution</h2>
+                <h2>How it works</h2>
                 <p>{project.solution}</p>
               </article>
             </section>
@@ -129,19 +143,32 @@ export function ProjectDetailPage() {
                 ))}
               </div>
             </section>
+            <div className="mt-10 grid gap-8">
+              <ProjectGallery project={project} />
+              <DetailList title="Current state" items={project.features} />
+              <DetailList title="What I built" items={project.whatIBuilt} />
+              <DetailList title="What was difficult" items={project.constraints} />
+              <DetailList title="What I learned" items={project.lessonsLearned} />
+              <DetailList title="What I would change next" items={project.futureImprovements} />
+              <RichTextRenderer value={project.body} />
+            </div>
           </div>
         </article>
       </Section>
 
-      <Section>
-        <div className="article-body mx-auto grid max-w-5xl gap-8">
-          <ProjectGallery project={project} />
-          <DetailList title="Features" items={project.features} />
-          <DetailList title="What I personally built" items={project.whatIBuilt} />
-          <DetailList title="Constraints and tradeoffs" items={project.constraints} />
-          <DetailList title="Lessons learned" items={project.lessonsLearned} />
-          <DetailList title="Future improvements" items={project.futureImprovements} />
-          <RichTextRenderer value={project.body} />
+      <Section className="!pt-4">
+        <div className="mx-auto max-w-5xl border-t border-primary/25 pt-10">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <h2 className="font-display text-3xl font-semibold text-ink">Related projects</h2>
+            <Link to="/projects" className="section-link pressable">
+              View all work
+            </Link>
+          </div>
+          <div className="mt-7 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {relatedProjects.map((relatedProject) => (
+              <ProjectCard key={relatedProject._id} project={relatedProject} />
+            ))}
+          </div>
         </div>
       </Section>
     </>

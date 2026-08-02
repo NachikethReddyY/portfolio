@@ -6,9 +6,9 @@ import type { SiteSettings } from '../../lib/types';
 
 const navItems = [
   { href: '/', label: 'Home' },
-  { href: '/projects', label: 'Projects' },
-  { href: '/blog', label: 'Blog' },
-  { href: '/about', label: 'About' },
+  { href: '/projects', label: 'Work' },
+  { href: '/blog', label: 'Writing' },
+  { href: '/#about', label: 'About', anchor: true },
   { href: '/contact', label: 'Contact' },
 ];
 
@@ -20,7 +20,10 @@ export function Navbar({ settings }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 px-3 py-3 sm:px-5">
+    <header
+      className="sticky top-0 z-40 px-3 py-3 sm:px-5"
+      onKeyDown={(event) => event.key === 'Escape' && setIsOpen(false)}
+    >
       <a
         href="#main-content"
         className="text-on-ink sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-terminal focus:px-4 focus:py-3 focus:text-sm focus:font-semibold"
@@ -43,7 +46,7 @@ export function Navbar({ settings }: NavbarProps) {
             <img src="/assets/nachiketh-dark-profile-v3.png" alt="" className="site-logo-img" />
           </span>
           <span className="min-w-0 leading-tight">
-            <span className="block truncate font-display text-base">
+            <span className="block truncate font-display text-base font-bold">
               {settings.name}
             </span>
             <span className="block max-w-[13rem] truncate text-xs text-muted sm:max-w-none">
@@ -53,29 +56,40 @@ export function Navbar({ settings }: NavbarProps) {
         </Link>
 
         <div className="hidden items-center gap-1 md:flex">
-          {navItems.map((item) => (
-            <NavLink
-              key={item.href}
-              to={item.href}
-              end={item.href === '/'}
-              className={({ isActive }) =>
-                [
-                  'pressable min-h-11 rounded-md border-2 px-4 py-2 text-sm font-bold',
-                  isActive
-                    ? 'border-[rgba(0,210,255,0.72)] bg-transparent text-[#00d2ff]'
-                    : 'border-transparent text-muted hover:border-[rgba(0,210,255,0.45)] hover:bg-terminal hover:text-ink',
-                ].join(' ')
-              }
-            >
-              {item.label}
-            </NavLink>
-          ))}
+          {navItems.map((item) =>
+            item.anchor ? (
+              <a
+                key={item.href}
+                href={item.href}
+                className="pressable inline-flex min-h-11 items-center rounded-md border-2 border-transparent px-4 py-2 text-sm font-bold text-muted hover:border-[rgba(0,210,255,0.45)] hover:bg-terminal hover:text-ink"
+              >
+                {item.label}
+              </a>
+            ) : (
+              <NavLink
+                key={item.href}
+                to={item.href}
+                end={item.href === '/'}
+                className={({ isActive }) =>
+                  [
+                    'pressable min-h-11 rounded-md border-2 px-4 py-2 text-sm font-bold',
+                    isActive
+                      ? 'border-[rgba(0,210,255,0.72)] bg-transparent text-[#00d2ff]'
+                      : 'border-transparent text-muted hover:border-[rgba(0,210,255,0.45)] hover:bg-terminal hover:text-ink',
+                  ].join(' ')
+                }
+              >
+                {item.label}
+              </NavLink>
+            ),
+          )}
         </div>
 
         <button
           type="button"
           aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
           aria-expanded={isOpen}
+          aria-controls="mobile-navigation"
           className="pressable grid size-11 place-items-center rounded-md border border-[rgba(0,210,255,0.5)] bg-terminal text-ink md:hidden"
           onClick={() => setIsOpen((current) => !current)}
         >
@@ -84,26 +98,40 @@ export function Navbar({ settings }: NavbarProps) {
       </nav>
 
       {isOpen ? (
-        <div className="cyber-shell mx-auto mt-2 max-w-7xl overflow-hidden rounded-none p-2 md:hidden">
-          <div className="grid gap-1">
-            {navItems.map((item) => (
-              <NavLink
-                key={item.href}
-                to={item.href}
-                end={item.href === '/'}
-                onClick={() => setIsOpen(false)}
-                className={({ isActive }) =>
-                  [
-                    'pressable min-h-12 rounded-md border-2 px-4 py-3 text-base font-bold',
-                    isActive
-                      ? 'border-[rgba(0,210,255,0.72)] bg-[#00d2ff] text-[#0b0b12]'
-                      : 'border-transparent text-muted hover:border-[rgba(0,210,255,0.45)] hover:bg-terminal hover:text-ink',
-                  ].join(' ')
-                }
-              >
-                {item.label}
-              </NavLink>
-            ))}
+        <div
+          id="mobile-navigation"
+          className="cyber-shell absolute left-1/2 top-[calc(100%-0.25rem)] w-[calc(100%-1.5rem)] max-w-7xl -translate-x-1/2 overflow-hidden p-2 shadow-[0_6px_0_rgba(36,58,86,0.75)] md:hidden"
+        >
+          <div className="grid grid-cols-2 gap-1">
+            {navItems.map((item) =>
+              item.anchor ? (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setIsOpen(false)}
+                  className="pressable flex min-h-11 items-center border border-transparent px-3 py-2 text-sm font-bold text-muted hover:border-[rgba(0,210,255,0.35)] hover:bg-terminal hover:text-ink"
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <NavLink
+                  key={item.href}
+                  to={item.href}
+                  end={item.href === '/'}
+                  onClick={() => setIsOpen(false)}
+                  className={({ isActive }) =>
+                    [
+                      'pressable flex min-h-11 items-center border px-3 py-2 text-sm font-bold',
+                      isActive
+                        ? 'border-[rgba(0,210,255,0.55)] bg-[rgba(0,210,255,0.1)] text-[#7ddcff]'
+                        : 'border-transparent text-muted hover:border-[rgba(0,210,255,0.35)] hover:bg-terminal hover:text-ink',
+                    ].join(' ')
+                  }
+                >
+                  {item.label}
+                </NavLink>
+              ),
+            )}
           </div>
         </div>
       ) : null}

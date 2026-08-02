@@ -24,17 +24,17 @@ export function ContactPage() {
     <>
       <Seo
         title={`Contact | ${settings.name}`}
-        description={`Contact ${settings.name} for internships, AI projects, full-stack collaborations, and hackathons.`}
+        description={`Contact ${settings.name} about internships, software projects, and hackathons.`}
       />
       <Section className="pb-16 pt-14 sm:pt-20">
         <div className="grid gap-10 lg:grid-cols-[1fr_0.9fr] lg:items-start">
           <div>
             <h1 className="font-display text-5xl font-black leading-[0.98] text-balance text-ink sm:text-6xl">
-              Have a role, project, or sharp piece of feedback?
+              Want to work together?
             </h1>
             <p className="mt-6 max-w-2xl text-xl font-semibold leading-8 text-primary-strong text-pretty">
-              I am open to internships, hackathons, AI tooling work, full-stack projects, and teams
-              that care about useful software more than buzzwords.
+              I am open to full-stack internships, software projects, hackathons, and feedback on
+              my work.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               {primaryContact ? (

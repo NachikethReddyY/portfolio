@@ -7,12 +7,17 @@ type SkillBadgeProps = {
 const skillIconClasses: Partial<Record<string, string>> = {
   typescript: 'devicon-typescript-plain',
   'react-nextjs': 'devicon-react-original',
+  nextjs: 'devicon-nextjs-plain',
   'node-express': 'devicon-nodejs-plain',
-  'python-local-ai': 'devicon-python-plain',
+  python: 'devicon-python-plain',
+  'local-agents': 'devicon-bash-plain',
   'postgresql-supabase': 'devicon-postgresql-plain',
+  supabase: 'devicon-supabase-plain',
+  mysql: 'devicon-mysql-original',
   'secure-coding-owasp': 'devicon-linux-plain',
   'expo-mobile': 'devicon-expo-original',
   'cli-systems-tools': 'devicon-bash-plain',
+  'agent-architecture': 'devicon-bash-plain',
 };
 
 const categoryIconClasses: Record<Skill['category'], string> = {

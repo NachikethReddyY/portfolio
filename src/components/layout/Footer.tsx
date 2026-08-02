@@ -24,20 +24,20 @@ export function Footer({ settings }: FooterProps) {
   return (
     <footer className="cyber-footer px-4 py-8 sm:px-6 lg:px-8">
       <div className="footer-console mx-auto max-w-7xl">
-        <div className="grid min-h-[24rem] lg:grid-cols-[9rem_1fr]">
+        <div className="grid min-h-[23rem] lg:grid-cols-[9rem_1fr]">
           <div className="grid place-items-start border-b border-[var(--footer-line)] p-6 lg:place-items-center lg:border-b-0 lg:border-r">
             <Link to="/" className="footer-mark" aria-label={`${settings.name} home`}>
               <img src="/assets/nachiketh-dark-profile-v3.png" alt="" className="site-logo-img" />
             </Link>
           </div>
 
-          <div className="grid gap-10 p-6 sm:p-8 lg:grid-cols-[0.75fr_0.75fr_0.9fr_1fr] lg:p-12">
+          <div className="grid gap-10 p-6 sm:grid-cols-2 sm:p-8 lg:grid-cols-[0.7fr_0.75fr_0.95fr_1.15fr] lg:p-12">
             <div>
-              <h2 className="footer-heading">About</h2>
+              <h2 className="footer-heading">Explore</h2>
               <div className="footer-link-list">
-                <Link to="/about">
+                <a href="/#about">
                   <Network aria-hidden="true" size={15} /> About
-                </Link>
+                </a>
                 <Link to="/contact">
                   <Mail aria-hidden="true" size={15} /> Contact
                 </Link>
@@ -53,7 +53,7 @@ export function Footer({ settings }: FooterProps) {
               <h2 className="footer-heading">Build</h2>
               <div className="footer-link-list">
                 <Link to="/projects">
-                  <Code2 aria-hidden="true" size={15} /> Projects
+                  <Code2 aria-hidden="true" size={15} /> Work
                 </Link>
                 <Link to="/blog">
                   <Network aria-hidden="true" size={15} /> Writing
@@ -69,15 +69,15 @@ export function Footer({ settings }: FooterProps) {
             <div>
               <h2 className="footer-heading">Focus</h2>
               <div className="footer-link-list">
-                <span>Full-stack apps</span>
-                <span>Local AI tools</span>
-                <span>Security practice</span>
-                <span>Clear project evidence</span>
+                <span>Web applications</span>
+                <span>AI tools</span>
+                <span>Cloud and security</span>
+                <span>Leadership and teaching</span>
               </div>
             </div>
 
             <div>
-              <h2 className="footer-heading">Build useful software.</h2>
+              <h2 className="footer-heading">Open to internships.</h2>
               <p className="mt-7 max-w-sm font-tech text-sm font-semibold leading-7 text-[var(--footer-muted)]">
                 {settings.availability}
               </p>
@@ -92,23 +92,17 @@ export function Footer({ settings }: FooterProps) {
                 </a>
               ) : null}
 
-              <h2 className="footer-heading mt-12">Social networks</h2>
+              <h2 className="footer-heading mt-12">Social</h2>
               <div className="mt-7 flex flex-wrap gap-5">
                 {socialIcons.map((item) => {
-                  if (item == null) return null;
                   const Icon = 'Icon' in item ? item.Icon : null;
-                  const isInternal = item.url.startsWith('/');
                   const icon = 'iconClass' in item && item.iconClass ? (
                     <i aria-hidden="true" className={item.iconClass} />
                   ) : Icon ? (
                     <Icon aria-hidden="true" size={20} />
                   ) : null;
 
-                  return isInternal ? (
-                    <Link key={item._id} to={item.url} className="footer-social" aria-label={item.label}>
-                      {icon}
-                    </Link>
-                  ) : (
+                  return (
                     <a
                       key={item._id}
                       href={item.url}
@@ -140,7 +134,7 @@ export function Footer({ settings }: FooterProps) {
             <Mail aria-hidden="true" size={14} /> Contact
           </Link>
           <Link to="/projects">
-            <Code2 aria-hidden="true" size={14} /> Projects
+            <Code2 aria-hidden="true" size={14} /> Work
           </Link>
         </div>
         <div className="flex items-center gap-5">

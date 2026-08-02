@@ -2,10 +2,10 @@ import type { ProjectStatus, ProjectType } from './types';
 
 export function formatStatus(status: ProjectStatus) {
   const labels: Record<ProjectStatus, string> = {
-    building: 'Building',
-    shipped: 'Shipped',
+    building: 'In development',
+    shipped: 'Completed',
     archived: 'Archived',
-    experiment: 'Experiment',
+    experiment: 'Prototype / experiment',
   };
 
   return labels[status];
@@ -17,7 +17,7 @@ export function formatProjectType(type?: ProjectType) {
   }
 
   const labels: Record<ProjectType, string> = {
-    'ai-tooling': 'AI Tooling',
+    'ai-tooling': 'AI tools',
     'full-stack': 'Full-stack',
     cybersecurity: 'Cybersecurity',
     'mobile-hardware': 'Mobile / Hardware',

@@ -46,7 +46,7 @@ export function ButtonLink({
     </span>
   );
 
-  if (external || href.startsWith('http') || href.startsWith('mailto:')) {
+  if (external || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('#')) {
     return (
       <a
         href={href}

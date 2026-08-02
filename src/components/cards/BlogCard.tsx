@@ -7,6 +7,7 @@ import type { BlogPost } from '../../lib/types';
 
 type BlogCardProps = {
   post: BlogPost;
+  compact?: boolean;
 };
 
 function limitSentences(value: string, maxSentences = 3) {
@@ -19,7 +20,7 @@ function limitSentences(value: string, maxSentences = 3) {
   return `${sentences.slice(0, maxSentences).join(' ')}...`;
 }
 
-export function BlogCard({ post }: BlogCardProps) {
+export function BlogCard({ post, compact = false }: BlogCardProps) {
   const featuredImageUrl = imageUrlFor(post.featuredImage, 720);
 
   return (
@@ -32,7 +33,11 @@ export function BlogCard({ post }: BlogCardProps) {
           <img
             src={featuredImageUrl}
             alt={post.featuredImage?.alt ?? post.title}
-            className="h-40 w-full object-cover"
+            className={
+              compact
+                ? 'h-40 w-full object-cover'
+                : 'aspect-[16/10] w-full object-cover object-center'
+            }
           />
         </div>
       ) : null}
@@ -49,7 +54,7 @@ export function BlogCard({ post }: BlogCardProps) {
           ))}
         </div>
 
-        <h3 className="mt-5 max-w-2xl font-display text-xl font-black leading-[1.35] text-balance text-ink sm:text-2xl">
+        <h3 className="mt-5 max-w-2xl font-display text-xl font-bold leading-[1.3] text-balance text-ink sm:text-2xl">
           <span className="group-hover:text-primary-strong">
             {post.title}
           </span>
@@ -61,7 +66,6 @@ export function BlogCard({ post }: BlogCardProps) {
         <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-[#00d2ff]/24 pt-4 font-tech text-xs font-semibold text-muted">
           <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
           <span>{post.readingTime ?? getReadingTime(post.body)}</span>
-          {post.author ? <span>{post.author.name}</span> : null}
         </div>
       </div>
     </Link>
