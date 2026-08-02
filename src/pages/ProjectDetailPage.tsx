@@ -12,7 +12,7 @@ import { useSanityQuery } from '../hooks/useSanityQuery';
 import { formatDate } from '../lib/dates';
 import { fallbackProjects } from '../lib/fallbackData';
 import { getReadingTime } from '../lib/readingTime';
-import { imageUrlFor } from '../lib/sanity/image';
+import { imageUrlFor, projectCoverUrlFor } from '../lib/sanity/image';
 import { projectBySlugQuery } from '../lib/sanity/queries';
 import { formatProjectType, formatStatus } from '../lib/status';
 import type { Project } from '../lib/types';
@@ -28,7 +28,7 @@ export function ProjectDetailPage() {
     return <NotFoundPage />;
   }
 
-  const coverImageUrl = imageUrlFor(project.coverImage, 1600);
+  const coverImageUrl = projectCoverUrlFor(project, 1600);
   const dateLabel = project.period ?? (project.createdAt ? formatDate(project.createdAt) : null);
   const readingTime = getReadingTime(project.body);
   const technologySlugs = new Set(project.technologies.map((technology) => technology.slug));

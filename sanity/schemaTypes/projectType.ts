@@ -72,6 +72,12 @@ export const projectType = defineType({
       description: 'Example: Jun 2026 or SUTD HacX 2025.',
     }),
     defineField({
+      name: 'sortDate',
+      title: 'Sort date',
+      type: 'date',
+      description: 'Date used to order projects, newest first.',
+    }),
+    defineField({
       name: 'impact',
       title: 'Proof / impact',
       type: 'text',

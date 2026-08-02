@@ -55,6 +55,7 @@ export const authorFields = `
 export const projectFields = `
   _id,
   "createdAt": _createdAt,
+  sortDate,
   title,
   "slug": slug.current,
   summary,
@@ -174,7 +175,7 @@ export const allProjectsQuery = `
     defined(status) &&
     defined(problem) &&
     defined(solution)
-  ] | order(featured desc, _createdAt desc) {
+  ] | order(coalesce(sortDate, _createdAt) desc) {
     ${projectFields}
   }
 `;

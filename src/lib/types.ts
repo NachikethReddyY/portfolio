@@ -97,6 +97,7 @@ export type ProjectType =
 export type Project = SeoFields & {
   _id: string;
   createdAt?: string;
+  sortDate?: string;
   title: string;
   slug: string;
   summary: string;

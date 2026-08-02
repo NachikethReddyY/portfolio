@@ -244,6 +244,7 @@ await client.createOrReplace({
   projectType: 'ai-tooling',
   role: 'Co-builder learning Go and shaping the agent workflow',
   period: 'Started Jul 2026',
+  sortDate: '2026-08-01',
   impact:
     'Targets the biggest pain point in consumer local AI coding setups: small context windows that cause constant compaction, forgotten plans, and inconsistent reasoning.',
   featured: true,

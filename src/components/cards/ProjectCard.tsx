@@ -2,7 +2,7 @@ import { ArrowRight, Code2, Globe2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 import { formatDate } from '../../lib/dates';
-import { imageUrlFor } from '../../lib/sanity/image';
+import { projectCoverUrlFor } from '../../lib/sanity/image';
 import { formatProjectType, formatStatus } from '../../lib/status';
 import type { Project, ProjectStatus } from '../../lib/types';
 import { ProjectVisual } from '../ProjectVisual';
@@ -30,7 +30,7 @@ function limitSentences(value: string, maxSentences = 2) {
 }
 
 export function ProjectCard({ project }: ProjectCardProps) {
-  const coverImageUrl = imageUrlFor(project.coverImage, 960);
+  const coverImageUrl = projectCoverUrlFor(project, 960);
   const dateLabel = project.period ?? (project.createdAt ? formatDate(project.createdAt) : null);
 
   return (

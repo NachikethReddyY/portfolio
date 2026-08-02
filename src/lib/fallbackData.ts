@@ -174,6 +174,7 @@ export const fallbackProjects: Project[] = [
     projectType: 'ai-tooling',
     role: 'Co-builder working on architecture, streaming, tools, and terminal interaction',
     period: 'Started Jul 2026',
+    sortDate: '2026-08-01',
     impact:
       'I am using LAH to learn how streaming, tool calls, terminal state, and memory fail in practice.',
     featured: true,
@@ -316,7 +317,8 @@ export const fallbackProjects: Project[] = [
     status: 'building',
     projectType: 'full-stack',
     role: 'Requirements, workflow documentation, design system, and full-stack planning',
-    period: '2026 · Ongoing school client project',
+    period: 'Jul 2026 – Present',
+    sortDate: '2026-08-02',
     impact:
       'I mapped the five staff roles, wrote the user stories, and used them to shape the tablet navigation.',
     featured: true,
@@ -380,6 +382,7 @@ export const fallbackProjects: Project[] = [
     projectType: 'full-stack',
     role: 'Full-stack builder on an AI learning product MVP',
     period: 'Jun 2026',
+    sortDate: '2026-06-01',
     impact:
       'Shipped a demoable product for the learning-to-earning challenge with auth, roadmap generation, progress tracking, and interactive coding lessons.',
     featured: false,
@@ -439,6 +442,7 @@ export const fallbackProjects: Project[] = [
     projectType: 'experiment',
     role: 'Frontend developer across interface, generation, validation, and download behaviour',
     period: 'Oct 2025 · Updated Feb 2026',
+    sortDate: '2026-02-01',
     impact:
       'Provides a direct generate-and-download workflow without accounts, stored data, or unnecessary navigation.',
     featured: false,
@@ -493,6 +497,7 @@ export const fallbackProjects: Project[] = [
     projectType: 'full-stack',
     role: 'Full-stack developer across frontend, backend, database, and workflow design',
     period: 'May 2026',
+    sortDate: '2026-05-01',
     impact:
       'I built the ticket flow from signup and approval through assignment, comments, status changes, and reporting.',
     featured: true,
@@ -547,10 +552,11 @@ export const fallbackProjects: Project[] = [
     slug: 'codeprobe-scanner',
     summary:
       'A CLI that scans dependencies and source code, reports security issues, and suggests patches.',
-    status: 'building',
+    status: 'archived',
     projectType: 'cybersecurity',
     role: 'Built the scanner and CLI',
     period: 'Jun 2026',
+    sortDate: '2026-06-01',
     impact:
       'Scans dependencies and source code, reports security issues, and suggests fixes in one CLI run.',
     featured: false,
@@ -607,6 +613,7 @@ export const fallbackProjects: Project[] = [
     projectType: 'ai-tooling',
     role: 'CLI and local AI workflow designer',
     period: 'Jun 2026',
+    sortDate: '2026-06-01',
     impact:
       'Keeps local model files and metadata in a folder that both people and agents can inspect.',
     featured: false,
@@ -658,6 +665,7 @@ export const fallbackProjects: Project[] = [
     projectType: 'ai-tooling',
     role: 'AI experimenter building local model training workflows',
     period: 'Jun 2026',
+    sortDate: '2026-06-01',
     impact:
       'Explores whether a small, local model can reason about production code and tool use with carefully curated training data.',
     featured: false,
@@ -709,6 +717,7 @@ export const fallbackProjects: Project[] = [
     projectType: 'mobile-hardware',
     role: 'Mobile app and hardware-integration builder for a hackathon prototype',
     period: 'SUTD HacX 2025',
+    sortDate: '2025-08-01',
     impact:
       'Packaged a working mobile iris-scan prototype connected to a Raspberry Pi capture rig for hackathon presentation.',
     featured: false,
@@ -761,6 +770,7 @@ export const fallbackProjects: Project[] = [
     projectType: 'cybersecurity',
     role: 'OWASP analyst for A01 Broken Access Control and A09 Logging & Monitoring',
     period: 'Jul 2026',
+    sortDate: '2026-07-01',
     impact:
       'Produced exploit notes, evidence, documentation, and remediation guidance for a Node/Express/MySQL/JWT web application.',
     featured: false,
@@ -807,6 +817,74 @@ export const fallbackProjects: Project[] = [
     ],
   },
   {
+    _id: 'project-kingdom-clash',
+    title: 'Kingdom Clash',
+    slug: 'kingdom-clash',
+    summary:
+      'A full-stack wellness game where real-life challenges earn points and PowerChips used to unlock heroes, fight bosses, and grow a virtual kingdom.',
+    status: 'shipped',
+    projectType: 'coursework',
+    role: 'Full-stack developer across the static frontend, Express API, authentication, and MySQL data model',
+    period: 'Jan–Feb 2026',
+    sortDate: '2026-02-01',
+    impact:
+      'Delivered a Singapore Polytechnic backend-development project with role-based access, wellness tracking, hero progression, raids, and leaderboard workflows.',
+    featured: false,
+    coverImage: {
+      asset: {
+        url: '/assets/kingdom-clash/kingdom-clash-cover.jpeg',
+      },
+      alt: 'Kingdom Clash landing page with the game logo and sign-up actions over a fantasy landscape.',
+      caption: 'Kingdom Clash landing page and entry points.',
+    },
+    gallery: [
+      {
+        asset: {
+          url: '/assets/kingdom-clash/kingdom-clash-cover.jpeg',
+        },
+        alt: 'Kingdom Clash landing page with the game logo and sign-up actions over a fantasy landscape.',
+        caption: 'Kingdom Clash landing page and entry points.',
+      },
+    ],
+    technologies: [
+      skill('JavaScript'),
+      skill('HTML / CSS'),
+      skill('Node.js / Express'),
+      skill('MySQL'),
+      skill('Secure Coding / OWASP'),
+    ],
+    problem:
+      'Wellness habits are difficult to sustain when progress feels abstract and rewards are disconnected from everyday actions.',
+    solution:
+      'Kingdom Clash turns wellness challenges into a game economy: completing activities earns points and PowerChips that fund hero recruitment, boss raids, duels, and kingdom growth.',
+    whatIBuilt: [
+      'A static HTML, CSS, and JavaScript interface for authentication, dashboards, challenges, the hero store, raids, settings, and admin workflows.',
+      'An Express REST API with JWT authentication, bcrypt password hashing, role-based access control, and account/session handling.',
+      'A MySQL schema and business rules for users, challenges, completions, heroes, boss battles, duels, battle logs, leaderboards, and rewards.',
+    ],
+    constraints: [
+      'The project had to satisfy backend-development coursework requirements while remaining demoable as a complete game experience.',
+      'Database updates for points, PowerChips, hero ownership, and combat state needed to preserve game rules across several related tables.',
+    ],
+    features: [
+      'JWT authentication and bcrypt password hashing',
+      'Participant, admin, and owner role-based access',
+      'Wellness challenge creation, joining, cooldowns, and completion rewards',
+      'Hero recruitment, healing, revival, deployment, boss raids, and duels',
+      'Points and PowerChips leaderboards',
+    ],
+    githubUrl: 'https://github.com/ST0503-BED/bed-ca2-NachikethReddyY',
+    lessonsLearned: [
+      'Authentication affects the entire product flow, from redirects and protected pages to role checks on API routes.',
+      'Game mechanics become easier to maintain when their limits and state changes are enforced in the backend, not only in the interface.',
+    ],
+    futureImprovements: [
+      'Wrap multi-table reward and duel updates in explicit database transactions.',
+      'Add automated API checks for authentication, permissions, and game-economy rules.',
+      'Replace client-side cooldown state with server-authoritative timestamps.',
+    ],
+  },
+  {
     _id: 'project-voxscribe',
     title: 'VoxScribe',
     slug: 'voxscribe',
@@ -816,6 +894,7 @@ export const fallbackProjects: Project[] = [
     projectType: 'ai-tooling',
     role: 'Local AI desktop-tool builder',
     period: 'Mar 2026',
+    sortDate: '2026-03-01',
     impact:
       'Keeps dictation and rewriting on the user’s computer instead of sending audio to a cloud service.',
     featured: false,

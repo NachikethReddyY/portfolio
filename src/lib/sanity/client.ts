@@ -3,7 +3,7 @@ import { createClient } from '@sanity/client';
 const projectId = import.meta.env.VITE_SANITY_PROJECT_ID || '508uqyvi';
 const dataset = import.meta.env.VITE_SANITY_DATASET || 'production';
 const apiVersion = import.meta.env.VITE_SANITY_API_VERSION || '2026-07-08';
-const sanityEnabled = import.meta.env.VITE_SANITY_ENABLED === 'true';
+const sanityEnabled = import.meta.env.VITE_SANITY_ENABLED !== 'false';
 
 export const hasSanityConfig = sanityEnabled && Boolean(projectId && projectId !== 'your-project-id');
 

@@ -1,6 +1,6 @@
 import { Search } from 'lucide-react';
 import type { ReactNode } from 'react';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { ProjectCard } from '../components/cards/ProjectCard';
 import { Seo } from '../components/Seo';
@@ -20,6 +20,8 @@ const statusOptions: Array<{ value: 'all' | ProjectStatus; label: string }> = [
   { value: 'archived', label: 'Archived' },
   { value: 'experiment', label: 'Experiment' },
 ];
+
+const projectsPerPage = 9;
 
 function getSearchText(project: Project) {
   return [
@@ -44,6 +46,7 @@ export function ProjectsIndexPage() {
   const [query, setQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<'all' | ProjectStatus>('all');
   const [typeFilter, setTypeFilter] = useState<'all' | ProjectType>('all');
+  const [page, setPage] = useState(1);
 
   const typeOptions = useMemo(() => {
     const types = new Set<ProjectType>();
@@ -60,14 +63,28 @@ export function ProjectsIndexPage() {
   const filteredProjects = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
 
-    return projects.filter((project) => {
-      const matchesStatus = statusFilter === 'all' || project.status === statusFilter;
-      const matchesType = typeFilter === 'all' || project.projectType === typeFilter;
-      const matchesQuery = !normalizedQuery || getSearchText(project).includes(normalizedQuery);
+    return [...projects]
+      .sort((left, right) =>
+        (right.sortDate ?? right.createdAt ?? '').localeCompare(
+          left.sortDate ?? left.createdAt ?? '',
+        ),
+      )
+      .filter((project) => {
+        const matchesStatus = statusFilter === 'all' || project.status === statusFilter;
+        const matchesType = typeFilter === 'all' || project.projectType === typeFilter;
+        const matchesQuery = !normalizedQuery || getSearchText(project).includes(normalizedQuery);
 
-      return matchesStatus && matchesType && matchesQuery;
-    });
+        return matchesStatus && matchesType && matchesQuery;
+      });
   }, [projects, query, statusFilter, typeFilter]);
+
+  useEffect(() => setPage(1), [query, statusFilter, typeFilter]);
+
+  const pageCount = Math.ceil(filteredProjects.length / projectsPerPage);
+  const visibleProjects = filteredProjects.slice(
+    (page - 1) * projectsPerPage,
+    page * projectsPerPage,
+  );
 
   return (
     <>
@@ -168,7 +185,7 @@ export function ProjectsIndexPage() {
 
         {filteredProjects.length ? (
           <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-            {filteredProjects.map((project) => (
+            {visibleProjects.map((project) => (
               <ProjectCard key={project._id} project={project} />
             ))}
           </div>
@@ -180,6 +197,30 @@ export function ProjectsIndexPage() {
             </p>
           </div>
         )}
+
+        {pageCount > 1 ? (
+          <nav aria-label="Project pages" className="mt-8 flex items-center justify-center gap-4">
+            <button
+              type="button"
+              disabled={page === 1}
+              onClick={() => setPage((current) => current - 1)}
+              className="pressable min-h-11 border border-[#00d2ff]/45 bg-terminal px-4 font-tech text-xs font-bold uppercase text-ink disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              Previous
+            </button>
+            <span className="font-tech text-xs font-bold uppercase text-muted">
+              Page {page} of {pageCount}
+            </span>
+            <button
+              type="button"
+              disabled={page === pageCount}
+              onClick={() => setPage((current) => current + 1)}
+              className="pressable min-h-11 border border-[#00d2ff]/45 bg-terminal px-4 font-tech text-xs font-bold uppercase text-ink disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              Next
+            </button>
+          </nav>
+        ) : null}
       </Section>
     </>
   );
