@@ -376,6 +376,35 @@ const projects = [
     lessonsLearned: ['Authentication affects the whole product flow, not only the login endpoint.', 'Game rules are easier to maintain when state changes are enforced in the backend.'],
     futureImprovements: ['Wrap multi-table rewards and duels in database transactions.', 'Add automated authentication, permissions, and game-economy checks.'],
   }),
+  project({
+    id: 'qr-code-generator',
+    title: 'QR Code Generator',
+    slug: 'qr-code-generator',
+    summary: 'A focused browser utility that turns a URL or text into a downloadable QR code from a single screen.',
+    status: 'shipped',
+    projectType: 'experiment',
+    role: 'Frontend developer across interface, generation, validation, and download behaviour',
+    period: 'Oct 2025 · Updated Feb 2026',
+    sortDate: '2026-02-01',
+    impact: 'Provides a direct generate-and-download workflow without accounts, stored data, or unnecessary navigation.',
+    technologies: ['skill-javascript', 'skill-html-css'],
+    problem: 'Generating a QR code should be a quick task, but many tools add sign-up flows, advertising, or unrelated controls around a simple interaction.',
+    solution: 'A lightweight client-side page accepts a URL or text, validates the input, renders the QR code in the browser, and enables a direct image download.',
+    whatIBuilt: [
+      'A responsive single-page interface with clear input, generation, preview, and download states.',
+      'Client-side QR rendering and PNG download behaviour using QRCode.js.',
+      'Inline empty-input feedback and disabled download behaviour before a code is generated.',
+    ],
+    constraints: [
+      'The project intentionally stays client-only and does not store generated content.',
+      'The small scope prioritises a reliable core workflow over accounts, history, or customisation.',
+    ],
+    features: ['Generate a QR code from a URL or text', 'Preview the result in the browser', 'Download the generated code as an image', 'Responsive single-screen layout'],
+    githubUrl: 'https://github.com/NachikethReddyY/QR-code',
+    demoUrl: 'https://ynr-qrcode.vercel.app/',
+    lessonsLearned: ['A small utility benefits from making its primary action obvious and keeping every state visible.', 'Client-side generation can keep a simple tool fast and avoid collecting user input on a server.'],
+    futureImprovements: ['Add colour, size, and error-correction controls only if real users need them.', 'Replace CDN dependencies with locally bundled assets for stronger deployment control.'],
+  }),
 ];
 
 const covers = [
@@ -403,6 +432,11 @@ const covers = [
     id: 'project-kingdom-clash',
     path: '/Users/nr/Sites/portfolio/public/assets/kingdom-clash/kingdom-clash-cover.jpeg',
     alt: 'Kingdom Clash landing page with the game logo and sign-up actions over a fantasy landscape.',
+  },
+  {
+    id: 'project-qr-code-generator',
+    path: '/Users/nr/Sites/portfolio/public/assets/qr-code/qr-code-cover.png',
+    alt: 'QR Code Generator interface with a text input, generate button, and preview area.',
   },
 ];
 
