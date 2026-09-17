@@ -1,0 +1,91 @@
+# Motion portfolio — 2026-09-17
+
+- [x] Inspect workspace and design guidance; confirm empty directory, no Git repository.
+- [x] Frame developer portfolio direction using supplied name and interests.
+- [x] Create three static visual directions and motion specifications.
+- [x] Incorporate the supplied public portfolio: real bio, project labels, artwork, and destinations.
+- [x] Inspect all three desktop compositions; verify click and arrow-key tab selection and content disclosure in Safari.
+- [x] Follow-up implementation verified at 390px and 320px in Helium responsive mode; no horizontal overflow.
+- [x] Publish concept comparison to public Postplan URL and verify returned content.
+- [x] User delegated the visual direction: “anything you like surprise me”.
+
+## Build selected direction — user delegated visual choice
+
+- [x] Select project-led direction B with typographic scale from A.
+- [x] Define acceptance checks and create app foundation.
+- [x] Build responsive portfolio with sourced projects, about, writing, and contact.
+- [x] Add one-time entrances, scroll reveals, project switching, and reduced-motion behavior.
+- [x] Record accepted design in DESIGN.md and DESIGN.html.
+- [x] Run build and focused checks; inspect main flows in browser.
+
+## Motion correction — visible scroll choreography
+
+Reference update: user supplied colourful dark developer-portfolio screenshots. Adopt compact capsule navigation, role-led typography, inline portrait/project imagery, and restrained purple/yellow/teal accents. Preserve personal content and existing destinations.
+
+Failed criterion: the previous version's entrances and hover effects did not make motion a defining part of the experience.
+
+- [x] Add focused progress/state regression checks before changing the motion.
+- [x] Build split-letter introduction, scroll-driven title movement, and a sticky three-project sequence.
+- [x] Preserve clickable/keyboard project selection, links, disclosure state, native scroll, and reduced-motion mode.
+- [x] Add scroll-driven portrait reveal and contact typography reveal.
+- [x] Verify motion at distinct scroll positions, reverse scrolling, mobile layout, and preference changes in browser.
+- [x] Update design references and record proof. Classified correction as project guidance; reusable motion acceptance proposal recorded without editing Fleet.
+
+## Reference benchmark and GSAP — 17 September 2026
+
+- [x] Inspect Pufferfishe and representative supplied references; assign bounded research and project-stage work to subagents as requested.
+- [x] Install GSAP and consult official React/ScrollTrigger guidance and official skill if available.
+- [x] Migrate hero, section, portrait, contact and project sequence motion to GSAP, preserving content and accessible interaction.
+- [x] Improve active-project storytelling and verify forward/reverse, direct tabs, mobile and reduced-motion behavior.
+- [x] Synchronize design docs and record verification; run focused tests and production build.
+- [x] Three.js abstract sculpture implemented, then superseded by the user’s laptop correction; unused dependency removed.
+
+## Hero correction — recognizable developer scene
+
+Failed criterion: abstract frames did not communicate developer work. Latest user reference explicitly replaces that visual with a MacBook-style laptop and code/AI panels emerging from it.
+
+- [x] Replace abstract sculpture with dimensional laptop, editor, and floating code/AI/terminal panels.
+- [x] Animate complete laptop entrance and emerging panels with GSAP; static assembled reduced-motion state.
+- [x] Adjust only hero visual sizing and inspect desktop/mobile clarity.
+- [x] Finish outstanding GSAP regression checks; update project guidance and final proof.
+
+## Laptop correction — one connected device
+
+Failed criterion: independently positioned screen and keyboard looked like separate pieces. Preserve the hero layout and floating cards; use one shared laptop silhouette/projection and animate the whole object.
+
+- [x] Replace separate CSS planes with one connected laptop drawing, including screen, hinge, keyboard and trackpad.
+- [x] Remove independent screen opening; preserve GSAP assembly and card emergence around the complete laptop.
+- [x] Verify connected geometry at desktop/mobile and update evidence.
+
+## Five-hour narrative portfolio build — 17 September 2026, 14:48–19:48 UTC
+
+Contract: complete story-led portfolio with real project/blog routes, sourced content, Sanity integration, true 3D and meaningful GSAP motion; preserve factual accuracy and accessibility; no admin, no invented credentials, no deployment without explicit destination authority.
+
+Failed criteria: opening did not explain availability or AI ambitions; decorative arrows lacked meaning; laptop looked flat; portfolio lacked narrative, internal case studies and writing.
+
+- [x] Verify public GitHub projects, T3 Code/Vorssaint contributions and Fleet workflow claims; record sources.
+- [x] Expand acceptance checks for route navigation, page transitions, content fallback, CMS validation and responsive motion.
+- [x] Build narrative homepage: role/availability/location → hello → education/experience → projects → AI workflows → stack → writing → footer.
+- [x] Implement project index/detail case studies and blog index/article routes, accessible navigation and custom GSAP page transitions.
+- [x] Add Sanity schemas, Studio, validated content adapter and local source fallback; distinguish local readiness from hosted provisioning.
+- [x] Build a real 3D laptop/keyboard model with local tooling and integrate optimized web rendering with accessible fallback.
+- [x] Write grounded original project narratives and articles with provenance; avoid unsupported contribution/training claims.
+- [ ] Iterate desktop/mobile visuals and purposeful motion, loading/error/empty states, keyboard and reduced motion.
+- [ ] Complete focused integration/build checks and independent review; synchronize design/docs and final handoff.
+
+Scope addition: custom liquid-glass navigation/menu and small link/control animations; verified Instagram/X/LinkedIn social links. Portfolio-stream URL is a nonblocking clarification; continue supplied references while waiting.
+- [x] Build custom responsive glass navigation with focus-safe menu and reduced-motion interactions.
+- [x] Verify social destinations; add Instagram, X if identified, and LinkedIn.
+- [x] Review requested portfolio stream if the source becomes available; otherwise state unavailable.
+
+Deployment authorised: user explicitly requested push to main in NachikethReddyY/portfolio, followed by verification of its Vercel deployment. Preserve existing routes/integrations during the migration.
+- [x] Inspect remote main and deployment settings; prepare a clean migration preserving original content routes.
+- [ ] Push verified build to main and confirm Vercel deployment status and live behavior.
+- [x] Incorporate public LinkedIn profile facts and generated portrait; exclude private account data.
+
+Release refinement:
+- [x] Correct project categorisation and verify query-level published content, image upload and revision handling.
+- [x] Pre-render all seeded public routes and validate headings, metadata, local assets and internal links.
+- [x] Bundle fonts locally and optimise the portrait/project-cover delivery.
+- [x] Preserve CMS editability for personal bio, social links, stack descriptions and contribution cards.
+- [ ] Verify production output in a browser, complete keyboard/reduced-motion checks, then migrate and push main.

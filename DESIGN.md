@@ -1,74 +1,43 @@
-# Design
+# Nachiketh Reddy — portfolio design
 
-## Metadata
+The current design is a personal developer portfolio, revised from the user's screenshots and explicit story order. `src/site.css` owns the visual system. `src/pages/Home.tsx` owns the narrative and its GSAP choreography.
 
-- Name: Nachiketh Reddy Portfolio
-- Register: brand
-- Scene: a Singapore Polytechnic student presents his work like a dark creator-learning site: sharp blue cyberpunk linework, cinematic portrait media, block display type, Courier-style body copy, repo proof, and dotted retro texture.
-- Color strategy: deep obsidian surfaces with electric-blue structure, blue-gray shadows, crisp off-white type, cool slate muted text, and restrained amber only for inline learning emphasis.
+## Story and visual rules
 
-## Foundations
+The opening must identify Nachiketh as a full-stack developer and aspiring AI engineer, based in Singapore and available for internships and projects. Follow with the person, education and community work, selected projects, AI workflows, contributions, tools, writing, and contact.
 
-### Color
+Keep the deep near-black canvas, cream text, purple role headline, and mint AI accent. Large type carries the hierarchy; real project artwork carries the evidence. Glass is reserved for navigation and the floating workspace panels. Thin separators connect the long page. Avoid invented stats, unrelated decorative arrows, and fake product screenshots.
 
-Global tokens use the About page as the site-wide standard: obsidian black, dark navy panels, electric-blue lines, blue-gray shadows, off-white text, and cool slate muted text. Warm amber is reserved for inline emphasis and a few small content signals, not component framing.
+| Token      | Value     | Use                                  |
+| ---------- | --------- | ------------------------------------ |
+| Background | `#080a0b` | Page canvas                          |
+| Surface    | `#121519` | Supporting surfaces                  |
+| Text       | `#f4f1e7` | Primary text and button surface      |
+| Muted      | `#a0a6b0` | Secondary text                       |
+| Line       | `#292d33` | Boundaries                           |
+| Mint       | `#57d9be` | AI focus and interaction             |
+| Lavender   | `#b59af7` | Developer role and selected emphasis |
+| Warm       | `#f0c779` | Restrained punctuation               |
 
-```css
-:root {
-  --color-bg: oklch(0.145 0.022 286);
-  --color-surface: oklch(0.185 0.026 286);
-  --color-surface-strong: oklch(0.245 0.034 286);
-  --color-terminal: oklch(0.075 0.018 286);
-  --color-terminal-soft: oklch(0.12 0.022 286);
-  --color-ink: oklch(0.89 0.026 292);
-  --color-muted: oklch(0.72 0.03 292);
-  --color-soft: oklch(0.58 0.035 292);
-  --color-primary: oklch(0.76 0.145 78);
-  --color-primary-strong: oklch(0.84 0.16 78);
-  --color-accent: oklch(0.82 0.075 305);
-  --color-violet: oklch(0.68 0.14 306);
-  --color-border: oklch(0.78 0.035 292);
-  --color-danger: oklch(0.67 0.2 28);
-  --color-warning: oklch(0.78 0.16 78);
-  --color-success: oklch(0.68 0.14 170);
-}
-```
+Locally bundled DM Sans is the primary typeface; Space Grotesk supports display details. The layout collapses from two-column compositions to a readable mobile sequence. All primary content must fit at 320px without horizontal page scrolling.
 
-### Typography
+## Motion contract
 
-- Display: Russo One
-- Body: Courier Prime
-- Technical labels: JetBrains Mono, used for metadata, code-like fragments, and terminal readouts
-- Body reading size starts at 17px.
-- Headings use balanced wrapping and zero letter spacing.
+- The hero title enters through a mask. The original 3D laptop opens around its actual hinge; its screen and keyboard remain one connected model.
+- The laptop responds subtly to pointer and scroll position. Rendering occurs on demand and stops when the scene is outside the viewport or the tab is hidden.
+- The illustrated portrait shifts with scroll. The AI workflow cards assemble in a reversible scroll-driven sequence. Section content and tool icons reveal as they enter the viewport.
+- Route changes use five dark shutter panels: cover, change content, reveal. Browser Back restores reading position; page headings receive focus after navigation.
+- Navigation, cards, buttons, and social links have short settling interactions. No intercepted wheel scrolling or perpetual decorative render loop.
+- Reduced motion presents all content assembled and readable. GSAP contexts, ScrollTriggers, observers, and Three.js resources are cleaned up on unmount.
 
-### Layout
+## Content and assets
 
-- Mobile-first single column, expanding into asymmetric two-column feature sections on desktop.
-- Section spacing uses fluid clamp values, with tighter groupings inside content modules.
-- Cards are geometric light-bordered dark panels with small hard neon shadows only when they represent destination content.
-- Background texture uses faint code snippets and schematic linework, not decorative grids or blurred orbs.
-- Primary content max width: 1180px. Prose max width: 72ch.
+Project status and contribution status are stated in words. T3 Code's linked proposal is closed, not merged. Fleet describes agent guidance and coordination; the Qwen experiment separately describes model fine-tuning. Private LAH and VSMS implementation details stay private.
 
-### Motion
+The laptop is original Blender geometry generated by `scripts/build-laptop.py`; the exported GLB is rendered with Three.js. The portrait is an AI-generated ink/graphite illustration derived from the user's supplied public LinkedIn portrait. Project images come from the existing portfolio and public project sources. README-based code previews are identified as illustrations, not screenshots of completed interfaces.
 
-- Motion should make the site feel responsive and premium, not theatrical.
-- Use subtle page-load reveals, hover lift for destination cards, and press feedback on buttons.
-- Respect `prefers-reduced-motion` with instant or opacity-only transitions.
+The reference list was sampled, including Pufferfishe, Eric Augusto, Craftz.dog, Bruno Simon, and the supplied Anthony Sistilli reviews. Patterns informed hierarchy, project storytelling, personality, and motion; no other developer's claims or case studies were reused. Superiority to another portfolio is not an objectively verified claim.
 
-## Components
+## Correction record
 
-- Navbar: sticky transparent creator-site bar with outlined active states, small circular mark, and warm gold underline shadow.
-- CTA Button: gold primary button, thick outlined secondary button, nested icon target.
-- Project Card: strong luminous title, role, proof/impact line, status, neon tech badges, terminal readout and graph wireframe preview, links.
-- About Hero: two-column NetworkChuck-inspired structure with an 80px desktop `ABOUT ME` heading, top-right arrow mark, 60ch text column, dark rectangular GitHub/LinkedIn/Projects buttons, Devicon GitHub mark, and a blue-framed portrait with blue-gray shadow.
-- About Skills: bordered blue cyber panel with rectangular tags using Devicon icons for TypeScript, React, Node, Python, PostgreSQL, Linux/security, Expo, and Bash/CLI.
-- Footer: framed blue cyber directory inspired by the NetworkChuck footer layout, with an NR identity rail, About/Build/Focus/Connect columns, a dotted `NACHIKETH REDDY` wordmark strip at reduced opacity, and a lower legal bar without “Current Portfolio.”
-- Blog Card: publication-style article preview with date, reading time, tags, and image support.
-- Skill Badge: compact light-bordered dark chip with saturated category swatch and proficiency metadata.
-- Rich Text Renderer: accessible Sanity Portable Text with headings, callouts, links, code, and images.
-- SEO Component: route-level title, description, canonical URL, and social tags.
-
-## Content System
-
-Sanity owns site settings, education/current focus/GitHub stats, homepage content, projects, posts, authors, categories/tags, skills/technologies, and social links. Project documents include role, period, impact, what Nachiketh personally built, constraints/tradeoffs, lessons, and future improvements. The React app includes fallback seed content only so the project is inspectable before a Sanity project is connected.
+Project guidance: a motion portfolio needs visible scroll choreography; a developer hero visual must communicate development; a laptop must have coherent connected geometry; the opening must explain role, location, availability, and AI ambitions. These corrections apply to this project. No cross-project guidance was changed.
