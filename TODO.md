@@ -70,8 +70,8 @@ Failed criteria: opening did not explain availability or AI ambitions; decorativ
 - [x] Add Sanity schemas, Studio, validated content adapter and local source fallback; distinguish local readiness from hosted provisioning.
 - [x] Build a real 3D laptop/keyboard model with local tooling and integrate optimized web rendering with accessible fallback.
 - [x] Write grounded original project narratives and articles with provenance; avoid unsupported contribution/training claims.
-- [ ] Iterate desktop/mobile visuals and purposeful motion, loading/error/empty states, keyboard and reduced motion.
-- [ ] Complete focused integration/build checks and independent review; synchronize design/docs and final handoff.
+- [x] Iterate desktop/mobile visuals and purposeful motion, loading/error/empty states, keyboard and reduced motion.
+- [x] Complete focused integration/build checks and independent review; synchronize design/docs and final handoff. 27 tests, 32 prerendered routes, browser acceptance checks and bounded independent reviews complete; hosted Sanity writes require editor login.
 
 Scope addition: custom liquid-glass navigation/menu and small link/control animations; verified Instagram/X/LinkedIn social links. Portfolio-stream URL is a nonblocking clarification; continue supplied references while waiting.
 - [x] Build custom responsive glass navigation with focus-safe menu and reduced-motion interactions.
@@ -156,4 +156,4 @@ Release refinement:
 
 - [x] Keep a rejected decorative 3D or math chunk from blanking the page; retain the static laptop or equation text.
 - [x] Add a visible reload/home recovery for unexpected application loading failures, and preserve readable article text when legacy formatting cannot load.
-- [ ] Verify failure and recovery in a local browser fixture, then build and deploy.
+- [x] Verify failure and recovery in a local browser fixture, then build and deploy. Vercel success for dde708d.

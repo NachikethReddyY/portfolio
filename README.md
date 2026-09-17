@@ -10,6 +10,17 @@ Sanity content.
 The repository uses `pnpm` (12.4.2 in `package.json`) and Node.js 22.18 or
 newer.
 
+
+## Start editing
+
+The live portfolio is [nachikethreddyy.vercel.app](https://nachikethreddyy.vercel.app). It includes 23 project case studies and six articles. The [content editor](https://nachikethreddyy.vercel.app/studio) uses your Sanity account.
+
+1. Sign in to Studio and open **Content setup**.
+2. Confirm the project/dataset and create the missing starter drafts.
+3. Review them under **Content → Current content**, then publish individually.
+
+Hosted starter import has not been performed. Public reads are connected to the existing dataset; no write token is included in the site. See [Sanity content and Studio login](#sanity-content-and-studio-login) for hiding starter content, legacy editing, image framing and build refreshes.
+
 ## Run and verify
 
 ```sh
