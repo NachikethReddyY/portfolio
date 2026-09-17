@@ -135,3 +135,9 @@ Release refinement:
 - [x] Preserve selected project category and writing query in the URL so detail → Back restores the same list; retain existing filters, direct routes, and shutter transitions.
 - [x] Keep query-only edits from scrolling or stealing input focus; verify typing, clearing, direct query URLs, and Back in the browser.
 - [x] Route skip, hero, case-study contents, and Back to top links through the same hash/focus handling; preserve current query state and verify keyboard focus at the destination.
+
+## Rich article delivery
+
+- [x] Load Mermaid and math formatting only when an article actually needs them; preserve rich content, strict diagram security, and source-code fallback.
+- [x] Verify legacy text-only article no longer requests Mermaid, and a local diagram fixture still renders with its fallback available.
+- [x] Convert the two preserved LAH paragraphs containing raw Markdown links into proper Portable Text links/code marks without rewriting the article.

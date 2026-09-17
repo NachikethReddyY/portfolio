@@ -75,12 +75,7 @@
       "image": "/images/lah-cover.webp",
       "imageAlt": "LAH product brief showing an agent control room with chat above and prompt below.",
       "accent": "mint",
-      "stack": [
-        "TypeScript",
-        "Python",
-        "Local agents",
-        "CLI / Systems Tools"
-      ],
+      "stack": ["TypeScript", "Python", "Local agents", "CLI / Systems Tools"],
       "role": "Co-builder working on architecture, streaming, tools, and terminal interaction",
       "featured": true,
       "links": [],
@@ -1178,13 +1173,7 @@
       "image": "/images/lumina-cover.webp",
       "imageAlt": "Lumina landing page showing its AI-assisted support-ticket routing workflow.",
       "accent": "lavender",
-      "stack": [
-        "TypeScript",
-        "React",
-        "Vite",
-        "Express",
-        "PostgreSQL"
-      ],
+      "stack": ["TypeScript", "React", "Vite", "Express", "PostgreSQL"],
       "role": "Full-stack developer across frontend, backend, database, and workflow design",
       "featured": true,
       "links": [
@@ -1507,10 +1496,7 @@
       "image": "",
       "imageAlt": "Model Shelf project preview",
       "accent": "mint",
-      "stack": [
-        "Python / Local AI",
-        "CLI / Systems Tools"
-      ],
+      "stack": ["Python / Local AI", "CLI / Systems Tools"],
       "role": "CLI and local AI workflow designer",
       "featured": false,
       "links": [
@@ -1807,10 +1793,7 @@
       "image": "",
       "imageAlt": "Qwen3.5 Distill project preview",
       "accent": "blue",
-      "stack": [
-        "Python / Local AI",
-        "TypeScript"
-      ],
+      "stack": ["Python / Local AI", "TypeScript"],
       "role": "AI experimenter building local model training workflows",
       "featured": false,
       "links": [
@@ -2393,10 +2376,7 @@
       "image": "",
       "imageAlt": "CoreML Workshop project preview",
       "accent": "lavender",
-      "stack": [
-        "Swift / SwiftUI",
-        "Core ML / Vision"
-      ],
+      "stack": ["Swift / SwiftUI", "Core ML / Vision"],
       "role": "Created the workshop and built the SwiftUI image-classification app",
       "featured": false,
       "links": [
@@ -2677,10 +2657,7 @@
       "image": "",
       "imageAlt": "VoxScribe project preview",
       "accent": "mint",
-      "stack": [
-        "Python / Local AI",
-        "CLI / Systems Tools"
-      ],
+      "stack": ["Python / Local AI", "CLI / Systems Tools"],
       "role": "Local AI desktop-tool builder",
       "featured": false,
       "links": [
@@ -2977,10 +2954,7 @@
       "image": "",
       "imageAlt": "Keel project preview",
       "accent": "blue",
-      "stack": [
-        "Go / Agent Systems",
-        "CLI / Systems Tools"
-      ],
+      "stack": ["Go / Agent Systems", "CLI / Systems Tools"],
       "role": "Built the Go CLI, Markdown parser, safe storage layer, terminal interface, timers, recurrence, and agent workflow",
       "featured": false,
       "links": [
@@ -3261,11 +3235,7 @@
       "image": "",
       "imageAlt": "Clipper",
       "accent": "mint",
-      "stack": [
-        "TypeScript",
-        "React / Next.js",
-        "MongoDB"
-      ],
+      "stack": ["TypeScript", "React / Next.js", "MongoDB"],
       "role": "Built the browser extension, web library, API integration, and self-hosted Docker workflow",
       "featured": false,
       "links": [
@@ -3984,11 +3954,7 @@
       "image": "https://cdn.sanity.io/images/508uqyvi/production/f622a61da5cb86eee6f1e374f127d028dd05e2cc-1280x720.png",
       "imageAlt": "Cryptix game-store interface used for the secure coding analysis.",
       "accent": "mint",
-      "stack": [
-        "Node.js / Express",
-        "Secure Coding / OWASP",
-        "MySQL"
-      ],
+      "stack": ["Node.js / Express", "Secure Coding / OWASP", "MySQL"],
       "role": "OWASP analyst for A01 Broken Access Control and A09 Logging & Monitoring",
       "featured": false,
       "links": [
@@ -4341,10 +4307,7 @@
       "image": "",
       "imageAlt": "Imposter Game",
       "accent": "mint",
-      "stack": [
-        "HTML / CSS",
-        "JavaScript"
-      ],
+      "stack": ["HTML / CSS", "JavaScript"],
       "role": "Designed and built the complete browser game in one HTML file",
       "featured": false,
       "links": [
@@ -4691,11 +4654,7 @@
       "image": "",
       "imageAlt": "Iris Auth Lite",
       "accent": "lavender",
-      "stack": [
-        "TypeScript",
-        "Expo / Mobile",
-        "Python / Local AI"
-      ],
+      "stack": ["TypeScript", "Expo / Mobile", "Python / Local AI"],
       "role": "Mobile app and hardware-integration builder for a hackathon prototype",
       "featured": false,
       "links": [
@@ -5423,10 +5382,7 @@
       "image": "https://cdn.sanity.io/images/508uqyvi/production/e4c8e0de408d3112ca6086693ed3ccf1e1363b8b-3362x2100.jpg",
       "imageAlt": "LaunchCode landing page with a gradient hero, navigation, calls to action, and a code-editor visual.",
       "accent": "mint",
-      "stack": [
-        "HTML / CSS",
-        "JavaScript"
-      ],
+      "stack": ["HTML / CSS", "JavaScript"],
       "role": "Frontend developer responsible for the responsive interface and interactive site flows",
       "featured": false,
       "links": [
@@ -5783,9 +5739,7 @@
       "image": "",
       "imageAlt": "Midnight Code",
       "accent": "mint",
-      "stack": [
-        "VS Code Extensions"
-      ],
+      "stack": ["VS Code Extensions"],
       "role": "Designed and packaged the color system as a VS Code theme",
       "featured": false,
       "links": [
@@ -6118,11 +6072,7 @@
       "image": "",
       "imageAlt": "PromptForge",
       "accent": "lavender",
-      "stack": [
-        "TypeScript",
-        "React / Next.js",
-        "Node.js / Express"
-      ],
+      "stack": ["TypeScript", "React / Next.js", "Node.js / Express"],
       "role": "Built the React interface, Express generation API, prompt templates, validation, and provider configuration",
       "featured": false,
       "links": [
@@ -6469,10 +6419,7 @@
       "image": "https://cdn.sanity.io/images/508uqyvi/production/0bf65e55df258f4d66bc862a903f0f8bf80ed7e9-1440x900.png",
       "imageAlt": "QR Code Generator interface with a text input, generate button, and preview area.",
       "accent": "mint",
-      "stack": [
-        "JavaScript",
-        "HTML / CSS"
-      ],
+      "stack": ["JavaScript", "HTML / CSS"],
       "role": "Frontend developer across interface, generation, validation, and download behaviour",
       "featured": false,
       "links": [
@@ -7181,10 +7128,7 @@
       "image": "",
       "imageAlt": "Tab",
       "accent": "mint",
-      "stack": [
-        "Swift / SwiftUI",
-        "CLI / Systems Tools"
-      ],
+      "stack": ["Swift / SwiftUI", "CLI / Systems Tools"],
       "role": "Built the SwiftUI app, window manager, hotkey controller, fuzzy search, settings, and switcher interface",
       "featured": false,
       "links": [
@@ -7531,10 +7475,7 @@
       "image": "https://cdn.sanity.io/images/508uqyvi/production/ea304908997df7a54292869f6dc75090fbc758ba-3362x2090.png",
       "imageAlt": "Zero Waste Lifestyle landing page with sustainability copy, calls to action, and green-city illustrations.",
       "accent": "lavender",
-      "stack": [
-        "HTML / CSS",
-        "JavaScript"
-      ],
+      "stack": ["HTML / CSS", "JavaScript"],
       "role": "Frontend developer responsible for the responsive content, interactions, and visual storytelling",
       "featured": false,
       "links": [
@@ -8840,9 +8781,7 @@
             {
               "_key": "595b734e7782",
               "_type": "span",
-              "marks": [
-                "878843ac5d20"
-              ],
+              "marks": ["878843ac5d20"],
               "text": "realistically"
             },
             {
@@ -9070,13 +9009,43 @@
           "_type": "block",
           "children": [
             {
-              "_key": "17d9700d88c7",
+              "_key": "c28c05e3fa67-text-0",
               "_type": "span",
               "marks": [],
-              "text": "The image above is from something I wanted to build: an HTML product brief created with GPT-5.5 on low reasoning using a `design-ui` skill I made. If the screenshot is not clear, there is a better look here: [LAH concept preview](https://www.linkedin.com/safety/go/?url=https%3A%2F%2Flnkd%2Ein%2FgzGtpEs5&urlhash=1Ljj&mt=T9XXxGIkV2s0jdDaS3r6wsCl_ckLyqwjIbZG2upl-3zPwCHqyCpSMEx18yeYDXiRxrQhwjaia47pS_9plWFtYOa0Pp_WBLMuK5Zn1QkD_YiVPMcjagOrH9VnYqE&isSdui=true)."
+              "text": "The image above is from something I wanted to build: an HTML product brief created with GPT-5.5 on low reasoning using a "
+            },
+            {
+              "_key": "c28c05e3fa67-part-0",
+              "_type": "span",
+              "marks": ["code"],
+              "text": "design-ui"
+            },
+            {
+              "_key": "c28c05e3fa67-text-1",
+              "_type": "span",
+              "marks": [],
+              "text": " skill I made. If the screenshot is not clear, there is a better look here: "
+            },
+            {
+              "_key": "c28c05e3fa67-part-1",
+              "_type": "span",
+              "marks": ["c28c05e3fa67-link-1"],
+              "text": "LAH concept preview"
+            },
+            {
+              "_key": "c28c05e3fa67-tail",
+              "_type": "span",
+              "marks": [],
+              "text": "."
             }
           ],
-          "markDefs": [],
+          "markDefs": [
+            {
+              "_key": "c28c05e3fa67-link-1",
+              "_type": "link",
+              "href": "https://lnkd.in/gzGtpEs5"
+            }
+          ],
           "style": "normal"
         },
         {
@@ -9112,13 +9081,48 @@
           "_type": "block",
           "children": [
             {
-              "_key": "4a493f224cbc",
+              "_key": "534b84dbfbed-text-0",
               "_type": "span",
               "marks": [],
-              "text": "So my friends [Cheng Jun Tee](https://www.linkedin.com/in/cj-tee/), [Chong Hao Ooi](https://www.linkedin.com/in/chong-hao-ooi/), and I decided to build something."
+              "text": "So my friends "
+            },
+            {
+              "_key": "534b84dbfbed-part-0",
+              "_type": "span",
+              "marks": ["534b84dbfbed-link-0"],
+              "text": "Cheng Jun Tee"
+            },
+            {
+              "_key": "534b84dbfbed-text-1",
+              "_type": "span",
+              "marks": [],
+              "text": ", "
+            },
+            {
+              "_key": "534b84dbfbed-part-1",
+              "_type": "span",
+              "marks": ["534b84dbfbed-link-1"],
+              "text": "Chong Hao Ooi"
+            },
+            {
+              "_key": "534b84dbfbed-tail",
+              "_type": "span",
+              "marks": [],
+              "text": ", and I decided to build something."
             }
           ],
-          "markDefs": [],
+          "markDefs": [
+            {
+              "_key": "534b84dbfbed-link-0",
+              "_type": "link",
+              "href": "https://www.linkedin.com/in/cj-tee/"
+            },
+            {
+              "_key": "534b84dbfbed-link-1",
+              "_type": "link",
+              "href": "https://www.linkedin.com/in/chong-hao-ooi/"
+            }
+          ],
           "style": "normal"
         },
         {

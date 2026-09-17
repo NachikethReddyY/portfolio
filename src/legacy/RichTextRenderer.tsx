@@ -4,10 +4,14 @@ import {
   type PortableTextReactComponents,
 } from "@portabletext/react";
 import type { PortableTextBlock } from "@portabletext/types";
-import katex from "katex";
-import mermaid from "mermaid";
-import { useEffect, useId, useState, type ReactNode } from "react";
-import "katex/dist/katex.min.css";
+import {
+  lazy,
+  Suspense,
+  useEffect,
+  useId,
+  useState,
+  type ReactNode,
+} from "react";
 
 import { imageSource } from "../content/merge";
 const imageUrlFor = (value: unknown, width = 1400) =>
@@ -167,41 +171,34 @@ function HighlightMark({
   );
 }
 
-mermaid.initialize({
-  startOnLoad: false,
-  securityLevel: "strict",
-  theme: "dark",
-  fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif",
-});
+let diagramEngine: Promise<(typeof import("mermaid"))["default"]> | undefined;
+function loadDiagramEngine() {
+  diagramEngine ??= import("mermaid")
+    .then(({ default: mermaid }) => {
+      mermaid.initialize({
+        startOnLoad: false,
+        securityLevel: "strict",
+        suppressErrorRendering: true,
+        theme: "dark",
+        fontFamily: "DM Sans, ui-sans-serif, system-ui, sans-serif",
+      });
+      return mermaid;
+    })
+    .catch((error: unknown) => {
+      diagramEngine = undefined;
+      throw error;
+    });
+  return diagramEngine;
+}
 
-function MathExpression({
-  equation,
-  displayMode = false,
-}: {
-  equation?: string;
-  displayMode?: boolean;
-}) {
-  if (!equation) {
-    return null;
-  }
-
-  try {
-    return (
-      <span
-        className={
-          displayMode ? "block overflow-x-auto py-2" : "align-baseline"
-        }
-        dangerouslySetInnerHTML={{
-          __html: katex.renderToString(equation, {
-            displayMode,
-            throwOnError: false,
-          }),
-        }}
-      />
-    );
-  } catch {
-    return <code className="font-tech text-primary-strong">{equation}</code>;
-  }
+const RenderMath = lazy(() => import("./MathExpression"));
+function MathExpression(props: { equation?: string; displayMode?: boolean }) {
+  if (!props.equation) return null;
+  return (
+    <Suspense fallback={<code>{props.equation}</code>}>
+      <RenderMath {...props} />
+    </Suspense>
+  );
 }
 
 function MermaidDiagram({ code }: { code?: string }) {
@@ -217,10 +214,11 @@ function MermaidDiagram({ code }: { code?: string }) {
     let active = true;
     const id = `mermaid-${reactId.replace(/[^a-zA-Z0-9_-]/g, "")}`;
 
-    mermaid
-      .render(id, code)
-      .then(({ svg: renderedSvg }) => {
-        if (active) {
+    loadDiagramEngine()
+      .then((mermaid) => (active ? mermaid.render(id, code) : undefined))
+      .then((result) => {
+        if (active && result) {
+          const renderedSvg = result.svg;
           setSvg(renderedSvg);
           setError(undefined);
         }
@@ -259,7 +257,9 @@ function MermaidDiagram({ code }: { code?: string }) {
       dangerouslySetInnerHTML={{ __html: svg }}
     />
   ) : (
-    <div className="p-4 font-tech text-sm text-muted">Rendering diagram...</div>
+    <pre className="overflow-x-auto p-4 font-tech text-sm leading-6 text-ink">
+      <code>{code}</code>
+    </pre>
   );
 }
 

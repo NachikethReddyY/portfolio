@@ -44,3 +44,8 @@
 - Search writing for Fleet, open the article, then browser Back: the input remains Fleet and the result remains filtered.
 - Typing and clearing the writing query updates the address without page shutter, focus loss, or scroll jump; replacing the current search does not create one history entry per key.
 - Direct URLs with `category=Native+apps` or `q=Fleet` render those views. An unknown category remains a usable All work view.
+
+## Rich article delivery
+
+- Existing LAH article remains readable before JavaScript and does not request a Mermaid bundle when no diagram exists.
+- A valid legacy Mermaid block loads its renderer and displays the diagram; an invalid block falls back to readable source. Keep Mermaid securityLevel strict.

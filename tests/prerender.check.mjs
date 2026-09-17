@@ -88,3 +88,33 @@ if (routes.includes("/writing/lah01")) {
 console.log(
   `Verified ${routes.length} prerendered routes: headings, metadata, local images, internal links, and readable legacy article.`,
 );
+
+// Rich content remains readable in the pre-render even when its optional engines are lazy.
+const { render } = await import("../.evidence/build-ssr/entry-server.js");
+const fixture = JSON.parse(readFileSync("src/content/seed.json", "utf8"));
+const fixtureArticle = fixture.articles[0];
+fixtureArticle.body = [];
+fixtureArticle.legacyBody = [
+  { _key: "math-proof", _type: "mathBlock", equation: "E = mc^2" },
+  {
+    _key: "diagram-proof",
+    _type: "mermaidDiagram",
+    code: "flowchart LR\nA[Research] --> B[Build]",
+  },
+];
+const richHtml = await render(`/writing/${fixtureArticle.slug}`, fixture);
+assert.ok(
+  richHtml.includes('class="katex"'),
+  "math is pre-rendered before JavaScript",
+);
+assert.ok(
+  richHtml.includes("flowchart LR"),
+  "diagram source is readable before its engine loads",
+);
+assert.ok(
+  !richHtml.includes("Loading article…"),
+  "lazy rich-content modules resolve before publishing",
+);
+console.log(
+  "Verified rich article pre-render: equation output and diagram source fallback.",
+);

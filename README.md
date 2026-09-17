@@ -97,7 +97,7 @@ The current document types are `profile`, `caseStudy`, `article`, and
 
 The legacy document types include `project` and `post`, along
 with the other registered legacy Studio types. Current Portable Text supports
-text blocks, links, `contentImage`, and `codeBlock`; legacy rich content keeps
+text blocks, links, `contentImage`, and `codeBlock`. Diagram and math engines load only when needed; server-rendered equations and diagram source remain readable before JavaScript. Legacy rich content keeps
 its existing renderer and object types.
 
 `src/content/query.ts` reads both generations:
