@@ -34,6 +34,8 @@ open that route in the app.
 The focused content and server checks are in `tests/`; the full suite runs with
 `pnpm test`. The test suite does not log in to Sanity or write hosted content.
 
+Project categories (`?category=Native+apps`) and writing searches (`?q=Fleet`) stay in the URL. Browser Back restores the same list, and query edits replace the current history entry without moving focus or scroll.
+
 ## Routes and source map
 
 The route table is in `src/main.tsx`:

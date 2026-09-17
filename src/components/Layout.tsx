@@ -86,9 +86,16 @@ export default function Layout({ children }: { children: ReactNode }) {
   return (
     <>
       <PageMetadata />
-      <a href="#main" className="skip-link">
+      <Link
+        to={{
+          pathname: location.pathname,
+          search: location.search,
+          hash: "#main",
+        }}
+        className="skip-link"
+      >
         Skip to content
-      </a>
+      </Link>
       <header className="site-nav shell">
         <Link to="/" className="brand" aria-label="Nachiketh Reddy home">
           Nachiketh<span> Reddy</span>
@@ -168,7 +175,9 @@ export default function Layout({ children }: { children: ReactNode }) {
           </div>
         </div>
       </dialog>
-      <main id="main">{children}</main>
+      <main id="main" tabIndex={-1}>
+        {children}
+      </main>
       <footer className="footer" id="contact">
         <div className="shell">
           <div className="footer-top">
@@ -213,7 +222,15 @@ export default function Layout({ children }: { children: ReactNode }) {
           <div className="footer-bottom">
             <span>© {new Date().getFullYear()} Nachiketh Reddy</span>
             <span>Made with curiosity. Still iterating.</span>
-            <a href="#main">Back to top ↑</a>
+            <Link
+              to={{
+                pathname: location.pathname,
+                search: location.search,
+                hash: "#main",
+              }}
+            >
+              Back to top ↑
+            </Link>
           </div>
         </div>
       </footer>

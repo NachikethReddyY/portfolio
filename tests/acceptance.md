@@ -37,3 +37,10 @@
 - AI content identifies Fleet as orchestration/workflow improvement, not model-weight training unless direct evidence supports it. Contribution links describe actual merged/open state.
 - Real 3D GLB has connected screen/base, depth, shadows and lighting; failed/unsupported rendering retains usable page and an intentional fallback.
 - Verify desktop 1440-ish, mobile320/390, keyboard, reduced motion, all primary routes and content filters.
+
+## Index return-state regression
+
+- Select Native apps, open Tab, then browser Back: Native apps remains selected and only Tab is shown.
+- Search writing for Fleet, open the article, then browser Back: the input remains Fleet and the result remains filtered.
+- Typing and clearing the writing query updates the address without page shutter, focus loss, or scroll jump; replacing the current search does not create one history entry per key.
+- Direct URLs with `category=Native+apps` or `q=Fleet` render those views. An unknown category remains a usable All work view.

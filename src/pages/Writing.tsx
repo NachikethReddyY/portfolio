@@ -1,6 +1,11 @@
+import { useLayoutEffect, useState } from "react";
 import { portfolioImage } from "../content/images";
-import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import {
+  Link,
+  useParams,
+  useSearchParams,
+  useNavigationType,
+} from "react-router-dom";
 import { useContent } from "../content/store";
 import { Arrow } from "../components/Icons";
 import { RichContent, LegacyRichContent } from "../components/RichContent";
@@ -37,7 +42,26 @@ export function ArticleRow({
 }
 export default function Writing() {
   const { articles } = useContent();
-  const [query, setQuery] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigationType = useNavigationType();
+  const [query, setDraftQuery] = useState(() => searchParams.get("q") ?? "");
+  useLayoutEffect(() => {
+    if (navigationType !== "REPLACE")
+      setDraftQuery(searchParams.get("q") ?? "");
+  }, [searchParams, navigationType]);
+  const setQuery = (value: string) => {
+    // Keep typing synchronous; router updates run in a React transition.
+    setDraftQuery(value);
+    setSearchParams(
+      (current) => {
+        const next = new URLSearchParams(current);
+        if (value) next.set("q", value);
+        else next.delete("q");
+        return next;
+      },
+      { replace: true, preventScrollReset: true },
+    );
+  };
   const scope = usePageMotion();
   const filtered = articles.filter((a) =>
     `${a.title} ${a.excerpt} ${a.category}`

@@ -230,9 +230,9 @@ export default function Home() {
           </div>
         </div>
         <div className="hero-foot">
-          <a href="#about">
+          <Link to="/#about">
             A little about me <span aria-hidden="true">↓</span>
-          </a>
+          </Link>
           <Socials />
         </div>
       </section>

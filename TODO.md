@@ -107,7 +107,7 @@ Release refinement:
 
 - [x] Correct article provenance links after repository migration and resolve confirmed unavailable project destinations without losing case-study content.
 - [x] Review animation lifecycle, hidden-tab work, WebGL loss and reduced-motion changes; fix concrete failures and verify in the browser.
-- [ ] Verify article and project navigation, production CMS refinement, and final deployed state.
+- [x] Verify article and project navigation, production CMS refinement, and final deployed state. Verified release 3c19e3a.
 
 ## CMS editorial controls
 
@@ -117,7 +117,7 @@ Release refinement:
 
 ## Reading and legacy routes
 
-- [ ] Redirect legacy blog URLs to canonical writing pages at the hosting layer and verify the live responses.
+- [x] Redirect legacy blog URLs to canonical writing pages at the hosting layer and verify the live responses.
 - [x] Expose the existing RSS feed from the writing index and give unknown pages accurate titles.
 
 ## 3D delivery refinement
@@ -129,3 +129,9 @@ Release refinement:
 
 - [x] Request appropriately sized Sanity CDN images for cards, case studies, and rich article content; preserve crop parameters and local assets.
 - [x] Verify the 4.7 MB original is replaced by a bounded response and visually inspect the affected project card.
+
+## Index navigation state
+
+- [x] Preserve selected project category and writing query in the URL so detail → Back restores the same list; retain existing filters, direct routes, and shutter transitions.
+- [x] Keep query-only edits from scrolling or stealing input focus; verify typing, clearing, direct query URLs, and Back in the browser.
+- [x] Route skip, hero, case-study contents, and Back to top links through the same hash/focus handling; preserve current query state and verify keyboard focus at the destination.

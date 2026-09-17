@@ -23,7 +23,7 @@ export default function PageTransition({
   navigation.current = navigationType;
   const first = useRef(true);
   const covered = useRef(false);
-  const oldPath = useRef(location.pathname);
+  const previousLocation = useRef(location);
   useEffect(() => {
     const previous = history.scrollRestoration;
     history.scrollRestoration = "manual";
@@ -73,8 +73,15 @@ export default function PageTransition({
   useLayoutEffect(() => {
     const wasFirst = first.current;
     first.current = false;
-    const pathChanged = oldPath.current !== displayed.pathname;
-    oldPath.current = displayed.pathname;
+    const previous = previousLocation.current;
+    const pathChanged = previous.pathname !== displayed.pathname;
+    const queryOnly =
+      !pathChanged &&
+      previous.hash === displayed.hash &&
+      previous.search !== displayed.search;
+    previousLocation.current = displayed;
+    // Filtering/searching replaces the current index state without moving the reader.
+    if (queryOnly && navigation.current !== "POP") return;
     const frame = requestAnimationFrame(() => {
       let target: HTMLElement | null = null;
       try {
@@ -134,7 +141,9 @@ export default function PageTransition({
   return (
     <>
       <div ref={content} className="route-content">
-        {children(displayed)}
+        {children(
+          location.pathname === displayed.pathname ? location : displayed,
+        )}
       </div>
       <div className="page-shutter" ref={cover} aria-hidden="true">
         {[0, 1, 2, 3, 4].map((i) => (

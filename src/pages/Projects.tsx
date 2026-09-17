@@ -1,6 +1,5 @@
 import { portfolioImage } from "../content/images";
-import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import { useContent } from "../content/store";
 import type { CaseStudy } from "../content/types";
 import { Arrow } from "../components/Icons";
@@ -55,7 +54,24 @@ export function ProjectCard({
 }
 export default function Projects() {
   const { projects } = useContent();
-  const [filter, setFilter] = useState("All work");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const requestedCategory = searchParams.get("category");
+  const filter = projects.some(
+    (project) => project.category === requestedCategory,
+  )
+    ? requestedCategory!
+    : "All work";
+  const setFilter = (category: string) => {
+    setSearchParams(
+      (current) => {
+        const next = new URLSearchParams(current);
+        if (category === "All work") next.delete("category");
+        else next.set("category", category);
+        return next;
+      },
+      { replace: true, preventScrollReset: true },
+    );
+  };
   const scope = usePageMotion();
   const filtered = projects.filter(
     (p) => filter === "All work" || p.category === filter,
@@ -167,9 +183,9 @@ export function ProjectDetail() {
               .map(
                 (b) =>
                   b._type === "block" && (
-                    <a href={`#${b._key}`} key={b._key}>
+                    <Link to={`#${b._key}`} key={b._key}>
                       {b.children.map((s) => s.text).join("")}
-                    </a>
+                    </Link>
                   ),
               )}
           </nav>
