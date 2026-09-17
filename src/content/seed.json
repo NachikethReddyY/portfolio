@@ -8052,7 +8052,7 @@
       "title": "The Most Useful Thing I Built for VSMS Wasn’t Code",
       "excerpt": "Before our team touched the main build, I turned scattered requirements into one document we could actually work from.",
       "category": "Building",
-      "publishedAt": "2026-07-22T09:00:00.000Z",
+      "publishedAt": "2026-09-17T08:00:00Z",
       "readMinutes": 3,
       "featured": true,
       "body": [
@@ -8223,7 +8223,7 @@
       "title": "I Use AI Every Day. I Still Own the Code.",
       "excerpt": "I am not interested in pretending I code without AI. I am interested in knowing when its answer is wrong.",
       "category": "AI workflows",
-      "publishedAt": "2026-07-15T09:00:00.000Z",
+      "publishedAt": "2026-09-17T08:00:00Z",
       "readMinutes": 3,
       "featured": true,
       "body": [
@@ -8366,7 +8366,7 @@
       "title": "Terminal Text Selection Looked Easy Until I Built It",
       "excerpt": "The task sounded tiny: highlight text and copy it. Then I found two selection systems that looked identical and behaved completely differently.",
       "category": "Notes",
-      "publishedAt": "2026-07-08T09:00:00.000Z",
+      "publishedAt": "2026-09-17T08:00:00Z",
       "readMinutes": 3,
       "featured": true,
       "body": [
@@ -8492,6 +8492,205 @@
               "_type": "span",
               "_key": "selection-lesson-span",
               "text": "I stopped looking for one event handler that would magically connect both layers. The honest options were an explicit OpenTUI-managed selection flow or clear clipboard behaviour after a native copy. The bug reminded me that before fixing an interaction, I need to ask who actually owns it.",
+              "marks": []
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "label": "Original portfolio source",
+          "url": "https://github.com/NachikethReddyY/portfolio/blob/main/src/lib/fallbackData.ts"
+        }
+      ]
+    },
+    {
+      "slug": "currently-building-lah",
+      "title": "I Built an AI Agent Harness to See What Happens Under the Prompt",
+      "excerpt": "I was using coding agents without really knowing what happened after I pressed Enter, so two friends and I started building the missing pieces ourselves.",
+      "category": "Building",
+      "publishedAt": "2026-09-17T08:00:00Z",
+      "readMinutes": 3,
+      "featured": true,
+      "body": [
+        {
+          "_type": "block",
+          "_key": "lah-intro",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "lah-intro-span",
+              "text": "I knew how to use coding agents, but not how they parsed responses, called tools, or decided what stayed in context. LAH started because I wanted to build those steps myself.",
+              "marks": []
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "_key": "lah-team-heading",
+          "style": "h2",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "lah-team-heading-span",
+              "text": "It is a team project, and it is still unfinished",
+              "marks": []
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "_key": "lah-team",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "lah-team-span",
+              "text": "Two friends and I are building LAH together. The repository is private while we are still changing the architecture. It is not production-ready and it is not trying to replace the major coding agents. Right now, we are using it to test streaming, tools, memory, and terminal behaviour.",
+              "marks": []
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "_key": "lah-context-heading",
+          "style": "h2",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "lah-context-heading-span",
+              "text": "Small local models make every wasted token obvious",
+              "marks": []
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "_key": "lah-context",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "lah-context-span",
+              "text": "On consumer hardware, I cannot pretend the context window is unlimited. If LAH sends too much, the model slows down or loses focus. If it removes the wrong detail, the plan falls apart. That turned context management from an abstract AI topic into a real product constraint.",
+              "marks": []
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "_key": "lah-stream-heading",
+          "style": "h2",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "lah-stream-heading-span",
+              "text": "Streaming is not just printing text slowly",
+              "marks": []
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "_key": "lah-stream",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "lah-stream-span",
+              "text": "A model response arrives as events that need to be parsed, displayed, and connected to tool calls. Thinking output, normal text, tool arguments, failures, and completion signals do not all behave the same way. Building the parser made me understand why an agent can feel broken even when the model itself is responding correctly.",
+              "marks": []
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "_key": "lah-tools-heading",
+          "style": "h2",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "lah-tools-heading-span",
+              "text": "The tool loop is where the agent becomes real",
+              "marks": []
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "_key": "lah-tools",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "lah-tools-span",
+              "text": "We built the first tools separately so we could see the whole loop. The model needs a clear tool description, the harness needs to validate the request, the terminal needs to show what happened, and the next model turn needs the result without filling the context with noise.",
+              "marks": []
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "_key": "lah-typescript-heading",
+          "style": "h2",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "lah-typescript-heading-span",
+              "text": "Why we moved from Go to TypeScript",
+              "marks": []
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "_key": "lah-typescript",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "lah-typescript-span",
+              "text": "The first version explored Go. We moved back to TypeScript because the ecosystem matched the TUI, validation, and provider work we were doing, and because all three of us could change and debug it faster. For this team and project, TypeScript was the more practical choice.",
+              "marks": []
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "_key": "lah-next-heading",
+          "style": "h2",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "lah-next-heading-span",
+              "text": "What I am working on next",
+              "marks": []
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "_key": "lah-next",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "lah-next-span",
+              "text": "Next I am working on better write tools, clearer streaming feedback, file indexing, more reliable memory, and tests across local model providers.",
               "marks": []
             }
           ]
@@ -9120,205 +9319,6 @@
       ],
       "cover": "https://cdn.sanity.io/images/508uqyvi/production/aa472d3a99ff810eafe3d670def09a3181e3116e-3392x1970.jpg",
       "sources": []
-    },
-    {
-      "slug": "currently-building-lah",
-      "title": "I Built an AI Agent Harness to See What Happens Under the Prompt",
-      "excerpt": "I was using coding agents without really knowing what happened after I pressed Enter, so two friends and I started building the missing pieces ourselves.",
-      "category": "Building",
-      "publishedAt": "2026-07-04T09:00:00.000Z",
-      "readMinutes": 3,
-      "featured": true,
-      "body": [
-        {
-          "_type": "block",
-          "_key": "lah-intro",
-          "style": "normal",
-          "markDefs": [],
-          "children": [
-            {
-              "_type": "span",
-              "_key": "lah-intro-span",
-              "text": "I knew how to use coding agents, but not how they parsed responses, called tools, or decided what stayed in context. LAH started because I wanted to build those steps myself.",
-              "marks": []
-            }
-          ]
-        },
-        {
-          "_type": "block",
-          "_key": "lah-team-heading",
-          "style": "h2",
-          "markDefs": [],
-          "children": [
-            {
-              "_type": "span",
-              "_key": "lah-team-heading-span",
-              "text": "It is a team project, and it is still unfinished",
-              "marks": []
-            }
-          ]
-        },
-        {
-          "_type": "block",
-          "_key": "lah-team",
-          "style": "normal",
-          "markDefs": [],
-          "children": [
-            {
-              "_type": "span",
-              "_key": "lah-team-span",
-              "text": "Two friends and I are building LAH together. The repository is private while we are still changing the architecture. It is not production-ready and it is not trying to replace the major coding agents. Right now, we are using it to test streaming, tools, memory, and terminal behaviour.",
-              "marks": []
-            }
-          ]
-        },
-        {
-          "_type": "block",
-          "_key": "lah-context-heading",
-          "style": "h2",
-          "markDefs": [],
-          "children": [
-            {
-              "_type": "span",
-              "_key": "lah-context-heading-span",
-              "text": "Small local models make every wasted token obvious",
-              "marks": []
-            }
-          ]
-        },
-        {
-          "_type": "block",
-          "_key": "lah-context",
-          "style": "normal",
-          "markDefs": [],
-          "children": [
-            {
-              "_type": "span",
-              "_key": "lah-context-span",
-              "text": "On consumer hardware, I cannot pretend the context window is unlimited. If LAH sends too much, the model slows down or loses focus. If it removes the wrong detail, the plan falls apart. That turned context management from an abstract AI topic into a real product constraint.",
-              "marks": []
-            }
-          ]
-        },
-        {
-          "_type": "block",
-          "_key": "lah-stream-heading",
-          "style": "h2",
-          "markDefs": [],
-          "children": [
-            {
-              "_type": "span",
-              "_key": "lah-stream-heading-span",
-              "text": "Streaming is not just printing text slowly",
-              "marks": []
-            }
-          ]
-        },
-        {
-          "_type": "block",
-          "_key": "lah-stream",
-          "style": "normal",
-          "markDefs": [],
-          "children": [
-            {
-              "_type": "span",
-              "_key": "lah-stream-span",
-              "text": "A model response arrives as events that need to be parsed, displayed, and connected to tool calls. Thinking output, normal text, tool arguments, failures, and completion signals do not all behave the same way. Building the parser made me understand why an agent can feel broken even when the model itself is responding correctly.",
-              "marks": []
-            }
-          ]
-        },
-        {
-          "_type": "block",
-          "_key": "lah-tools-heading",
-          "style": "h2",
-          "markDefs": [],
-          "children": [
-            {
-              "_type": "span",
-              "_key": "lah-tools-heading-span",
-              "text": "The tool loop is where the agent becomes real",
-              "marks": []
-            }
-          ]
-        },
-        {
-          "_type": "block",
-          "_key": "lah-tools",
-          "style": "normal",
-          "markDefs": [],
-          "children": [
-            {
-              "_type": "span",
-              "_key": "lah-tools-span",
-              "text": "We built the first tools separately so we could see the whole loop. The model needs a clear tool description, the harness needs to validate the request, the terminal needs to show what happened, and the next model turn needs the result without filling the context with noise.",
-              "marks": []
-            }
-          ]
-        },
-        {
-          "_type": "block",
-          "_key": "lah-typescript-heading",
-          "style": "h2",
-          "markDefs": [],
-          "children": [
-            {
-              "_type": "span",
-              "_key": "lah-typescript-heading-span",
-              "text": "Why we moved from Go to TypeScript",
-              "marks": []
-            }
-          ]
-        },
-        {
-          "_type": "block",
-          "_key": "lah-typescript",
-          "style": "normal",
-          "markDefs": [],
-          "children": [
-            {
-              "_type": "span",
-              "_key": "lah-typescript-span",
-              "text": "The first version explored Go. We moved back to TypeScript because the ecosystem matched the TUI, validation, and provider work we were doing, and because all three of us could change and debug it faster. For this team and project, TypeScript was the more practical choice.",
-              "marks": []
-            }
-          ]
-        },
-        {
-          "_type": "block",
-          "_key": "lah-next-heading",
-          "style": "h2",
-          "markDefs": [],
-          "children": [
-            {
-              "_type": "span",
-              "_key": "lah-next-heading-span",
-              "text": "What I am working on next",
-              "marks": []
-            }
-          ]
-        },
-        {
-          "_type": "block",
-          "_key": "lah-next",
-          "style": "normal",
-          "markDefs": [],
-          "children": [
-            {
-              "_type": "span",
-              "_key": "lah-next-span",
-              "text": "Next I am working on better write tools, clearer streaming feedback, file indexing, more reliable memory, and tests across local model providers.",
-              "marks": []
-            }
-          ]
-        }
-      ],
-      "sources": [
-        {
-          "label": "Original portfolio source",
-          "url": "https://github.com/NachikethReddyY/portfolio/blob/main/src/lib/fallbackData.ts"
-        }
-      ]
     }
   ],
   "experience": [

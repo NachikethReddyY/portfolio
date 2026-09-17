@@ -1,3 +1,4 @@
+import { starterContentTool } from "./src/cms/StarterContentTool";
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { schemaTypes } from "./src/cms/schema";
@@ -10,5 +11,6 @@ export default defineConfig({
   dataset: process.env.SANITY_STUDIO_DATASET || "production",
   basePath: "/studio",
   plugins: [structureTool({ structure })],
+  tools: (previous) => [...previous, starterContentTool],
   schema: { types: [...existingSchemaTypes, ...schemaTypes] },
 });

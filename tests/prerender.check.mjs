@@ -1,14 +1,11 @@
 import assert from "node:assert/strict";
 import { readFileSync, existsSync } from "node:fs";
 import { parse } from "parse5";
+import { portfolioSchema } from "../src/content/validation.ts";
 const seed = JSON.parse(readFileSync("src/content/seed.json", "utf8"));
-const routes = [
-  "/",
-  "/projects",
-  "/writing",
-  ...seed.projects.map((p) => `/projects/${p.slug}`),
-  ...seed.articles.map((a) => `/writing/${a.slug}`),
-];
+const routes = JSON.parse(readFileSync("dist/route-manifest.json", "utf8"));
+assert.ok(routes.length >= seed.projects.length + seed.articles.length + 3);
+
 function descendants(node) {
   return [node, ...(node.childNodes || []).flatMap(descendants)];
 }
@@ -22,6 +19,20 @@ for (const path of routes) {
     "utf8",
   );
   const nodes = descendants(parse(html));
+  const snapshots = nodes.filter((n) => attr(n, "id") === "portfolio-content");
+  assert.equal(snapshots.length, 1, `${path}: one browser content snapshot`);
+  const content = portfolioSchema.parse(
+    JSON.parse(snapshots[0].childNodes.map((n) => n.value || "").join("")),
+  );
+  assert.ok(
+    content.projects.every((project) =>
+      routes.includes(`/projects/${project.slug}`),
+    ) &&
+      content.articles.every((article) =>
+        routes.includes(`/writing/${article.slug}`),
+      ),
+    `${path}: initial browser content matches prerendered routes`,
+  );
   const heading = nodes.filter((n) => n.tagName === "h1");
   assert.equal(heading.length, 1, `${path}: one primary heading`);
   const title = nodes

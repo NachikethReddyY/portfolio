@@ -13,8 +13,26 @@ export const sanityProjectId =
 export const sanityDataset =
   import.meta.env.VITE_SANITY_DATASET || "production";
 const ContentContext = createContext(localContent);
-export function ContentProvider({ children }: { children: ReactNode }) {
-  const [content, setContent] = useState(localContent);
+function initialPageContent(): PortfolioContent {
+  if (typeof document === "undefined") return localContent;
+  try {
+    const snapshot = document.getElementById("portfolio-content")?.textContent;
+    if (snapshot) return portfolioSchema.parse(JSON.parse(snapshot));
+  } catch {
+    // A missing or stale build snapshot must not prevent the portfolio from opening.
+  }
+  return localContent;
+}
+export function ContentProvider({
+  children,
+  initialContent,
+}: {
+  children: ReactNode;
+  initialContent?: PortfolioContent;
+}) {
+  const [content, setContent] = useState(
+    () => initialContent ?? initialPageContent(),
+  );
   useEffect(() => {
     if (import.meta.env.VITE_SANITY_ENABLED === "false") return;
     const controller = new AbortController();

@@ -1,10 +1,27 @@
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { render } from "../.evidence/build-ssr/entry-server.js";
 import { resolveSiteUrl } from "../server/publishing.ts";
-const content = JSON.parse(
-  readFileSync(new URL("../src/content/seed.json", import.meta.url)),
-);
-const template = readFileSync("dist/index.html", "utf8");
+import { loadPublishedContent } from "../server/content.ts";
+import { parse } from "parse5";
+const { content, source } = await loadPublishedContent();
+let template = readFileSync("dist/index.html", "utf8")
+  .replace(
+    /<script id="portfolio-content" type="application\/json">[\s\S]*?<\/script>/g,
+    "",
+  )
+  .replace(/<link rel="canonical"[^>]*>/g, "")
+  .replace(/<meta (?:property="og:[^"]+"|name="twitter:[^"]+")[^>]*>/g, "");
+const findRoot = (node) =>
+  node.attrs?.some((a) => a.name === "id" && a.value === "root")
+    ? node
+    : node.childNodes?.map(findRoot).find(Boolean);
+const root = findRoot(parse(template, { sourceCodeLocationInfo: true }));
+if (!root?.sourceCodeLocation?.startTag || !root.sourceCodeLocation.endTag)
+  throw new Error("Missing prerender root");
+template =
+  template.slice(0, root.sourceCodeLocation.startTag.endOffset) +
+  template.slice(root.sourceCodeLocation.endTag.startOffset);
+const snapshot = `<script id="portfolio-content" type="application/json">${JSON.stringify(content).replace(/</g, "\\u003c")}</script>`;
 const base = resolveSiteUrl(process.env.VITE_SITE_URL);
 const escape = (value) =>
   value.replace(
@@ -56,7 +73,7 @@ for (const route of routes) {
   const image = new URL(route.image || "/images/nachiketh-sketch.webp", base)
     .href;
   const tags = `<link rel="canonical" href="${escape(canonical)}"><meta property="og:title" content="${escape(route.title)}"><meta property="og:description" content="${escape(route.description)}"><meta property="og:url" content="${escape(canonical)}"><meta property="og:image" content="${escape(image)}"><meta property="og:type" content="${route.type || "website"}"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:creator" content="@Nachikethreddyy">`;
-  const markup = (await render(route.path)).replace(
+  const markup = (await render(route.path, content)).replace(
     /<template\b[^>]*>[\s\S]*?<\/template>/g,
     "",
   );
@@ -67,11 +84,16 @@ for (const route of routes) {
       `<meta name="description" content="${escape(route.description)}">`,
     )
     .replace("</head>", tags + "</head>")
+    .replace("</body>", snapshot + "</body>")
     .replace('<div id="root"></div>', `<div id="root">${markup}</div>`);
   const folder = route.path === "/" ? "dist" : `dist${route.path}`;
   mkdirSync(folder, { recursive: true });
   writeFileSync(`${folder}/index.html`, html);
 }
+writeFileSync(
+  "dist/route-manifest.json",
+  JSON.stringify(routes.map((route) => route.path)),
+);
 console.log(
-  `Prerendered ${routes.length} public routes with readable HTML and social metadata.`,
+  `Content source: ${source}. Prerendered ${routes.length} public routes with readable HTML and social metadata.`,
 );

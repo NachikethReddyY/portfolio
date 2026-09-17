@@ -1,3 +1,4 @@
+import { starterContentTool } from "./StarterContentTool";
 import { Studio, defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { schemaTypes } from "./schema";
@@ -11,6 +12,7 @@ const config = defineConfig({
   dataset: sanityDataset,
   basePath: "/studio",
   plugins: [structureTool({ structure })],
+  tools: (previous) => [...previous, starterContentTool],
   schema: { types: [...legacySchemaTypes, ...schemaTypes] },
 });
 export default function StudioPage() {

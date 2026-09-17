@@ -26,7 +26,7 @@ pnpm studio:build
 `pnpm dev` starts Vite at `127.0.0.1` and also wires the read-only content
 endpoints through the Vite middleware. `pnpm build` runs the type checks, builds
 the browser bundle, builds the SSR entry into `.evidence/build-ssr`, and
-prerenders the public routes into `dist/`, and checks their headings, metadata, images, and internal links. `pnpm preview` serves that build.
+loads published Sanity content (with a local fallback), prerenders its public routes into `dist/`, and checks their headings, metadata, images, internal links, and browser content snapshots. `pnpm preview` serves that build.
 `pnpm studio` starts Sanity's CLI development server, while `pnpm studio:build`
 builds the Studio bundle. For the embedded `/studio` route, run `pnpm dev` and
 open that route in the app.
@@ -73,9 +73,7 @@ The main files are:
 
 ## Sanity content and Studio login
 
-The public app does not require a Sanity login. It starts with
-`src/content/seed.json`, then the browser client in `src/content/store.tsx`
-requests published Sanity data using the CDN and `perspective: "published"`.
+The public app does not require a Sanity login. Production pages start with the validated content snapshot embedded during the build. Development and unavailable snapshots fall back to `src/content/seed.json`. The browser client in `src/content/store.tsx` then requests published Sanity data using the CDN and `perspective: "published"`. The snapshot is JSON with HTML-sensitive characters escaped; the browser validates it again before use.
 If Sanity is disabled, unavailable, invalid, or returns content that fails the
 schemas, the local content remains visible. There is no browser-side write
 token.
@@ -85,6 +83,10 @@ browser. It uses the signed-in editor session for Studio operations. The
 embedded Studio registers both the current schemas from `src/cms/schema.ts`
 and the existing schemas from `sanity/schemaTypes/`; `sanity.config.ts` and
 `sanity.cli.ts` configure the same project and dataset for the Sanity CLI.
+
+The **Content setup** tab lists the starter documents and checks which are already present. After you confirm the dataset, **Create missing drafts** creates only missing documents using your editor session. It does not overwrite existing documents or publish anything. Review the drafts in **Content → Current content**, then publish them individually. The original LAH article and other preserved records remain under **Content → Existing content**. The CLI exporter and this screen share the same draft transformation.
+
+Published changes load on the public site automatically. A new Vercel build is needed to refresh the initial HTML, search metadata, and sharing previews. For automatic rebuilds, connect a Sanity publish webhook to a Vercel deploy hook in your own account settings; no deploy hook or write credential is stored in this repository.
 
 The current document types are `profile`, `caseStudy`, `article`, and
 `experience`. Profile fields include the bio, personal interests, social links, stack descriptions, and contribution cards. Case studies and articles accept uploaded cover images or image URLs. The Studio separates current content from preserved legacy documents.
@@ -170,9 +172,7 @@ of `pnpm content:export`.
 - SPA fallback for browser routes while leaving `/api` paths available to functions
 - `nosniff` and `strict-origin-when-cross-origin` headers, plus immutable caching for `/assets/*`
 
-The repository contains deployment configuration; that configuration is not
-evidence that a deployment has happened. A Vercel project must be connected
-and configured separately. A host that serves only `dist/` can serve the
+The GitHub repository `NachikethReddyY/portfolio` is connected to Vercel, with production at `https://nachikethreddyy.vercel.app`. A push to `main` triggers the connected deployment. Verify the GitHub deployment status and `/api/health` after each release. A host that serves only `dist/` can serve the
 prerendered frontend, but it must provide equivalent server functions if the
 read-only API, RSS, sitemap, and live Sanity fallback behavior are required.
 

@@ -80,7 +80,7 @@ Scope addition: custom liquid-glass navigation/menu and small link/control anima
 
 Deployment authorised: user explicitly requested push to main in NachikethReddyY/portfolio, followed by verification of its Vercel deployment. Preserve existing routes/integrations during the migration.
 - [x] Inspect remote main and deployment settings; prepare a clean migration preserving original content routes.
-- [ ] Push verified build to main and confirm Vercel deployment status and live behavior.
+- [x] Push verified build to main and confirm Vercel deployment status and live behavior. Initial deployment e7959ac; function import fix 62d9032, live health returns Sanity/200.
 - [x] Incorporate public LinkedIn profile facts and generated portrait; exclude private account data.
 
 Release refinement:
@@ -88,4 +88,17 @@ Release refinement:
 - [x] Pre-render all seeded public routes and validate headings, metadata, local assets and internal links.
 - [x] Bundle fonts locally and optimise the portrait/project-cover delivery.
 - [x] Preserve CMS editability for personal bio, social links, stack descriptions and contribution cards.
-- [ ] Verify production output in a browser, complete keyboard/reduced-motion checks, then migrate and push main.
+- [x] Verify production output in a browser, complete keyboard/reduced-motion checks, then migrate and push main.
+
+## Live function packaging correction
+
+- [x] Reproduce live function import failure using the official Vercel Node builder.
+- [x] Rewrite TypeScript import extensions in emitted functions; test emitted handlers, rebuild and redeploy.
+- [x] Verify live health/content/RSS/sitemap responses and frontend paths.
+
+## CMS publishing refinement
+
+- [x] Let an authenticated editor create missing starter drafts inside Studio, with a visible content summary and no overwriting/publishing.
+- [x] Share the schema-shaped draft transformation between Studio and the existing CLI export; test idempotent import selection.
+- [x] Use published content at build time so prerendered pages and metadata reflect CMS edits; keep offline fallback.
+- [ ] Verify local Studio tool rendering, type/build checks, and deployed content behavior; hosted writes remain editor-triggered.
