@@ -53,7 +53,7 @@ The route table is in `src/main.tsx`:
 | `/contact`        | Redirect to the home page's `#contact` anchor                           |
 | `/studio/*`       | Lazy-loaded Sanity Studio                                               |
 
-Unknown routes and unknown content slugs render the not-found view.
+Unknown routes and unknown content slugs render the not-found view. Optional renderer failures remain local: the laptop keeps its image fallback, math keeps its source, and legacy articles keep readable text. Unexpected application failures show reload and home recovery actions.
 
 The main files are:
 

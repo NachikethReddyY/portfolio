@@ -49,3 +49,10 @@
 
 - Existing LAH article remains readable before JavaScript and does not request a Mermaid bundle when no diagram exists.
 - A valid legacy Mermaid block loads its renderer and displays the diagram; an invalid block falls back to readable source. Keep Mermaid securityLevel strict.
+
+## Loading failure recovery
+
+- A rejected 3D module leaves the static laptop visible and homepage navigation usable.
+- A rejected math formatter leaves the equation text readable in its article.
+- A rejected legacy article renderer leaves readable text and a reload action; unrelated navigation remains usable.
+- An unexpected page render failure shows an explicit recovery screen with working reload and home actions, without displaying error internals.

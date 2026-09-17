@@ -14,6 +14,7 @@ import {
 } from "react";
 
 import { imageSource } from "../content/merge";
+import { RenderBoundary } from "../components/RenderBoundary";
 const imageUrlFor = (value: unknown, width = 1400) =>
   portfolioImage(imageSource(value), width);
 
@@ -195,9 +196,11 @@ const RenderMath = lazy(() => import("./MathExpression"));
 function MathExpression(props: { equation?: string; displayMode?: boolean }) {
   if (!props.equation) return null;
   return (
-    <Suspense fallback={<code>{props.equation}</code>}>
-      <RenderMath {...props} />
-    </Suspense>
+    <RenderBoundary fallback={<code>{props.equation}</code>}>
+      <Suspense fallback={<code>{props.equation}</code>}>
+        <RenderMath {...props} />
+      </Suspense>
+    </RenderBoundary>
   );
 }
 

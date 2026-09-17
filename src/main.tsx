@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Projects, { ProjectDetail } from "./pages/Projects";
 import Writing, { ArticleDetail } from "./pages/Writing";
 import NotFound from "./pages/NotFound";
+import { PageRecovery, RenderBoundary } from "./components/RenderBoundary";
 import "@fontsource-variable/dm-sans/wght.css";
 import "@fontsource-variable/space-grotesk/wght.css";
 import "./site.css";
@@ -74,6 +75,8 @@ function App() {
 }
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <App />
+    <RenderBoundary fallback={<PageRecovery />}>
+      <App />
+    </RenderBoundary>
   </StrictMode>,
 );

@@ -8,6 +8,7 @@ import { Arrow } from "../components/Icons";
 import { Socials } from "../components/Layout";
 import { ProjectCard } from "./Projects";
 import { ArticleRow } from "./Writing";
+import { RenderBoundary } from "../components/RenderBoundary";
 const toolIcons = new Set([
   "typescript",
   "react",
@@ -24,6 +25,15 @@ const toolIcons = new Set([
   "github",
 ]);
 const LaptopScene = lazy(() => import("../components/LaptopScene"));
+const laptopFallback = (
+  <div className="laptop-scene">
+    <img
+      className="laptop-fallback"
+      src="/models/laptop-fallback.webp"
+      alt=""
+    />
+  </div>
+);
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 export default function Home() {
   const { profile, projects, articles, experience } = useContent();
@@ -186,29 +196,11 @@ export default function Home() {
             </div>
           </div>
           <div className="hero-studio">
-            <Suspense
-              fallback={
-                <div className="laptop-scene">
-                  <img
-                    className="laptop-fallback"
-                    src="/models/laptop-fallback.webp"
-                    alt=""
-                  />
-                </div>
-              }
-            >
-              {import.meta.env.SSR ? (
-                <div className="laptop-scene">
-                  <img
-                    className="laptop-fallback"
-                    src="/models/laptop-fallback.webp"
-                    alt=""
-                  />
-                </div>
-              ) : (
-                <LaptopScene />
-              )}
-            </Suspense>
+            <RenderBoundary fallback={laptopFallback}>
+              <Suspense fallback={laptopFallback}>
+                {import.meta.env.SSR ? laptopFallback : <LaptopScene />}
+              </Suspense>
+            </RenderBoundary>
             <div className="scene-note scene-note--code">
               <span className="note-symbol">{"{ }"}</span>
               <div>

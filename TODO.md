@@ -150,4 +150,10 @@ Release refinement:
 ## Editor image framing
 
 - [x] Preserve authored Sanity crop metadata through current and legacy content loading without changing uncropped images or page geometry.
-- [ ] Test crop resolution for covers, gallery and body images; verify rendered crop in a local browser fixture and deploy.
+- [x] Test crop resolution for covers, gallery and body images; verify rendered crop in a local browser fixture and deploy. Vercel success for d224a5d; health Sanity/200.
+
+## Loading recovery
+
+- [x] Keep a rejected decorative 3D or math chunk from blanking the page; retain the static laptop or equation text.
+- [x] Add a visible reload/home recovery for unexpected application loading failures, and preserve readable article text when legacy formatting cannot load.
+- [ ] Verify failure and recovery in a local browser fixture, then build and deploy.
