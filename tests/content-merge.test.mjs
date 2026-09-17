@@ -123,3 +123,18 @@ test("published hide lists remove matching seed and remote entries and leave unr
   assert.ok(!sitemap.includes(`/writing/${hiddenArticle}</`));
   assert.ok(!sitemap.includes(`/projects/${hiddenProject}</`));
 });
+
+test("published empty gallery clears starter images while absent gallery preserves them", () => {
+  const project = seed.projects.find((project) => project.gallery?.length);
+  assert.ok(project);
+  const update = { ...project, gallery: [] };
+  const cleared = mergeContent(seed, { projects: [update] }).projects.find(
+    (item) => item.slug === project.slug,
+  );
+  assert.deepEqual(cleared.gallery, []);
+  const { gallery, ...withoutGallery } = project;
+  const retained = mergeContent(seed, {
+    projects: [withoutGallery],
+  }).projects.find((item) => item.slug === project.slug);
+  assert.deepEqual(retained.gallery, gallery);
+});

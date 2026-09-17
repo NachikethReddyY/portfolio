@@ -2,7 +2,7 @@ import { projectFields, postFields } from "../legacy/queries.ts";
 // Both schema generations remain readable; drafts are excluded and scheduled posts are hidden until their date.
 export const contentQuery = `{
  "profile": *[_type == "profile" && !(_id in path("drafts.**"))][0],
- "projects": *[_type == "caseStudy" && hidden != true && !(_id in path("drafts.**"))] | order(year desc){..., "slug":slug.current, "image":coalesce(coverUpload.asset->url,image,""), "links":coalesce(links,[]), body[]{..., _type == "contentImage" => {"url":coalesce(upload.asset->url,url)}}},
+ "projects": *[_type == "caseStudy" && hidden != true && !(_id in path("drafts.**"))] | order(year desc){..., "slug":slug.current, "image":coalesce(coverUpload.asset->url,image,""), defined(gallery) => {"gallery":gallery[]{..., "url":coalesce(upload.asset->url,url)}}, "links":coalesce(links,[]), body[]{..., _type == "contentImage" => {"url":coalesce(upload.asset->url,url)}}},
  "articles": *[_type == "article" && hidden != true && publishedAt <= now() && !(_id in path("drafts.**"))] | order(publishedAt desc){..., "slug":slug.current, "cover":coalesce(coverUpload.asset->url,cover,""), "sources":coalesce(sources,[]), body[]{..., _type == "contentImage" => {"url":coalesce(upload.asset->url,url)}}},
  "hiddenProjects": *[_type == "caseStudy" && hidden == true && !(_id in path("drafts.**"))].slug.current,
  "hiddenArticles": *[_type == "article" && (hidden == true || publishedAt > now()) && !(_id in path("drafts.**"))].slug.current,

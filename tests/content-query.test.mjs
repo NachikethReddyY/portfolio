@@ -69,6 +69,11 @@ test("published content query resolves image uploads, preserves legacy revisions
   );
   assert.equal(result.projects[0].image, "https://cdn.sanity.io/cover.webp");
   assert.equal(
+    Object.hasOwn(result.projects[0], "gallery"),
+    false,
+    "an absent gallery keeps the local fallback intact",
+  );
+  assert.equal(
     result.projects[0].body[0].url,
     "https://cdn.sanity.io/cover.webp",
   );
@@ -128,4 +133,50 @@ test("published visibility controls suppress hidden and rescheduled seed entries
     result.experience.map((x) => x.id),
     ["education", "leadership"],
   );
+});
+
+test("project gallery uploads and external images retain editorial order and empty gallery intent", async () => {
+  const result = await (
+    await evaluate(parse(contentQuery), {
+      dataset: [
+        {
+          _id: "asset-gallery",
+          _type: "sanity.imageAsset",
+          url: "https://cdn.sanity.io/gallery.webp",
+        },
+        {
+          _id: "gallery-case",
+          _type: "caseStudy",
+          slug: { current: "gallery" },
+          gallery: [
+            {
+              _key: "uploaded",
+              _type: "contentImage",
+              upload: { asset: { _ref: "asset-gallery" } },
+              alt: "Uploaded screenshot",
+              caption: "First",
+            },
+            {
+              _key: "external",
+              _type: "contentImage",
+              url: "https://example.com/second.webp",
+              alt: "External screenshot",
+              caption: "Second",
+            },
+          ],
+        },
+        {
+          _id: "empty-case",
+          _type: "caseStudy",
+          slug: { current: "empty" },
+          gallery: [],
+        },
+      ],
+    })
+  ).get();
+  const gallery = result.projects.find((p) => p.slug === "gallery").gallery;
+  assert.equal(gallery[0].url, "https://cdn.sanity.io/gallery.webp");
+  assert.equal(gallery[0].caption, "First");
+  assert.equal(gallery[1].url, "https://example.com/second.webp");
+  assert.deepEqual(result.projects.find((p) => p.slug === "empty").gallery, []);
 });

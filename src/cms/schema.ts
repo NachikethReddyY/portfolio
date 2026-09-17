@@ -500,6 +500,16 @@ export const caseStudy = defineType({
       initialValue: false,
       validation: (rule) => rule.required(),
     }),
+    defineField({
+      name: "gallery",
+      title: "Project gallery",
+      type: "array",
+      group: "presentation",
+      of: [defineArrayMember({ type: "contentImage" })],
+      initialValue: [],
+      description:
+        "Drag to reorder. Upload images or use URLs; captions and alt text travel with each image. An empty gallery removes the starter gallery.",
+    }),
     sourceLinksField("links", "Project links", "links"),
     visibilityField("presentation"),
     bodyField("Case study body", "content"),

@@ -129,6 +129,10 @@ export function createStarterDocuments(
       withDocumentMeta(
         {
           ...project,
+          gallery: (project.gallery ?? []).map((image) => ({
+            ...image,
+            _type: "contentImage",
+          })),
           hidden: false,
           slug: toSlug(project.slug),
         },
@@ -144,6 +148,7 @@ export function createStarterDocuments(
           "year",
           "image",
           "imageAlt",
+          "gallery",
           "accent",
           "stack",
           "role",

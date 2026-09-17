@@ -93,7 +93,7 @@ To retire a starter project or article, enable **Hide from portfolio** and publi
 Published changes load on the public site automatically. A new Vercel build is needed to refresh the initial HTML, search metadata, and sharing previews. For automatic rebuilds, connect a Sanity publish webhook to a Vercel deploy hook in your own account settings; no deploy hook or write credential is stored in this repository.
 
 The current document types are `profile`, `caseStudy`, `article`, and
-`experience`. Profile fields include the bio, personal interests, social links, stack descriptions, and contribution cards. Case studies and articles accept uploaded cover images or image URLs. The Studio separates current content from preserved legacy documents.
+`experience`. Profile fields include the bio, personal interests, social links, stack descriptions, and contribution cards. Case studies and articles accept uploaded cover images or image URLs. The case-study gallery supports ordered uploads/URLs, captions, and alt text; starter import preserves existing images, and clearing it removes the gallery. The Studio separates current content from preserved legacy documents.
 
 The legacy document types include `project` and `post`, along
 with the other registered legacy Studio types. Current Portable Text supports

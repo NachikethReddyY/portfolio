@@ -130,3 +130,27 @@ test("starter selection skips draft or published IDs and same-type slugs", () =>
   );
   assert.deepEqual(sameSlugDifferentType, [slugMatch]);
 });
+
+test("case-study starter drafts preserve gallery order, alt text and captions", () => {
+  const starters = createStarterDocuments(seed);
+  for (const project of seed.projects) {
+    const document = starters.find(
+      (item) => item._id === `drafts.case-study-${project.slug}`,
+    );
+    assert.ok(Array.isArray(document.gallery));
+    assert.deepEqual(
+      document.gallery.map(({ url, alt, caption }) => ({
+        url,
+        alt,
+        ...(caption === undefined ? {} : { caption }),
+      })),
+      project.gallery ?? [],
+    );
+    assert.ok(
+      document.gallery.every(
+        (image) =>
+          image._type === "contentImage" && typeof image._key === "string",
+      ),
+    );
+  }
+});

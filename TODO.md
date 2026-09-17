@@ -141,3 +141,8 @@ Release refinement:
 - [x] Load Mermaid and math formatting only when an article actually needs them; preserve rich content, strict diagram security, and source-code fallback.
 - [x] Verify legacy text-only article no longer requests Mermaid, and a local diagram fixture still renders with its fallback available.
 - [x] Convert the two preserved LAH paragraphs containing raw Markdown links into proper Portable Text links/code marks without rewriting the article.
+
+## CMS gallery editing
+
+- [x] Preserve every case-study gallery image, caption, alt, and order through starter import; add the matching Studio field and upload-aware published query.
+- [ ] Verify exported documents and query resolution, including clearing a gallery, then rebuild Studio/public site and deploy.

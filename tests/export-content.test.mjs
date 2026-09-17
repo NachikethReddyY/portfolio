@@ -28,7 +28,7 @@ const requiredFields = {
       ].includes(field),
   ),
   caseStudy: schemaFields.caseStudy.filter(
-    (field) => !["image", "coverUpload"].includes(field),
+    (field) => !["image", "coverUpload", "gallery"].includes(field),
   ),
   article: schemaFields.article.filter(
     (field) => !["cover", "coverUpload"].includes(field),
