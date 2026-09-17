@@ -220,4 +220,4 @@ the commands documented here.
 
 ### Image delivery
 
-Sanity CDN images are requested at bounded widths with automatic format negotiation: 960 px for project cards, 1600 px for case-study covers, and 1400 px for article/gallery images. Existing editorial crop settings and local assets are preserved. The Blender model combines static keys and speaker slots into 17 mesh primitives while retaining the animated screen hinge.
+Sanity CDN images are requested at bounded widths with automatic format negotiation: 960 px for project cards, 1600 px for case-study covers, and 1400 px for article/gallery images. Authored Sanity upload crops are resolved into CDN rectangles before content validation; URL query crops and local assets are preserved. Images retain their cropped natural aspect ratio, so the hotspot does not introduce an additional card crop. The Blender model combines static keys and speaker slots into 17 mesh primitives while retaining the animated screen hinge.

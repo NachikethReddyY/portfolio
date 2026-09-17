@@ -145,4 +145,9 @@ Release refinement:
 ## CMS gallery editing
 
 - [x] Preserve every case-study gallery image, caption, alt, and order through starter import; add the matching Studio field and upload-aware published query.
-- [ ] Verify exported documents and query resolution, including clearing a gallery, then rebuild Studio/public site and deploy.
+- [x] Verify exported documents and query resolution, including clearing a gallery, then rebuild Studio/public site and deploy. Vercel success for 8242ed3; live content API 200.
+
+## Editor image framing
+
+- [x] Preserve authored Sanity crop metadata through current and legacy content loading without changing uncropped images or page geometry.
+- [ ] Test crop resolution for covers, gallery and body images; verify rendered crop in a local browser fixture and deploy.

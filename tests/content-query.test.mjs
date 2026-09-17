@@ -4,7 +4,10 @@ import { parse, evaluate } from "groq-js";
 import { contentQuery } from "../src/content/query.ts";
 
 test("published content query resolves image uploads, preserves legacy revisions, and excludes drafts and future articles", async () => {
-  const upload = { asset: { _type: "reference", _ref: "image-cover" } };
+  const upload = {
+    asset: { _type: "reference", _ref: "image-cover" },
+    crop: { left: 0.1, top: 0.2, right: 0, bottom: 0 },
+  };
   const dataset = [
     {
       _id: "image-cover",
@@ -68,6 +71,12 @@ test("published content query resolves image uploads, preserves legacy revisions
     ["current"],
   );
   assert.equal(result.projects[0].image, "https://cdn.sanity.io/cover.webp");
+  assert.deepEqual(result.projects[0].coverUpload.crop, upload.crop);
+  assert.equal(
+    result.projects[0].coverUpload.asset.url,
+    "https://cdn.sanity.io/cover.webp",
+  );
+  assert.deepEqual(result.projects[0].body[0].upload.crop, upload.crop);
   assert.equal(
     Object.hasOwn(result.projects[0], "gallery"),
     false,

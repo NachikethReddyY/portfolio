@@ -1,4 +1,6 @@
 export const imageFields = `
+  crop,
+  hotspot,
   asset->{
     url,
     metadata {

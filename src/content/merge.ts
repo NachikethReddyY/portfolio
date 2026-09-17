@@ -4,6 +4,7 @@ import {
   profileSchema,
   experienceSchema,
 } from "./validation.ts";
+import { applyImageCrop } from "./images.ts";
 import type {
   PortfolioContent,
   CaseStudy,
@@ -27,11 +28,37 @@ export function imageSource(value: unknown): string {
   const image = record(value),
     asset = record(image.asset);
   const direct = web(image.url) || web(asset.url);
-  if (direct) return direct;
+  if (direct) return applyImageCrop(direct, image);
   const ref = string(asset._ref).match(/^image-([a-f0-9]+)-(\d+x\d+)-(\w+)$/);
-  return ref
+  const source = ref
     ? `https://cdn.sanity.io/images/508uqyvi/production/${ref[1]}-${ref[2]}.${ref[3]}`
     : "";
+  return applyImageCrop(source, image);
+}
+
+function resolveEditorialImages(value: unknown): RecordValue {
+  const document = record(value);
+  const cover = imageSource(document.coverUpload);
+  const resolveImage = (value: unknown) => {
+    const image = record(value);
+    return { ...image, url: imageSource(image.upload) || image.url };
+  };
+  return {
+    ...document,
+    ...(cover ? { image: cover, cover } : {}),
+    ...(Array.isArray(document.gallery)
+      ? { gallery: document.gallery.map(resolveImage) }
+      : {}),
+    ...(Array.isArray(document.body)
+      ? {
+          body: document.body.map((block) =>
+            record(block)._type === "contentImage"
+              ? resolveImage(block)
+              : block,
+          ),
+        }
+      : {}),
+  };
 }
 // Existing Studio blocks are preserved; URLs remain data, never executable protocols.
 export function sanitizeRichBody(value: unknown): unknown {
@@ -212,11 +239,15 @@ export function mergeContent(
   // New editorial content wins over legacy versions; published new-schema edits win over both.
   const projects = mergeBySlug(
     applyNewLegacyRevisions(base.projects, oldProjects),
-    valid(data.projects, (v) => caseStudySchema.safeParse(v)),
+    valid(data.projects, (v) =>
+      caseStudySchema.safeParse(resolveEditorialImages(v)),
+    ),
   );
   const articles = mergeBySlug(
     applyNewLegacyRevisions(base.articles, oldArticles),
-    valid(data.articles, (v) => articleSchema.safeParse(v)),
+    valid(data.articles, (v) =>
+      articleSchema.safeParse(resolveEditorialImages(v)),
+    ),
   );
   const projectOrder = new Map(base.projects.map((p, i) => [p.slug, i]));
   projects.sort(

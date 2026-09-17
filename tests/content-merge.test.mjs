@@ -138,3 +138,60 @@ test("published empty gallery clears starter images while absent gallery preserv
   }).projects.find((item) => item.slug === project.slug);
   assert.deepEqual(retained.gallery, gallery);
 });
+
+test("editor crops survive cover, gallery, body and legacy content validation", () => {
+  const source =
+    "https://cdn.sanity.io/images/508uqyvi/production/abcdef-1000x800.png";
+  const crop = { left: 0.1, top: 0.2, right: 0.15, bottom: 0.05 };
+  const image = { asset: { url: source }, crop };
+  const picture = {
+    _type: "contentImage",
+    _key: "image",
+    url: source,
+    alt: "Framed screenshot",
+    upload: image,
+  };
+  const project = {
+    ...seed.projects[0],
+    image: source,
+    coverUpload: image,
+    gallery: [picture],
+    body: [picture],
+  };
+  const article = {
+    ...seed.articles[0],
+    cover: source,
+    coverUpload: image,
+    body: [picture],
+  };
+  const content = mergeContent(seed, {
+    projects: [project],
+    articles: [article],
+  });
+  const p = content.projects.find((p) => p.slug === project.slug);
+  const a = content.articles.find((a) => a.slug === article.slug);
+  for (const url of [
+    p.image,
+    p.gallery[0].url,
+    p.body[0].url,
+    a.cover,
+    a.body[0].url,
+  ]) {
+    assert.equal(new URL(url).searchParams.get("rect"), "100,160,750,600");
+  }
+  const legacy = convertLegacyProject({
+    title: "Crop",
+    slug: "crop",
+    summary: "Crop",
+    coverImage: image,
+    gallery: [image],
+  });
+  assert.equal(
+    new URL(legacy.image).searchParams.get("rect"),
+    "100,160,750,600",
+  );
+  assert.equal(
+    new URL(legacy.gallery[0].url).searchParams.get("rect"),
+    "100,160,750,600",
+  );
+});

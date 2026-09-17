@@ -184,6 +184,9 @@ importers:
       '@sanity/client':
         specifier: ^8.6.2
         version: 8.6.2
+      '@sanity/image-url':
+        specifier: 2.1.1
+        version: 2.1.1
       gsap:
         specifier: ^3.15.0
         version: 3.15.0
