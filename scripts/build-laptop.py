@@ -130,6 +130,44 @@ def world_bounds(obj: bpy.types.Object) -> tuple[Vector, Vector]:
     )
 
 
+def bounds_union(objects: list[bpy.types.Object]) -> tuple[Vector, Vector]:
+    bounds = [world_bounds(obj) for obj in objects]
+    return (
+        Vector((min(pair[0].x for pair in bounds), min(pair[0].y for pair in bounds), min(pair[0].z for pair in bounds))),
+        Vector((max(pair[1].x for pair in bounds), max(pair[1].y for pair in bounds), max(pair[1].z for pair in bounds))),
+    )
+
+
+def apply_bevels_and_join(objects: list[bpy.types.Object], joined_name: str, part_description: str) -> bpy.types.Object:
+    """Apply static bevels, then join world-preserving meshes into one draw call."""
+    if not objects:
+        raise RuntimeError(f"Cannot join empty object group: {joined_name}")
+    source_names = [obj.name for obj in objects]
+    for obj in objects:
+        if obj.type != "MESH":
+            raise RuntimeError(f"Non-mesh object in {joined_name}: {obj.name}")
+        if obj.data.users > 1:
+            obj.data = obj.data.copy()
+        bpy.ops.object.select_all(action="DESELECT")
+        obj.select_set(True)
+        bpy.context.view_layer.objects.active = obj
+        for modifier in list(obj.modifiers):
+            if modifier.type == "BEVEL":
+                bpy.ops.object.modifier_apply(modifier=modifier.name)
+
+    bpy.ops.object.select_all(action="DESELECT")
+    for obj in objects:
+        obj.select_set(True)
+    bpy.context.view_layer.objects.active = objects[0]
+    bpy.ops.object.join()
+    joined = bpy.context.object
+    joined.name = joined_name
+    joined["part"] = part_description
+    joined["merged_from"] = ",".join(source_names)
+    joined["static_geometry_optimization"] = "Bevels applied and meshes joined; world bounds preserved."
+    return joined
+
+
 def make_camera() -> bpy.types.Object:
     data = bpy.data.cameras.new("Camera_ThreeQuarter")
     camera = bpy.data.objects.new("Camera_ThreeQuarter", data)
@@ -208,8 +246,8 @@ def assign_screen_front_uv(obj: bpy.types.Object) -> None:
     if x_span <= 0.0 or z_span <= 0.0:
         raise RuntimeError("ScreenDisplay front face has invalid planar UV extents")
 
-    # glTF/Three.js uses UV origin at the upper-left for loaded textures.  Put the
-    # top of the physical screen at V=0 so CanvasTexture.flipY=false stays upright.
+    # Put the top at V=0 in Blender. The glTF exporter flips the V coordinate;
+    # the runtime CanvasTexture uses flipY=true to keep the editor upright.
     for polygon in front_faces:
         for loop_index in polygon.loop_indices:
             vertex = mesh.vertices[mesh.loops[loop_index].vertex_index].co
@@ -219,8 +257,8 @@ def assign_screen_front_uv(obj: bpy.types.Object) -> None:
     mesh.update()
     obj["uv_mapping"] = "Negative-Y planar front: U=(X-minX)/(maxX-minX), V=(maxZ-Z)/(maxZ-minZ); top=V0, bottom=V1."
     obj["uv_range"] = "U 0..1, V 0..1 across the visible front screen surface"
-    obj["canvas_texture_flipY"] = False
-    obj["canvas_texture_flipY_expectation"] = "Set THREE.CanvasTexture.flipY = false when replacing ScreenDisplay material through GLTFLoader; draw the canvas upright from its top-left origin."
+    obj["canvas_texture_flipY"] = True
+    obj["canvas_texture_flipY_expectation"] = "Set THREE.CanvasTexture.flipY = true when replacing ScreenDisplay material through GLTFLoader; draw the canvas upright from its top-left origin."
 
 
 def build_model() -> list[bpy.types.Object]:
@@ -311,6 +349,24 @@ def build_model() -> list[bpy.types.Object]:
             slot = rounded_cube(f"SpeakerSlot_{side}{slot_index + 1:02d}", (x, y, 0.755), (0.22, 0.22, 0.065), slot_material, bevel=0.065, segments=2)
             slot["part"] = "recessed speaker slot"
             speaker_objects.append(slot)
+
+    keycap_objects = [obj for obj in keyboard_objects]
+    speaker_objects_before_join = [obj for obj in speaker_objects]
+    keycap_bounds_before = bounds_union(keycap_objects)
+    speaker_bounds_before = bounds_union(speaker_objects_before_join)
+    joined_keycaps = apply_bevels_and_join(keycap_objects, "KeyboardKeycaps", "static recessed keycaps and spacebar")
+    joined_speakers = apply_bevels_and_join(speaker_objects_before_join, "SpeakerSlots", "static recessed speaker slots")
+    keycap_bounds_after = world_bounds(joined_keycaps)
+    speaker_bounds_after = world_bounds(joined_speakers)
+    bound_tolerance = 1e-5
+    for label, before, after in (
+        ("KEYCAPS", keycap_bounds_before, keycap_bounds_after),
+        ("SPEAKERS", speaker_bounds_before, speaker_bounds_after),
+    ):
+        if any(abs(before[side][index] - after[side][index]) > bound_tolerance for side in (0, 1) for index in range(3)):
+            raise RuntimeError(f"{label} world bounds changed during static mesh join")
+        print(f"OPTIMIZATION_{label}_BOUNDS_BEFORE={tuple(round(v, 6) for v in before[0])}..{tuple(round(v, 6) for v in before[1])}")
+        print(f"OPTIMIZATION_{label}_BOUNDS_AFTER={tuple(round(v, 6) for v in after[0])}..{tuple(round(v, 6) for v in after[1])}")
 
     # A quiet ground plane keeps the product render grounded without exporting scenery into the GLB.
     ground = rounded_cube("StudioFloor", (0.0, 0.0, -0.10), (33.0, 30.0, 0.16), floor_material, bevel=0.05, segments=2)

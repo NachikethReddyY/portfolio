@@ -15,6 +15,12 @@ export default function PageMetadata() {
         (prefix) => location.pathname === prefix + p.slug,
       ),
     );
+    const missing =
+      !project &&
+      !article &&
+      !["/", "/projects", "/writing", "/blog", "/about", "/contact"].includes(
+        location.pathname,
+      );
     const title = project
       ? `${project.name} — Nachiketh Reddy`
       : article
@@ -23,10 +29,15 @@ export default function PageMetadata() {
           ? "Projects — Nachiketh Reddy"
           : location.pathname === "/writing"
             ? "Writing — Nachiketh Reddy"
-            : "Nachiketh Reddy — Full-stack developer & aspiring AI engineer";
+            : missing
+              ? "Page not found — Nachiketh Reddy"
+              : "Nachiketh Reddy — Full-stack developer & aspiring AI engineer";
     const description =
       project?.summary ||
       article?.excerpt ||
+      (missing
+        ? "This page could not be found. Explore Nachiketh’s projects and writing."
+        : "") ||
       "Student developer in Singapore building web applications, local AI tools, and agent workflows. Available for internships and projects.";
     const origin = resolveSiteUrl(import.meta.env.VITE_SITE_URL);
     const canonical = new URL(
@@ -57,7 +68,10 @@ export default function PageMetadata() {
     setMeta(
       "property",
       "og:image",
-      new URL(project?.image || "/images/nachiketh-sketch.webp", origin).href,
+      new URL(
+        project?.image || article?.cover || "/images/nachiketh-sketch.webp",
+        origin,
+      ).href,
     );
     setMeta("name", "twitter:card", "summary_large_image");
     setMeta("name", "twitter:creator", "@Nachikethreddyy");

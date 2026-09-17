@@ -1,3 +1,4 @@
+import { portfolioImage } from "../content/images";
 import { lazy, Suspense } from "react";
 import type { PortableTextBlock } from "@portabletext/types";
 import { PortableText } from "@portabletext/react";
@@ -7,7 +8,11 @@ const components: PortableTextComponents = {
   types: {
     contentImage: ({ value }) => (
       <figure>
-        <img src={value.url} alt={value.alt} loading="lazy" />
+        <img
+          src={portfolioImage(value.url, 1400)}
+          alt={value.alt}
+          loading="lazy"
+        />
         {value.caption && <figcaption>{value.caption}</figcaption>}
       </figure>
     ),

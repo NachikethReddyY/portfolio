@@ -194,6 +194,12 @@ export function mergeContent(
   payload: unknown,
 ): PortfolioContent {
   const data = record(payload);
+  const hiddenProjects = new Set(
+    list(data.hiddenProjects).filter((v) => typeof v === "string"),
+  );
+  const hiddenArticles = new Set(
+    list(data.hiddenArticles).filter((v) => typeof v === "string"),
+  );
   const profile = profileSchema.safeParse(data.profile);
   const oldProjects = list(data.legacyProjects).flatMap((p) => {
     const project = convertLegacyProject(p);
@@ -222,10 +228,10 @@ export function mergeContent(
   );
   return {
     profile: profile.success ? profile.data : base.profile,
-    projects,
-    articles: articles.sort(
-      (a, b) => Date.parse(b.publishedAt) - Date.parse(a.publishedAt),
-    ),
+    projects: projects.filter((project) => !hiddenProjects.has(project.slug)),
+    articles: articles
+      .filter((article) => !hiddenArticles.has(article.slug))
+      .sort((a, b) => Date.parse(b.publishedAt) - Date.parse(a.publishedAt)),
     experience: experience.length ? experience : base.experience,
   };
 }

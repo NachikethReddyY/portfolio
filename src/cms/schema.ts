@@ -1,6 +1,16 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
 
 const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+const visibilityField = (group: string) =>
+  defineField({
+    name: "hidden",
+    title: "Hide from portfolio",
+    type: "boolean",
+    group,
+    initialValue: false,
+    description:
+      "Publish this change to hide the matching project or article, including its bundled starter version. Turn off and publish to show it again.",
+  });
 
 const slugField = (source: string) =>
   defineField({
@@ -491,6 +501,7 @@ export const caseStudy = defineType({
       validation: (rule) => rule.required(),
     }),
     sourceLinksField("links", "Project links", "links"),
+    visibilityField("presentation"),
     bodyField("Case study body", "content"),
   ],
   preview: {
@@ -579,6 +590,7 @@ export const article = defineType({
     }),
     bodyField("Article body", "content"),
     sourceLinksField("sources", "Sources", "links"),
+    visibilityField("metadata"),
   ],
   preview: {
     select: {
@@ -597,6 +609,15 @@ export const experience = defineType({
     { name: "links", title: "Links" },
   ],
   fields: [
+    defineField({
+      name: "order",
+      title: "Timeline order",
+      type: "number",
+      group: "details",
+      initialValue: 0,
+      description: "Lower numbers appear first.",
+      validation: (rule) => rule.integer().min(0),
+    }),
     defineField({
       name: "id",
       title: "ID",

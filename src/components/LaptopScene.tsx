@@ -67,7 +67,7 @@ export default function LaptopScene() {
   const [failed, setFailed] = useState(false);
   useEffect(() => {
     const host = container.current;
-    if (!host) return;
+    if (!host || failed) return;
     let renderer: THREE.WebGLRenderer;
     try {
       renderer = new THREE.WebGLRenderer({
@@ -123,15 +123,16 @@ export default function LaptopScene() {
     floor.receiveShadow = true;
     scene.add(floor);
     let disposed = false;
+    let unavailable = false;
     let visible = true;
     let model: THREE.Group | undefined;
     let frame = 0;
     const render = () => {
-      if (disposed || !visible || document.hidden) return;
+      if (disposed || unavailable || !visible || document.hidden) return;
       renderer.render(scene, camera);
     };
     const requestRender = () => {
-      if (frame) return;
+      if (disposed || unavailable || frame) return;
       frame = requestAnimationFrame(() => {
         frame = 0;
         render();
@@ -173,6 +174,7 @@ export default function LaptopScene() {
     document.addEventListener("visibilitychange", requestRender);
     const onLost = (event: Event) => {
       event.preventDefault();
+      unavailable = true;
       setFailed(true);
     };
     renderer.domElement.addEventListener("webglcontextlost", onLost);
@@ -273,7 +275,10 @@ export default function LaptopScene() {
       },
       undefined,
       () => {
-        if (!disposed) setFailed(true);
+        if (!disposed) {
+          unavailable = true;
+          setFailed(true);
+        }
       },
     );
     return () => {
@@ -300,7 +305,7 @@ export default function LaptopScene() {
       renderer.dispose();
       renderer.domElement.remove();
     };
-  }, []);
+  }, [failed]);
   return (
     <div
       className={`laptop-scene ${ready ? "is-ready" : ""} ${failed ? "is-failed" : ""}`}

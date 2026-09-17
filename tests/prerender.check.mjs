@@ -2,9 +2,13 @@ import assert from "node:assert/strict";
 import { readFileSync, existsSync } from "node:fs";
 import { parse } from "parse5";
 import { portfolioSchema } from "../src/content/validation.ts";
-const seed = JSON.parse(readFileSync("src/content/seed.json", "utf8"));
 const routes = JSON.parse(readFileSync("dist/route-manifest.json", "utf8"));
-assert.ok(routes.length >= seed.projects.length + seed.articles.length + 3);
+assert.ok(routes.length >= 3);
+assert.equal(
+  new Set(routes).size,
+  routes.length,
+  "route manifest contains no duplicates",
+);
 
 function descendants(node) {
   return [node, ...(node.childNodes || []).flatMap(descendants)];
@@ -70,15 +74,17 @@ for (const path of routes) {
     );
   }
 }
-const legacy = readFileSync("dist/writing/lah01/index.html", "utf8");
-assert.ok(
-  legacy.includes("Local AI setups have a problem"),
-  "legacy article text exists before JavaScript",
-);
-assert.ok(
-  !legacy.includes('hidden id="S:'),
-  "legacy article text is not hidden behind streaming JavaScript",
-);
+if (routes.includes("/writing/lah01")) {
+  const legacy = readFileSync("dist/writing/lah01/index.html", "utf8");
+  assert.ok(
+    legacy.includes("Local AI setups have a problem"),
+    "legacy article text exists before JavaScript",
+  );
+  assert.ok(
+    !legacy.includes('hidden id="S:'),
+    "legacy article text is not hidden behind streaming JavaScript",
+  );
+}
 console.log(
   `Verified ${routes.length} prerendered routes: headings, metadata, local images, internal links, and readable legacy article.`,
 );

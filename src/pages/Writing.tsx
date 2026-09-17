@@ -1,3 +1,4 @@
+import { portfolioImage } from "../content/images";
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useContent } from "../content/store";
@@ -56,6 +57,9 @@ export default function Writing() {
           <p>
             Notes from building software, working with AI, and finding out why
             the first attempt didn’t work.
+            <a className="writing-rss" href="/rss.xml">
+              Follow via RSS <Arrow diagonal />
+            </a>
           </p>
           <label className="search-field">
             <span>Search writing</span>
@@ -121,7 +125,7 @@ export function ArticleDetail() {
       <div className="article-body">
         {article.cover && (
           <figure>
-            <img src={article.cover} alt="" />
+            <img src={portfolioImage(article.cover, 1400)} alt="" />
           </figure>
         )}
         <RichContent body={article.body} />

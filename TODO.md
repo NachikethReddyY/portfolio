@@ -101,4 +101,31 @@ Release refinement:
 - [x] Let an authenticated editor create missing starter drafts inside Studio, with a visible content summary and no overwriting/publishing.
 - [x] Share the schema-shaped draft transformation between Studio and the existing CLI export; test idempotent import selection.
 - [x] Use published content at build time so prerendered pages and metadata reflect CMS edits; keep offline fallback.
-- [ ] Verify local Studio tool rendering, type/build checks, and deployed content behavior; hosted writes remain editor-triggered.
+- [x] Verify local Studio tool rendering, type/build checks, and deployed content behavior; hosted writes remain editor-triggered.
+
+## Final public-link and motion review
+
+- [x] Correct article provenance links after repository migration and resolve confirmed unavailable project destinations without losing case-study content.
+- [x] Review animation lifecycle, hidden-tab work, WebGL loss and reduced-motion changes; fix concrete failures and verify in the browser.
+- [ ] Verify article and project navigation, production CMS refinement, and final deployed state.
+
+## CMS editorial controls
+
+- [x] Add explicit hide controls for projects and articles so an editor can remove starter content from the public site without deleting it; drafts must not affect public visibility.
+- [x] Preserve stable experience IDs and add an editable timeline order, with query and merge regression coverage.
+- [x] Verify hidden items stay out of published HTML, API, RSS and sitemap; preserve readable offline fallback.
+
+## Reading and legacy routes
+
+- [ ] Redirect legacy blog URLs to canonical writing pages at the hosting layer and verify the live responses.
+- [x] Expose the existing RSS feed from the writing index and give unknown pages accurate titles.
+
+## 3D delivery refinement
+
+- [x] Merge static keycap and speaker geometry while preserving the hinge, screen texture, connected silhouette, and fallback asset.
+- [x] Compare exported geometry bounds and draw-call count; inspect the optimized scene in the browser before release.
+
+## Image delivery
+
+- [x] Request appropriately sized Sanity CDN images for cards, case studies, and rich article content; preserve crop parameters and local assets.
+- [x] Verify the 4.7 MB original is replaced by a bounded response and visually inspect the affected project card.

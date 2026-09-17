@@ -842,10 +842,6 @@
       "featured": true,
       "links": [
         {
-          "label": "Live demo",
-          "url": "https://roadrunners-ten.vercel.app"
-        },
-        {
           "label": "Source",
           "url": "https://github.com/NachikethReddyY/roadrunners"
         }
@@ -1138,6 +1134,34 @@
           "markDefs": [],
           "listItem": "bullet",
           "level": 1
+        },
+        {
+          "_type": "block",
+          "_key": "availability-title",
+          "style": "h2",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "availability-title-text",
+              "text": "Project access",
+              "marks": []
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "_key": "availability-note",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "availability-note-text",
+              "text": "The earlier hosted demo is currently unavailable. The public repository remains available above.",
+              "marks": []
+            }
+          ]
         }
       ],
       "legacyRevision": "2026-08-02T10:36:23Z",
@@ -3583,7 +3607,7 @@
       "category": "AI systems",
       "summary": "A full-stack vulnerability scanner that combines dependency scanning, SAST checks, risk scoring, and AI-generated patch suggestions.",
       "headline": "Turns security review into a developer workflow by scanning dependencies and source code, then suggesting or generating fixes.",
-      "status": "Archived",
+      "status": "Built",
       "year": "Jun 2026",
       "image": "https://cdn.sanity.io/images/508uqyvi/production/bf12168d9b06a31ab77a1a70abaa0975929ae084-1920x1243.jpg",
       "imageAlt": "CodeProbe terminal scan reporting dependency vulnerabilities, exploit verification, patches, and a risk score.",
@@ -3963,7 +3987,7 @@
       "stack": [
         "Node.js / Express",
         "Secure Coding / OWASP",
-        "PostgreSQL / Supabase"
+        "MySQL"
       ],
       "role": "OWASP analyst for A01 Broken Access Control and A09 Logging & Monitoring",
       "featured": false,
@@ -5026,12 +5050,7 @@
       ],
       "role": "Full-stack developer across the static frontend, Express API, authentication, and MySQL data model",
       "featured": false,
-      "links": [
-        {
-          "label": "Source code",
-          "url": "https://github.com/ST0503-BED/bed-ca2-NachikethReddyY"
-        }
-      ],
+      "links": [],
       "body": [
         {
           "_type": "block",
@@ -5354,6 +5373,34 @@
             }
           ],
           "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "availability-title",
+          "style": "h2",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "availability-title-text",
+              "text": "Project access",
+              "marks": []
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "_key": "availability-note",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "availability-note-text",
+              "text": "The original coursework repository is not publicly available. This case study preserves the project overview.",
+              "marks": []
+            }
+          ]
         }
       ],
       "legacyRevision": "2026-08-02T11:40:05Z",
@@ -5370,7 +5417,7 @@
       "name": "LaunchCode",
       "category": "Web applications",
       "summary": "A multi-page learning hub that helps young developers discover courses, events, FAQs, and a clear path into building web applications.",
-      "headline": "Delivered a complete frontend coursework site with course discovery, events, registration, FAQ, and success flows across seven pages.",
+      "headline": "Delivered a complete frontend coursework site with course discovery, events, registration, FAQ, and success flows across six pages.",
       "status": "Built",
       "year": "Frontend Development CA2 · 2025",
       "image": "https://cdn.sanity.io/images/508uqyvi/production/e4c8e0de408d3112ca6086693ed3ccf1e1363b8b-3362x2100.jpg",
@@ -5471,7 +5518,7 @@
             {
               "_type": "span",
               "_key": "section-2-0-text",
-              "text": "Seven linked pages covering the landing experience, courses, events, FAQs, registration, and confirmation.",
+              "text": "Six linked pages covering the landing experience, courses, events, FAQs, registration, and confirmation.",
               "marks": []
             }
           ],
@@ -6780,10 +6827,6 @@
         {
           "label": "Source code",
           "url": "https://github.com/NachikethReddyY/reddone"
-        },
-        {
-          "label": "Live project",
-          "url": "https://reddone.vercel.app"
         }
       ],
       "body": [
@@ -7094,6 +7137,34 @@
             }
           ],
           "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "availability-title",
+          "style": "h2",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "availability-title-text",
+              "text": "Project access",
+              "marks": []
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "_key": "availability-note",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "availability-note-text",
+              "text": "The hosted demo is currently unavailable. The public repository remains available above.",
+              "marks": []
+            }
+          ]
         }
       ],
       "legacyRevision": "2026-08-02T11:39:43Z",
@@ -8214,7 +8285,7 @@
       "sources": [
         {
           "label": "Original portfolio source",
-          "url": "https://github.com/NachikethReddyY/portfolio/blob/main/src/lib/fallbackData.ts"
+          "url": "https://github.com/NachikethReddyY/portfolio/blob/8661591ab2285ca46dfc5244ee69304301d1651a/src/lib/fallbackData.ts"
         }
       ]
     },
@@ -8357,7 +8428,7 @@
       "sources": [
         {
           "label": "Original portfolio source",
-          "url": "https://github.com/NachikethReddyY/portfolio/blob/main/src/lib/fallbackData.ts"
+          "url": "https://github.com/NachikethReddyY/portfolio/blob/8661591ab2285ca46dfc5244ee69304301d1651a/src/lib/fallbackData.ts"
         }
       ]
     },
@@ -8500,7 +8571,7 @@
       "sources": [
         {
           "label": "Original portfolio source",
-          "url": "https://github.com/NachikethReddyY/portfolio/blob/main/src/lib/fallbackData.ts"
+          "url": "https://github.com/NachikethReddyY/portfolio/blob/8661591ab2285ca46dfc5244ee69304301d1651a/src/lib/fallbackData.ts"
         }
       ]
     },
@@ -8699,7 +8770,7 @@
       "sources": [
         {
           "label": "Original portfolio source",
-          "url": "https://github.com/NachikethReddyY/portfolio/blob/main/src/lib/fallbackData.ts"
+          "url": "https://github.com/NachikethReddyY/portfolio/blob/8661591ab2285ca46dfc5244ee69304301d1651a/src/lib/fallbackData.ts"
         }
       ]
     },

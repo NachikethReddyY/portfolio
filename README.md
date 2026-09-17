@@ -28,7 +28,7 @@ endpoints through the Vite middleware. `pnpm build` runs the type checks, builds
 the browser bundle, builds the SSR entry into `.evidence/build-ssr`, and
 loads published Sanity content (with a local fallback), prerenders its public routes into `dist/`, and checks their headings, metadata, images, internal links, and browser content snapshots. `pnpm preview` serves that build.
 `pnpm studio` starts Sanity's CLI development server, while `pnpm studio:build`
-builds the Studio bundle. For the embedded `/studio` route, run `pnpm dev` and
+builds the Studio bundle (use a separate output path when keeping a frontend build, for example `pnpm exec sanity build .evidence/studio-build`). For the embedded `/studio` route, run `pnpm dev` and
 open that route in the app.
 
 The focused content and server checks are in `tests/`; the full suite runs with
@@ -46,7 +46,7 @@ The route table is in `src/main.tsx`:
 | `/writing`        | Searchable writing index                                                |
 | `/writing/:slug`  | Article detail page                                                     |
 | `/blog`           | Redirect to `/writing`                                                  |
-| `/blog/:slug`     | Legacy article route handled by the article detail view                 |
+| `/blog/:slug`     | Permanent redirect to its canonical `/writing/:slug` route              |
 | `/about`          | Redirect to the home page's `#about` anchor                             |
 | `/contact`        | Redirect to the home page's `#contact` anchor                           |
 | `/studio/*`       | Lazy-loaded Sanity Studio                                               |
@@ -85,6 +85,8 @@ and the existing schemas from `sanity/schemaTypes/`; `sanity.config.ts` and
 `sanity.cli.ts` configure the same project and dataset for the Sanity CLI.
 
 The **Content setup** tab lists the starter documents and checks which are already present. After you confirm the dataset, **Create missing drafts** creates only missing documents using your editor session. It does not overwrite existing documents or publish anything. Review the drafts in **Content → Current content**, then publish them individually. The original LAH article and other preserved records remain under **Content → Existing content**. The CLI exporter and this screen share the same draft transformation.
+
+To retire a starter project or article, enable **Hide from portfolio** and publish that change. Deleting or unpublishing its CMS copy restores the bundled starter, so use this explicit hide control instead. Scheduled articles with matching starter slugs remain hidden until their publication date. Experience entries have a **Timeline order** field; lower numbers appear first. These controls affect presentation, not access permissions on the public Sanity dataset. During a complete CMS outage, server endpoints fall back to bundled public starter content.
 
 Published changes load on the public site automatically. A new Vercel build is needed to refresh the initial HTML, search metadata, and sharing previews. For automatic rebuilds, connect a Sanity publish webhook to a Vercel deploy hook in your own account settings; no deploy hook or write credential is stored in this repository.
 
@@ -213,3 +215,7 @@ The generated portrait is an ink-and-graphite illustration based on the user’s
 Generated evidence under `.evidence/` and local concepts under `artifacts/`
 are ignored by git. No deployment or hosted Sanity mutation is performed by
 the commands documented here.
+
+### Image delivery
+
+Sanity CDN images are requested at bounded widths with automatic format negotiation: 960 px for project cards, 1600 px for case-study covers, and 1400 px for article/gallery images. Existing editorial crop settings and local assets are preserved. The Blender model combines static keys and speaker slots into 17 mesh primitives while retaining the animated screen hinge.

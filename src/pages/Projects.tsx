@@ -1,3 +1,4 @@
+import { portfolioImage } from "../content/images";
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useContent } from "../content/store";
@@ -22,7 +23,11 @@ export function ProjectCard({
     >
       <div className="project-card-art">
         {project.image ? (
-          <img src={project.image} alt={project.imageAlt} loading="lazy" />
+          <img
+            src={portfolioImage(project.image, 960)}
+            alt={project.imageAlt}
+            loading="lazy"
+          />
         ) : (
           <ProjectPreview project={project} />
         )}
@@ -147,7 +152,10 @@ export function ProjectDetail() {
       </header>
       {project.image && (
         <div className="case-cover shell">
-          <img src={project.image} alt={project.imageAlt} />
+          <img
+            src={portfolioImage(project.image, 1600)}
+            alt={project.imageAlt}
+          />
         </div>
       )}
       <div className="case-body shell">
@@ -174,7 +182,11 @@ export function ProjectDetail() {
           <div className="project-gallery">
             {project.gallery?.map((image) => (
               <figure key={image.url}>
-                <img src={image.url} alt={image.alt} loading="lazy" />
+                <img
+                  src={portfolioImage(image.url, 1400)}
+                  alt={image.alt}
+                  loading="lazy"
+                />
                 {image.caption && <figcaption>{image.caption}</figcaption>}
               </figure>
             ))}

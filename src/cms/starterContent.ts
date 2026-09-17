@@ -129,6 +129,7 @@ export function createStarterDocuments(
       withDocumentMeta(
         {
           ...project,
+          hidden: false,
           slug: toSlug(project.slug),
         },
         `drafts.case-study-${project.slug}`,
@@ -147,6 +148,7 @@ export function createStarterDocuments(
           "stack",
           "role",
           "featured",
+          "hidden",
           "links",
           "body",
         ],
@@ -158,6 +160,7 @@ export function createStarterDocuments(
         withDocumentMeta(
           {
             ...article,
+            hidden: false,
             slug: toSlug(article.slug),
           },
           `drafts.article-${article.slug}`,
@@ -171,21 +174,28 @@ export function createStarterDocuments(
             "publishedAt",
             "readMinutes",
             "featured",
+            "hidden",
             "body",
             "sources",
           ],
         ),
       ),
-    ...content.experience.map((entry) =>
-      withDocumentMeta(entry, `drafts.experience-${entry.id}`, "experience", [
-        "id",
-        "organization",
-        "title",
-        "period",
-        "kind",
-        "description",
-        "url",
-      ]),
+    ...content.experience.map((entry, order) =>
+      withDocumentMeta(
+        { ...entry, order },
+        `drafts.experience-${entry.id}`,
+        "experience",
+        [
+          "order",
+          "id",
+          "organization",
+          "title",
+          "period",
+          "kind",
+          "description",
+          "url",
+        ],
+      ),
     ),
   ];
 }

@@ -82,3 +82,50 @@ test("published content query resolves image uploads, preserves legacy revisions
   assert.equal(result.legacyProjects[0]._updatedAt, "2026-09-17T14:00:00Z");
   assert.equal(result.legacyArticles[0]._updatedAt, "2026-09-17T15:00:00Z");
 });
+
+test("published visibility controls suppress hidden and rescheduled seed entries without leaking draft choices", async () => {
+  const dataset = [
+    {
+      _id: "case-hidden",
+      _type: "caseStudy",
+      slug: { current: "hidden-project" },
+      hidden: true,
+    },
+    {
+      _id: "drafts.case-draft",
+      _type: "caseStudy",
+      slug: { current: "draft-choice" },
+      hidden: true,
+    },
+    {
+      _id: "article-hidden",
+      _type: "article",
+      slug: { current: "hidden-note" },
+      hidden: true,
+      publishedAt: "2000-01-01T00:00:00Z",
+    },
+    {
+      _id: "article-future",
+      _type: "article",
+      slug: { current: "rescheduled-note" },
+      publishedAt: "2099-01-01T00:00:00Z",
+    },
+    {
+      _id: "drafts.article-hidden",
+      _type: "article",
+      slug: { current: "draft-note" },
+      hidden: true,
+    },
+    { _id: "experience-b", _type: "experience", id: "leadership", order: 2 },
+    { _id: "experience-a", _type: "experience", id: "education", order: 1 },
+  ];
+  const result = await (await evaluate(parse(contentQuery), { dataset })).get();
+  assert.deepEqual(result.projects, []);
+  assert.deepEqual(result.articles, []);
+  assert.deepEqual(result.hiddenProjects, ["hidden-project"]);
+  assert.deepEqual(result.hiddenArticles, ["hidden-note", "rescheduled-note"]);
+  assert.deepEqual(
+    result.experience.map((x) => x.id),
+    ["education", "leadership"],
+  );
+});

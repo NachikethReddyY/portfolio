@@ -1,4 +1,5 @@
 import { test } from "node:test";
+import { createRss, createSitemap } from "../server/publishing.ts";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import {
@@ -100,4 +101,25 @@ test("legacy category inference matches AI terms rather than fragments inside or
     }).category,
     "AI systems",
   );
+});
+
+test("published hide lists remove matching seed and remote entries and leave unrelated content intact", () => {
+  const hiddenProject = seed.projects[0].slug;
+  const hiddenArticle = seed.articles[0].slug;
+  const result = mergeContent(seed, {
+    hiddenProjects: [hiddenProject, null, { slug: seed.projects[1].slug }],
+    hiddenArticles: [hiddenArticle],
+    projects: [seed.projects[0]],
+    articles: [seed.articles[0]],
+  });
+  assert.equal(result.projects.length, seed.projects.length - 1);
+  assert.equal(result.articles.length, seed.articles.length - 1);
+  assert.ok(!result.projects.some((p) => p.slug === hiddenProject));
+  assert.ok(!result.articles.some((a) => a.slug === hiddenArticle));
+  assert.ok(result.projects.some((p) => p.slug === seed.projects[1].slug));
+  const rss = createRss(result, "https://example.com");
+  const sitemap = createSitemap(result, "https://example.com");
+  assert.ok(!rss.includes(`/writing/${hiddenArticle}</`));
+  assert.ok(!sitemap.includes(`/writing/${hiddenArticle}</`));
+  assert.ok(!sitemap.includes(`/projects/${hiddenProject}</`));
 });

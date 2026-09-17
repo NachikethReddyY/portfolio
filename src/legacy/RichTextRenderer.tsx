@@ -1,3 +1,4 @@
+import { portfolioImage } from "../content/images";
 import {
   PortableText,
   type PortableTextReactComponents,
@@ -9,7 +10,8 @@ import { useEffect, useId, useState, type ReactNode } from "react";
 import "katex/dist/katex.min.css";
 
 import { imageSource } from "../content/merge";
-const imageUrlFor = (value: unknown, _width?: number) => imageSource(value);
+const imageUrlFor = (value: unknown, width = 1400) =>
+  portfolioImage(imageSource(value), width);
 
 type RichTextRendererProps = {
   value?: PortableTextBlock[] | string;
