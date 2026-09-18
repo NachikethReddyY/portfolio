@@ -5076,3 +5076,57 @@ em {
 :root { --font-mono: "Geist Mono Variable", monospace; --font-pixel: "Geist Pixel", monospace; }
 code, pre, kbd, samp { font-family: var(--font-mono); }
 .font-pixel { font-family: var(--font-pixel); }
+
+/* The approved case-study interlude borrows the linework of an architectural plan. */
+.case-chapter-number { display: block; color: var(--brand-text); font: 13px/1.4 var(--font-mono); margin-bottom: 14px; }
+.case-blueprint { --draft: #d9e8ff; color: var(--draft); background: #143365; border: 1px solid #b6cffb88; outline: 1px solid #b6cffb55; outline-offset: -8px; padding: clamp(22px,3vw,38px); margin: 10px 0 85px; scroll-margin-top: 115px; }
+.blueprint-heading { border-bottom: 1px solid #b6cffb66; padding-bottom: 28px; margin-bottom: 30px; }
+.blueprint-heading h2 { color: #f1f6ff; font-size: clamp(28px,3vw,42px); line-height: 1.15; letter-spacing: -.045em; margin: 0 0 18px; }
+.blueprint-heading p { color: #c0d1ed; line-height: 1.7; max-width: 650px; margin: 0; }
+.blueprint-layout { display: grid; grid-template-columns: minmax(0,1.15fr) minmax(0,1fr); gap: 30px; align-items: start; }
+.blueprint-sheet { position: sticky; top: 140px; margin: 0; min-width: 0; }
+.blueprint-drawing { display: block; width: 100%; height: auto; overflow: visible; }
+.blueprint-drawing text { fill: currentColor; font-family: var(--font-mono); }
+.blueprint-dimensions { color: #aac8f0; font-size: 11px; }
+.blueprint-dimensions path { fill: none; stroke: currentColor; stroke-width: .8; }
+.room-fill { fill: #d5e8ff; opacity: .1; }
+.room-wall { fill: none; stroke: #d9e8ff; stroke-width: 1.5; }
+.room-detail { fill: none; stroke: #b6cffb88; stroke-width: 1; }
+.room-number { font-size: 12px; }
+.room-name { font-size: 18px; }
+.room-subtitle { font-size: 11px; opacity: .8; }
+.blueprint-route { fill: none; stroke: #aacdff; stroke-width: 2; }
+.blueprint-title-block { border: 1px solid #b6cffb88; display: grid; grid-template-columns: 1.2fr .8fr 1fr; margin-top: 16px; font: 10px/1.6 var(--font-mono); }
+.blueprint-title-block > span { padding: 10px; color: #acc5e9; }
+.blueprint-title-block > span + span { border-left: 1px solid #b6cffb88; }
+.blueprint-title-block strong { display: block; font-size: 11px; font-weight: 500; color: #eef5ff; margin-top: 4px; overflow-wrap: anywhere; }
+.blueprint-step { min-height: 400px; display: flex; flex-direction: column; justify-content: center; padding: 20px 0 50px; }
+.blueprint-step + .blueprint-step { border-top: 1px solid #b6cffb44; }
+.blueprint-step-number { font: 12px/1.5 var(--font-mono); color: #bed8ff; margin-bottom: 18px; }
+.blueprint-step h3 { color: #f1f6ff; font-size: clamp(23px,2vw,29px); line-height: 1.25; margin: 0 0 18px; letter-spacing: -.035em; }
+.blueprint-step p { font-size: 16px; line-height: 1.8; color: #c5d5ee; margin: 0; }
+.blueprint-limit { border-top: 1px solid #b6cffb66; padding-top: 22px; margin: 0; color: #b8cae6; font-size: 14px; line-height: 1.7; }
+@media(max-width:999px) {
+ .blueprint-layout { grid-template-columns: 1fr; gap: 24px; }
+ .blueprint-sheet { position: static; max-width: 650px; width: 100%; margin-inline: auto; }
+ .blueprint-step { min-height: 0; padding: 28px 0; }
+}
+@media(max-width:700px) {
+ .case-blueprint { padding: 24px 18px; margin-bottom: 50px; }
+ .blueprint-heading { padding-bottom: 22px; margin-bottom: 20px; }
+ .blueprint-title-block > span { padding: 7px; }
+ .blueprint-step p { font-size: 16px; }
+ .blueprint-title-block { grid-template-columns: 1fr; }
+ .blueprint-title-block > span { display: flex; justify-content: space-between; gap: 15px; font-size: 11px; }
+ .blueprint-title-block strong { margin: 0; }
+ .blueprint-title-block > span + span { border-left: 0; border-top: 1px solid #b6cffb66; }
+}
+@media(prefers-reduced-motion:reduce) {
+ .blueprint-sheet { position: static; }
+ .blueprint-step { min-height: 0; padding: 20px 0 30px; }
+}
+@media(max-width:700px) {
+ .blueprint-drawing .room-name { font-family: 'Geist Variable', sans-serif; font-size: 27px; font-weight: 500; }
+ .blueprint-drawing .room-number { font-size: 19px; }
+ .blueprint-drawing .room-subtitle, .blueprint-dimensions text { display: none; }
+}

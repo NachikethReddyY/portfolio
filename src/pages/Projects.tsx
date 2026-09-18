@@ -10,6 +10,7 @@ import { ReadingContents } from "../components/ReadingContents";
 import { readingSections } from "../lib/readingContents";
 import { useMemo, useRef, useEffect } from "react";
 import { ProjectGallery } from "../components/ProjectGallery";
+import { CaseBlueprint, blueprintFor } from "../components/CaseBlueprint";
 import { previewTilt } from "../lib/workInteractions";
 
 export function ProjectCard({
@@ -152,15 +153,23 @@ export function ProjectDetail() {
   const { projects } = useContent();
   const project = projects.find((p) => p.slug === slug);
   const scope = usePageMotion(slug);
+  const blueprint = blueprintFor(slug ?? "");
   const sections = useMemo(
     () => [
       { id: "project-overview", label: "Overview" },
       ...(project?.gallery?.length
         ? [{ id: "project-highlights", label: "Highlights" }]
         : []),
-      ...readingSections(project?.body ?? []),
+      ...readingSections(project?.body ?? []).flatMap((section, index) =>
+        index === 1 && blueprint
+          ? [
+              section,
+              { id: "project-blueprint", label: "Workflow & decisions" },
+            ]
+          : [section],
+      ),
     ],
-    [project],
+    [project, blueprint],
   );
   if (!project) return <NotFound />;
   const next = projects[(projects.indexOf(project) + 1) % projects.length];
@@ -232,9 +241,22 @@ export function ProjectDetail() {
             </section>
           )}
           {chapters.map((chapter, index) => (
-            <section className="case-chapter" key={chapter[0]?._key ?? index}>
-              <RichContent body={chapter} />
-            </section>
+            <div className="case-chapter-group" key={chapter[0]?._key ?? index}>
+              <section className="case-chapter">
+                <span className="case-chapter-number">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <RichContent body={chapter} />
+              </section>
+              {index === 1 && blueprint && (
+                <CaseBlueprint
+                  key={project.slug}
+                  study={blueprint}
+                  name={project.name}
+                  status={project.status}
+                />
+              )}
+            </div>
           ))}
           {project.legacyBody && (
             <LegacyRichContent body={project.legacyBody} />

@@ -34,8 +34,18 @@ export function usePageMotion(key?: string) {
       document.fonts.ready.then(() => {
         if (active) ScrollTrigger.refresh();
       });
+      // Gallery images can finish after the fonts. Refresh measured scroll positions
+      // when page geometry changes, rather than leaving later chapters out of sync.
+      let refreshFrame = 0;
+      const observer = new ResizeObserver(() => {
+        cancelAnimationFrame(refreshFrame);
+        refreshFrame = requestAnimationFrame(() => ScrollTrigger.refresh());
+      });
+      if (scope.current) observer.observe(scope.current);
       return () => {
         active = false;
+        observer.disconnect();
+        cancelAnimationFrame(refreshFrame);
         mm.revert();
       };
     },

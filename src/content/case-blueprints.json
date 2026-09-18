@@ -1,0 +1,577 @@
+{
+  "vsms": {
+    "title": "Follow the participant, not the dashboard.",
+    "summary": "The event crosses five staff roles. The design work starts by making each handoff explicit.",
+    "limit": "In development: workflow questions, tablet testing and synchronisation decisions still need validation.",
+    "steps": [
+      {
+        "label": "Arrival",
+        "detail": "Registration · consent",
+        "title": "Give each role a clear starting point.",
+        "body": "I brought the requirements together as user stories, role workflows and open questions. Registration and consent establish the participant’s place in the event; administrators need a wider view. Mapping those responsibilities first gave the team a basis for discussing navigation instead of treating an early dashboard as the specification."
+      },
+      {
+        "label": "Screening",
+        "detail": "Queue · stations",
+        "title": "Make the next action easy to find.",
+        "body": "Queue staff and screening-station staff need different information from the same event. The tablet direction prioritises readable controls and visible progress because staff may be moving between stations. Large targets and clear spacing are practical design choices here; representative-device testing is still needed to establish how well they work."
+      },
+      {
+        "label": "Review",
+        "detail": "Results · referral",
+        "title": "Keep the handoff understandable.",
+        "body": "Reviewers need the screening information that supports their next decision. The workflow also includes referrals and event monitoring, so the interface cannot stop at a completed station. I documented these transitions alongside the unresolved client questions. Offline and synchronisation behaviour remain part of the architecture discussion rather than a claim of a finished deployment."
+      }
+    ]
+  },
+  "lah": {
+    "title": "Keep the agent loop understandable.",
+    "summary": "A local model, tool results and durable context all have to work together.",
+    "limit": "Active team project. The repository is private; safer write tools and broader provider evaluation remain future work.",
+    "steps": [
+      {
+        "label": "Request",
+        "detail": "Local server · stream",
+        "title": "Start with visible progress.",
+        "body": "LAH connects an OpenAI-compatible local server to a TypeScript agent loop. My work includes streaming-response parsing and experiments with LM Studio. Incremental output matters because a long thinking period otherwise looks like a stalled application. Loading, thinking and response feedback are still being refined as the terminal interface develops."
+      },
+      {
+        "label": "Tools",
+        "detail": "Read-only operations",
+        "title": "Make tool results part of the conversation.",
+        "body": "The early tool set focuses on non-destructive inspection of the local environment. That keeps the feedback loop easier to understand while we work on tool calling and streamed output. A model proposing an operation, the harness performing it, and the result returning to context are separate steps; reliability depends on all three."
+      },
+      {
+        "label": "Context",
+        "detail": "Plans · durable memory",
+        "title": "Decide what should survive compaction.",
+        "body": "Small context windows make it expensive to resend an entire conversation, but aggressive compaction can lose the plan. The team is experimenting with what stays in context and what belongs in durable memory. This is an open systems question, so the case study describes the tradeoff without claiming that a memory strategy has already solved it."
+      }
+    ]
+  },
+  "roadrunners": {
+    "title": "Turn a goal into a path people can revisit.",
+    "summary": "The MVP connects a career goal, a generated roadmap and interactive practice.",
+    "limit": "Hackathon MVP. Curriculum quality and completion analytics still need deeper evaluation.",
+    "steps": [
+      {
+        "label": "Goal",
+        "detail": "Career direction",
+        "title": "Make the first input concrete.",
+        "body": "The starting point is a career goal rather than an empty course catalogue. That gives the roadmap generation a direction and makes the core demo loop easier to follow. Under hackathon time pressure, the product needed to show how a learner could move from an intention into a visible next step."
+      },
+      {
+        "label": "Roadmap",
+        "detail": "Branches · pivots",
+        "title": "Treat the plan as revisable.",
+        "body": "The generated journey includes branches and pivots instead of a single static list. XP, streaks and maps make progress visible, but they do not establish learning quality by themselves. Validated fallback content keeps the experience usable when a model call is unavailable, so the generation service is not the only path through the product."
+      },
+      {
+        "label": "Practice",
+        "detail": "CodeCasts · checkpoints",
+        "title": "Connect the map to something actionable.",
+        "body": "CodeCasts bring editable code, checkpoints and optional narration into the journey. They give the roadmap a practice surface rather than ending at recommendations. The next step is to evaluate the curriculum and turn these interactions into reusable lesson templates; the MVP does not yet demonstrate improved learning outcomes."
+      }
+    ]
+  },
+  "lumina": {
+    "title": "A ticket is a history of decisions.",
+    "summary": "The interface and database model follow the ticket lifecycle together.",
+    "limit": "Built as a coursework product. Production authentication, routing configuration and deeper reporting remain next steps.",
+    "steps": [
+      {
+        "label": "Intake",
+        "detail": "Onboarding · ticket",
+        "title": "Model more than the form.",
+        "body": "Lumina includes onboarding, approvals, comments and notifications around the ticket itself. A form-only view would miss the work that follows submission. Building the React interface alongside the Express API made those states part of the same workflow rather than separate screens that happen to share a ticket identifier."
+      },
+      {
+        "label": "Assignment",
+        "detail": "Routing · ownership",
+        "title": "Preserve who was responsible.",
+        "body": "The PostgreSQL design represents assignment history explicitly. That supports a clearer account of how a ticket moved between people and gives reporting a useful source of truth. AI-assisted routing sits within this visible workflow: the user still needs to understand and change the assignment state."
+      },
+      {
+        "label": "Review",
+        "detail": "Audit · reporting",
+        "title": "Make the history useful later.",
+        "body": "Dashboards and reporting helpers draw on the stored lifecycle, including assignment changes and metadata. This made database design central to the interface work, not an implementation detail added afterward. The current project still needs stronger production authentication and configurable routing rules before the design can be treated as a production helpdesk."
+      }
+    ]
+  },
+  "model-shelf": {
+    "title": "Make the model folder an interface.",
+    "summary": "A readable shelf connects files on disk to the information a runtime needs.",
+    "limit": "In development. Metadata validation and additional runtime adapters remain planned work.",
+    "steps": [
+      {
+        "label": "Organise",
+        "detail": "Visible model files",
+        "title": "Keep the storage understandable.",
+        "body": "The shelf conventions cover GGUF, MLX and safetensors without hiding the models behind a database or background service. The folder itself is intended to be readable by a person and an agent. That choice keeps inspection straightforward and makes the storage layout part of the product contract."
+      },
+      {
+        "label": "Resolve",
+        "detail": "Format · publisher · size",
+        "title": "Answer the questions before launch.",
+        "body": "The CLI resolver brings together model format, publisher, quantisation and disk or memory expectations. These details matter when several runtimes and model formats share one computer. A useful resolution result should explain what was found and what can run it, rather than requiring the user to reconstruct that context from a filename."
+      },
+      {
+        "label": "Use",
+        "detail": "Install · launch adapters",
+        "title": "Keep the final action explicit.",
+        "body": "Install, update and launch flows build on the same shelf conventions. The tool intentionally avoids a web app and service layer because its value is a repeatable local workflow. More launch adapters are planned, but expanding compatibility should preserve the inspectable file structure rather than introduce a second hidden source of truth."
+      }
+    ]
+  },
+  "qwen3-distill": {
+    "title": "The training run starts with the examples.",
+    "summary": "This experiment connects training-data choices, adapter training and coding-response evaluation.",
+    "limit": "Experiment, not a demonstrated benchmark result. Structured evaluation and adapter comparisons remain next steps.",
+    "steps": [
+      {
+        "label": "Examples",
+        "detail": "Coding · tool use",
+        "title": "Define the behaviour through data.",
+        "body": "The training examples cover React, JavaScript, Python, system design, APIs, Docker and tool use. Grouping the data makes the intended scope visible before training starts. The important question is whether those examples express the behaviour I want consistently; a larger collection alone does not establish better model quality."
+      },
+      {
+        "label": "Train",
+        "detail": "MLX · GPU paths",
+        "title": "Make experiments repeatable.",
+        "body": "The project includes local MLX training scripts for Apple silicon and GPU training paths. That separates the experiment from a one-off manual session and makes memory, cost and iteration speed explicit constraints. Repeatable scripts are a foundation for comparison, but a completed run is not itself evidence of useful improvement."
+      },
+      {
+        "label": "Evaluate",
+        "detail": "Generated coding responses",
+        "title": "Check what changed.",
+        "body": "The evaluation workflow examines generated coding responses after training. The next step is a structured benchmark and comparison against larger hosted models, with clear model cards for adapter variants. Until that evidence exists, the portfolio presents this as an exploration of data and local training rather than a claim that the smaller model wins."
+      }
+    ]
+  },
+  "memworker": {
+    "title": "Capture now. Preserve context carefully.",
+    "summary": "The prototype connects a mobile capture flow to transcripts and client memory.",
+    "limit": "Prototype. On-device transcription, encrypted memory and practitioner validation are unfinished.",
+    "steps": [
+      {
+        "label": "Capture",
+        "detail": "Recording · client context",
+        "title": "Start from the worker’s task.",
+        "body": "The Expo app includes client, recording, chat and after-hours flows. Quick capture matters, but the recording also belongs to a sensitive client context. Privacy cues and clear transmission boundaries therefore shape the interface from the start, rather than appearing only as a settings page after AI features are added."
+      },
+      {
+        "label": "Process",
+        "detail": "Transcripts · queues",
+        "title": "Show the work between states.",
+        "body": "The service architecture includes an Express API, workers, PostgreSQL and Redis. Recording, transcription and structured memory are distinct stages, so queues and status are part of the product experience. The direction is toward local processing; the prototype should not be read as proof that every part already operates on-device."
+      },
+      {
+        "label": "Recall",
+        "detail": "Structured client memory",
+        "title": "Keep automation accountable.",
+        "body": "Durable context can help a social worker return to a case without reconstructing every prior interaction. That usefulness must be balanced against storage, battery, memory and privacy constraints. Finishing encrypted local memory and validating the workflow with social workers come before expanding the automation."
+      }
+    ]
+  },
+  "coreml-workshop": {
+    "title": "Make inference visible on a phone.",
+    "summary": "One image moves through a small, complete SwiftUI classification workflow.",
+    "limit": "Workshop app. The confidence value describes a model output, not a guarantee that the label is correct.",
+    "steps": [
+      {
+        "label": "Choose",
+        "detail": "Photo picker",
+        "title": "Begin with an input people recognise.",
+        "body": "The workshop starts with choosing a photo rather than a block of inference code. A visible input makes it easier to follow what the model receives and what the application does next. SwiftUI handles the selection surface, while loading and error states keep the demonstration understandable when the happy path is interrupted."
+      },
+      {
+        "label": "Classify",
+        "detail": "Vision · Core ML",
+        "title": "Give the model a clear contract.",
+        "body": "A Vision request wraps the fruit-classification Core ML model. The app keeps inference on-device, with different compute configuration for simulator and physical-device paths. Separating image selection from the request helps explain the pipeline without turning the workshop interface into a set of implementation controls."
+      },
+      {
+        "label": "Read",
+        "detail": "Label · confidence",
+        "title": "Explain the output and its limits.",
+        "body": "The result presents a fruit label and confidence together. That makes the model’s output tangible, but confidence still needs explanation so learners do not treat it as certainty. More bundled sample images and an in-app explanation of limitations are useful next steps for making the workshop easier to repeat."
+      }
+    ]
+  },
+  "voxscribe": {
+    "title": "From a spoken thought to text in the app.",
+    "summary": "A quiet desktop utility joins capture, local transcription and insertion.",
+    "limit": "Packaging, dependency onboarding and model presets still need refinement.",
+    "steps": [
+      {
+        "label": "Capture",
+        "detail": "Hotkey · status overlay",
+        "title": "Keep the user in their current task.",
+        "body": "VoxScribe runs in the system tray and starts recording through global hotkeys. The status overlay provides feedback without requiring a separate chat workspace. Because the user is speaking live, visible recording state and a short feedback loop matter as much as the transcription itself."
+      },
+      {
+        "label": "Transcribe",
+        "detail": "Whisper · optional rewrite",
+        "title": "Separate transcription from rewriting.",
+        "body": "Local faster-whisper produces the transcript; an Ollama model can optionally rewrite it. Keeping those jobs distinct makes the workflow easier to reason about: recognising what was said and changing how it is phrased are different operations. Local dependencies also need clear onboarding so privacy does not come at the cost of an opaque setup."
+      },
+      {
+        "label": "Insert",
+        "detail": "Active application",
+        "title": "Treat delivery as part of the product.",
+        "body": "The final text is injected into the active app. That last step connects the model output to the user’s original task and introduces permission and fallback concerns of its own. A correct transcript is only part of a successful dictation flow; desktop integration and cross-platform packaging still need careful attention."
+      }
+    ]
+  },
+  "keel": {
+    "title": "One ledger. Two ways to work.",
+    "summary": "The CLI and terminal interface share a human-readable Markdown source of truth.",
+    "limit": "Importers and new agent workflows must preserve the existing conflict checks and ledger format.",
+    "steps": [
+      {
+        "label": "Read",
+        "detail": "Markdown grammar",
+        "title": "Treat the file as a public contract.",
+        "body": "Tasks, notes, metadata, subtasks, timers and recurrence live in the ledger. The parser preserves unknown metadata so a newer tool or a manual edit does not lose information just because another reader does not understand it. This makes plain text a useful shared interface rather than merely an export format."
+      },
+      {
+        "label": "Work",
+        "detail": "CLI · terminal UI",
+        "title": "Offer different views of the same state.",
+        "body": "The Bubble Tea workbench supports filtering, searching, editing, timing and completion, while the CLI serves command-driven workflows. Both need to agree on the ledger. A second hidden store would undermine the reason to choose Markdown, so the interaction design follows the file’s canonical role."
+      },
+      {
+        "label": "Save",
+        "detail": "Conflict checks · recovery",
+        "title": "Make persistence harder to get wrong.",
+        "body": "The write path uses temporary files, fsync, rename, conflict detection and repair backups. Those details matter because humans and agents can touch the same file. Local-first does not eliminate concurrency: the tool has to detect conflicting edits rather than silently replace someone else’s work."
+      }
+    ]
+  },
+  "clipper": {
+    "title": "Turn a useful tab into a durable note.",
+    "summary": "Capture crosses extension permissions, an API boundary and a self-hosted library.",
+    "limit": "Search and the rebrand remain in progress. Export formats should follow actual usage needs.",
+    "steps": [
+      {
+        "label": "Capture",
+        "detail": "Page · selected text",
+        "title": "Make saving part of reading.",
+        "body": "The Manifest V3 extension can capture a page or a selected passage, with keyboard shortcuts for the flow. The background, content and popup modules have different responsibilities because browser permissions and page access are not interchangeable. A reliable capture path matters more here than adding a complicated editor."
+      },
+      {
+        "label": "Transfer",
+        "detail": "Extension · API",
+        "title": "Respect the browser boundary.",
+        "body": "Captured content moves through the API modules into the self-hosted web application. This is a small distributed workflow, even when it feels like one browser action. Keeping the extension and service responsibilities clear helps explain where permission, network and persistence concerns belong."
+      },
+      {
+        "label": "Find",
+        "detail": "Searchable library",
+        "title": "Make the saved material useful again.",
+        "body": "The Next.js library and MongoDB service give captured research a place beyond browser history. Docker Compose supports the self-hosted setup, preserving the user’s control over the collection. Search improvements come next; export should be shaped by the formats people actually need rather than a speculative list."
+      }
+    ]
+  },
+  "codeprobe-scanner": {
+    "title": "Make a finding lead to a reviewable change.",
+    "summary": "Dependency checks and source-pattern analysis converge in a report and patch workflow.",
+    "limit": "Automated detection has limits. Broader analyzers, SARIF and CI modes are planned; suggestions still need review.",
+    "steps": [
+      {
+        "label": "Inspect",
+        "detail": "Dependencies · source",
+        "title": "Bring related evidence together.",
+        "body": "CodeProbe recursively scans packages and source patterns, including nested projects. Dependency advisories and code-level issues are different signals, but separating them into unrelated reports can make remediation harder to follow. The combined workflow is intended to put those findings in the same developer-facing context."
+      },
+      {
+        "label": "Explain",
+        "detail": "Severity · proof context",
+        "title": "Avoid a verdict without its reason.",
+        "body": "The report includes risk scoring and CVE context alongside source findings. Clear severity alone is not enough: a developer needs to understand why an issue was raised and where to inspect it. This is especially important for pattern-based checks, which should not create false confidence that a codebase has been proven secure."
+      },
+      {
+        "label": "Review",
+        "detail": "Narrow patch suggestions",
+        "title": "Keep the proposed fix inspectable.",
+        "body": "Kimi integration supports patch suggestions, with automatic fixes for selected issue classes. The useful boundary is a clear issue, narrow context and a diff a developer can review. More language analyzers and CI-friendly exports would extend the workflow, but they should preserve that connection between the finding and the proposed change."
+      }
+    ]
+  },
+  "cryptix-security-analysis": {
+    "title": "From a suspected weakness to evidence.",
+    "summary": "The team divided OWASP categories, then documented findings and remediation.",
+    "limit": "My scope was A01 and A09. The diagram summarises the review process and does not expose exploit details.",
+    "steps": [
+      {
+        "label": "Scope",
+        "detail": "A01 · A09",
+        "title": "Make ownership explicit.",
+        "body": "I owned broken access control and logging/monitoring analysis within the team’s OWASP review. Defining that boundary makes the contribution clearer than claiming the entire security assessment. The work used API testing, JWT review and database inspection to understand the assigned risks in the application."
+      },
+      {
+        "label": "Inspect",
+        "detail": "Routes · permissions · logs",
+        "title": "Connect the label to an observation.",
+        "body": "A vulnerability category is only a starting point. The review needed evidence that another teammate could follow, along with practical remediation. Bruno, DataGrip, OrbStack and K9s were part of the workflow, but the case study centres the finding and fix tracking rather than presenting tool usage as the result."
+      },
+      {
+        "label": "Verify",
+        "detail": "Fix tracker · screenshots",
+        "title": "Check the changed behaviour.",
+        "body": "Post-fix screenshots and documentation helped the team hand off the remediation work. Logging and monitoring were treated as security responsibilities in their own right. Automated regression tests remain a next step so that a reviewed fix can be checked again when the application changes."
+      }
+    ]
+  },
+  "imposter-game": {
+    "title": "One phone. Private turns.",
+    "summary": "The interaction moves from setup to a concealed role reveal and a shared outcome.",
+    "limit": "Single-file browser game. No accounts or stored history are part of the current scope.",
+    "steps": [
+      {
+        "label": "Set up",
+        "detail": "Players · topic",
+        "title": "Reduce the work before the game.",
+        "body": "Players choose a count and the game assigns the topic and imposter. Keeping setup on one device avoids downloads and accounts before a short in-person activity. The implementation deliberately fits in one HTML file, letting the interaction carry the experience without a service layer."
+      },
+      {
+        "label": "Pass",
+        "detail": "Private role reveal",
+        "title": "Protect the moment between players.",
+        "body": "The device moves from one player to the next, so privacy depends on clear reveal and conceal states. The screen must explain whose turn it is without showing the previous role. This is the central constraint of pass-and-play: each transition matters more than adding extra game modes."
+      },
+      {
+        "label": "Resolve",
+        "detail": "Discuss · vote · reveal",
+        "title": "Make the end of the round obvious.",
+        "body": "A discussion timer, voting flow and final reveal bring everyone back into the shared part of the game. Replay returns to a fresh round rather than introducing profiles or history. Custom topic packs are a possible extension, but the current design keeps the turn-by-turn instructions as the priority."
+      }
+    ]
+  },
+  "iris-auth-lite": {
+    "title": "Explain capture before verification.",
+    "summary": "A phone and Raspberry Pi camera work through connection, image quality and local storage.",
+    "limit": "Hackathon prototype. The case study does not establish biometric accuracy or production security.",
+    "steps": [
+      {
+        "label": "Connect",
+        "detail": "Phone · Pi camera",
+        "title": "Show the hardware state.",
+        "body": "The Expo flow moves through onboarding, PIN creation and connection to a Raspberry Pi camera companion. A live MJPEG preview and REST capture endpoints support the local link. Clear connection states matter because a hardware demo can fail before the user ever reaches the model or verification step."
+      },
+      {
+        "label": "Check",
+        "detail": "Capture · quality scoring",
+        "title": "Do not accept every frame.",
+        "body": "The capture path includes deterministic quality scoring and image enhancement before a frame becomes part of a verification template. That makes input quality a visible part of the workflow. It also gives enrollment guidance a concrete purpose: helping the user provide a usable frame, not just asking them to try again."
+      },
+      {
+        "label": "Store",
+        "detail": "Templates · PIN · logs",
+        "title": "Keep the privacy boundary explicit.",
+        "body": "The prototype uses on-device persistence and a local camera connection rather than a cloud-dependent demonstration. Templates, PINs and audit logs are part of that design. Stronger security documentation and repeatable Pi provisioning are still next steps; an offline architecture alone does not prove a secure biometric system."
+      }
+    ]
+  },
+  "kingdom-clash": {
+    "title": "Connect the reward to the rule.",
+    "summary": "Wellness activities feed an economy of points, heroes and battles.",
+    "limit": "Coursework build. Transactional updates and automated economy checks remain next steps.",
+    "steps": [
+      {
+        "label": "Participate",
+        "detail": "Wellness challenges",
+        "title": "Give the activity a visible consequence.",
+        "body": "The product connects wellness challenges to an in-game reward system. Participants and administrators use separate screens, while authentication and roles shape the available actions. The aim is to make progress tangible through the game; the project does not provide evidence that it changed long-term wellness habits."
+      },
+      {
+        "label": "Reward",
+        "detail": "Points · ownership",
+        "title": "Make the backend own the rules.",
+        "body": "Rewards, hero recruitment and leaderboards share a MySQL data model behind an Express API. These actions affect more than a visual counter: they change balances and ownership. The backend is the place to enforce the rules, because relying on interface state would make the economy difficult to reason about."
+      },
+      {
+        "label": "Play",
+        "detail": "Raids · duels · growth",
+        "title": "Follow the consequences across tables.",
+        "body": "Battles and kingdom growth build on the same state as the reward flow. The next implementation step is wrapping multi-table rewards and duels in transactions, backed by authentication, permission and economy tests. The case study keeps that unfinished reliability work visible rather than treating the complete demo as a finished production game."
+      }
+    ]
+  },
+  "launchcode": {
+    "title": "Help a beginner find a next step.",
+    "summary": "Six connected pages move from discovery to registration and confirmation.",
+    "limit": "Frontend coursework. Registration persistence requires a backend and is not claimed as a shipped service.",
+    "steps": [
+      {
+        "label": "Discover",
+        "detail": "Courses · events",
+        "title": "Make the choices approachable.",
+        "body": "The landing, course and event pages introduce learning opportunities through a consistent visual language. Clear calls to action matter because the audience is new to the subject. The framework-free constraint puts the responsibility on semantic HTML, responsive CSS and the hierarchy of each independently loaded page."
+      },
+      {
+        "label": "Understand",
+        "detail": "Details · FAQs",
+        "title": "Keep context between pages.",
+        "body": "The FAQ and supporting content help a visitor answer questions before registering. Shared navigation and gradients connect the separate pages so moving through the site does not feel like entering a different product. The design challenge is consistency across the whole journey, not only a polished home screen."
+      },
+      {
+        "label": "Register",
+        "detail": "Form · confirmation",
+        "title": "Finish the visible flow honestly.",
+        "body": "The registration and confirmation pages complete the frontend journey. JavaScript supports the interaction, but storing submissions in a backend remains future work. Presenting that distinction matters: the interface can demonstrate a complete path without implying that it already operates as a production registration service."
+      }
+    ]
+  },
+  "midnight-code": {
+    "title": "Give colour a job.",
+    "summary": "The theme separates the editor canvas, syntax hierarchy and interaction state.",
+    "limit": "Built theme package. More language and extension testing is needed before broader distribution.",
+    "steps": [
+      {
+        "label": "Canvas",
+        "detail": "Near-black workbench",
+        "title": "Quiet the surrounding interface.",
+        "body": "The workbench uses a near-black canvas so the editor chrome does not compete with the code. This is a hierarchy choice rather than simply a preference for fewer colours. Navigation, inactive surfaces and the active editor still need enough distinction for the user to understand where they are working."
+      },
+      {
+        "label": "Syntax",
+        "detail": "Restrained semantic colour",
+        "title": "Keep meaning in a narrow palette.",
+        "body": "White text and blue accents form a deliberately limited colour system. Syntax still has to communicate useful differences, while comments remain readable without becoming dominant. A narrow palette makes those relationships more important, because colour cannot be used as an easy substitute for every level of emphasis."
+      },
+      {
+        "label": "State",
+        "detail": "Selection · errors · focus",
+        "title": "Test the moments that interrupt reading.",
+        "body": "Selections, errors and inactive UI need to remain visible against the dark workbench. The theme is packaged with extension metadata as Super Black & Blue. More languages and extension surfaces should be checked before wider publication, since a theme that works in one file can still lose important distinctions elsewhere."
+      }
+    ]
+  },
+  "promptforge": {
+    "title": "Separate intent from provider configuration.",
+    "summary": "The interface gathers the task; the server handles validation and generation.",
+    "limit": "Local-provider adapters and additional export formats are not yet implemented.",
+    "steps": [
+      {
+        "label": "Describe",
+        "detail": "Task · constraints · context",
+        "title": "Make the missing information visible.",
+        "body": "PromptForge starts with task templates, target-model presets and optional context. Planning, debugging and documentation need different outputs, so a single unstructured text box is not the whole workflow. The interface helps make intent and expected artifacts explicit before the prompt is rewritten."
+      },
+      {
+        "label": "Generate",
+        "detail": "Validated server request",
+        "title": "Keep the key on the server.",
+        "body": "The Express generation endpoint validates the request with Zod and calls the provider from the server. The target model selected in the interface is separate from the model doing the rewrite. Keeping those concepts apart makes configuration easier to understand and avoids exposing API credentials in browser code."
+      },
+      {
+        "label": "Reuse",
+        "detail": "Presets · local history",
+        "title": "Keep useful work close to the task.",
+        "body": "Local presets and prompt history support returning to a useful starting point. The next steps are provider adapters and exports for common coding-agent workflows. Those additions should build on the same explicit task contract, rather than adding more controls without improving the user’s ability to describe the work."
+      }
+    ]
+  },
+  "qr-code-generator": {
+    "title": "Keep one small task complete.",
+    "summary": "Input, preview and download fit into one client-side flow.",
+    "limit": "Client-only utility. It does not collect generated content or provide account/history features.",
+    "steps": [
+      {
+        "label": "Enter",
+        "detail": "URL or text",
+        "title": "Explain an empty state where it happens.",
+        "body": "The page accepts a URL or text and provides inline feedback when the input is empty. There is no registration flow around the task. Keeping the input and its validation in the same screen makes the next action clear without adding a separate error page or a collection of unrelated controls."
+      },
+      {
+        "label": "Generate",
+        "detail": "Browser preview",
+        "title": "Show the result before offering it.",
+        "body": "QRCode.js renders the code in the browser and the interface presents the preview. Generation and download are separate states, so the user can see what will be saved. Client-side processing also keeps this small interaction independent of a server that would otherwise receive the entered content."
+      },
+      {
+        "label": "Download",
+        "detail": "PNG image",
+        "title": "Only enable an action that can work.",
+        "body": "The download action stays disabled until a code exists. That small state rule is central to making the utility reliable: a visible control should reflect whether its action is available. Further colour, size and error-correction options should be driven by actual needs, while locally bundled assets would improve deployment control."
+      }
+    ]
+  },
+  "reddone": {
+    "title": "Make a release carry its evidence.",
+    "summary": "The control plane separates specification, isolated building and approved deployment.",
+    "limit": "The hosted demo is unavailable. Provider expansion depends on proving the existing boundaries.",
+    "steps": [
+      {
+        "label": "Specify",
+        "detail": "Research · findings · approval",
+        "title": "Agree on the work before building.",
+        "body": "Projects, findings and specifications have explicit places in the control plane. This makes research and approval part of the workflow rather than prose buried inside a long model conversation. Human gates matter because the generated application may eventually interact with real provider accounts and deployment targets."
+      },
+      {
+        "label": "Build",
+        "detail": "Isolated builder · verifier",
+        "title": "Keep generated code inside a boundary.",
+        "body": "Builder and verifier sandboxes separate generated code from trusted control-plane responsibilities. Provider credentials remain server-side, and readiness states are redacted. The design does not assume that a successful preview is sufficient evidence for release; source and artifacts still have to be verified."
+      },
+      {
+        "label": "Release",
+        "detail": "Approval · deployment",
+        "title": "Distinguish a demo from a live action.",
+        "body": "Demo, private and hackathon modes have explicit activation requirements. A useful demo exercises the contracts without presenting mocked providers as live infrastructure. GitHub and Vercel integration then belong to a gated release path, with provider expansion deferred until the current security boundaries have stronger production evidence."
+      }
+    ]
+  },
+  "tab": {
+    "title": "Name the app. Return to the task.",
+    "summary": "A keyboard-first overlay moves from invocation to search and activation.",
+    "limit": "Experiment. Signed/notarised releases and real usage feedback remain next steps.",
+    "steps": [
+      {
+        "label": "Invoke",
+        "detail": "Global hotkey",
+        "title": "Keep the utility out of the way.",
+        "body": "The switcher opens through a global hotkey instead of occupying a permanent workspace. A small desktop utility needs to be available quickly and then disappear. This makes focus handling part of the core interaction, alongside the SwiftUI panel and its screen-aware size."
+      },
+      {
+        "label": "Find",
+        "detail": "Fuzzy app search",
+        "title": "Support recognition and recall.",
+        "body": "Running applications can be filtered by name through fuzzy search and keyboard navigation. The interface uses complete rows and overflow affordances so the list does not end in confusing partial items. The layout has to adapt to different screens while keeping the selection and the available action clear."
+      },
+      {
+        "label": "Activate",
+        "detail": "Selected window",
+        "title": "Finish where the user intended.",
+        "body": "Activating the selected application is the point of the interaction, not merely highlighting it in a list. Native window management, focus and multiple displays therefore deserve attention before additional switching modes. Usage feedback and signed releases are the next steps toward a more dependable daily utility."
+      }
+    ]
+  },
+  "zero-waste-lifestyle": {
+    "title": "Turn a principle into something to explore.",
+    "summary": "The site connects a personal introduction, the 5 Rs and practical aspirations.",
+    "limit": "Framework-free coursework. Asset optimisation and replacing remaining scroll polling are future improvements.",
+    "steps": [
+      {
+        "label": "Introduce",
+        "detail": "Personal story",
+        "title": "Give the topic a human starting point.",
+        "body": "The homepage and personal background create context before the site presents sustainability guidance. The three-page structure makes room for both explanation and aspiration. A nature-inspired visual language ties those pages together, while responsive layouts keep the content readable on smaller screens."
+      },
+      {
+        "label": "Explore",
+        "detail": "Interactive 5 Rs",
+        "title": "Make the current idea unmistakable.",
+        "body": "The 5 Rs gallery supports direct selection and circular arrow navigation, with active-state feedback and mobile auto-scrolling. These are different ways to reach the same content. The interaction should make the selected principle easier to understand, rather than requiring a particular input method to reveal information."
+      },
+      {
+        "label": "Reflect",
+        "detail": "Timeline · aspirations",
+        "title": "Let motion support the reading.",
+        "body": "Flip cards, a timeline, counters and scroll reveals add pacing to the educational content. The underlying HTML still needs to remain useful when scripting is unavailable. That progressive-enhancement boundary is more important than the animation itself; reducing large assets and replacing scroll polling are practical next improvements."
+      }
+    ]
+  }
+}

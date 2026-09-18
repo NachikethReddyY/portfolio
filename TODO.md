@@ -427,7 +427,7 @@ Scroll refinement evidence: `.evidence/scroll-refinement/verification.md`. Repro
 - [x] 390px browser and touch emulation checked with no horizontal overflow; phone composer Full access and rabbit text overlap corrected. Reduced motion keeps content visible.
 - [x] Latest About timing verified independently: staggered identity, supporting text hidden at portrait arrival, then full reveal over more scroll.
 - [x] 49 focused unit tests pass; production build generates and validates 33 public routes.
-- [ ] Push release to GitHub main and verify connected Vercel production deployment and live site.
+- [x] Push homepage release to GitHub main and verify connected Vercel production deployment and live site (95d5be6).
 
 Evidence: `.evidence/story-finish/`. Native computer-use startup fails, so checks use local Chromium directly; physical-phone/Safari and subjective audio quality remain unverified. Earlier native-provider blockers are superseded by browser evidence where listed above. Corrections classified as project guidance and recorded in projectagents.md / DESIGN.md.
 - [x] Latest Work spacing correction: close the oversized settled-title/project gap while preserving centred pop and scroll hold; browser-check desktop/phone, then publish correction.
@@ -442,9 +442,21 @@ Evidence: `.evidence/story-finish/`. Native computer-use startup fails, so check
 
 - [x] Latest stamp correction supersedes monogram: restore actual portrait in this required placement, preserve perforated frame and verify navigation.
 - [x] Prepare and publish three case-study treatments from existing VSMS evidence: https://tx68s62xto54.postplan.dev (public).
-- [ ] User selection required for the new case-study layout; then expand, implement and verify the selected treatment. Existing result-first case studies remain published.
+- [x] User selected option 03; implement chapters with an architectural blueprint interlude.
 - [x] Switch main typography to Geist and monospace to Geist Mono; preserve handwritten/specialised fonts and reserve Geist Pixel for pixel treatments; recheck layout after font metrics change.
 - [x] Review all user-named portfolio/UX references, distil evidence-backed principles, and refine the case-study comparison before design selection.
 
 
 Follow-up verification: 49 tests pass; build validates 33 routes. Desktop and 390px touch-emulated Chromium checks pass for Work spacing, Models centring/gating, terminal, rabbit/teaching handoff, chat order, About reveal, and actual portrait stamp navigation. Browser computed styles confirm Geist / Geist Mono / preserved Caveat. Public case-study comparison returns HTTP 200 and fits 390px. Native browser, physical-phone/Safari and audible quality remain unverified.
+
+## Approved hybrid case studies — 18 September 2026
+User selected option 03, chapters with a blueprint interlude. Previous design-selection pause is resolved.
+- [x] Map each existing project's documented process into decision-led chapters and a project-specific three-stage blueprint; preserve roles/status and evidence limits.
+- [x] Implement one bounded desktop blueprint sequence, readable mobile stages, and static reduced-motion content; preserve case-study contents and galleries.
+- [x] Expand explanations using existing public project evidence and contextual images; no invented user research or impact numbers.
+- [x] Verify desktop/phone/reduced-motion, navigation and all 23 project routes; update guidance.
+- [ ] Push approved hybrid, verify Vercel deployment, and repeat focused live browser checks.
+- [x] Latest visual reference: use a deep-blue architectural drawing treatment, precise linework/regions/connectors and title block; keep Geist and actual project semantics. This refines the approved hybrid interlude rather than replacing the reading flow.
+- [x] Inspect the actual whichai.dev Fable 5.1 example and add staged blueprint drawing/focus motion matching its architectural language; verify phone/reduced-motion and keep all earlier changes.
+
+Blueprint evidence: `.evidence/story-finish/blueprint-motion-check.mjs` verifies pre-entry, intermediate and finished drawing states at 1440px/390px and reduced motion; `blueprint-check.mjs` verifies scroll progression/navigation; `all-case-check.mjs` verifies all 23 case routes. The actual whichai.dev Fable 5.1 reference was inspected in Chromium. Correction classified as project guidance.
