@@ -182,8 +182,8 @@ export function ProjectDetail() {
   return (
     <article ref={scope} className={`detail-page accent-${project.accent}`}>
       <header className="case-heading shell">
-        <Link className="back-link" to="/projects">
-          ← All projects
+        <Link className="back-link case-back-glass" to="/projects">
+          <span aria-hidden="true">←</span> All projects
         </Link>
         <div className="detail-kicker">
           <span>{project.category}</span>

@@ -460,3 +460,29 @@ User selected option 03, chapters with a blueprint interlude. Previous design-se
 - [x] Inspect the actual whichai.dev Fable 5.1 example and add staged blueprint drawing/focus motion matching its architectural language; verify phone/reduced-motion and keep all earlier changes.
 
 Blueprint evidence: `.evidence/story-finish/blueprint-motion-check.mjs` verifies pre-entry, intermediate and finished drawing states at 1440px/390px and reduced motion; `blueprint-check.mjs` verifies scroll progression/navigation; `all-case-check.mjs` verifies all 23 case routes. The actual whichai.dev Fable 5.1 reference was inspected in Chromium. Correction classified as project guidance.
+
+## Case-study redesign and private access — 18 September 2026
+- [x] Inspect the nine supplied live references and screenshot direction; record observed patterns and access limits.
+- [x] Prepare three distinct case-study compositions using real public project content, Geist, large evidence images and readable chapters; preserve homepage and approved blueprint capability pending selection.
+- [x] Show whole-project NDA gate / error / post-access states and document server-side protection for text and assets; never ship confidential data in public HTML, JS, CMS queries or build output.
+- [x] Browser-check desktop/390px previews, all preview controls and source links; publish the public-only design comparison for selection under the mock-first rule.
+- [ ] After selection, implement the approved design and actual access protection; confirm protected scope and provision secrets separately from the public repository, then verify access boundaries before deployment.
+
+Preview: https://lbgn61lqdgsf.postplan.dev · public-only content. Three static compositions; no production changes or active authentication. Whole-project NDA scope confirmed by user; actual project identities and public metadata still to be selected.
+
+Proof: `.evidence/case-redesign/verification.json` and desktop/390px browser captures. Security plan: `.evidence/case-redesign/access-plan.md`. Mobile blueprint recomposed vertically after visual inspection found small labels. Classified as project guidance for implementation.
+
+## Case-study correction — 18 September, 22:40
+- [x] Apply the explicitly requested liquid-glass treatment to the case-study back link; preserve destination and keyboard/touch behaviour.
+- [x] Replace the rejected floor-plan metaphor in the redesign draft with a meaningful software workflow and evidence-led structure using Lumina, the project in the screenshot.
+- [x] Prepare genuinely different compositions around actual public screens, responsibilities, decisions and limits; keep private-project protection whole-project.
+- [x] Verify the real back link and revised previews on desktop and phone, then publish the comparison for review before changing the full case-study template.
+
+Failed criteria: architectural rooms did not explain the software; the previous layouts were too similar and did not make the project's actual work clear. Treat this correction as project guidance; propose retiring generic floor plans from case studies after selecting the replacement.
+
+Changed locally: case-study liquid-glass back link and explicit light case-study text. Verified 46px touch target, blur/fallback styling, keyboard navigation to /projects, 1440px/390px layouts, typecheck and diff check. Revised public preview version 2: https://lbgn61lqdgsf.postplan.dev. Full template replacement and NDA access implementation remain pending selection; no production deployment this turn. Browser proof: `.evidence/case-redesign/glass-check.json`, `rebuild-check.json`, and corresponding screenshots.
+
+## Vercel release and handoff — 18 September 2026
+- [ ] Run the current test/build pipeline and release the implemented case-study glass back link and contrast fix through the existing GitHub-connected Vercel project.
+- [ ] Verify the new deployment status, production routes, health endpoint and desktop/phone back navigation.
+- [ ] Write a local handoff with release evidence, the latest rejected/accepted design state, remaining redesign and whole-project NDA work, and next-agent entry points.
