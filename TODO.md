@@ -455,7 +455,7 @@ User selected option 03, chapters with a blueprint interlude. Previous design-se
 - [x] Implement one bounded desktop blueprint sequence, readable mobile stages, and static reduced-motion content; preserve case-study contents and galleries.
 - [x] Expand explanations using existing public project evidence and contextual images; no invented user research or impact numbers.
 - [x] Verify desktop/phone/reduced-motion, navigation and all 23 project routes; update guidance.
-- [ ] Push approved hybrid, verify Vercel deployment, and repeat focused live browser checks.
+- [x] Push approved hybrid, verify Vercel deployment, and repeat focused live browser checks (2dc519f; Vercel success; live desktop/390px drawing sequence, reduced motion, Work/Models spacing, timeline, terminal, About and health checks pass).
 - [x] Latest visual reference: use a deep-blue architectural drawing treatment, precise linework/regions/connectors and title block; keep Geist and actual project semantics. This refines the approved hybrid interlude rather than replacing the reading flow.
 - [x] Inspect the actual whichai.dev Fable 5.1 example and add staged blueprint drawing/focus motion matching its architectural language; verify phone/reduced-motion and keep all earlier changes.
 
