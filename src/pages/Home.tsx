@@ -341,22 +341,56 @@ export default function Home() {
                 { y: 0, rotation: 3, scale: 1, opacity: 1, duration: 0.4 },
                 0.4,
               );
-            gsap.fromTo(".hello-copy > .section-index", { opacity: 0 }, {
-              opacity: 1,
-              scrollTrigger: { trigger: about, start: "top 45%", end: "top 20%", scrub: true },
-            });
+            gsap.fromTo(
+              ".hello-copy > .section-index",
+              { opacity: 0 },
+              {
+                opacity: 1,
+                scrollTrigger: {
+                  trigger: about,
+                  start: "top 45%",
+                  end: "top 20%",
+                  scrub: true,
+                },
+              },
+            );
             // Supporting details wait for the portrait, then unfold over more scroll.
             const details = gsap.utils.toArray<HTMLElement>(".hello-detail");
             if (window.matchMedia("(min-width: 701px)").matches) {
-              gsap.fromTo(details, { y: 35, autoAlpha: 0 }, {
-                y: 0, autoAlpha: 1, stagger: 0.16, ease: "none",
-                scrollTrigger: { trigger: about, start: "top 20%", end: "top -15%", scrub: 0.25 },
-              });
+              gsap.fromTo(
+                details,
+                { y: 35, autoAlpha: 0 },
+                {
+                  y: 0,
+                  autoAlpha: 1,
+                  stagger: 0.16,
+                  ease: "none",
+                  scrollTrigger: {
+                    trigger: about,
+                    start: "top 20%",
+                    end: "top -15%",
+                    scrub: 0.25,
+                  },
+                },
+              );
             } else {
-              details.forEach(detail => gsap.fromTo(detail, { y: 25, autoAlpha: 0 }, {
-                y: 0, autoAlpha: 1, ease: "none",
-                scrollTrigger: { trigger: detail, start: "top 90%", end: "top 65%", scrub: 0.25 },
-              }));
+              details.forEach((detail) =>
+                gsap.fromTo(
+                  detail,
+                  { y: 25, autoAlpha: 0 },
+                  {
+                    y: 0,
+                    autoAlpha: 1,
+                    ease: "none",
+                    scrollTrigger: {
+                      trigger: detail,
+                      start: "top 90%",
+                      end: "top 65%",
+                      scrub: 0.25,
+                    },
+                  },
+                ),
+              );
             }
           }
           root.current
@@ -393,9 +427,21 @@ export default function Home() {
                 },
               );
             });
+          const updateWorkGap = () =>
+            gsap.set(".home-work .project-grid", {
+              marginTop: () =>
+                -innerHeight * 0.78 +
+                (root.current?.querySelector<HTMLElement>(
+                  ".work-stage .section-header",
+                )?.offsetHeight ?? 240) /
+                  2 +
+                64,
+            });
+          updateWorkGap();
           const work = gsap.timeline({
             scrollTrigger: {
               trigger: ".work-stage",
+              onRefreshInit: updateWorkGap,
               start: "top top",
               end: "bottom bottom",
               scrub: 0.25,
@@ -429,19 +475,41 @@ export default function Home() {
               ".work-stage .inline-link",
               { autoAlpha: 0 },
               { autoAlpha: 1, duration: 0.15 },
+            )
+            .fromTo(
+              ".home-work .project-grid",
+              { autoAlpha: 0 },
+              { autoAlpha: 1, duration: 0.35 },
+              0.9,
             );
           const word = root.current?.querySelector<HTMLElement>(".models-word");
           const destination = root.current?.querySelector<HTMLElement>(
             ".models-destination",
           );
           if (word && destination) {
+            gsap.set(word, { x: 0, y: 0, scale: 1 });
+            const anchor = word.parentElement!;
+            const handoff = { progress: 0 };
+            const positionWord = () => {
+              const source = anchor.getBoundingClientRect();
+              const target = destination.getBoundingClientRect();
+              gsap.set(word, {
+                x: (target.left - source.left) * handoff.progress,
+                y: (target.top - source.top) * handoff.progress,
+                scale:
+                  1 +
+                  (destination.offsetWidth / word.offsetWidth - 1) *
+                    handoff.progress,
+              });
+            };
             const travel = gsap.timeline({
               scrollTrigger: {
                 trigger: ".learning-transition",
-                start: "top 40%",
+                start: "top top",
                 end: "bottom 20%",
                 scrub: 0.3,
                 invalidateOnRefresh: true,
+                onUpdate: positionWord,
               },
             });
             travel
@@ -455,36 +523,19 @@ export default function Home() {
                 { autoAlpha: 0, y: 25 },
                 { autoAlpha: 1, y: 0, duration: 0.3 },
               )
-              .to(".learning-transition-copy", {
-                y: () => innerHeight * 0.35,
-                duration: 0.45,
-                ease: "none",
-              })
+              .to({}, { duration: 0.55 })
               .to(".models-lead", {
                 opacity: 0,
                 filter: "blur(10px)",
                 duration: 0.25,
               })
-              .to({}, { duration: 0.3 })
-              .fromTo(
-                word,
-                { x: 0, y: 0, scale: 1 },
-                {
-                  x: () =>
-                    destination.getBoundingClientRect().left -
-                    word.getBoundingClientRect().left +
-                    Number(gsap.getProperty(word, "x")),
-                  y: () =>
-                    destination.getBoundingClientRect().top -
-                    word.getBoundingClientRect().top +
-                    Number(gsap.getProperty(word, "y")) +
-                    Number(gsap.getProperty(".learning-transition-copy", "y")) -
-                    window.innerHeight * 0.35,
-                  scale: () => destination.offsetWidth / word.offsetWidth,
-                  duration: 0.7,
-                  ease: "power2.inOut",
-                },
-              )
+              .to({}, { duration: 0.25 })
+              .to(handoff, {
+                progress: 1,
+                duration: 0.65,
+                ease: "power2.inOut",
+                onUpdate: positionWord,
+              })
               .set(word, { visibility: "hidden" })
               .fromTo(
                 destination,
@@ -655,8 +706,15 @@ export default function Home() {
                 <span className="hello-intro">I’m</span>{" "}
                 <span className="hello-name">Nachiketh.</span>
               </h2>
-              <p className="hello-detail hello-study">IT student at Singapore Polytechnic.</p>
-              <p className="hello-detail">{(profile.about ?? localContent.profile.about)?.replace(/^I’m Nachiketh, an IT student at Singapore Polytechnic\.\s*/, "")}</p>
+              <p className="hello-detail hello-study">
+                IT student at Singapore Polytechnic.
+              </p>
+              <p className="hello-detail">
+                {(profile.about ?? localContent.profile.about)?.replace(
+                  /^I’m Nachiketh, an IT student at Singapore Polytechnic\.\s*/,
+                  "",
+                )}
+              </p>
               <p className="hello-detail">
                 {(profile.personal ?? localContent.profile.personal)
                   ?.replace(", occasionally on a kart track", "")
@@ -922,20 +980,24 @@ export default function Home() {
           className="learning-transition shell"
           aria-label="From web development to AI"
         >
-          <div className="learning-transition-copy">
-            <p className="models-lead">It started with web apps.</p>
-            <h2>
-              <span className="models-lead">Now I’m exploring</span>
-              <br />
-              <em>
-                <span className="models-lead">how </span>
-                <span className="models-word">Models</span>
-                <span className="models-lead"> work.</span>
-              </em>
-            </h2>
-            <span className="models-lead" aria-hidden="true">
-              ↓
-            </span>
+          <div className="models-sticky">
+            <div className="learning-transition-copy">
+              <p className="models-lead">It started with web apps.</p>
+              <h2>
+                <span className="models-lead">Now I’m exploring</span>
+                <br />
+                <em>
+                  <span className="models-lead">how </span>
+                  <span className="models-anchor">
+                    <span className="models-word">Models</span>
+                  </span>
+                  <span className="models-lead"> work.</span>
+                </em>
+              </h2>
+              <span className="models-lead" aria-hidden="true">
+                ↓
+              </span>
+            </div>
           </div>
         </section>
         <section id="ai" className="ai-section">
@@ -965,8 +1027,11 @@ export default function Home() {
                 </div>
                 <LocalModelDemo />
               </div>
-              <div className="local-evolution">
-                <article data-reveal>
+              <ol
+                className="local-evolution"
+                aria-label="My local-model timeline"
+              >
+                <li data-reveal>
                   <span className="evolution-number">01</span>
                   <h3>Ollama was only the beginning.</h3>
                   <p>
@@ -974,31 +1039,47 @@ export default function Home() {
                     finding an interface I wanted to use every day was another.
                   </p>
                   <span className="evolution-app">Open WebUI</span>
-                </article>
-                <article data-reveal>
+                </li>
+                <li data-reveal>
+                  <span className="evolution-number">02</span>
                   <AppIcon id="lmstudio" />
                   <h3>Then came LM Studio.</h3>
                   <p>
                     I kept experimenting with local models and made LM Studio
                     part of my workflow.
                   </p>
-                </article>
-                <article data-reveal>
+                </li>
+                <li data-reveal>
+                  <span className="evolution-number">03</span>
                   <AppIcon id="mlx" />
                   <h3>A Mac opened another door.</h3>
                   <p>
                     After switching to Mac, I discovered MLX. Now I wanted to
                     understand what was happening underneath the chat.
                   </p>
-                </article>
-              </div>
+                </li>
+              </ol>
               <RabbitHole />
-              <div className="ai-chapter" data-reveal>
-                <h3>Learning to teach a model.</h3>
+              <div className="ai-chapter teaching-chapter">
+                <h3 className="teaching-destination">
+                  <span>Learning to</span> <span>teach a model.</span>
+                </h3>
                 <p>
                   Running models made me want to understand how they learn. I
                   started learning to <FineTuneTerm /> models, which took me
                   deeper into Python, training data, and MLX on Apple silicon.
+                </p>
+                <p>
+                  One earlier experiment is on Hugging Face: my{" "}
+                  <a
+                    className="text-link"
+                    href="https://huggingface.co/nachikethreddyy/qwen3.5-8b-distilled-MLX"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Qwen coding fine-tune
+                  </a>
+                  . I’m still learning how to train and evaluate these models.
                 </p>
                 <div className="ai-tool-pair">
                   <span>
@@ -1020,8 +1101,8 @@ export default function Home() {
               </div>
               <div className="ai-intro ai-specialists" data-reveal>
                 <p>
-                  After six months of running local agents, I realized
-                  something.
+                  After <strong className="months-highlight">six months</strong>{" "}
+                  of running local agents, I realized something.
                 </p>
                 <h2>
                   One model can’t
@@ -1030,12 +1111,7 @@ export default function Home() {
                 </h2>
                 <p>
                   What if I trained smaller models for specific tasks, then ran
-                  them together as agents on the same computer? With two
-                  friends, I’m building{" "}
-                  <Link className="text-link" to="/projects/lah">
-                    LAH
-                  </Link>{" "}
-                  to explore tool calls, memory, and that coordination.
+                  them together as agents on the same computer?
                 </p>
               </div>
               <MarkOneDemo />
@@ -1060,22 +1136,41 @@ export default function Home() {
                   generalist at one task. That’s the experiment—not a benchmark
                   result yet.
                 </p>
+                <p data-reveal>
+                  With two friends, I’m building LAH to explore tool calls,
+                  memory, and that coordination.
+                </p>
+                <p data-reveal>
+                  Legion will work with our custom harness, currently codenamed{" "}
+                  <a
+                    className="text-link"
+                    href="https://github.com/NachikethReddyY/LAH"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    LAH (Local Agent Harness)
+                  </a>
+                  .
+                  <span className="repository-note">
+                    GitHub repository is currently private.
+                  </span>
+                </p>
                 <div className="legion-links" data-reveal>
                   <Link className="inline-link" to="/projects/qwen3-distill">
                     Fine-tuning experiments <Arrow />
                   </Link>
                 </div>
+                <p className="writing-bridge">
+                  Explore more in my{" "}
+                  <a className="text-link" href="#latest-writing">
+                    writing <Arrow />
+                  </a>
+                </p>
               </div>
             </div>
           </div>
         </section>
         <section className="home-writing shell">
-          <p className="writing-bridge">
-            Explore more in my{" "}
-            <a className="text-link" href="#latest-writing">
-              writing <Arrow />
-            </a>
-          </p>
           <div id="latest-writing" className="section-header writing-heading">
             <div>
               <h2>

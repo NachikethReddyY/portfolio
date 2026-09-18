@@ -21,7 +21,7 @@ The handbook supplies principles, not replacement personal facts or automatic au
 - Cover identity/value, credible evidence, reasons to collaborate, selected work, a personal introduction and a clear contact action. These are content jobs, not mandatory new sections.
 - Preserve the accepted order: hero → about → stack → Education → Work/projects → open-source contributions → web-to-models transition → AI/Legion → latest writing → Connect.
 - Keep the full name at the top initially and the accepted N on scroll. Keep the single menu, working View projects action and visible Connect destination. Don’t reintroduce the removed capsule or hero Contact button.
-- Use the slanted drawn portrait only in About. Hero identity and footer use text; the perforated route stamp uses an N monogram. Do not repeat the portrait or add an Open to Work frame.
+- Use the slanted drawn portrait in About and the real photo in the perforated route stamp. Hero identity and footer use text. Do not repeat the portrait or add an Open to Work frame.
 - State full-stack development and aspiring AI engineering accurately. Avoid sales claims, inflated experience or clickbait. Ask Nachiketh if new positioning or personal facts are needed.
 - Use genuine contributions, education, project evidence and status as credibility. Never manufacture testimonials, awards, client logos, endorsement, employment, numerical results or model-run evidence. Do not use a zero-awards list to imply accomplishments.
 - Curate around four strong homepage projects; 2–4 are sufficient for a student and 4–6 is an upper reference range, not a quota. Retain the broader project index unless explicitly asked to remove entries.
@@ -119,7 +119,7 @@ Source: Nachiketh’s summary in this thread on 18 September 2026. Video URL/tit
 
 ## Latest stamp and hero correction
 
-After the rectangle draw/erase, show the closed-laptop top-view poster while loading, crossfade to the rendered closed laptop, orbit the camera, then open the lid as identity/roles/socials appear; app icons emerge afterward. Never flash the open fallback during normal loading. Preserve fully visible reduced-motion and six-second failed-load recovery. Use actual MacBook Air-style recessed left MagSafe/two USB-C ports and right headphone jack. The stamp has transparent semicircular perforations along all edges and quarter-circle corner cuts, retaining the N monogram. Dotted borders on a solid rectangle do not satisfy the stamp shape.
+After the rectangle draw/erase, show the closed-laptop top-view poster while loading, crossfade to the rendered closed laptop, orbit the camera, then open the lid as identity/roles/socials appear; app icons emerge afterward. Never flash the open fallback during normal loading. Preserve fully visible reduced-motion and six-second failed-load recovery. Use actual MacBook Air-style recessed left MagSafe/two USB-C ports and right headphone jack. The stamp has transparent semicircular perforations along all edges and quarter-circle corner cuts, retaining the required portrait. Dotted borders on a solid rectangle do not satisfy the stamp shape.
 
 ## Homepage story corrections — 18 September 2026
 
@@ -158,3 +158,23 @@ These corrections are project guidance, authorized by the ongoing request to cap
 - Case-study reference: https://perryw-2023.webflow.io/stadia-bluetooth. Adapt result-first media, concise overview and role/status/stack facts, Highlights, generous numbered chapters and contents navigation to the existing project evidence. Do not copy its imagery, claims or prose.
 
 These corrections are project guidance, not shared Fleet or skill guidance. Publication is authorized for the GitHub portfolio repository and its connected public Vercel site after checks.
+
+## Latest story corrections — 18 September, evening
+
+These bounded corrections supersede the earlier chat and transition descriptions; classify them as project guidance.
+
+- Work holds at the viewport centre, then settles with a compact 64px gap from subtitle to projects; preserve this gap on refresh/resize. Models uses a stable viewport-centred sticky stage, sequential text and isolated-word handoff. Do not counter-scroll its entire sentence downward.
+- Ollama is a terminal sample: titlebar Ollama, `ollama run gemma2`, `>>>` prompt, Ollama icon/model name, streamed response. Open WebUI → LM Studio → Mac/MLX is a connected timeline, vertical on phones.
+- Move the word “hole” to the opening, dissolve it into the hole, move the rabbit close before its short jump/dive, then land before slowly drawing the circle. Animate actual SVG stroke length. Carry the two-line teaching title into the next chapter heading without overlapping text or clipping; reduced motion presents static headings.
+- Emphasize six months and the specialist-model question. Sequence the three chat layers with prompt typing, tilt, response typing, changed-file pop, then composer; start only when the figure actually enters the viewport, including phones.
+- Put the two-friends collaboration copy and LAH (Local Agent Harness) explanation below Legion. Link its GitHub repository with its current private status. Link the existing Qwen experiment on Hugging Face in fine-tuning. No unverified benchmark claims.
+- “Explore more in my writing” belongs inside the Legion story, followed by Latest writing. Preserve the existing article handoff.
+- Route stamp uses the real portrait at full artwork width; caption styles must not override artwork sizing. Preserve perforations and project navigation.
+
+
+## Typography and case-study direction — latest 18 September steering
+
+- Geist is the main and display face; Geist Mono is the monospace face. Geist Pixel is available for specialised pixel treatments. Preserve Caveat handwriting and other explicitly specialised artwork typography.
+- Case studies should explain the problem, responsibilities, decisions, evidence, tradeoffs and current limits, with real project images. A longer story must add explanation rather than invented research or impact metrics.
+- The supplied UX-resource video summary is user-provided, not an independently watched transcript. Public reference sites were inspected with access limits recorded in the local case-study comparison. Use UX principles to explain a concrete choice; they do not prove usability outcomes.
+- Three static treatments (walkthrough, blueprint, hybrid) are prepared for selection. Preserve the existing result-first case-study design until the user chooses the new direction.

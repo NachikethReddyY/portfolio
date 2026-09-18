@@ -1,3 +1,18 @@
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+gsap.registerPlugin(useGSAP);
+function TypedText({ text }: { text: string }) {
+  return (
+    <span aria-label={text}>
+      {Array.from(text).map((letter, index) => (
+        <span className="typed-char" key={index} aria-hidden="true">
+          {letter}
+        </span>
+      ))}
+    </span>
+  );
+}
 function Chevron() {
   return (
     <svg viewBox="0 0 16 16" aria-hidden="true">
@@ -14,22 +29,99 @@ function FileChip() {
   );
 }
 export function MarkOneDemo() {
+  const root = useRef<HTMLElement>(null);
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        const mobile = matchMedia("(max-width:700px)").matches;
+        const conversation = gsap
+          .timeline({ paused: true })
+          .fromTo(
+            ".mark-one-prompt",
+            { autoAlpha: 0, y: 35, rotation: 0 },
+            { autoAlpha: 1, y: 0, duration: 0.3 },
+          )
+          .from(".prompt-type .typed-char, .prompt-type .mark-one-file-chip", {
+            opacity: 0,
+            duration: 0.02,
+            stagger: 0.012,
+          })
+          .to(".mark-one-prompt", {
+            rotation: mobile ? 1.5 : 3,
+            y: -12,
+            duration: 0.5,
+          })
+          .fromTo(
+            ".mark-one-response",
+            { autoAlpha: 0, y: 35, rotation: 0 },
+            { autoAlpha: 1, y: 0, duration: 0.35 },
+          )
+          .from(".response-type .typed-char", {
+            opacity: 0,
+            duration: 0.02,
+            stagger: 0.014,
+          })
+          .from(".mark-one-changes", {
+            autoAlpha: 0,
+            scale: 0.95,
+            y: 12,
+            duration: 0.45,
+            ease: "back.out(1.4)",
+          })
+          .to(".mark-one-response", {
+            rotation: mobile ? -1 : -2,
+            y: -8,
+            duration: 0.5,
+          })
+          .fromTo(
+            ".mark-one-composer",
+            { autoAlpha: 0, y: 35, rotation: 0 },
+            {
+              autoAlpha: 1,
+              y: 0,
+              rotation: mobile ? 0.8 : 1.5,
+              duration: 0.45,
+            },
+          );
+        const observer = new IntersectionObserver(
+          ([entry]) => {
+            if (!entry.isIntersecting) return;
+            conversation.play();
+            observer.disconnect();
+          },
+          { rootMargin: "0px 0px -20% 0px" },
+        );
+        observer.observe(root.current!);
+        return () => observer.disconnect();
+      });
+      return () => mm.revert();
+    },
+    { scope: root },
+  );
   return (
     <figure
       className="mark-one-demo"
-      data-reveal
+      ref={root}
       aria-label="Illustrative local model conversation"
     >
       <div className="mark-one-prompt">
-        <p>
-          Build a typed API client in <FileChip />. Accept a response parser and
-          an abort signal, handle HTTP errors, then run <code>pnpm check</code>.
+        <p className="prompt-type">
+          <TypedText text="Build a typed API client in " />
+          <FileChip />
+          <TypedText text=". Accept a response parser and an abort signal, handle HTTP errors, then run " />
+          <code>
+            <TypedText text="pnpm check" />
+          </code>
+          <TypedText text="." />
         </p>
       </div>
       <div className="mark-one-response">
-        <p>
-          <strong>A small client.</strong> Typed results, response validation,
-          request cancellation, and clear errors for failed HTTP responses.
+        <p className="response-type">
+          <strong>
+            <TypedText text="A small client." />
+          </strong>{" "}
+          <TypedText text="Typed results, response validation, request cancellation, and clear errors for failed HTTP responses." />
         </p>
         <div className="mark-one-changes">
           <span className="changes-heading">

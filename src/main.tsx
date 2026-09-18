@@ -9,8 +9,9 @@ import Projects, { ProjectDetail } from "./pages/Projects";
 import Writing, { ArticleDetail } from "./pages/Writing";
 import NotFound from "./pages/NotFound";
 import { PageRecovery, RenderBoundary } from "./components/RenderBoundary";
-import "@fontsource-variable/dm-sans/wght.css";
-import "@fontsource-variable/space-grotesk/wght.css";
+import "@fontsource-variable/geist/wght.css";
+import "@fontsource-variable/geist-mono/wght.css";
+import "@fontsource/geist-pixel/latin-400.css";
 import "./site.css";
 const StudioPage = lazy(() => import("./cms/StudioPage"));
 function App() {

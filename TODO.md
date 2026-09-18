@@ -430,3 +430,21 @@ Scroll refinement evidence: `.evidence/scroll-refinement/verification.md`. Repro
 - [ ] Push release to GitHub main and verify connected Vercel production deployment and live site.
 
 Evidence: `.evidence/story-finish/`. Native computer-use startup fails, so checks use local Chromium directly; physical-phone/Safari and subjective audio quality remain unverified. Earlier native-provider blockers are superseded by browser evidence where listed above. Corrections classified as project guidance and recorded in projectagents.md / DESIGN.md.
+- [x] Latest Work spacing correction: close the oversized settled-title/project gap while preserving centred pop and scroll hold; browser-check desktop/phone, then publish correction.
+- [x] Latest Models correction: stable viewport-centred sentence/hold, no downward counter-scroll drift, then word handoff and chapter reveal; verify intermediate geometry.
+- [x] Convert Open WebUI → LM Studio → Mac/MLX progression into a connected responsive timeline, preserving factual copy and rabbit sequence.
+- [x] Replace early Ollama chat with terminal history: Ollama window, ollama run gemma2, >>> prompt, model-labelled streamed sample response; responsive/reduced-motion support.
+- [x] Latest rabbit correction: move “hole” into opening and dissolve; move bunny closer before dive; shorter landing distance and slower hand-drawn circle after landing.
+- [x] Highlight six months, enlarge/widen specialist-model paragraph, and sequence chat box/typing/tilt/response/files/follow-up on scroll with reduced-motion fallback.
+- [x] Carry the circled teaching heading into the following fine-tuning chapter using GSAP; remove duplicate-heading appearance during transition and retain static reduced-motion content.
+- [x] Move two-friends/LAH copy below Legion, explain Local Agent Harness, link its private GitHub repository, add the verified Hugging Face fine-tuning experiment, and place the writing bridge inside the Legion story.
+- [x] Fix collapsed artwork width inside route-transition stamp; verify actual project navigation transition on desktop and phone.
+
+- [x] Latest stamp correction supersedes monogram: restore actual portrait in this required placement, preserve perforated frame and verify navigation.
+- [x] Prepare and publish three case-study treatments from existing VSMS evidence: https://tx68s62xto54.postplan.dev (public).
+- [ ] User selection required for the new case-study layout; then expand, implement and verify the selected treatment. Existing result-first case studies remain published.
+- [x] Switch main typography to Geist and monospace to Geist Mono; preserve handwritten/specialised fonts and reserve Geist Pixel for pixel treatments; recheck layout after font metrics change.
+- [x] Review all user-named portfolio/UX references, distil evidence-backed principles, and refine the case-study comparison before design selection.
+
+
+Follow-up verification: 49 tests pass; build validates 33 routes. Desktop and 390px touch-emulated Chromium checks pass for Work spacing, Models centring/gating, terminal, rabbit/teaching handoff, chat order, About reveal, and actual portrait stamp navigation. Browser computed styles confirm Geist / Geist Mono / preserved Caveat. Public case-study comparison returns HTTP 200 and fits 390px. Native browser, physical-phone/Safari and audible quality remain unverified.

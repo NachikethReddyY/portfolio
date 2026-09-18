@@ -14,8 +14,9 @@
     "content:export": "node scripts/export-content.mjs"
   },
   "dependencies": {
-    "@fontsource-variable/dm-sans": "^5.3.0",
-    "@fontsource-variable/space-grotesk": "^5.3.0",
+    "@fontsource-variable/geist": "^5.3.0",
+    "@fontsource-variable/geist-mono": "^5.3.0",
+    "@fontsource/geist-pixel": "^5.3.0",
     "@gsap/react": "^2.1.2",
     "@portabletext/react": "^8.0.1",
     "@portabletext/types": "^4.0.2",

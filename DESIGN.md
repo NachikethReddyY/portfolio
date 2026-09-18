@@ -185,7 +185,7 @@ These are project-guidance corrections, not shared Fleet rules. Browser evidence
 
 ## Current accepted story — final 18 September corrections
 
-This section supersedes earlier portrait, stamp, stack, contribution, About timing and local-chat descriptions above. Only About uses the slanted drawn portrait; the hero and footer are text identities and the perforated stamp has an N. Availability dots are green. The whole hero moves behind the opaque normal-flow story so About visibly covers it without later bleed.
+This section supersedes earlier portrait, stamp, stack, contribution, About timing and local-chat descriptions above. About uses the slanted drawn portrait; the hero and footer are text identities and the perforated stamp uses the real portrait. Availability dots are green. The whole hero moves behind the opaque normal-flow story so About visibly covers it without later bleed.
 
 Hello precedes separate “I’m” and “Nachiketh” entrances. The portrait arrives next. “IT student at Singapore Polytechnic.” replaces the rejected slogan; this line and biography reveal only after the portrait reaches view, over additional scroll. Phone details reveal individually within the viewport.
 
@@ -198,3 +198,20 @@ AI history follows Ollama → Open WebUI → LM Studio → Mac/MLX → rabbit-ho
 Case studies adapt [Perry’s Stadia study](https://perryw-2023.webflow.io/stadia-bluetooth): result media first, overview alongside facts, Highlights, chapter titles and contents, using existing project content and evidence. Source imagery and prose are not copied.
 
 Browser evidence: `.evidence/story-finish/verification.json` plus staged screenshots and About-specific checks. Native computer-use transport is unavailable; headless Chromium provides direct browser layout and interaction evidence. Physical-phone/Safari and subjective audio listening are not verified.
+
+## Evening follow-up — supersedes earlier terminal and handoff details
+
+Work retains its centre pop/hold and closes to a 64px settled subtitle-to-project gap. The Models sentence stays centred in a sticky viewport and reveals the chapter after its isolated word lands. Ollama now uses a terminal window (`ollama run gemma2`, `>>>` prompt and streamed model-labelled answer). The tool progression is a connected timeline with a vertical mobile layout.
+
+The word “hole” moves into the opening and dissolves before the nearby rabbit dives. Landing precedes a slow SVG circle draw; the teaching title then travels into the following chapter without a second visible copy. Reduced motion retains a static reading path.
+
+Six months is highlighted; the specialist question is larger and wider. Prompt typing, panel tilt, response typing, edited-file summary and follow-up composer play in sequence on viewport entry. LAH collaboration and Local Agent Harness explanation follow Legion; its GitHub link states that the repository is private. The earlier Qwen fine-tuning experiment links to its existing Hugging Face model. The writing invitation belongs inside Legion, not in a separate section. The route stamp artwork fills its frame.
+
+Evidence: `.evidence/story-finish/spacing-check.mjs`, `handoff-check.mjs`, `chat-check.mjs`, `stamp-check.mjs` and their desktop/phone screenshots. These are project-guidance corrections.
+
+
+## Latest font and stamp correction
+
+Geist is the main and display typeface, Geist Mono handles code and technical labels, and Geist Pixel is available for pixel treatments. Caveat handwriting is unchanged. The real portrait is required in the perforated navigation stamp; it supersedes the monogram, with artwork sizing independent of caption styles.
+
+The expanded case-study direction is pending selection from three static treatments. The recommended hybrid combines readable, image-led chapters with one bounded blueprint sequence; this is a proposal, not the current implementation. Public inspiration coverage and access limitations are documented in the review artifact.

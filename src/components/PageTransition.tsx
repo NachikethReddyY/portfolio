@@ -172,9 +172,7 @@ export default function PageTransition({
           <div className="shutter-tile" key={i} />
         ))}
         <div className="route-stamp">
-          <span className="stamp-monogram">
-            N<span>↗</span>
-          </span>
+          <img className="stamp-portrait" src="/images/nachiketh-photo.jpeg" alt="" />
           <span>Nachiketh Reddy</span>
         </div>
       </div>

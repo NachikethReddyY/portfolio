@@ -68,6 +68,14 @@ export function RabbitHole() {
             ? hole.left + hole.width / 2 - origin.left - origin.width / 2
             : hole.top - origin.bottom;
         };
+        const circle = root.current!.querySelector<SVGPathElement>(
+          ".teaching-circle path",
+        )!;
+        const circleLength = circle.getTotalLength();
+        gsap.set(circle, {
+          strokeDasharray: circleLength,
+          strokeDashoffset: circleLength,
+        });
         const dive = gsap.timeline({
           scrollTrigger: {
             trigger: root.current,
@@ -77,73 +85,165 @@ export function RabbitHole() {
             invalidateOnRefresh: true,
           },
         });
+        const wordOffset = (axis: "x" | "y") => {
+          const hole = root
+            .current!.querySelector(".rabbit-hole")!
+            .getBoundingClientRect();
+          const word = root
+            .current!.querySelector(".hole-anchor")!
+            .getBoundingClientRect();
+          return axis === "x"
+            ? hole.left + hole.width / 2 - word.left - word.width / 2
+            : hole.top + hole.height / 2 - word.top - word.height / 2;
+        };
         dive
           .fromTo(
             ".story-rabbit",
-            { autoAlpha: 0, scale: 0.3, y: 45 },
-            {
-              autoAlpha: 1,
-              scale: 1,
-              y: 0,
-              duration: 0.18,
-              ease: "back.out(1.5)",
-            },
+            { autoAlpha: 0, scale: 0.3, y: 30 },
+            { autoAlpha: 1, scale: 1, y: 0, duration: 0.25 },
           )
           .to({}, { duration: 0.2 })
+          .to(".hole-word", {
+            x: () => wordOffset("x"),
+            y: () => wordOffset("y"),
+            duration: 0.65,
+            ease: "power2.inOut",
+          })
+          .to(".hole-word", {
+            autoAlpha: 0,
+            scale: 0.6,
+            filter: "blur(8px)",
+            duration: 0.3,
+          })
+          .fromTo(
+            ".rabbit-hole",
+            { autoAlpha: 0, scale: 0.4 },
+            { autoAlpha: 1, scale: 1, duration: 0.3 },
+            "<",
+          )
           .to(".story-rabbit", {
-            y: -65,
-            x: () => holeOffset("x") * 0.5,
+            x: () => holeOffset("x") - 80,
+            y: () => holeOffset("y") - 20,
+            duration: 0.55,
+            ease: "power2.inOut",
+          })
+          .to({}, { duration: 0.2 })
+          .to(".story-rabbit", {
+            x: () => holeOffset("x") - 30,
+            y: () => holeOffset("y") - 95,
             rotation: -18,
-            duration: 0.16,
+            duration: 0.25,
             ease: "power2.out",
+          })
+          .to(".story-rabbit", {
+            x: () => holeOffset("x"),
+            y: () => holeOffset("y"),
+            rotation: 100,
+            scale: 0.1,
+            autoAlpha: 0,
+            duration: 0.3,
+            ease: "power3.in",
           })
           .fromTo(
             ".rabbit-speed",
             { autoAlpha: 0, scaleY: 0.3 },
-            { autoAlpha: 0.8, scaleY: 1, duration: 0.12 },
+            { autoAlpha: 0.8, scaleY: 1, duration: 0.1 },
+            "<.15",
           )
-          .to(
-            ".story-rabbit",
-            {
-              x: () => holeOffset("x"),
-              y: () => holeOffset("y"),
-              rotation: 100,
-              scale: 0.1,
-              autoAlpha: 0,
-              duration: 0.22,
-              ease: "power3.in",
-            },
-            "<",
-          )
-          .to(".rabbit-speed", { autoAlpha: 0, duration: 0.08 })
-          .to(".rabbit-opening, .rabbit-hole", {
-            autoAlpha: 0,
-            scale: 0.9,
-            duration: 0.16,
-          })
+          .to(".rabbit-speed", { autoAlpha: 0, duration: 0.1 })
+          .to(".rabbit-opening, .rabbit-hole", { autoAlpha: 0, duration: 0.25 })
           .fromTo(
             ".rabbit-landing",
-            { autoAlpha: 0, y: 40 },
-            { autoAlpha: 1, y: 0, duration: 0.2 },
-            "<.05",
+            { autoAlpha: 0, y: 25 },
+            { autoAlpha: 1, y: 0, duration: 0.25 },
+            "<",
           )
           .fromTo(
             ".landing-rabbit",
-            { autoAlpha: 0, y: -130, rotation: -12 },
+            { autoAlpha: 0, y: -50, rotation: -8 },
             {
               autoAlpha: 1,
               y: 0,
               rotation: 0,
-              duration: 0.24,
+              duration: 0.3,
               ease: "bounce.out",
             },
           )
+          .to({}, { duration: 0.2 })
           .fromTo(
             ".teaching-circle path",
-            { strokeDashoffset: 1 },
-            { strokeDashoffset: 0, duration: 0.2, ease: "none" },
+            { strokeDashoffset: circleLength, autoRound: false },
+            {
+              strokeDashoffset: 0,
+              autoRound: false,
+              duration: 1.2,
+              ease: "none",
+            },
           )
-          .to({}, { duration: 0.25 });
+          .to({}, { duration: 0.4 });
+        const heading =
+          root.current!.querySelector<HTMLElement>(".rabbit-landing h3")!;
+        const target = root.current!.parentElement!.querySelector<HTMLElement>(
+          ".teaching-destination",
+        );
+        if (target) {
+          const transfer = { progress: 0 };
+          const sources = [
+            ...heading.querySelectorAll<HTMLElement>(".teaching-line"),
+          ];
+          const destinations = [
+            ...target.querySelectorAll<HTMLElement>(":scope > span"),
+          ];
+          const reposition = () => {
+            sources.forEach((source, index) => {
+              const dest = destinations[index].getBoundingClientRect();
+              const from = source.getBoundingClientRect();
+              const x = Number(gsap.getProperty(source, "x"));
+              const y = Number(gsap.getProperty(source, "y"));
+              gsap.set(source, {
+                x: (dest.left - from.left + x) * transfer.progress,
+                y: (dest.top - from.top + y) * transfer.progress,
+                scale:
+                  1 + (dest.width / source.offsetWidth - 1) * transfer.progress,
+              });
+            });
+            // Keep the two lines readable while they converge onto one baseline.
+            const first = sources[0].getBoundingClientRect();
+            const second = sources[1].getBoundingClientRect();
+            if (second.left < first.right && second.top < first.bottom + 8) {
+              gsap.set(sources[1], {
+                y:
+                  Number(gsap.getProperty(sources[1], "y")) +
+                  first.bottom +
+                  8 -
+                  second.top,
+              });
+            }
+          };
+          gsap
+            .timeline({
+              scrollTrigger: {
+                trigger: root.current,
+                start: "bottom bottom",
+                end: "bottom 25%",
+                scrub: 0.3,
+                onUpdate: reposition,
+              },
+            })
+            .fromTo(target, { autoAlpha: 0 }, { autoAlpha: 0, duration: 0.01 })
+            .to(".rabbit-landing > p, .landing-rabbit, .teaching-circle", {
+              autoAlpha: 0,
+              duration: 0.25,
+            })
+            .to(
+              transfer,
+              { progress: 1, duration: 0.7, onUpdate: reposition },
+              "<",
+            )
+            .to(sources, { color: "#f3f1e8", duration: 0.7 }, "<")
+            .set(heading, { autoAlpha: 0 })
+            .set(target, { autoAlpha: 1 });
+        }
       });
       return () => mm.revert();
     },
@@ -161,7 +261,9 @@ export function RabbitHole() {
                 <RabbitArtwork className="story-rabbit" />
               </span>
             </span>{" "}
-            hole.
+            <span className="hole-anchor">
+              <span className="hole-word">hole.</span>
+            </span>
           </h3>
           <p>I wanted to understand how models learn.</p>
         </div>
@@ -175,10 +277,10 @@ export function RabbitHole() {
         <div className="rabbit-landing">
           <p>Fine-tuning.</p>
           <h3>
-            Learning to
+            <span className="teaching-line">Learning to</span>
             <br />
-            <span className="teaching-target">
-              teach a model
+            <span className="teaching-target teaching-line">
+              teach a model.
               <RabbitArtwork className="landing-rabbit" />
               <svg
                 className="teaching-circle"
@@ -186,10 +288,7 @@ export function RabbitHole() {
                 preserveAspectRatio="none"
                 aria-hidden="true"
               >
-                <path
-                  pathLength="1"
-                  d="M614 30C512-4 156-4 38 28S-4 112 306 109 683 56 621 25C547-9 184 2 65 23"
-                />
+                <path d="M614 30C512-4 156-4 38 28S-4 112 306 109 683 56 621 25C547-9 184 2 65 23" />
               </svg>
             </span>
           </h3>
