@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useState, useMemo } from "react";
 import { portfolioImage } from "../content/images";
 import {
   Link,
@@ -12,6 +12,8 @@ import { RichContent, LegacyRichContent } from "../components/RichContent";
 import { usePageMotion } from "../usePageMotion";
 import type { Article } from "../content/types";
 import NotFound from "./NotFound";
+import { ReadingContents } from "../components/ReadingContents";
+import { readingSections } from "../lib/readingContents";
 const date = (value: string) =>
   new Intl.DateTimeFormat("en", {
     day: "numeric",
@@ -117,6 +119,10 @@ export function ArticleDetail() {
   const { articles, profile } = useContent();
   const article = articles.find((a) => a.slug === slug);
   const scope = usePageMotion(slug);
+  const sections = useMemo(
+    () => readingSections(article?.body ?? []),
+    [article],
+  );
   if (!article) return <NotFound />;
   const next = articles[(articles.indexOf(article) + 1) % articles.length];
   return (
@@ -146,38 +152,45 @@ export function ArticleDetail() {
           </div>
         </div>
       </header>
-      <div className="article-body">
-        {article.cover && (
-          <figure>
-            <img src={portfolioImage(article.cover, 1400)} alt="" />
-          </figure>
-        )}
-        <RichContent body={article.body} />
-        {article.legacyBody && <LegacyRichContent body={article.legacyBody} />}
-        {article.sources.length > 0 && (
-          <details className="article-sources">
-            <summary>Sources & related work</summary>
-            <ul>
-              {article.sources.map((s) => (
-                <li key={s.url}>
-                  <a href={s.url} target="_blank" rel="noopener noreferrer">
-                    {s.label}
-                    <Arrow diagonal />
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </details>
-        )}
-        <div className="article-end">
-          <p>Thanks for reading.</p>
-          <a
-            href={profile.x ?? "https://x.com/Nachikethreddyy"}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Continue the conversation on X <Arrow diagonal />
-          </a>
+      <div
+        className={`reading-layout article-reading${sections.length ? "" : " reading-layout-solo"}`}
+      >
+        <ReadingContents sections={sections} label="Article contents" />
+        <div className="article-body reading-main">
+          {article.cover && (
+            <figure>
+              <img src={portfolioImage(article.cover, 1400)} alt="" />
+            </figure>
+          )}
+          <RichContent body={article.body} />
+          {article.legacyBody && (
+            <LegacyRichContent body={article.legacyBody} />
+          )}
+          {article.sources.length > 0 && (
+            <details className="article-sources">
+              <summary>Sources & related work</summary>
+              <ul>
+                {article.sources.map((s) => (
+                  <li key={s.url}>
+                    <a href={s.url} target="_blank" rel="noopener noreferrer">
+                      {s.label}
+                      <Arrow diagonal />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </details>
+          )}
+          <div className="article-end">
+            <p>Thanks for reading.</p>
+            <a
+              href={profile.x ?? "https://x.com/Nachikethreddyy"}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Continue the conversation on X <Arrow diagonal />
+            </a>
+          </div>
         </div>
       </div>
       <Link className="next-article" to={`/writing/${next.slug}`}>

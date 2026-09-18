@@ -1,12 +1,16 @@
-import { portfolioImage } from "../content/images";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import { useContent } from "../content/store";
-import type { CaseStudy } from "../content/types";
+import type { ContentBlock, CaseStudy } from "../content/types";
 import { Arrow } from "../components/Icons";
 import { RichContent, LegacyRichContent } from "../components/RichContent";
 import { usePageMotion } from "../usePageMotion";
 import NotFound from "./NotFound";
-import { ProjectPreview } from "../components/ProjectPreview";
+import { ProjectMedia } from "../components/ProjectMedia";
+import { ReadingContents } from "../components/ReadingContents";
+import { readingSections } from "../lib/readingContents";
+import { useMemo, useRef, useEffect } from "react";
+import { ProjectGallery } from "../components/ProjectGallery";
+import { previewTilt } from "../lib/workInteractions";
 
 export function ProjectCard({
   project,
@@ -15,34 +19,58 @@ export function ProjectCard({
   project: CaseStudy;
   index?: number;
 }) {
+  const card = useRef<HTMLAnchorElement>(null);
+  const frame = useRef(0);
+  useEffect(() => () => cancelAnimationFrame(frame.current), []);
+  const resetTilt = () => {
+    cancelAnimationFrame(frame.current);
+    card.current?.style.removeProperty("--preview-x");
+    card.current?.style.removeProperty("--preview-y");
+  };
   return (
     <Link
+      ref={card}
+      onPointerMove={(event) => {
+        if (
+          event.pointerType !== "mouse" ||
+          !window.matchMedia(
+            "(hover: hover) and (prefers-reduced-motion: no-preference)",
+          ).matches
+        )
+          return;
+        const element = event.currentTarget;
+        const { clientX, clientY } = event;
+        cancelAnimationFrame(frame.current);
+        frame.current = requestAnimationFrame(() => {
+          const box = element.getBoundingClientRect();
+          const tilt = previewTilt(
+            (clientX - box.left) / box.width,
+            (clientY - box.top) / box.height,
+          );
+          element.style.setProperty("--preview-x", `${tilt.x}deg`);
+          element.style.setProperty("--preview-y", `${tilt.y}deg`);
+        });
+      }}
+      onPointerLeave={resetTilt}
+      onBlur={resetTilt}
       to={`/projects/${project.slug}`}
       className={`project-card accent-${project.accent}`}
     >
-      <div className="project-card-art">
-        {project.image ? (
-          <img
-            src={portfolioImage(project.image, 960)}
-            alt={project.imageAlt}
-            loading="lazy"
-          />
-        ) : (
-          <ProjectPreview project={project} />
-        )}
-        <span className="project-open">
-          <Arrow diagonal />
-        </span>
-        <span className="project-card-index">
-          {String(index + 1).padStart(2, "0")}
-        </span>
-      </div>
       <div className="project-card-info">
         <div>
           <h3>{project.name}</h3>
           <p>{project.summary}</p>
         </div>
         <span>{project.status}</span>
+      </div>
+      <div className="project-card-art">
+        <ProjectMedia project={project} />
+        <span className="project-open">
+          <Arrow diagonal />
+        </span>
+        <span className="project-card-index">
+          {String(index + 1).padStart(2, "0")}
+        </span>
       </div>
       <div className="project-card-stack">
         {project.stack.slice(0, 3).map((tech) => (
@@ -124,8 +152,24 @@ export function ProjectDetail() {
   const { projects } = useContent();
   const project = projects.find((p) => p.slug === slug);
   const scope = usePageMotion(slug);
+  const sections = useMemo(
+    () => [
+      { id: "project-overview", label: "Overview" },
+      ...(project?.gallery?.length
+        ? [{ id: "project-highlights", label: "Highlights" }]
+        : []),
+      ...readingSections(project?.body ?? []),
+    ],
+    [project],
+  );
   if (!project) return <NotFound />;
   const next = projects[(projects.indexOf(project) + 1) % projects.length];
+  const chapters: ContentBlock[][] = [];
+  for (const block of project.body) {
+    if (!chapters.length || (block._type === "block" && block.style === "h2"))
+      chapters.push([]);
+    chapters[chapters.length - 1].push(block);
+  }
   return (
     <article ref={scope} className={`detail-page accent-${project.accent}`}>
       <header className="case-heading shell">
@@ -138,20 +182,6 @@ export function ProjectDetail() {
         </div>
         <h1 tabIndex={-1}>{project.name}</h1>
         <p className="case-summary">{project.summary}</p>
-        <div className="case-facts">
-          <div>
-            <span>My role</span>
-            <p>{project.role}</p>
-          </div>
-          <div>
-            <span>When</span>
-            <p>{project.year}</p>
-          </div>
-          <div>
-            <span>Built with</span>
-            <p>{project.stack.join(" · ")}</p>
-          </div>
-        </div>
         <div className="case-links">
           {project.links.map((link) => (
             <a
@@ -166,47 +196,49 @@ export function ProjectDetail() {
           ))}
         </div>
       </header>
-      {project.image && (
-        <div className="case-cover shell">
-          <img
-            src={portfolioImage(project.image, 1600)}
-            alt={project.imageAlt}
-          />
-        </div>
-      )}
-      <div className="case-body shell">
-        <aside>
-          <p>Inside the project</p>
-          <nav aria-label="Case study contents">
-            {project.body
-              .filter((b) => b._type === "block" && b.style === "h2")
-              .map(
-                (b) =>
-                  b._type === "block" && (
-                    <Link to={`#${b._key}`} key={b._key}>
-                      {b.children.map((s) => s.text).join("")}
-                    </Link>
-                  ),
-              )}
-          </nav>
-        </aside>
-        <div>
-          <RichContent body={project.body} />
+      <div className="case-cover shell">
+        <ProjectMedia project={project} prominent />
+      </div>
+      <div className="case-body reading-layout shell">
+        <ReadingContents sections={sections} label="Case study contents" />
+        <div className="reading-main">
+          <section className="case-overview" id="project-overview">
+            <div className="case-facts">
+              <div>
+                <span>My role</span>
+                <p>{project.role}</p>
+              </div>
+              <div>
+                <span>Timeline & status</span>
+                <p>
+                  {project.year} · {project.status}
+                </p>
+              </div>
+              <div>
+                <span>Built with</span>
+                <p>{project.stack.join(" · ")}</p>
+              </div>
+            </div>
+            <div className="case-overview-copy">
+              <h2>Overview</h2>
+              <p>{project.headline}</p>
+              <p>{project.summary}</p>
+            </div>
+          </section>
+          {!!project.gallery?.length && (
+            <section className="case-highlights" id="project-highlights">
+              <h2>Highlights</h2>
+              <ProjectGallery key={project.slug} images={project.gallery} />
+            </section>
+          )}
+          {chapters.map((chapter, index) => (
+            <section className="case-chapter" key={chapter[0]?._key ?? index}>
+              <RichContent body={chapter} />
+            </section>
+          ))}
           {project.legacyBody && (
             <LegacyRichContent body={project.legacyBody} />
           )}
-          <div className="project-gallery">
-            {project.gallery?.map((image) => (
-              <figure key={image.url}>
-                <img
-                  src={portfolioImage(image.url, 1400)}
-                  alt={image.alt}
-                  loading="lazy"
-                />
-                {image.caption && <figcaption>{image.caption}</figcaption>}
-              </figure>
-            ))}
-          </div>
         </div>
       </div>
       <Link className="next-project shell" to={`/projects/${next.slug}`}>

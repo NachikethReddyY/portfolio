@@ -1,4 +1,5 @@
 import type { CaseStudy } from "../content/types";
+import { DeviceFrame } from "./DeviceFrame";
 const commands: Record<
   string,
   { file: string; command: string; lines: string[] }
@@ -83,28 +84,29 @@ export function ProjectPreview({ project }: { project: CaseStudy }) {
         className="coreml-preview"
         aria-label="On-device image classification workshop illustration"
       >
-        <div className="phone-preview">
-          <div className="phone-notch" />
-          <span>Image classification</span>
-          <svg viewBox="0 0 100 100" aria-hidden="true">
-            <path
-              d="M51 30C35 18 15 34 20 58S44 90 51 77C60 92 83 73 83 53S63 23 51 30Z"
-              fill="#d8df65"
-            />
-            <path
-              d="M51 30C50 12 62 9 70 13C67 25 58 26 51 30Z"
-              fill="#72c69c"
-            />
-          </svg>
-          <strong>Photo → model → label</strong>
-          <div className="phone-home" />
-        </div>
+        <DeviceFrame kind="phone">
+          <div className="phone-preview-content">
+            <span>Image classification</span>
+            <svg viewBox="0 0 100 100" aria-hidden="true">
+              <path
+                d="M51 30C35 18 15 34 20 58S44 90 51 77C60 92 83 73 83 53S63 23 51 30Z"
+                fill="#d8df65"
+              />
+              <path
+                d="M51 30C50 12 62 9 70 13C67 25 58 26 51 30Z"
+                fill="#72c69c"
+              />
+            </svg>
+            <strong>Photo → model → label</strong>
+          </div>
+        </DeviceFrame>
         <span className="preview-side-note">
           SwiftUI
           <br />
           Core ML
           <br />
           Vision
+          <small>Workshop illustration</small>
         </span>
       </div>
     );

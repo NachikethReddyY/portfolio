@@ -37,6 +37,13 @@ const escape = (value) =>
   );
 const routes = [
   {
+    path: "/404",
+    title: "Page not found — Nachiketh Reddy",
+    description:
+      "This page could not be found. Return home or explore Nachiketh’s projects.",
+    noindex: true,
+  },
+  {
     path: "/",
     title: "Nachiketh Reddy — Full-stack developer & aspiring AI engineer",
     description:
@@ -72,7 +79,7 @@ for (const route of routes) {
   const canonical = base + route.path;
   const image = new URL(route.image || "/images/nachiketh-sketch.webp", base)
     .href;
-  const tags = `<link rel="canonical" href="${escape(canonical)}"><meta property="og:title" content="${escape(route.title)}"><meta property="og:description" content="${escape(route.description)}"><meta property="og:url" content="${escape(canonical)}"><meta property="og:image" content="${escape(image)}"><meta property="og:type" content="${route.type || "website"}"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:creator" content="@Nachikethreddyy">`;
+  const tags = `${route.noindex ? '<meta name="robots" content="noindex">' : ""}<link rel="canonical" href="${escape(canonical)}"><meta property="og:title" content="${escape(route.title)}"><meta property="og:description" content="${escape(route.description)}"><meta property="og:url" content="${escape(canonical)}"><meta property="og:image" content="${escape(image)}"><meta property="og:type" content="${route.type || "website"}"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:creator" content="@Nachikethreddyy">`;
   const markup = (await render(route.path, content)).replace(
     /<template\b[^>]*>[\s\S]*?<\/template>/g,
     "",
@@ -89,6 +96,7 @@ for (const route of routes) {
   const folder = route.path === "/" ? "dist" : `dist${route.path}`;
   mkdirSync(folder, { recursive: true });
   writeFileSync(`${folder}/index.html`, html);
+  if (route.path === "/404") writeFileSync("dist/404.html", html);
 }
 writeFileSync(
   "dist/route-manifest.json",

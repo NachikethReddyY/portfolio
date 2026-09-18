@@ -3,8 +3,6 @@ import type { ReactNode } from "react";
 import { useLocation, useNavigationType } from "react-router-dom";
 import type { Location } from "react-router-dom";
 import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-gsap.registerPlugin(useGSAP);
 
 export default function PageTransition({
   children,
@@ -23,6 +21,7 @@ export default function PageTransition({
   navigation.current = navigationType;
   const first = useRef(true);
   const covered = useRef(false);
+  const motion = useRef<gsap.core.Timeline | null>(null);
   const previousLocation = useRef(location);
   useEffect(() => {
     const previous = history.scrollRestoration;
@@ -39,36 +38,55 @@ export default function PageTransition({
       window.removeEventListener("scroll", save);
     };
   }, [displayed.key]);
-  useGSAP(
-    () => {
-      if (location.key === displayed.key) return;
-      positions.current.set(displayed.key, window.scrollY);
-      const tiles = cover.current?.children;
-      if (tiles) gsap.killTweensOf(tiles);
-      const reduced = window.matchMedia(
-        "(prefers-reduced-motion: reduce)",
-      ).matches;
-      if (reduced || location.pathname === displayed.pathname || !tiles) {
-        covered.current = false;
-        gsap.set(cover.current, { visibility: "hidden" });
-        setDisplayed(location);
-        return;
+  // One timeline owns the cover. Never revert it when the destination mounts.
+  useLayoutEffect(() => {
+    if (location.key === displayed.key) return;
+    positions.current.set(displayed.key, window.scrollY);
+    motion.current?.kill();
+    const host = cover.current;
+    const tiles = host?.querySelectorAll(".shutter-tile");
+    const stamp = host?.querySelector(".route-stamp");
+    if (
+      !host ||
+      !tiles ||
+      !stamp ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      location.pathname === displayed.pathname
+    ) {
+      covered.current = false;
+      if (host) {
+        gsap.set(host, { visibility: "hidden" });
+        host.classList.remove("is-active");
       }
-      covered.current = true;
-      gsap.set(cover.current, { visibility: "visible" });
-      gsap.fromTo(
+      setDisplayed(location);
+      return;
+    }
+    covered.current = true;
+    host.classList.add("is-active");
+    gsap.set(host, { visibility: "visible" });
+    gsap.set(stamp, { opacity: 0, scale: 1.6, rotation: -18 });
+    motion.current = gsap
+      .timeline()
+      .fromTo(
         tiles,
-        { yPercent: 105 },
-        {
-          yPercent: 0,
-          duration: 0.38,
-          stagger: { each: 0.03, from: "start" },
-          ease: "power4.inOut",
-          onComplete: () => setDisplayed(latest.current),
-        },
-      );
+        { yPercent: 105, y: 0 },
+        { yPercent: 0, duration: 0.56, stagger: 0.045, ease: "power3.inOut" },
+      )
+      .to(stamp, {
+        opacity: 1,
+        scale: 1,
+        rotation: -7,
+        duration: 0.28,
+        ease: "back.out(1.5)",
+      })
+      .to({}, { duration: 0.16 })
+      .call(() => setDisplayed(latest.current));
+  }, [location.key]);
+  useEffect(
+    () => () => {
+      motion.current?.kill();
     },
-    { scope: cover, dependencies: [location.key], revertOnUpdate: true },
+    [],
   );
   useLayoutEffect(() => {
     const wasFirst = first.current;
@@ -114,30 +132,34 @@ export default function PageTransition({
     });
     return () => cancelAnimationFrame(frame);
   }, [displayed.key, displayed.hash, displayed.pathname]);
-  useGSAP(
-    () => {
-      if (!cover.current || !covered.current) return;
-      const tiles = cover.current.children;
-      gsap.killTweensOf(tiles);
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        gsap.set(cover.current, { visibility: "hidden" });
-        covered.current = false;
-        return;
-      }
-      gsap.set(cover.current, { visibility: "visible" });
-      gsap.to(tiles, {
-        yPercent: -105,
-        duration: 0.45,
-        stagger: { each: 0.03, from: "end" },
-        ease: "power4.inOut",
-        onComplete: () => {
-          covered.current = false;
-          if (cover.current) gsap.set(cover.current, { visibility: "hidden" });
-        },
-      });
-    },
-    { scope: cover, dependencies: [displayed.key], revertOnUpdate: true },
-  );
+  useLayoutEffect(() => {
+    const host = cover.current;
+    if (!host || !covered.current) return;
+    const frame = requestAnimationFrame(() => {
+      motion.current?.kill();
+      motion.current = gsap
+        .timeline({
+          onComplete: () => {
+            covered.current = false;
+            gsap.set(host, { visibility: "hidden" });
+            host.classList.remove("is-active");
+          },
+        })
+        .to(".route-stamp", { opacity: 0, scale: 0.94, duration: 0.18 }, 0.12)
+        .to(
+          host.querySelectorAll(".shutter-tile"),
+          {
+            yPercent: -105,
+            y: 0,
+            duration: 0.6,
+            stagger: { each: 0.04, from: "end" },
+            ease: "power3.inOut",
+          },
+          0.25,
+        );
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [displayed.key]);
   return (
     <>
       <div ref={content} className="route-content">
@@ -147,10 +169,14 @@ export default function PageTransition({
       </div>
       <div className="page-shutter" ref={cover} aria-hidden="true">
         {[0, 1, 2, 3, 4].map((i) => (
-          <div key={i}>
-            <span>{i === 2 ? "nr." : ""}</span>
-          </div>
+          <div className="shutter-tile" key={i} />
         ))}
+        <div className="route-stamp">
+          <span className="stamp-monogram">
+            N<span>↗</span>
+          </span>
+          <span>Nachiketh Reddy</span>
+        </div>
       </div>
     </>
   );

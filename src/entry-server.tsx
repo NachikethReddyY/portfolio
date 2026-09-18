@@ -4,6 +4,7 @@ import { ContentProvider } from "./content/store";
 import Layout from "./components/Layout";
 import type { PortfolioContent } from "./content/types";
 import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
 import Projects, { ProjectDetail } from "./pages/Projects";
 import Writing, { ArticleDetail } from "./pages/Writing";
 export async function render(path: string, content?: PortfolioContent) {
@@ -18,6 +19,7 @@ export async function render(path: string, content?: PortfolioContent) {
             <Route path="/writing" element={<Writing />} />
             <Route path="/writing/:slug" element={<ArticleDetail />} />
             <Route path="/blog/:slug" element={<ArticleDetail />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>
       </ContentProvider>

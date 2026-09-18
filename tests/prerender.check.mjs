@@ -118,3 +118,64 @@ assert.ok(
 console.log(
   "Verified rich article pre-render: equation output and diagram source fallback.",
 );
+
+// Missing URLs must render recovery content before JavaScript, including nested content routes.
+for (const path of [
+  "/not-a-real-page",
+  "/projects/not-a-project",
+  "/writing/not-an-article",
+]) {
+  const missingHtml = await render(path, fixture);
+  const missingNodes = descendants(parse(missingHtml));
+  assert.equal(
+    missingNodes.filter((n) => n.tagName === "h1").length,
+    1,
+    `${path}: one recovery heading`,
+  );
+  assert.ok(
+    missingHtml.includes("Page not found"),
+    `${path}: custom recovery content`,
+  );
+  for (const target of ["/", "/projects"]) {
+    assert.ok(
+      missingNodes.some((n) => n.tagName === "a" && attr(n, "href") === target),
+      `${path}: recovery link ${target}`,
+    );
+  }
+}
+assert.ok(
+  readFileSync("dist/404.html", "utf8").includes(
+    'name="robots" content="noindex"',
+  ),
+  "static 404 is non-indexable",
+);
+console.log(
+  "Verified unknown, missing-project and missing-article recovery, plus static 404 output.",
+);
+
+const homeHtml = await render("/", fixture);
+const homeNodes = descendants(parse(homeHtml));
+const aiTrigger = homeNodes.find(
+  (n) => n.tagName === "button" && attr(n, "class") === "ai-role",
+);
+assert.ok(aiTrigger, "AI engineer has its own keyboard/touch trigger");
+assert.equal(
+  attr(aiTrigger, "aria-label"),
+  "AI engineer: prompt to model to output",
+);
+const aiAspiration = homeNodes.find(
+  (n) => n.tagName === "p" && attr(n, "class") === "hero-aspiration",
+);
+assert.ok(
+  aiAspiration.childNodes.some(
+    (n) => n.nodeName === "#text" && n.value.includes("Aspiring"),
+  ),
+  "Aspiring is outside the AI interaction",
+);
+assert.ok(
+  homeHtml.includes('data-entrance="complete"'),
+  "server-rendered hero remains visible before JavaScript",
+);
+console.log(
+  "Verified independent AI role trigger and readable pre-JavaScript hero.",
+);

@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import PageMetadata from "./PageMetadata";
+import { SoundFeedback } from "./SoundFeedback";
+import { ConnectAtmosphere } from "./ConnectAtmosphere";
 import { Arrow, SocialIcon } from "./Icons";
 import { useContent } from "../content/store";
 
@@ -40,9 +42,17 @@ export function Socials({ labels = false }: { labels?: boolean }) {
 export default function Layout({ children }: { children: ReactNode }) {
   const { profile } = useContent();
   const [open, setOpen] = useState(false);
+  const [compactBrand, setCompactBrand] = useState(false);
+  useEffect(() => {
+    const updateBrand = () => setCompactBrand(window.scrollY > 80);
+    updateBrand();
+    window.addEventListener("scroll", updateBrand, { passive: true });
+    return () => window.removeEventListener("scroll", updateBrand);
+  }, []);
   const dialog = useRef<HTMLDialogElement>(null);
   const menuButton = useRef<HTMLButtonElement>(null);
   const location = useLocation();
+  const menuAnimation = useRef<gsap.core.Timeline | null>(null);
   useEffect(() => {
     setOpen(false);
   }, [location.pathname, location.hash]);
@@ -65,23 +75,61 @@ export default function Layout({ children }: { children: ReactNode }) {
         window.matchMedia("(prefers-reduced-motion: reduce)").matches
       )
         return;
-      gsap.fromTo(
-        ".menu-link",
-        { y: 30, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.55,
-          stagger: 0.065,
-          ease: "power3.out",
-        },
-      );
+      menuAnimation.current = gsap
+        .timeline()
+        .fromTo(
+          dialog.current,
+          { clipPath: "inset(0 0 0 100%)" },
+          {
+            clipPath: "inset(0 0 0 0%)",
+            duration: 0.42,
+            ease: "power3.inOut",
+          },
+        )
+        .fromTo(
+          ".menu-top,.menu-bottom",
+          { opacity: 0 },
+          {
+            opacity: 1,
+            duration: 0.2,
+          },
+          0.25,
+        )
+        .fromTo(
+          ".menu-link",
+          { x: 28, opacity: 0 },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 0.34,
+            stagger: 0.045,
+            ease: "power3.out",
+          },
+          0.25,
+        );
+      return () => {
+        menuAnimation.current = null;
+      };
     },
     { scope: dialog, dependencies: [open], revertOnUpdate: true },
   );
   const close = () => {
-    setOpen(false);
-    menuButton.current?.focus();
+    const animation = menuAnimation.current;
+    if (
+      animation &&
+      !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      animation
+        .eventCallback("onReverseComplete", () => {
+          setOpen(false);
+          menuButton.current?.focus();
+        })
+        .timeScale(1.5)
+        .reverse();
+    } else {
+      setOpen(false);
+      menuButton.current?.focus();
+    }
   };
   return (
     <>
@@ -97,25 +145,26 @@ export default function Layout({ children }: { children: ReactNode }) {
         Skip to content
       </Link>
       <header className="site-nav shell">
-        <Link to="/" className="brand" aria-label="Nachiketh Reddy home">
-          Nachiketh<span> Reddy</span>
-          <i>.</i>
+        <Link
+          to="/"
+          className={`brand${compactBrand ? " is-compact" : ""}`}
+          aria-label="Nachiketh Reddy home"
+        >
+          <span className="brand-full" aria-hidden="true">
+            Nachiketh<span> Reddy</span>
+            <i>.</i>
+          </span>
+          <span className="brand-initial" aria-hidden="true">
+            N
+          </span>
         </Link>
-        <nav className="glass-nav" aria-label="Main navigation">
-          <NavLink to="/" end>
-            Home
-          </NavLink>
-          <NavLink to="/projects">Work</NavLink>
-          <NavLink to="/writing">Writing</NavLink>
-          <Link to="/#about">About</Link>
-        </nav>
         <a
           className="nav-contact"
           href={profile.linkedin}
           target="_blank"
           rel="noopener noreferrer"
         >
-          Say hello <Arrow diagonal />
+          Connect <Arrow diagonal />
         </a>
         <button
           className="menu-toggle"
@@ -160,7 +209,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             ].map(([to, label], index) => (
               <Link className="menu-link" key={to} to={to} onClick={close}>
                 <small>0{index + 1}</small>
-                {label}
+                <span className="menu-link-label">{label}</span>
                 <Arrow />
               </Link>
             ))}
@@ -179,6 +228,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         {children}
       </main>
       <footer className="footer" id="contact">
+        <ConnectAtmosphere />
         <div className="shell">
           <div className="footer-top">
             <p>
@@ -188,26 +238,40 @@ export default function Layout({ children }: { children: ReactNode }) {
           </div>
           <div className="footer-call">
             <h2>
-              Have something
+              Connect
               <br />
-              in mind?
+              with me.
             </h2>
             <a
               href={profile.linkedin}
               target="_blank"
               rel="noopener noreferrer"
               className="contact-orbit"
-              aria-label="Say hello on LinkedIn"
+              aria-label="Connect on LinkedIn"
             >
-              <span>Say hello</span>
+              <span>Connect</span>
               <Arrow diagonal />
             </a>
           </div>
           <div className="footer-links">
             <p>
-              A project, an internship, or a good conversation.
-              <br />
-              I’d like to hear about it.
+              Connect with me on{" "}
+              <a
+                href={profile.x ?? "https://x.com/Nachikethreddyy"}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                X
+              </a>{" "}
+              or{" "}
+              <a
+                href={profile.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn
+              </a>
+              .
             </p>
             <div>
               <Link to="/projects">Projects</Link>
@@ -220,8 +284,9 @@ export default function Layout({ children }: { children: ReactNode }) {
             nachiketh<span>.</span>
           </div>
           <div className="footer-bottom">
+            <SoundFeedback />
             <span>© {new Date().getFullYear()} Nachiketh Reddy</span>
-            <span>Made with curiosity. Still iterating.</span>
+            <span className="footer-location">{profile.location}</span>
             <Link
               to={{
                 pathname: location.pathname,

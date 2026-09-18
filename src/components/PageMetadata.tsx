@@ -61,6 +61,7 @@ export default function PageMetadata() {
       tag.content = content;
     };
     setMeta("name", "description", description);
+    setMeta("name", "robots", missing ? "noindex" : "index, follow");
     setMeta("property", "og:title", title);
     setMeta("property", "og:description", description);
     setMeta("property", "og:url", canonical);

@@ -231,4 +231,23 @@ the commands documented here.
 
 ### Image delivery
 
-Sanity CDN images are requested at bounded widths with automatic format negotiation: 960 px for project cards, 1600 px for case-study covers, and 1400 px for article/gallery images. Authored Sanity upload crops are resolved into CDN rectangles before content validation; URL query crops and local assets are preserved. Images retain their cropped natural aspect ratio, so the hotspot does not introduce an additional card crop. The Blender model combines static keys and speaker slots into 17 mesh primitives while retaining the animated screen hinge.
+Sanity CDN images are requested at bounded widths with automatic format negotiation: 960 px for project cards, 1600 px for case-study covers, and 1400 px for article/gallery images. Authored Sanity upload crops are resolved into CDN rectangles before content validation; URL query crops and local assets are preserved. Images retain their cropped natural aspect ratio, so the hotspot does not introduce an additional card crop. The Blender model combines static keycaps and key legends into shared meshes while retaining the animated screen hinge. It uses rounded outline extrusions for the chassis and lid, so the corner radius is independent of shell thickness.
+
+### Homepage laptop artwork
+
+Edit `public/models/laptop-screen.svg` for the blue desktop, code window, and enlarged Dock. Regenerate its texture with:
+
+```sh
+pnpm exec node --input-type=module -e 'import sharp from "sharp"; await sharp("public/models/laptop-screen.svg").png().toFile("public/models/laptop-screen.png")'
+```
+
+Both the browser model and Blender fallback use that PNG. The recessed lid mark is generated from `scripts/apple-logo-contours.json` (Apple silhouette from Simple Icons); the original device geometry is in `scripts/build-laptop.py`. The editable scene remains local at `.evidence/narrative-build/laptop.blend`.
+
+`src/lib/laptopCamera.ts` fits mesh bounds to the canvas. `tests/laptop-framing.test.mjs` verifies desktop/mobile framing and hinge ownership. The renderer retains its last frame between updates and leaves the static render visible until the first successful model draw.
+
+After a production build, run `node scripts/build-design-reference.mjs` to regenerate `DESIGN.html` from the same server-rendered components and CSS. View it through the local Vite server at `/DESIGN.html`; it is a development reference, not a published route.
+
+
+The screen composition can be rebuilt with node scripts/build-screen-art.mjs after capturing the prepared illustrative editor into .evidence/app-refinement/vscode-window.png. The script decodes the capture before embedding it (computer-use captures may be JPEG bytes despite a PNG filename). It composes the real editor, app artwork, and notch-safe menu bar, then exports the shared 2160×1305 PNG. App artwork provenance is in public/icons/apps/SOURCES.md.
+
+The hero app tiles and compact stack share src/components/AppIcon.tsx. Keep additions grounded in profile content or explicit user direction. Height-responsive hero rules keep social links in the viewport; preserve the minimum readable height rather than hiding controls on unusually small windows.

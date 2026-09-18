@@ -4,9 +4,9 @@ The current design is a personal developer portfolio, revised from the user's sc
 
 ## Story and visual rules
 
-The opening must identify Nachiketh as a full-stack developer and aspiring AI engineer, based in Singapore and available for internships and projects. Follow with the person, education and community work, selected projects, AI workflows, contributions, tools, writing, and contact.
+The opening must identify Nachiketh as a full-stack developer and aspiring AI engineer, based in Singapore and available for internships and projects. Follow with the person, learning and community, an empty employment Work section, full-stack web projects, a viewport-height transition into AI, AI workflows, contributions, tools, writing, and contact.
 
-Keep the deep near-black canvas, cream text, purple role headline, and mint AI accent. Large type carries the hierarchy; real project artwork carries the evidence. Glass is reserved for navigation and the floating workspace panels. Thin separators connect the long page. Avoid invented stats, unrelated decorative arrows, and fake product screenshots.
+Keep the deep near-black canvas and cream text. Use #5271FF as the brand accent and #8FA4FF for readable small accent text. Large type carries the hierarchy; real project artwork carries the evidence. Glass is reserved for navigation and the floating workspace panels. Thin separators connect the long page. Avoid invented stats, unrelated decorative arrows, and fake product screenshots.
 
 | Token      | Value     | Use                                  |
 | ---------- | --------- | ------------------------------------ |
@@ -15,9 +15,9 @@ Keep the deep near-black canvas, cream text, purple role headline, and mint AI a
 | Text       | `#f4f1e7` | Primary text and button surface      |
 | Muted      | `#a0a6b0` | Secondary text                       |
 | Line       | `#292d33` | Boundaries                           |
-| Mint       | `#57d9be` | AI focus and interaction             |
-| Lavender   | `#b59af7` | Developer role and selected emphasis |
-| Warm       | `#f0c779` | Restrained punctuation               |
+| Brand      | `#5271FF` | Availability dot and punctuation |
+| Brand action | `#7890FF` | Hero button and hello punctuation |
+| Brand text | `#8FA4FF` | Small accent text, focus and existing emphasis |
 
 Locally bundled DM Sans is the primary typeface; Space Grotesk supports display details. The layout collapses from two-column compositions to a readable mobile sequence. All primary content must fit at 320px without horizontal page scrolling.
 
@@ -41,3 +41,160 @@ The reference list was sampled, including Pufferfishe, Eric Augusto, Craftz.dog,
 ## Correction record
 
 Project guidance: a motion portfolio needs visible scroll choreography; a developer hero visual must communicate development; a laptop must have coherent connected geometry; the opening must explain role, location, availability, and AI ambitions. These corrections apply to this project. No cross-project guidance was changed.
+
+## Accepted homepage B — 18 September 2026
+
+- Preserve the current navigation, including its brand/home link and menu behavior. The hero identity belongs in one compact portrait card with location and availability.
+- Position the laptop above the role block. “Aspiring AI engineer” sits immediately above “Full-stack developer”; the heading dot has explicit room inside its entrance mask.
+- Development (React, Express, Swift) and AI (agent workflows, model training, local models) use fixed-size floating cards. Use the code and chip icons from the project's stroke icon style. Cycle with short transitions and a three-second dwell, with per-card pause buttons, offscreen/tab suspension, and static reduced-motion content. Expose the full list once to assistive technology without announcements on every cycle.
+- Cards may sit behind the laptop at their edges; text and controls must stay unobscured. Identity padding is 16px vertically on desktop, 13px on phones; do not reserve a large blank lower area.
+- The laptop is supplementary imagery, excluded from accessibility semantics. Build its geometry in Blender: rounded outline extrusions preserve broad corner curves independently of thin shell depth, dark graphite metal contrasts with matte black keycaps, and the trackpad has its own tone. Use a thin notched display, connected hinge, six keyboard rows and quiet key legends. A shared screen image keeps the browser and fallback artwork consistent.
+- Keep the entire model inside the canvas by fitting its projected bounds with animation margin. Pointer response remains available through the studio parent without covering card controls.
+- Retain one hero action, “View projects”. Center GitHub, LinkedIn, Instagram and X icons in a separate 44px-target strip between dividers at the bottom of the viewport-height hero. Contact remains available in the unchanged navigation and page footer.
+- On phones, stack the identity, two topic cards, laptop, roles and project action. Do not hide essential content to force a fixed screen height.
+
+These are project guidance corrections: prior versions failed realistic laptop curvature/materials, complete framing, clear role grouping, and readable card overlap. Global skills are unchanged.
+
+## Sticker and narrative refinement
+
+The raised topic stickers use code/chip icons instead of visible category headings. Their labels emerge from the laptop after its 2.05-second opening sequence; subsequent text transitions have a three-second dwell. Use a 17px rounded edge, subtle inset highlight and a five-pixel lower edge. These surfaces belong only to the hero stickers. Keep rotation under eight degrees.
+
+On mobile, reduced motion needs 48px more space above the laptop to show every topic without overlap. The static fallback remains until the first successful model frame. Defer initial hiding/reveals until the browser has a paint opportunity, preserving readable background-tab and prerendered content.
+
+Keep the narrative order factual: about → learning/community → Work (no employment entries) → full-stack web projects → full-height learning transition → AI work. Web-project selection uses the existing category, so LAH remains in the AI section. Journey and project entrances reverse when scrolling back; the learning transition and AI assembly follow scroll position. No fabricated professional experience.
+
+The lid carries a recessed Apple silhouette following the same hinge as the display. `public/models/laptop-screen.svg` is the editable screen source; its PNG is shared by WebGL and Blender's fallback render. Brand marks in the illustrative Dock remain recognizable; page accent tokens use the selected blue family.
+
+Correction classification: project guidance. Check readable sticker text in both animated and reduced-motion states, and preserve the final WebGL frame when rendering is idle or the viewport changes.
+
+At 701–1250px, the laptop starts 118px below the stage top and cards move to the outside edges so the identity and AI labels remain readable. At phone widths, AI workflow stage height is 640px so its review card does not cover the build card's footer. The laptop entrance rotates gently from −0.18 radians; it does not translate below the canvas. Opening frames are covered by the framing regression check.
+
+## App-icon refinement — 18 September 2026 (supersedes cycling topic cards)
+
+The hero keeps the accepted black background and role hierarchy. The identity card floats toward the upper-right. Ten labeled tool icons emerge once from the screen after the lid opens: TypeScript, Python, Node.js, Drizzle, React, Swift, Express, MLX, Claude Code, and Codex. Their desktop arc follows the device silhouette; pointer movement moves them outward with the laptop tilt. On phones they form a legible five-column arrangement above the device. No repeating text carousel.
+
+The hero consumes the available viewport height below navigation. Stage size and typography respond to height as well as width so socials remain at the bottom. Very small viewports retain a minimum readable layout and normal scrolling. Do not crop the laptop or hide socials to make it fit.
+
+Keep #5271FF as the brand token. Action surfaces and punctuation use #78B5FF, supporting accents #83BAFF, and hello punctuation 48% opacity. The persistent side menu and capsule navigation remain; contact copy is “Connect”.
+
+Use real app artwork with source notes in public/icons/apps/SOURCES.md. The display texture uses a captured VS Code window, separate Apple menu glyph, left-side Code menus, a camera-safe middle gap, and right-side battery, Wi-Fi, Control Centre, date/time. Dock icons have distinct silhouettes. The bezel and camera housing are near-black with restrained reflections. Disable laptop self-shadow reception to prevent speckled shadow artifacts while retaining its floor shadow.
+
+Story order: about → learning/community → contributions → empty Work → free-time building transition → full-stack projects → centered, scroll-pinned web-to-models transition → AI work → compact tool grid → writing → Connect footer. Tool names remain small; omit descriptions, GSAP, and Blender from the personal stack. CMS-authored tools are retained, with sourced additions deduplicated by ID.
+
+Route transition: overlapping solid rectangles cover the viewport, portrait stamp lands, route swaps while fully covered, stamp fades, rectangles leave. Explicitly set both pixel and percentage translations so GSAP cannot double-count the CSS transform. Same-page filters, hash navigation, Back restoration, focus and reduced motion remain supported. Reduced motion bypasses cover and scroll pinning.
+
+## Role mascots — 18 September 2026
+
+Per the supplied reference, perch the blue Codex character and orange Claude Code mascot together immediately above the grouped role text. Preserve the laptop, heading, action and social-strip geometry. Use a short hop/turn/blink greeting (under five seconds), replay on pointer entry, pause while offscreen or hidden, and leave static artwork for reduced motion. The supplied raster stays unchanged; an SVG color-key filter removes its black background at render time. Keep clock text right-aligned with a 30px inset in the 1440px screen artwork.
+
+Latest accepted correction supersedes the larger greeting pair: pets are 36px tall (26px on narrow/short windows), walk along the measured width of “Aspiring AI engineer”, blink, duck behind its foreground letters, and pop back up. A clipped layer bounds the movement; it does not change heading or laptop geometry. Both remain visible and stationary under reduced motion. This remains a short sequence with hover replay rather than a perpetual loop.
+
+## Autonomous pet play — 18 September 2026
+
+Supersedes the finite greeting: both pets loop walking, blinking, hiding and peeking automatically while visible. Hovering or focusing either pet pauses both playheads at their current poses; leaving/blurring resumes without restarting. The bubble introduces Codex with “Nachiketh’s favourite model is Astra on high” or Claude Code with “Nachiketh’s favourite model is Haiku on high”. Use the supplied preference wording without treating it as a product capability claim. Crop both artwork viewports to their visible feet and align them with a common flex baseline. Keep reduced-motion pets static but introductions available. Suspend motion offscreen and while the document is hidden.
+
+Bounded visual correction: Codex artwork is 1.4× its previous size (42px desktop, 33.6px narrow/short), with the same foot baseline; Claude size remains unchanged. Introduction bubbles have a bordered triangular tail aligned to the paused speaker, and their horizontal position is clamped to viewport bounds.
+
+Independent-entity correction: hovering/focusing Codex pauses only the Codex timeline; Claude keeps playing. Hovering/focusing Claude pauses only Claude. This supersedes the shared-pause behavior. Offscreen and document-hidden suspension still apply to both.
+
+## Personal introduction and portrait placement
+
+The hero identity card uses the original real LinkedIn portrait (`/images/nachiketh-photo.jpeg`). About and the transition stamp retain the hand-drawn illustration. About shows the complete square artwork at its intrinsic aspect ratio, without a fade or cover crop, with its caption in normal flow and room for scroll rotation.
+
+The role-hover code is Nachiketh's own TypeScript introduction: `builds: ["web apps", "iOS apps"]` and `exploring: ["AI agents", "local models"]`. Its four lines replace the role after a selection highlight; the heading returns on leave. Reserve enough room for the snippet and wrap long lines on narrow screens without hiding the social strip.
+
+## Navigation, stack, and Fleet Mark I corrections
+
+Use the fixed menu button as the only desktop navigation mechanism; remove the center capsule. Its right-side modal expands into view, then staggered links enter. Close reverses the sequence; native modal focus and Escape remain. Six rows and the social footer fit the viewport without internal scrolling, including short mobile sizes.
+
+User-confirmed stack order begins TypeScript, React, Python, Express, Foundation Models. Go and MongoDB are excluded even if mentioned in project descriptions. HTML/CSS sit last; only their icons soften on grid hover and sharpen when individually hovered/focused. Frameworks without sourced logos use labeled monograms rather than invented brand symbols.
+
+Fleet Mark I replaces the old three-card workflow illustration. Its illustrative TypeScript session contains a task prompt, typed API example, command, and a decorative composer beneath the response paragraph using Fleet Mark I / High. It is not a functional chat or a record of an actual model test run. The supplied clean real photo replaces the LinkedIn image with an Open to Work border in the hero only.
+
+Final details: hero photo is the supplied clean original, displayed at 1.5× around the face inside a fixed crop; no Open to Work frame. MacBook status icons move together 112 screen-art pixels toward the date. Aspiration hover adds a short blue glow and two finite sparkles, without moving the role or pets; reduced motion omits the sparkles.
+
+The navigation brand stays at its existing left alignment and crossfades from the full name to “N” after 80px of page scroll, restoring at the top without changing its home-link target. Biography copy excludes karting and National Software Competition organising per user correction; don't infer personal activities from project associations.
+
+
+## Missing-page recovery
+
+Unknown URLs and missing project/article slugs share a custom 404: a typographic 404 with the zero in the accepted light blue, a plain “Page not found” heading, short explanation, primary Back home action and secondary View projects link. Preserve the common header, menu, footer and stamped route transitions. The layout stacks on narrow screens; all recovery content is server-rendered, with a static `404.html` artifact. Missing-page metadata uses noindex and restores normal indexing on recovery. Existing hosting rewrites are unchanged.
+
+The optional clock/globe reference is deferred; it adds no required story content.
+
+
+## Coordinated hero entrance and AI inference reveal
+
+Supersedes the independent text entrances and aspiration sparkles. Draw a rounded blue rectangle in 0.7s, hold 0.08s, erase over 0.35s. Wait for a rendered laptop frame; reveal the laptop over 0.35s, then open the lid while identity, roles and socials fade in. Emerge app icons only after opening completes. Pointer tilt is gated until the opening completes. Failed/slow decorative loading settles on the static fallback within six seconds plus the short reveal. Reduced motion shows everything immediately. The header/menu stays usable throughout.
+
+Only the “AI engineer” substring is interactive. A short selection sweep replaces its letters with a compact prompt → model → output diagram; connecting strokes draw once, then settle. Leave/blur/Escape restores the letters; keyboard and touch can activate it, and reduced motion shows the settled diagram. “Aspiring” does not trigger the interaction. Preserve the role’s dimensions and independent mascot behavior. This is an explanatory illustration, not a live inference or training claim.
+
+The source-backed portfolio principles live in `projectagents.md` (also available as `AGENTS.md`), with the user-supplied FLUX handbook kept locally in artifacts/references. Accepted personal facts, story order and explicit user choices override generic handbook examples.
+
+
+## Connect shader — 18 September 2026
+
+The existing Connect footer gets one contained procedural blue ribbon behind its unchanged content. It uses the brand #5271FF and light-blue #78B5FF family at no more than 24% alpha over #0d1013, fading toward its edges. It adds a closing visual emphasis, without changing the laptop-led hero, wordmark, route transitions or contact actions.
+
+The original WebGL shader is a lazy separate chunk, loaded when the footer approaches the viewport. One triangle renders at a maximum 960×480 buffer and 30 draws/second. It plays for four visible seconds, then retains the last frame. Mouse movement requests a finite 800ms response; it never captures clicks. Offscreen or document-hidden states cancel scheduled work and preserve the motion budget. Unmount deletes shaders, program and buffer and releases the context. Context loss or shader/chunk failure retains the static CSS poster. Reduced motion uses the static poster without creating a WebGL context. No external shader dependency, video asset, full-page loop or new controls are added.
+
+Automated checks cover scheduler behavior and conservative muted-text contrast; device frame cost, browser shader compilation and visual appearance require browser observation and are not inferred from those tests.
+
+
+## Work presentation and reading — reference adaptation
+
+Adapt Perry Wang’s Stadia case-study hierarchy and the supplied title-first card reference inside the accepted near-black/blue system. Project cards lead with name, short summary and true status, followed by a generous media surface. Browser frames contain actual web screenshots; a desktop frame surrounds the CodeProbe terminal image. The existing Core ML workshop illustration uses a reusable phone frame and an explicit illustration label. LAH’s product brief remains artwork, not a fabricated app screenshot. No copied reference assets, credentials, metrics or employment claims.
+
+Case studies show their media before role/year/stack, followed by the existing narrative. Keyed h2 headings generate right-side contents navigation, with a blue active-reading marker. Longer writing uses the same component at a 710px reading measure. Contents wrap above the article under 900px. Legacy articles without keyed headings omit the navigation. Existing sources, gallery captions, filters, route recovery and Back behavior are protected.
+
+Interactions are tied to useful actions: precise mouse input tilts project media by at most three degrees; focus lifts the preview and highlights the arrow; touch opens the same project normally. Gallery images open a native modal with full image/alt/caption, Previous/Next and arrow keys, Escape and Close, backdrop dismissal and focus restoration. The modal enters once over 220ms; reduced motion removes entrance and tilt. Reading text stays still.
+
+A footer Interface sounds toggle is off by default and remembers an explicit local preference. It synthesizes a quiet 70ms click only on trusted button/link/summary activation, never hovering or page load. No audio assets or background soundtrack. Muting suspends the context; unmount closes it. Sound is supplementary and every action retains visual feedback. Browser visual, keyboard, touch and listening verification remain pending because the native browser connection is unavailable.
+
+
+## Curved stamp and closed-laptop arrival — latest correction
+
+Replaces the outlined-rectangle entrance. A transparent Blender-rendered closed-lid poster appears during loading. Crossfade it over 450ms with the ready closed model; start a 2.5-second camera-and-lid sequence after a 150ms hold. The camera moves from near overhead to the existing three-quarter position during the first 70%; the lid remains closed during the first 30%, then opens. At each pose the camera fits actual mesh corners, preserving wide/narrow framing. Lift the closed hinge by 0.2 model units to clear keycaps, returning it to its original position when open. Identity/roles/socials fade around the start of lid opening; apps wait for completion. Reduced motion keeps the settled open view. Failed or six-second loading switches directly to the open fallback and readable content.
+
+The Blender model includes actual sidewall cut-outs for MagSafe and two USB-C ports on the left and a round headphone jack on the right. Dark inset geometry and USB-C tongues/MagSafe contacts add depth. Port reference: https://www.apple.com/uk/macbook-air/specs/. The route stamp uses an original SVG alpha mask with semicircular bites every 15px horizontally and 18.5px vertically, plus curved cuts at each corner. This changes the silhouette, not the accepted portrait or route timing.
+
+
+## Current homepage — supersedes earlier story/arrival/sound descriptions
+
+Rectangle draw (700ms), pause (100ms), erase (400ms), closed poster/model crossfade (450ms), camera orbit and lid opening (2.65s); identity fades as the lid opens, apps emerge afterward. Opening is load-driven, never scroll-driven. Normal loading uses the closed poster only; WebGL failure uses the readable open fallback. A bounded animation recovery prevents a stalled closed pose.
+
+Order: About → stack → Education with nested campus details → Work/projects → real open-source contributions → web-to-models → local AI/Legion → latest writing → Connect. The opaque story surface flows over the pinned desktop hero and continues behind all later sections. The About name enters from above/left, then biography/portrait; N remains in navigation. Reduced motion skips all choreography; short/mobile windows avoid hero pinning.
+
+Page #080b0e, supporting surface #101419, panels #11161c; restrain footer shader opacity. Connect includes the drawing and readable name with blue dot. Text links turn blue and underline on hover/focus. No site sound toggle; trusted activation produces the existing finite quiet click, browser mute controls it.
+
+The stack includes Tailwind. Blur includes labels and icons together at 3px/32% opacity for the user-confirmed less-used set, restoring the focused/hovered item; Prisma stays sharp. MLX keeps the source black/white mark on a grey app tile; Expo is white. Apple artwork provenance is in public/icons/apps/SOURCES.md.
+
+Fleet Mark I is an illustrative three-part conversation with file chip, brief result/files-changed summary and separate composer. It contains no source code, claimed actual model run, fabricated metrics or test-pass claim. Legion describes the intended team of smaller task specialists. The 2B/30B comparison is a question to evaluate. Fine-tuning exposes a finite examples → adapters → evaluation diagram via hover, focus or touch.
+
+
+## Latest scroll refinement — 18 September 2026
+
+Supersedes the earlier pinned hero and model interlude. Every homepage section owns normal document space; only bounded transforms create depth. Hello/name → portrait → biography; mobile name precedes portrait. A 44px translucent glass N stays legible. Work has a short blank stage, title/subtitle entrance and settlement above the project grid. Project entrances are upright.
+
+The stack groups current tools first in eight desktop/four phone columns. LM Studio stays sharp; Ollama joins the whole-item blur set. MLX retains source colors in its grey tile. School and nested activities form one compact Education panel. Contribution cards separate repository links from PR evidence and preserve truthful status.
+
+Models travels into the local-computer heading, without a pinned fade-out gap. November 2024 Ollama → current LM Studio/MLX → fine-tuning/Python/MLX → six months of agents → specialist models/Legion. The laptop chat is labeled illustrative. Performance comparisons remain questions. Recovery and 404 use an interactive lost-window illustration with direct exit actions.
+
+These are project-guidance corrections, not shared Fleet rules. Browser evidence is recorded under `.evidence/scroll-refinement/`.
+
+
+## Current accepted story — final 18 September corrections
+
+This section supersedes earlier portrait, stamp, stack, contribution, About timing and local-chat descriptions above. Only About uses the slanted drawn portrait; the hero and footer are text identities and the perforated stamp has an N. Availability dots are green. The whole hero moves behind the opaque normal-flow story so About visibly covers it without later bleed.
+
+Hello precedes separate “I’m” and “Nachiketh” entrances. The portrait arrives next. “IT student at Singapore Polytechnic.” replaces the rejected slogan; this line and biography reveal only after the portrait reaches view, over additional scroll. Phone details reveal individually within the viewport.
+
+Dashed Web development / App development / AI outlines and labels appear on hover/focus (always on touch). Less-used items live outside the groups and blur icon plus text together; Next.js and Ollama are less-used, Prisma/LM Studio/MLX remain current. Shared apps have “Tools that I use”. Keep the handwritten pointer hint and gray MLX tile with original mark colors.
+
+Work has a sticky centre pop, readable hold, upward settlement and project emergence. Contributions are actual T3 Code and Vorssaint app icons linking to each repo’s PR search for NachikethReddyY. Models follows a sequential sentence reveal, surrounding blur, isolated-word hold and physical handoff; the chapter stays hidden until landing.
+
+AI history follows Ollama → Open WebUI → LM Studio → Mac/MLX → rabbit-hole curiosity → fine-tuning in Python/MLX → specialist agents. A simple Ollama/gemma2 sample chat replaces explanatory diagrams. Rabbit jumps, dives and lands beside the circled “teach a model”; motion is finite and scroll-controlled. Fleet Mark I has three slightly tilted layers, an edited-file summary without code, and High / Full access in the composer on desktop and phone. The real Fleet article settles into Latest writing.
+
+Case studies adapt [Perry’s Stadia study](https://perryw-2023.webflow.io/stadia-bluetooth): result media first, overview alongside facts, Highlights, chapter titles and contents, using existing project content and evidence. Source imagery and prose are not copied.
+
+Browser evidence: `.evidence/story-finish/verification.json` plus staged screenshots and About-specific checks. Native computer-use transport is unavailable; headless Chromium provides direct browser layout and interaction evidence. Physical-phone/Safari and subjective audio listening are not verified.

@@ -9,3 +9,9 @@ artifacts/
 !.env.example
 .vercel/
 .sanity/
+
+__pycache__/
+*.pyc
+
+# Generated local design specimen
+/DESIGN.html

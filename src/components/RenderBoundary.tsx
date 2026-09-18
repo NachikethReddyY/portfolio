@@ -1,3 +1,4 @@
+import { RecoveryArtwork } from "./RecoveryArtwork";
 import { Component } from "react";
 import type { ReactNode } from "react";
 
@@ -19,20 +20,30 @@ export class RenderBoundary extends Component<
 
 export function PageRecovery() {
   return (
-    <main className="not-found shell" role="alert">
-      <p>Nachiketh Reddy</p>
-      <h1>This page couldn’t finish loading.</h1>
-      <p>Reload to try again, or head back to the portfolio.</p>
-      <div>
-        <button
-          className="button-primary"
-          onClick={() => window.location.reload()}
-        >
-          Reload page
-        </button>
-        <a className="button-secondary" href="/">
-          Back home
-        </a>
+    <main className="missing-page recovery-page shell">
+      <RecoveryArtwork error />
+      <div className="missing-copy" role="alert">
+        <p className="missing-status">Page interrupted</p>
+        <h1>
+          Let’s get you
+          <br />
+          back on track<span>.</span>
+        </h1>
+        <p>
+          This page couldn’t finish loading. Try a reload, or return to the
+          portfolio.
+        </p>
+        <div className="missing-actions">
+          <button
+            className="button-primary"
+            onClick={() => window.location.reload()}
+          >
+            Reload page
+          </button>
+          <a className="button-secondary" href="/">
+            Back home
+          </a>
+        </div>
       </div>
     </main>
   );

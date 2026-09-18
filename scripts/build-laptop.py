@@ -7,6 +7,7 @@ Run with the Blender executable in background mode:
 from __future__ import annotations
 
 import math
+import json
 import os
 import sys
 from pathlib import Path
@@ -152,7 +153,7 @@ def apply_bevels_and_join(objects: list[bpy.types.Object], joined_name: str, par
         obj.select_set(True)
         bpy.context.view_layer.objects.active = obj
         for modifier in list(obj.modifiers):
-            if modifier.type == "BEVEL":
+            if modifier.type in {"BEVEL", "WEIGHTED_NORMAL"}:
                 bpy.ops.object.modifier_apply(modifier=modifier.name)
 
     bpy.ops.object.select_all(action="DESELECT")
@@ -172,14 +173,14 @@ def make_camera() -> bpy.types.Object:
     data = bpy.data.cameras.new("Camera_ThreeQuarter")
     camera = bpy.data.objects.new("Camera_ThreeQuarter", data)
     bpy.context.collection.objects.link(camera)
-    camera.location = (15.8, -18.8, 12.6)
-    data.lens = 54.0
+    camera.location = (6.5, -22.8, 11.8)
+    data.lens = 48.0
     data.sensor_width = 36.0
     data.clip_start = 0.1
     data.clip_end = 200.0
     aim_at(camera, (0.0, 0.7, 3.0))
     camera["view_description"] = "Camera-ready three-quarter product view from front-right, aimed at the hinge and display."
-    camera["position"] = "(15.8, -18.8, 12.6)"
+    camera["position"] = "(6.5, -22.8, 11.8)"
     camera["target"] = "(0.0, 0.7, 3.0)"
     bpy.context.scene.camera = camera
     return camera
@@ -261,150 +262,178 @@ def assign_screen_front_uv(obj: bpy.types.Object) -> None:
     obj["canvas_texture_flipY_expectation"] = "Set THREE.CanvasTexture.flipY = true when replacing ScreenDisplay material through GLTFLoader; draw the canvas upright from its top-left origin."
 
 
+def rounded_slab(name, location, dimensions, mat, radius=.2, plane='XY', parent=None):
+    """Extrude a rounded outline, so corner radius is independent of thickness."""
+    w, d, h = dimensions
+    outline_h = d if plane == 'XY' else h
+    thickness = h if plane == 'XY' else d
+    r = min(radius, w/2, outline_h/2)
+    outline=[]
+    for cx,cy,start in [(w/2-r,outline_h/2-r,0),(-w/2+r,outline_h/2-r,90),(-w/2+r,-outline_h/2+r,180),(w/2-r,-outline_h/2+r,270)]:
+        for step in range(13):
+            angle=math.radians(start+step*90/12)
+            outline.append((cx+r*math.cos(angle),cy+r*math.sin(angle)))
+    n=len(outline)
+    verts=[]
+    for t in [-thickness/2,thickness/2]:
+        verts += [(x,y,t) if plane=='XY' else (x,t,y) for x,y in outline]
+    faces=[tuple(reversed(range(n))),tuple(range(n,2*n))]
+    faces += [(j,(j+1)%n,(j+1)%n+n,j+n) for j in range(n)]
+    if plane=='XZ': faces=[tuple(reversed(face)) for face in faces]
+    mesh=bpy.data.meshes.new(name+'Mesh');mesh.from_pydata(verts,[],faces);mesh.update()
+    obj=bpy.data.objects.new(name,mesh);bpy.context.collection.objects.link(obj)
+    obj.location=location;obj.data.materials.append(mat)
+    if parent: obj.parent=parent;obj.location=location
+    bevel=obj.modifiers.new('Soft perimeter edge','BEVEL');bevel.width=min(.045,thickness*.22);bevel.segments=3
+    for polygon in mesh.polygons: polygon.use_smooth=polygon.index>=2
+    normals=obj.modifiers.new('Weighted corner normals','WEIGHTED_NORMAL');normals.keep_sharp=True
+    return obj
+
+
 def build_model() -> list[bpy.types.Object]:
-    graphite = material("Graphite Aluminum", (0.075, 0.095, 0.12, 1.0), 0.82, 0.25)
-    graphite_edge = material("Graphite Edge", (0.035, 0.045, 0.06, 1.0), 0.72, 0.22)
-    key_material = material("Recessed Keycaps", (0.012, 0.017, 0.024, 1.0), 0.28, 0.31)
-    key_side = material("Key Shadow", (0.004, 0.006, 0.009, 1.0), 0.08, 0.4)
-    screen_material = material("ScreenDisplay Material", (0.006, 0.018, 0.032, 1.0), 0.22, 0.16, (0.006, 0.028, 0.052, 1.0), 0.28)
-    slot_material = material("Speaker Slots", (0.003, 0.004, 0.006, 1.0), 0.05, 0.32)
-    floor_material = material("Studio Floor", (0.008, 0.011, 0.016, 1.0), 0.15, 0.32)
-
-    base = rounded_cube("BaseChassis", (0.0, 0.0, 0.38), (13.4, 8.6, 0.72), graphite, bevel=0.28, segments=3)
-    base["part"] = "machined graphite aluminum base"
-    base["dimensions_mm"] = "340 x 218 x 18"
-    deck = rounded_cube("KeyboardDeckInset", (0.0, 0.70, 0.735), (11.75, 4.25, 0.07), graphite_edge, bevel=0.11, segments=2)
-    deck["part"] = "recessed keyboard well"
-    front_lip = rounded_cube("FrontPalmrestLip", (0.0, -3.94, 0.48), (12.9, 0.20, 0.32), graphite_edge, bevel=0.08, segments=2)
-
-    screen_root = bpy.data.objects.new("ScreenHingeRoot", None)
-    bpy.context.collection.objects.link(screen_root)
-    screen_root.location = (0.0, 3.52, 0.72)
-    screen_root.rotation_euler[0] = math.radians(-7.0)
-    screen_root["part"] = "hinged screen assembly"
-    screen_root["hinge_angle_degrees"] = 107.0
-
-    screen_back = rounded_cube("ScreenBackShell", (0.0, 0.0, 3.73), (12.3, 0.44, 7.46), graphite, bevel=0.22, segments=3, parent=screen_root)
-    screen_back["part"] = "screen rear shell"
-    bezel_plate = rounded_cube("DisplayBezel", (0.0, -0.245, 3.73), (11.96, 0.08, 7.12), graphite_edge, bevel=0.16, segments=2, parent=screen_root)
-    display = planar_screen("ScreenDisplay", (0.0, -0.30, 3.88), (10.76, 0.045, 5.92), screen_material, parent=screen_root)
+    """Modern Air proportions; one model unit represents roughly 25 mm."""
+    metal = material("Midnight Aluminum", (0.038, 0.043, 0.053, 1), 0.72, 0.38)
+    edge = material("Midnight Edge", (0.010, 0.014, 0.021, 1), 0.65, 0.3)
+    bezel = material("Obsidian Bezel", (0.0005, 0.0006, 0.0008, 1), 0, 1)
+    bezel.node_tree.nodes.get("Principled BSDF").inputs["Specular IOR Level"].default_value = 0.05
+    black = material("Keyboard Black", (0.002, 0.0025, 0.003, 1), 0.0, 0.78)
+    legend = material("Key Legends", (0.55, 0.59, 0.66, 1), 0.1, 0.5)
+    glass = material("ScreenDisplay Material", (0.006, 0.009, 0.015, 1), 0.1, 0.3)
+    floor_mat = material("Studio Floor", (0.008, 0.011, 0.016, 1), 0.1, 0.4)
+    base = rounded_slab("BaseChassis", (0, .03, .20), (12.2, 8.0, .38), metal, .48)
+    rounded_slab("KeyboardDeckInset", (0, 1.04, .397), (11.10, 4.08, .03), edge, .20)
+    rounded_cube("FrontOpeningRecess", (0, -3.94, .27), (1.9, .065, .12), black, .05, 4)
+    hinge = bpy.data.objects.new("ScreenHingeRoot", None)
+    bpy.context.collection.objects.link(hinge)
+    hinge.location = (0, 3.91, .40)
+    hinge.rotation_euler.x = math.radians(-12)
+    hinge["hinge_angle_degrees"] = 102
+    lid = rounded_slab("ScreenBackShell", (0, 0, 3.88), (12.2, .16, 7.76), metal, .38, "XZ", hinge)
+    # Recessed Apple silhouette, cut into the outside of the lid (not a decal).
+    contours=json.loads((PROJECT_ROOT/'scripts/apple-logo-contours.json').read_text())
+    from mathutils.geometry import tessellate_polygon
+    logo_mat=material('Recessed Apple Mark',(.004,.006,.009,1),.65,.2)
+    for index, contour in enumerate(contours):
+        ring=[Vector(((12-x)*.078, (12-y)*.078, 0)) for x,y in contour]
+        n=len(ring);vertices=[]
+        for depth in [.055,.14]:
+            vertices += [(v.x,depth,v.y+3.95) for v in ring]
+        triangles=tessellate_polygon([ring]);faces=[]
+        for triangle in triangles:
+            ids=list(triangle)
+            faces.append(tuple(reversed(ids)));faces.append(tuple(j+n for j in ids))
+        faces += [(j,(j+1)%n,(j+1)%n+n,j+n) for j in range(n)]
+        mesh=bpy.data.meshes.new('LogoCutMesh');mesh.from_pydata(vertices,[],faces);mesh.update()
+        cutter=bpy.data.objects.new('LogoCutter',mesh);bpy.context.collection.objects.link(cutter)
+        cutter.parent=hinge
+        bpy.context.view_layer.update()
+        bpy.ops.object.select_all(action='DESELECT');lid.select_set(True);bpy.context.view_layer.objects.active=lid
+        for modifier in list(lid.modifiers): bpy.ops.object.modifier_apply(modifier=modifier.name)
+        modifier=lid.modifiers.new('Engraved Apple silhouette','BOOLEAN');modifier.operation='DIFFERENCE';modifier.object=cutter
+        bpy.ops.object.modifier_apply(modifier=modifier.name)
+        bpy.data.objects.remove(cutter,do_unlink=True)
+        inset_vertices=[(v.x,.056,v.y+3.95) for v in ring]
+        inset_faces=[tuple(tri) for tri in triangles]
+        inset_mesh=bpy.data.meshes.new('AppleInsetMesh');inset_mesh.from_pydata(inset_vertices,[],inset_faces);inset_mesh.update()
+        inset=bpy.data.objects.new(f'AppleMark_{index}',inset_mesh);bpy.context.collection.objects.link(inset);inset.parent=hinge;inset.data.materials.append(logo_mat)
+    rounded_slab("DisplayBezel", (0, -.091, 3.88), (12.04, .035, 7.58), bezel, .32, "XZ", hinge)
+    display = rounded_slab("ScreenDisplay", (0, -.12, 3.96), (11.82, .025, 7.12), glass, .24, "XZ", hinge)
     assign_screen_front_uv(display)
     display["replaceable_texture_surface"] = True
-    display["surface_role"] = "dark emissive display placeholder"
-    display["texture_replacement_hint"] = "Replace the material on ScreenDisplay while preserving its object name."
+    rounded_slab("CameraNotch", (0, -.149, 7.365), (1.32, .035, .34), bezel, .09, "XZ", hinge)
+    lens = material("Camera Lens", (.018, .027, .05, 1), .3, .2)
+    rounded_cube("CameraLens", (0, -.171, 7.37), (.075, .008, .075), lens, .004, 4, hinge)
+    bridge = rounded_cube("HingeBridge", (0, 3.88, .39), (10.6, .32, .23), edge, .1, 4)
 
-    bezel_top = rounded_cube("BezelTop", (0.0, -0.305, 6.97), (11.38, 0.055, 0.26), graphite_edge, bevel=0.05, segments=2, parent=screen_root)
-    bezel_bottom = rounded_cube("BezelBottom", (0.0, -0.305, 0.73), (11.38, 0.055, 0.26), graphite_edge, bevel=0.05, segments=2, parent=screen_root)
-    bezel_left = rounded_cube("BezelLeft", (-5.68, -0.305, 3.85), (0.25, 0.055, 6.20), graphite_edge, bevel=0.05, segments=2, parent=screen_root)
-    bezel_right = rounded_cube("BezelRight", (5.68, -0.305, 3.85), (0.25, 0.055, 6.20), graphite_edge, bevel=0.05, segments=2, parent=screen_root)
-    for obj in (bezel_top, bezel_bottom, bezel_left, bezel_right):
-        obj["part"] = "display bezel"
-
-    hinge_parts: list[bpy.types.Object] = []
-    for side, x in (("L", -4.45), ("R", 4.45)):
-        block = rounded_cube(f"HingeBridge_{side}", (x, 3.48, 0.91), (0.82, 0.78, 0.45), graphite_edge, bevel=0.10, segments=2)
-        block["part"] = "hinge bridge physically overlapping base and screen shell"
-        barrel = cylinder(f"HingeBarrel_{side}", (x, 3.42, 0.93), 0.22, 1.12, key_side)
-        barrel["part"] = "hinge barrel"
-        hinge_parts.extend((block, barrel))
-
-    keyboard_objects: list[bpy.types.Object] = []
-    key_prototype: bpy.types.Object | None = None
-    row_y = (1.86, 1.02, 0.18, -0.66, -1.50)
-    for row, y in enumerate(row_y, start=1):
-        columns = 13 if row != 5 else 11
-        spacing = 0.84
-        x_offset = -((columns - 1) * spacing) / 2.0
-        for col in range(columns):
-            x = x_offset + col * spacing
-            width = 0.72
-            if row == 5 and col in (0, columns - 1):
-                width = 1.05
-            if key_prototype is None:
-                key_prototype = rounded_cube("Key_R01C01", (x, y, 0.785), (width, 0.62, 0.12), key_material, bevel=0.09, segments=2)
-                key_prototype["part"] = "individual recessed keycap"
-                key_prototype["row"] = row
-                key_prototype["column"] = col + 1
-                key_obj = key_prototype
-            else:
-                key_obj = duplicate_with_location(key_prototype, f"Key_R{row:02d}C{col + 1:02d}", (x, y, 0.785))
-                key_obj["part"] = "individual recessed keycap"
-                key_obj["row"] = row
-                key_obj["column"] = col + 1
-                key_obj.dimensions = (width, 0.62, 0.12)
-            keyboard_objects.append(key_obj)
-
-    spacebar = rounded_cube("Key_Spacebar", (0.0, -1.51, 0.785), (4.35, 0.64, 0.12), key_material, bevel=0.09, segments=2)
-    spacebar["part"] = "individual recessed spacebar"
-    keyboard_objects.append(spacebar)
-
-    trackpad = rounded_cube("Trackpad", (0.0, -2.62, 0.745), (4.15, 1.95, 0.09), key_side, bevel=0.16, segments=3)
-    trackpad["part"] = "recessed glass trackpad"
-    trackpad["gesture_surface"] = True
-
-    speaker_objects: list[bpy.types.Object] = []
-    for side, x in (("L", -5.78), ("R", 5.78)):
-        for slot_index in range(7):
-            y = -2.18 + slot_index * 0.36
-            slot = rounded_cube(f"SpeakerSlot_{side}{slot_index + 1:02d}", (x, y, 0.755), (0.22, 0.22, 0.065), slot_material, bevel=0.065, segments=2)
-            slot["part"] = "recessed speaker slot"
-            speaker_objects.append(slot)
-
-    keycap_objects = [obj for obj in keyboard_objects]
-    speaker_objects_before_join = [obj for obj in speaker_objects]
-    keycap_bounds_before = bounds_union(keycap_objects)
-    speaker_bounds_before = bounds_union(speaker_objects_before_join)
-    joined_keycaps = apply_bevels_and_join(keycap_objects, "KeyboardKeycaps", "static recessed keycaps and spacebar")
-    joined_speakers = apply_bevels_and_join(speaker_objects_before_join, "SpeakerSlots", "static recessed speaker slots")
-    keycap_bounds_after = world_bounds(joined_keycaps)
-    speaker_bounds_after = world_bounds(joined_speakers)
-    bound_tolerance = 1e-5
-    for label, before, after in (
-        ("KEYCAPS", keycap_bounds_before, keycap_bounds_after),
-        ("SPEAKERS", speaker_bounds_before, speaker_bounds_after),
-    ):
-        if any(abs(before[side][index] - after[side][index]) > bound_tolerance for side in (0, 1) for index in range(3)):
-            raise RuntimeError(f"{label} world bounds changed during static mesh join")
-        print(f"OPTIMIZATION_{label}_BOUNDS_BEFORE={tuple(round(v, 6) for v in before[0])}..{tuple(round(v, 6) for v in before[1])}")
-        print(f"OPTIMIZATION_{label}_BOUNDS_AFTER={tuple(round(v, 6) for v in after[0])}..{tuple(round(v, 6) for v in after[1])}")
-
-    # A quiet ground plane keeps the product render grounded without exporting scenery into the GLB.
-    ground = rounded_cube("StudioFloor", (0.0, 0.0, -0.10), (33.0, 30.0, 0.16), floor_material, bevel=0.05, segments=2)
-    ground["exclude_from_model_export"] = True
-
-    model_objects = [obj for obj in bpy.context.scene.objects if obj.type == "MESH" and obj != ground]
-    for obj in model_objects:
-        obj.select_set(False)
-    for obj in model_objects:
-        obj.select_set(True)
-
-    # The hinge bridges deliberately overlap the rear edge of the base and the lower screen shell.
-    base_min, base_max = world_bounds(base)
-    bridge_min, bridge_max = world_bounds(hinge_parts[0])
-    screen_min, screen_max = world_bounds(screen_back)
-    def overlap(a_min: Vector, a_max: Vector, b_min: Vector, b_max: Vector) -> bool:
-        return all(a_min[index] <= b_max[index] and b_min[index] <= a_max[index] for index in range(3))
-    bridge_overlaps_base = overlap(bridge_min, bridge_max, base_min, base_max)
-    bridge_overlaps_screen = overlap(bridge_min, bridge_max, screen_min, screen_max)
-    print(f"HINGE_BOUNDS base={tuple(round(value, 4) for value in base_min)}..{tuple(round(value, 4) for value in base_max)} bridge={tuple(round(value, 4) for value in bridge_min)}..{tuple(round(value, 4) for value in bridge_max)} screen={tuple(round(value, 4) for value in screen_min)}..{tuple(round(value, 4) for value in screen_max)}")
-    if not (bridge_overlaps_base and bridge_overlaps_screen):
-        raise RuntimeError("Hinge bridge failed the physical overlap check")
-
-    scene = bpy.context.scene
-    scene["asset_name"] = "Graphite hinged laptop"
-    scene["design_notes"] = "Original product model with rounded graphite aluminum chassis, individually recessed keycaps, speaker slots, trackpad, and physically joined hinged display."
-    scene["export_orientation"] = "Y-up via glTF export_yup=True"
-    scene["camera_ready_view"] = "Camera_ThreeQuarter"
-    scene["connected_geometry_check"] = "PASS: HingeBridge_L/R overlap BaseChassis and ScreenBackShell"
-    scene["screen_texture_surface"] = "ScreenDisplay"
-    return model_objects
-
+    keys = []
+    labels = []
+    rows = [list('1234567890-=')+['delete'], ['tab']+list('qwertyuiop')+['[',']'], ['caps']+list('asdfghjkl')+[';',"'",'return'], ['shift']+list('zxcvbnm')+[',','.','/','shift']]
+    for row in range(6):
+        y = 2.66 - row * .64
+        if row == 0:
+            entries = ['esc'] + [f'F{i}' for i in range(1,13)]
+        elif row < 5:
+            entries = rows[row-1]
+        else:
+            entries = ['fn','ctrl','opt','cmd','space','cmd','opt','←','↑','↓','→']
+        if row == 5:
+            widths = [.65,.65,.65,.85,4.05,.85,.65,.45,.45,.45,.45]
+        else:
+            widths = [.75]*len(entries)
+            widths[0] = 1.05 if row > 1 else .75
+            widths[-1] = 1.05 if row > 0 else .75
+        gap = .065
+        total = sum(widths) + gap*(len(widths)-1)
+        x = -total/2
+        for col,(label,width) in enumerate(zip(entries,widths)):
+            cx=x+width/2
+            keys.append(rounded_slab(f'Key_{row}_{col}', (cx,y,.434), (width,.52,.055), black,.09))
+            if label != 'space':
+                curve=bpy.data.curves.new(f'Legend_{row}_{col}',type='FONT')
+                curve.body=label;curve.align_x='CENTER';curve.align_y='CENTER';curve.size=.105 if len(label)>1 else .16
+                obj=bpy.data.objects.new(curve.name,curve);bpy.context.collection.objects.link(obj)
+                obj.location=(cx,y,.465);obj.data.materials.append(legend)
+                bpy.ops.object.select_all(action='DESELECT');obj.select_set(True);bpy.context.view_layer.objects.active=obj
+                bpy.ops.object.convert(target='MESH');labels.append(bpy.context.object)
+            x += width+gap
+    apply_bevels_and_join(keys,'KeyboardKeycaps','six keyboard rows with separate spacebar')
+    apply_bevels_and_join(labels,'KeyboardLegends','quiet key legends')
+    trackpad_mat = material('Trackpad Glass', (.026,.032,.042,1), .35, .46)
+    trackpad = rounded_slab('Trackpad',(0,-2.6,.398),(5.35,2.45,.025),trackpad_mat,.18)
+    # Air speakers sit along the hinge; no retro speaker grilles beside the keys.
+    # Real sidewall recesses; the dark interior sits inside the chassis, not on it.
+    bpy.ops.object.select_all(action='DESELECT')
+    base.select_set(True)
+    bpy.context.view_layer.objects.active = base
+    for modifier in list(base.modifiers):
+        bpy.ops.object.modifier_apply(modifier=modifier.name)
+    def cut_port(cutter):
+        bpy.ops.object.select_all(action='DESELECT')
+        cutter.select_set(True)
+        bpy.context.view_layer.objects.active = cutter
+        for modifier in list(cutter.modifiers):
+            bpy.ops.object.modifier_apply(modifier=modifier.name)
+        bpy.context.view_layer.objects.active = base
+        modifier = base.modifiers.new('Recessed side port', 'BOOLEAN')
+        modifier.operation = 'DIFFERENCE'
+        modifier.object = cutter
+        bpy.ops.object.modifier_apply(modifier=modifier.name)
+        bpy.data.objects.remove(cutter, do_unlink=True)
+    for name, y, width in [('MagSafe', 3.18, .57), ('USB_C_0', 2.40, .37), ('USB_C_1', 1.77, .37)]:
+        cut_port(rounded_cube(name+'Cutter',(-6.1,y,.21),(.42,width,.145),black,.065,8))
+        rounded_cube(name,(-5.925,y,.21),(.012,width-.04,.115),black,.05,6)
+        if name.startswith('USB'):
+            rounded_cube(name+'Tongue',(-6.005,y,.21),(.10,width-.10,.028),edge,.012,4)
+        else:
+            for contact in range(5):
+                rounded_cube('MagSafeContact'+str(contact),(-6.015,y+(contact-2)*.08,.21),(.04,.034,.035),legend,.012,4)
+    cut_port(cylinder('HeadphoneCutter',(6.1,2.65,.21),.073,.42,black))
+    cylinder('HeadphoneJack',(5.925,2.65,.21),.063,.015,black)
+    base['recessed_ports'] = 'MagSafe 3, two USB-C, 3.5mm headphone'
+    bpy.context.view_layer.update()
+    # Focused geometry invariants protect the connected hinge and palm-rest space.
+    bmin,bmax=world_bounds(base);hmin,hmax=world_bounds(bridge);smin,smax=world_bounds(lid)
+    def overlap(a,b,c,d):
+        return all(a[i] <= d[i] and c[i] <= b[i] for i in range(3))
+    assert overlap(bmin,bmax,hmin,hmax), 'Hinge must meet base'
+    assert overlap(hmin,hmax,smin,smax), 'Hinge must meet screen'
+    assert base.dimensions.z < .4, 'Slim chassis'
+    assert trackpad.location.y + trackpad.dimensions.y/2 < -.80, 'Trackpad clears keyboard'
+    assert display.parent == hinge and lid.parent == hinge, 'Display moves with lid'
+    ground=rounded_cube('StudioFloor',(0,0,-.12),(33,30,.16),floor_mat,.04,2)
+    ground['exclude_from_model_export']=True
+    scene=bpy.context.scene
+    scene['asset_name']='Midnight Air-style hinged laptop'
+    scene['connected_geometry_check']='PASS: hinge overlaps base and lid'
+    scene['design_notes']='Thin flat chassis, narrow bezel, camera notch, six keyboard rows, large trackpad; original Blender geometry.'
+    print('GEOMETRY_CHECKS=PASS: slim chassis, connected hinge, clear trackpad, parented screen')
+    return [obj for obj in scene.objects if obj.type=='MESH' and obj!=ground]
 
 def configure_render() -> None:
     scene = bpy.context.scene
     scene.render.engine = "BLENDER_EEVEE"
-    scene.render.resolution_x = 900
-    scene.render.resolution_y = 700
+    scene.render.resolution_x = 1200
+    scene.render.resolution_y = 900
     scene.render.resolution_percentage = 100
     scene.render.image_settings.file_format = "PNG"
     scene.render.filepath = str(RENDER_PATH)
@@ -458,59 +487,33 @@ def add_fallback_text(
 
 
 def add_fallback_editor_overlay(screen_root: bpy.types.Object) -> list[bpy.types.Object]:
-    """Add a render-only code editor overlay matching LaptopScene.editorTexture()."""
-    chrome = fallback_principled("Fallback Editor Chrome", (0.045, 0.060, 0.085, 1.0), emission_strength=0.05)
-    line_number = fallback_principled("Fallback Line Number", (0.20, 0.25, 0.34, 1.0), emission_strength=0.15)
-    colors = {
-        "comment": fallback_principled("Fallback Comment", (0.34, 0.40, 0.50, 1.0), emission_strength=0.18),
-        "purple": fallback_principled("Fallback Purple", (0.72, 0.54, 1.0, 1.0), emission_strength=0.24),
-        "text": fallback_principled("Fallback Text", (0.86, 0.87, 0.92, 1.0), emission_strength=0.18),
-        "mint": fallback_principled("Fallback Mint", (0.26, 0.86, 0.73, 1.0), emission_strength=0.32),
-        "yellow": fallback_principled("Fallback Yellow", (0.95, 0.72, 0.32, 1.0), emission_strength=0.28),
-        "blue": fallback_principled("Fallback Blue", (0.52, 0.72, 1.0, 1.0), emission_strength=0.24),
-    }
-    overlay: list[bpy.types.Object] = []
-    top_bar = rounded_cube("FallbackEditorTopBar", (0.0, -0.335, 6.46), (10.72, 0.025, 0.42), chrome, bevel=0.06, segments=2, parent=screen_root)
-    status_bar = rounded_cube("FallbackEditorStatusBar", (0.0, -0.335, 1.12), (10.72, 0.025, 0.28), chrome, bevel=0.04, segments=2, parent=screen_root)
-    overlay.extend((top_bar, status_bar))
-
-    # Small status dots mirror the source editor texture's red, yellow, and mint controls.
-    for index, color in enumerate(("#e58383", "#f2c875", "#43dcc5")):
-        mat = fallback_principled(f"Fallback Dot {index}", tuple(int(color[i:i + 2], 16) / 255 for i in (1, 3, 5)) + (1.0,), emission_strength=0.3)
-        bpy.ops.mesh.primitive_uv_sphere_add(segments=16, ring_count=8, radius=0.105, location=(-4.72 + index * 0.31, -0.365, 6.46))
-        dot = bpy.context.object
-        dot.name = f"FallbackEditorDot{index}"
-        dot.scale.y = 0.22
-        dot.data.materials.append(mat)
-        dot.parent = screen_root
-        dot.location = (-4.72 + index * 0.31, -0.365, 6.46)
-        overlay.append(dot)
-
-    add_fallback_text("FallbackEditorTitle", "nachiketh / workspace", (2.35, -0.365, 6.46), 0.19, line_number, screen_root)
-    lines = [
-        ("comment", "// a little curiosity, then a lot of building"),
-        ("purple", "const developer = {"),
-        ("text", '  name: "Nachiketh Reddy",'),
-        ("mint", '  focus: ["web", "AI", "useful things"],'),
-        ("yellow", '  location: "Singapore",'),
-        ("text", "  learning: true"),
-        ("purple", "};"),
-        ("comment", ""),
-        ("blue", "await buildSomethingWorthUsing();"),
-    ]
-    for index, (color_name, body) in enumerate(lines):
-        z = 5.90 - index * 0.49
-        add_fallback_text(f"FallbackLineNumber{index + 1:02d}", f"{index + 1:02d}", (-4.72, -0.365, z), 0.15, line_number, screen_root)
-        add_fallback_text(f"FallbackCodeLine{index + 1:02d}", body, (-3.72, -0.365, z), 0.21, colors[color_name], screen_root)
-    add_fallback_text("FallbackEditorStatus", "main   /   TypeScript                         ready to build", (-4.72, -0.365, 1.12), 0.15, line_number, screen_root)
-    return overlay
+    """Use the same screen artwork as Three.js; restore Blender's UV convention."""
+    display = bpy.data.objects['ScreenDisplay']
+    mat = bpy.data.materials.new('Fallback Screen Artwork')
+    mat.use_nodes = True
+    nodes = mat.node_tree.nodes
+    nodes.clear()
+    output = nodes.new('ShaderNodeOutputMaterial')
+    emission = nodes.new('ShaderNodeEmission')
+    image = nodes.new('ShaderNodeTexImage')
+    image.image = bpy.data.images.load(str(PROJECT_ROOT / 'public/models/laptop-screen.png'))
+    uv = nodes.new('ShaderNodeTexCoord')
+    mapping = nodes.new('ShaderNodeVectorMath'); mapping.operation = 'MULTIPLY_ADD'
+    mapping.inputs[1].default_value = (1, -1, 1)
+    mapping.inputs[2].default_value = (0, 1, 0)
+    mat.node_tree.links.new(uv.outputs['UV'], mapping.inputs[0])
+    mat.node_tree.links.new(mapping.outputs[0], image.inputs['Vector'])
+    mat.node_tree.links.new(image.outputs['Color'], emission.inputs['Color'])
+    mat.node_tree.links.new(emission.outputs[0], output.inputs['Surface'])
+    display.data.materials.clear(); display.data.materials.append(mat)
+    return []
 
 
 def brighten_fallback_scene() -> dict[str, object]:
     """Temporarily lift the graphite/silver product lighting for the transparent fallback."""
     scene = bpy.context.scene
     previous: dict[str, object] = {"exposure": scene.view_settings.exposure}
-    scene.view_settings.exposure = 0.85
+    scene.view_settings.exposure = 0.0
     energies = {"KeyLight": 2300.0, "FillLight": 1650.0, "RimLight": 2600.0, "ScreenGlow": 160.0}
     previous["energies"] = {}
     for name, energy in energies.items():
@@ -586,6 +589,38 @@ def render_transparent_fallback() -> None:
         scene.render.film_transparent = previous_film_transparent
 
 
+def render_closed_poster() -> None:
+    scene = bpy.context.scene
+    camera = scene.camera
+    hinge = bpy.data.objects['ScreenHingeRoot']
+    saved_camera = camera.matrix_world.copy()
+    saved_lens = camera.data.lens
+    camera.data.lens = 65
+    saved_angle = hinge.rotation_euler.x
+    saved_height = hinge.location.z
+    saved_path = scene.render.filepath
+    saved_format = scene.render.image_settings.file_format
+    saved_transparent = scene.render.film_transparent
+    floor = bpy.data.objects.get('StudioFloor')
+    if floor: floor.hide_render = True
+    hinge.rotation_euler.x = math.pi / 2
+    hinge.location.z += .2
+    camera.location = (0, -.7, 24)
+    aim_at(camera, (0, 0, .6))
+    scene.render.film_transparent = True
+    scene.render.image_settings.file_format = 'WEBP'
+    scene.render.filepath = str(PROJECT_ROOT / 'public/models/laptop-closed.webp')
+    bpy.ops.render.render(write_still=True)
+    hinge.rotation_euler.x = saved_angle
+    hinge.location.z = saved_height
+    camera.matrix_world = saved_camera
+    camera.data.lens = saved_lens
+    scene.render.filepath = saved_path
+    scene.render.image_settings.file_format = saved_format
+    scene.render.film_transparent = saved_transparent
+    if floor: floor.hide_render = False
+
+
 def export_model(model_objects: list[bpy.types.Object]) -> None:
     MODEL_PATH.parent.mkdir(parents=True, exist_ok=True)
     BLEND_PATH.parent.mkdir(parents=True, exist_ok=True)
@@ -625,10 +660,14 @@ def main() -> None:
     make_camera()
     configure_render()
     export_model(model_objects)
+    add_fallback_editor_overlay(bpy.data.objects["ScreenHingeRoot"])
+    bpy.ops.file.pack_all()
     bpy.context.scene.render.filepath = str(RENDER_PATH)
     bpy.ops.render.render(write_still=True)
     bpy.ops.wm.save_as_mainfile(filepath=str(BLEND_PATH))
 
+    render_transparent_fallback()
+    render_closed_poster()
     print("LAPTOP_BUILD_COMPLETE")
     print(f"MODEL_PATH={MODEL_PATH}")
     print(f"BLEND_PATH={BLEND_PATH}")
@@ -636,7 +675,7 @@ def main() -> None:
     print(f"MODEL_OBJECT_COUNT={len(model_objects)}")
     print("MODEL_OBJECT_NAMES=" + ",".join(obj.name for obj in model_objects))
     print("EXPORT_ORIENTATION=Y-up (export_yup=True)")
-    print("CONNECTED_GEOMETRY=PASS (HingeBridge_L/R overlap BaseChassis and ScreenBackShell)")
+    print("CONNECTED_GEOMETRY=PASS (HingeBridge overlaps BaseChassis and ScreenBackShell)")
 
 
 if __name__ == "__main__":
