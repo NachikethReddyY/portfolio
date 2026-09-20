@@ -215,3 +215,10 @@ Evidence: `.evidence/story-finish/spacing-check.mjs`, `handoff-check.mjs`, `chat
 Geist is the main and display typeface, Geist Mono handles code and technical labels, and Geist Pixel is available for pixel treatments. Caveat handwriting is unchanged. The real portrait is required in the perforated navigation stamp; it supersedes the monogram, with artwork sizing independent of caption styles.
 
 The user selected hybrid option 03. Case studies keep their result-first opening and images, then add three project-specific explanatory stages after the approach. The interlude uses the supplied architectural reference: deep blue, thin drafting lines, outlined regions, a connecting route, and a project/status title block. Desktop scroll reveals the route and regions beside the text; phones and reduced motion use normal document flow. All 23 original projects have an authored workflow, rationale and explicit limit based on existing public content. Gallery layout changes refresh scroll measurements. Public inspiration coverage and access limits are documented in the review artifact.
+
+
+## Visitor feedback refinement — 20 September 2026
+
+Applied the linked Self-Made Web Designer video, “The Psychology of a PERFECT Website” (https://www.youtube.com/watch?v=d-IaU9qcDGg), from its English caption track, not independent observation of its examples. Treat its three-friends framing as a design metaphor, not a neuroscience or conversion claim.
+
+Preserve familiar top navigation and the existing grouped stack/project evidence. Extend the existing restrained hover feedback to keyboard focus on primary/secondary actions, inline links, Connect and Menu. The menu strokes use transforms rather than animated width. Reduced motion retains static arrows/strokes and visible focus/color feedback. No extra animation, layout change, new copy or claimed usability outcome follows from this reference.

@@ -199,7 +199,7 @@ em {
 .nav-contact svg {
   width: 17px;
 }
-.nav-contact:hover svg {
+.nav-contact:is(:hover, :focus-visible) svg {
   transform: translate(3px, -3px);
 }
 .nav-contact svg,
@@ -234,14 +234,15 @@ em {
   background: var(--text);
   left: 14px;
   top: 17px;
-  transition: width 0.25s;
+  transition: transform 0.25s;
+  transform-origin: left center;
 }
 .menu-toggle i:last-child {
   top: 24px;
-  width: 11px;
+  transform: scaleX(0.733333);
 }
-.menu-toggle:hover i:last-child {
-  width: 15px;
+.menu-toggle:is(:hover, :focus-visible) i:last-child {
+  transform: scaleX(1);
 }
 .navigation-menu {
   position: fixed;
@@ -469,14 +470,14 @@ em {
   width: 19px;
   height: 19px;
 }
-.button-primary:hover svg,
-.button-secondary:hover svg {
+.button-primary:is(:hover, :focus-visible) svg,
+.button-secondary:is(:hover, :focus-visible) svg {
   transform: translateX(4px);
 }
-.button-primary:hover {
+.button-primary:is(:hover, :focus-visible) {
   background: #fff;
 }
-.button-secondary:hover {
+.button-secondary:is(:hover, :focus-visible) {
   background: #ffffff0c;
 }
 .hero-studio {
@@ -659,7 +660,7 @@ em {
   width: 20px;
   height: 20px;
 }
-.inline-link:hover svg {
+.inline-link:is(:hover, :focus-visible) svg {
   transform: translateX(5px);
 }
 .journey-section,
@@ -2942,7 +2943,7 @@ em {
   color: var(--bg);
   font-weight: 650;
 }
-.story-hero .button-primary:hover {
+.story-hero .button-primary:is(:hover, :focus-visible) {
   background: var(--brand-text);
 }
 .story-hero .hero-foot {
@@ -4270,14 +4271,14 @@ em {
 .menu-link:hover::before, .menu-link:focus-visible::before { transform: scaleX(1); }
 .menu-link-label, .menu-link svg { transition: transform 220ms ease; }
 .menu-link:hover .menu-link-label, .menu-link:focus-visible .menu-link-label { transform: translateX(6px); }
-.menu-link:hover svg { transform: translateX(3px); }
+.menu-link:is(:hover, :focus-visible) svg { transform: translateX(3px); }
 .menu-link small { align-self: center; margin: 0; }
 .menu-link svg { flex-shrink: 0; width: 22px; }
 .menu-bottom { margin: 0; align-items: center; gap: 8px; font-size: 12px; }
 .menu-bottom p { line-height: 1.45; }
 .menu-top button { padding: 4px 8px; min-height: 36px; }
 .menu-toggle { transition: background 180ms ease, border-color 180ms ease; }
-.menu-toggle:hover { background: #78b5ff20; border-color: #78b5ff80; }
+.menu-toggle:is(:hover, :focus-visible) { background: #78b5ff20; border-color: #78b5ff80; }
 .app-icon .app-icon-monogram { font-size: 13px; letter-spacing: -.04em; }
 @media (max-width: 700px) {
   .menu-bottom { flex-direction: column; align-items: flex-start; }
@@ -5167,4 +5168,11 @@ code, pre, kbd, samp { font-family: var(--font-mono); }
  .blueprint-drawing .room-name { font-family: 'Geist Variable', sans-serif; font-size: 27px; font-weight: 500; }
  .blueprint-drawing .room-number { font-size: 19px; }
  .blueprint-drawing .room-subtitle, .blueprint-dimensions text { display: none; }
+}
+
+/* Familiar controls keep feedback available to keyboard users without extra motion. */
+@media (prefers-reduced-motion: reduce) {
+  :is(.nav-contact, .button-primary, .button-secondary, .inline-link, .menu-link):is(:hover, :focus-visible) svg,
+  .menu-link:is(:hover, :focus-visible) .menu-link-label { transform: none; }
+  .menu-toggle:is(:hover, :focus-visible) i:last-child { transform: scaleX(0.733333); }
 }
