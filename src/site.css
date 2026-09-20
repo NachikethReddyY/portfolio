@@ -5198,3 +5198,21 @@ code, pre, kbd, samp { font-family: var(--font-mono); }
  .mark-one-composer .composer-draft { display: none !important; }
  .mark-one-composer .composer-placeholder { display: block !important; }
 }
+
+/* Compact phone spacing while preserving the desktop story composition. */
+@media (max-width: 700px) {
+  .stack-section { padding-bottom: 48px; }
+  .stack-groups { gap: 28px 16px; }
+  .stack-group:nth-child(3) .tool-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stack-older { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px 12px; padding-top: 0; }
+  .stack-tools-label { margin: 8px 0 -8px; }
+  .stack-shared { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; padding-top: 0; }
+  .stack-shared .app-icon { width: 42px; height: 42px; }
+  .stack-shared .tool-item h4 { font-size: 11px; }
+  .journey-section { margin-top: 24px; padding-top: 48px; }
+}
+@media (max-width: 700px) and (prefers-reduced-motion: no-preference) {
+  .work-stage { height: 155svh; }
+  .learning-transition { height: 180svh; }
+  .rabbit-stage { height: 210svh; }
+}

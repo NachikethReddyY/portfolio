@@ -82,7 +82,7 @@ export function RabbitHole() {
             trigger: root.current,
             start: "top top",
             end: "bottom bottom",
-            scrub: 0.25,
+            scrub: true,
             invalidateOnRefresh: true,
           },
         });
@@ -230,7 +230,7 @@ export function RabbitHole() {
                 trigger: root.current,
                 start: "bottom bottom",
                 end: "bottom 25%",
-                scrub: 0.3,
+                scrub: true,
                 onUpdate: reposition,
               },
             })

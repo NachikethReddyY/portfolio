@@ -160,25 +160,25 @@ export default function Home() {
             {
               strokeDashoffset: 0,
               autoRound: false,
-              duration: 0.7,
+              duration: 0.4,
               ease: "power2.inOut",
             },
           )
           .to(".hero-outline rect", {
             strokeDashoffset: -1,
             autoRound: false,
-            duration: 0.4,
-            delay: 0.1,
+            duration: 0.25,
+            delay: 0.05,
             ease: "power2.inOut",
           });
       } else if (phase === "laptop") {
-        gsap.to(".hero-closed-poster", { opacity: 0, duration: 0.45 });
+        gsap.to(".hero-closed-poster", { opacity: 0, duration: 0.25 });
         gsap.fromTo(
           ".laptop-scene:not(.hero-closed-poster)",
           { opacity: 0 },
           {
             opacity: 1,
-            duration: 0.45,
+            duration: 0.25,
             onComplete: () => sendEntrance("shown"),
           },
         );
@@ -186,7 +186,7 @@ export default function Home() {
         gsap.fromTo(
           ".hero-person,.hero-bottom,.hero-foot",
           { opacity: 0 },
-          { opacity: 1, duration: 0.65, stagger: 0.12, delay: 0.85 },
+          { opacity: 1, duration: 0.45, stagger: 0.08, delay: 0.35 },
         );
       }
     },
@@ -216,8 +216,8 @@ export default function Home() {
         scale: 0.12,
         autoAlpha: 0,
         rotation: 0,
-        duration: 1.1,
-        stagger: 0.06,
+        duration: 0.65,
+        stagger: 0.035,
         ease: "back.out(1.1)",
       });
       const movers = stickers.map((el) => ({
@@ -320,7 +320,7 @@ export default function Home() {
                 trigger: about,
                 start: "top 95%",
                 end: "top 5%",
-                scrub: 0.25,
+                scrub: true,
               },
             });
             handoff
@@ -369,7 +369,7 @@ export default function Home() {
                     trigger: about,
                     start: "top 20%",
                     end: "top -15%",
-                    scrub: 0.25,
+                    scrub: true,
                   },
                 },
               );
@@ -386,7 +386,7 @@ export default function Home() {
                       trigger: detail,
                       start: "top 90%",
                       end: "top 65%",
-                      scrub: 0.25,
+                      scrub: true,
                     },
                   },
                 ),
@@ -444,7 +444,7 @@ export default function Home() {
               onRefreshInit: updateWorkGap,
               start: "top top",
               end: "bottom bottom",
-              scrub: 0.25,
+              scrub: true,
               invalidateOnRefresh: true,
             },
           });
@@ -507,7 +507,7 @@ export default function Home() {
                 trigger: ".learning-transition",
                 start: "top top",
                 end: "bottom 20%",
-                scrub: 0.3,
+                scrub: true,
                 invalidateOnRefresh: true,
                 onUpdate: positionWord,
               },
@@ -554,7 +554,7 @@ export default function Home() {
                 trigger: ".home-writing",
                 start: "top 75%",
                 end: "top 15%",
-                scrub: 0.3,
+                scrub: true,
               },
             })
             .fromTo(

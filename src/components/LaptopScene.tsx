@@ -250,7 +250,7 @@ export default function LaptopScene({
               onOpen();
             },
           });
-          intro.to(pose, { progress: 1, duration: 2.5, ease: "none" }, 0.15);
+          intro.to(pose, { progress: 1, duration: 1.65, ease: "none" }, 0.05);
           startOpening.current = () => intro.play();
           if (openRef.current) intro.play();
           requestRender();
