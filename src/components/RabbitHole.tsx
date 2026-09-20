@@ -195,6 +195,8 @@ export function RabbitHole() {
           const destinations = [
             ...target.querySelectorAll<HTMLElement>(":scope > span"),
           ];
+          const copy =
+            target.parentElement!.querySelector<HTMLElement>(":scope > p")!;
           const reposition = () => {
             // Read both lines first; collision avoidance must not force layout after a write.
             const measurements = sources.map((source, index) => {
@@ -214,11 +216,13 @@ export function RabbitHole() {
                 targetWidth: dest.width,
               };
             });
-            headingTransfer(measurements, transfer.progress).forEach(
-              (pose, index) => {
-                gsap.set(sources[index], pose);
-              },
-            );
+            headingTransfer(
+              measurements,
+              transfer.progress,
+              copy.getBoundingClientRect().top,
+            ).forEach((pose, index) => {
+              gsap.set(sources[index], pose);
+            });
           };
           gsap
             .timeline({

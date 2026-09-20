@@ -5176,3 +5176,21 @@ code, pre, kbd, samp { font-family: var(--font-mono); }
   .menu-link:is(:hover, :focus-visible) .menu-link-label { transform: none; }
   .menu-toggle:is(:hover, :focus-visible) i:last-child { transform: scaleX(0.733333); }
 }
+
+/* Reserve both travelling title lines so their destination cannot collapse into the copy. */
+.teaching-destination { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.teaching-destination > span { line-height: 1.2; }
+.mark-one-composer .composer-draft { position: absolute; inset: 24px 24px auto; visibility: hidden; color: var(--text); }
+.mark-one-composer .composer-placeholder { min-height: 5.25em; }
+.illustrative-diff { font-family: var(--font-mono); white-space: nowrap; }
+.illustrative-diff > span:first-child { color: #9ad5ae; }
+.illustrative-diff > span:last-child { color: #f2aaa7; margin-left: 8px; }
+@media(max-width:700px) {
+ .mark-one-composer .composer-draft { inset: 18px 18px auto; }
+ .mark-one-composer .composer-placeholder { min-height: 9em; }
+}
+@media(prefers-reduced-motion:reduce) {
+ .mark-one-prompt, .mark-one-response, .mark-one-composer { transform: none; }
+}
+
+.legion-story .legion-status { border-left: 2px solid var(--brand-text); padding: 14px 22px; background: #7ab8ff08; font-size: 19px; color: var(--text); }

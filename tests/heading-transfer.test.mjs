@@ -38,3 +38,16 @@ test("separate lines keep their original movement", () => {
     { x: -25, y: 200, scale: 0.75 },
   ]);
 });
+
+test("travelling title stays above chapter copy, including reverse scroll", () => {
+  for (const progress of [0, 0.3, 0.7, 1, 0.7, 0.3]) {
+    const frames = [line(400, 500), line(450, 528)];
+    const poses = headingTransfer(frames, progress, 540);
+    frames.forEach((frame, index) => {
+      assert.ok(
+        frame.top + poses[index].y + frame.height * poses[index].scale <=
+          524 + 1e-8,
+      );
+    });
+  }
+});

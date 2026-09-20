@@ -559,14 +559,14 @@ export default function Home() {
             })
             .fromTo(
               ".story-article",
-              { y: -100, scale: 0.94 },
+              { y: 20, scale: 1 },
               { y: 0, scale: 1, duration: 0.7, ease: "power2.inOut" },
             )
             .fromTo(
               ".writing-heading",
               { autoAlpha: 0, y: 20 },
               { autoAlpha: 1, y: 0, duration: 0.3 },
-              0.5,
+              0,
             );
           gsap.from(".local-workspace", {
             y: 65,
@@ -1135,6 +1135,9 @@ export default function Home() {
                   I’m exploring whether a 2B specialist can outperform a 30B
                   generalist at one task. That’s the experiment—not a benchmark
                   result yet.
+                </p>
+                <p className="legion-status" data-reveal>
+                  I’m currently preparing training data for model training.
                 </p>
                 <p data-reveal>
                   With two friends, I’m building LAH to explore tool calls,

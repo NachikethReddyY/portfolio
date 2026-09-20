@@ -1,10 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import type { ReactNode } from "react";
-import { createClient } from "@sanity/client";
 import seed from "./seed.json";
 import { portfolioSchema } from "./validation";
-import { mergeContent } from "./merge";
-import { contentQuery } from "./query";
 import type { PortfolioContent } from "./types";
 
 export const localContent: PortfolioContent = portfolioSchema.parse(seed);
@@ -38,18 +35,14 @@ export function ContentProvider({
     const controller = new AbortController();
     const timeout = window.setTimeout(() => controller.abort(), 5000);
     try {
-      const client = createClient({
-        projectId: sanityProjectId,
-        dataset: sanityDataset,
-        apiVersion: import.meta.env.VITE_SANITY_API_VERSION || "2026-09-17",
-        useCdn: true,
-        perspective: "published",
-      });
-      client
-        .fetch<unknown>(contentQuery, {}, { signal: controller.signal })
+      fetch("/api/content", { signal: controller.signal })
+        .then(async (response) => {
+          if (!response.ok)
+            throw new Error(`Content request failed: ${response.status}`);
+          return portfolioSchema.parse(await response.json());
+        })
         .then((value) => {
-          if (!controller.signal.aborted)
-            setContent(mergeContent(localContent, value));
+          if (!controller.signal.aborted) setContent(value);
         })
         .catch(() => {
           /* Keep local content readable when CMS is unavailable. */

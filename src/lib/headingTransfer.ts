@@ -16,6 +16,7 @@ type LineMeasurement = {
 export function headingTransfer(
   lines: readonly LineMeasurement[],
   progress: number,
+  copyTop = Infinity,
 ) {
   const poses = lines.map((line) => ({
     x: (line.targetLeft - line.left + line.x) * progress,
@@ -37,5 +38,19 @@ export function headingTransfer(
       poses[1].y += first.top + first.height + 8 - second.top;
     }
   }
+  // Move the pair together if scrub lag would let either line cover the chapter copy.
+  const bottom = Math.max(
+    ...lines.map(
+      (line, index) =>
+        line.top -
+        line.y +
+        poses[index].y +
+        (line.height / line.scale) * poses[index].scale,
+    ),
+  );
+  const overflow = Math.max(0, bottom - (copyTop - 16));
+  poses.forEach((pose) => {
+    pose.y -= overflow;
+  });
   return poses;
 }

@@ -222,3 +222,7 @@ The user selected hybrid option 03. Case studies keep their result-first opening
 Applied the linked Self-Made Web Designer video, “The Psychology of a PERFECT Website” (https://www.youtube.com/watch?v=d-IaU9qcDGg), from its English caption track, not independent observation of its examples. Treat its three-friends framing as a design metaphor, not a neuroscience or conversion claim.
 
 Preserve familiar top navigation and the existing grouped stack/project evidence. Extend the existing restrained hover feedback to keyboard focus on primary/secondary actions, inline links, Connect and Menu. The menu strokes use transforms rather than animated width. Reduced motion retains static arrows/strokes and visible focus/color feedback. No extra animation, layout change, new copy or claimed usability outcome follows from this reference.
+
+### Mark I and story correction — 20 September 2026
+
+Latest user steering: the illustrative conversation types in the composer, presses send, lifts the submitted prompt into its own panel, then produces a faster short response and illustrative +/− line counts. Composer model name is Mark I. The static reduced-motion view retains the completed conversation. The two-line teaching destination reserves both lines and travelling text clears the paragraph. Current status: preparing training data for model training, followed by the existing LAH work and fine-tuning experiments. Latest writing appears with its first article; preserve article order and real destinations.

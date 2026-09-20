@@ -35,55 +35,57 @@ export function MarkOneDemo() {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         const mobile = matchMedia("(max-width:700px)").matches;
+        const composer =
+          root.current!.querySelector<HTMLElement>(".mark-one-composer")!;
+        const prompt =
+          root.current!.querySelector<HTMLElement>(".mark-one-prompt")!;
+        const lift = () => composer.offsetTop - prompt.offsetTop;
         const conversation = gsap
-          .timeline({ paused: true })
+          .timeline({ paused: true, defaults: { ease: "power2.out" } })
+          .set(".mark-one-prompt, .mark-one-response", { autoAlpha: 0 })
+          .set(composer, { y: () => -lift() + 60 })
+          .set(".composer-placeholder", { autoAlpha: 0 })
+          .set(".composer-draft", { autoAlpha: 1 })
+          .from(
+            ".composer-draft .typed-char, .composer-draft .mark-one-file-chip",
+            {
+              opacity: 0,
+              duration: 0.01,
+              stagger: 0.006,
+            },
+          )
+          .to(".composer-send", { scale: 0.82, duration: 0.1 })
+          .to(".composer-send", { scale: 1, duration: 0.12 })
+          .set(".composer-draft", { autoAlpha: 0 })
+          .set(".composer-placeholder", { autoAlpha: 1 })
           .fromTo(
             ".mark-one-prompt",
-            { autoAlpha: 0, y: 35, rotation: 0 },
-            { autoAlpha: 1, y: 0, duration: 0.3 },
+            { autoAlpha: 0, y: 60, rotation: 0, scale: 0.96 },
+            {
+              autoAlpha: 1,
+              y: -12,
+              rotation: mobile ? 1.5 : 3,
+              scale: 1,
+              duration: 0.45,
+            },
           )
-          .from(".prompt-type .typed-char, .prompt-type .mark-one-file-chip", {
-            opacity: 0,
-            duration: 0.02,
-            stagger: 0.012,
-          })
-          .to(".mark-one-prompt", {
-            rotation: mobile ? 1.5 : 3,
-            y: -12,
-            duration: 0.5,
-          })
+          .to(composer, { y: 0, duration: 0.45 }, "<")
           .fromTo(
             ".mark-one-response",
-            { autoAlpha: 0, y: 35, rotation: 0 },
-            { autoAlpha: 1, y: 0, duration: 0.35 },
+            { autoAlpha: 0, y: 20, rotation: 0 },
+            { autoAlpha: 1, y: -8, rotation: mobile ? -1 : -2, duration: 0.25 },
           )
           .from(".response-type .typed-char", {
             opacity: 0,
-            duration: 0.02,
-            stagger: 0.014,
+            duration: 0.01,
+            stagger: 0.008,
           })
           .from(".mark-one-changes", {
             autoAlpha: 0,
-            scale: 0.95,
-            y: 12,
-            duration: 0.45,
-            ease: "back.out(1.4)",
-          })
-          .to(".mark-one-response", {
-            rotation: mobile ? -1 : -2,
-            y: -8,
-            duration: 0.5,
-          })
-          .fromTo(
-            ".mark-one-composer",
-            { autoAlpha: 0, y: 35, rotation: 0 },
-            {
-              autoAlpha: 1,
-              y: 0,
-              rotation: mobile ? 0.8 : 1.5,
-              duration: 0.45,
-            },
-          );
+            scale: 0.97,
+            y: 8,
+            duration: 0.2,
+          });
         const observer = new IntersectionObserver(
           ([entry]) => {
             if (!entry.isIntersecting) return;
@@ -92,7 +94,7 @@ export function MarkOneDemo() {
           },
           { rootMargin: "0px 0px -20% 0px" },
         );
-        observer.observe(root.current!);
+        observer.observe(composer);
         return () => observer.disconnect();
       });
       return () => mm.revert();
@@ -119,29 +121,43 @@ export function MarkOneDemo() {
       <div className="mark-one-response">
         <p className="response-type">
           <strong>
-            <TypedText text="A small client." />
+            <TypedText text="Done." />
           </strong>{" "}
-          <TypedText text="Typed results, response validation, request cancellation, and clear errors for failed HTTP responses." />
+          <TypedText text="The typed client is ready for review." />
         </p>
         <div className="mark-one-changes">
           <span className="changes-heading">
-            Files changed <span>Edited 1 file</span>
+            Files changed <span>Illustrative diff · 1 file</span>
           </span>
           <div>
             <FileChip />
-            <span>Added request handling</span>
+            <span
+              className="illustrative-diff"
+              aria-label="Illustrative diff: 42 lines added, 6 removed"
+            >
+              <span>+42</span> <span>−6</span>
+            </span>
           </div>
         </div>
       </div>
       <div
         className="mark-one-composer"
         role="img"
-        aria-label="Illustrated prompt composer with Fleet Mark I selected at High effort"
+        aria-label="Illustrated prompt composer with Mark I selected at High effort"
       >
+        <p className="composer-draft" aria-hidden="true">
+          <TypedText text="Build a typed API client in " />
+          <FileChip />
+          <TypedText text=". Accept a response parser and an abort signal, handle HTTP errors, then run " />
+          <code>
+            <TypedText text="pnpm check" />
+          </code>
+          <TypedText text="." />
+        </p>
         <span className="composer-placeholder">Ask a follow-up…</span>
         <div className="composer-toolbar">
           <span className="composer-model">
-            Fleet Mark I <Chevron />
+            Mark I <Chevron />
           </span>
           <span className="composer-effort">
             High <Chevron />
