@@ -167,7 +167,7 @@ export default function LaptopScene({
     };
     renderer.domElement.addEventListener("webglcontextlost", onLost);
     const texture = new THREE.TextureLoader().load(
-      "/models/laptop-screen.png",
+      "/models/laptop-screen.webp",
       requestRender,
     );
     texture.colorSpace = THREE.SRGBColorSpace;

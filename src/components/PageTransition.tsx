@@ -172,7 +172,7 @@ export default function PageTransition({
           <div className="shutter-tile" key={i} />
         ))}
         <div className="route-stamp">
-          <img className="stamp-portrait" src="/images/nachiketh-photo.jpeg" alt="" />
+          <img className="stamp-portrait" src="/images/nachiketh-stamp.webp" alt="" />
           <span>Nachiketh Reddy</span>
         </div>
       </div>

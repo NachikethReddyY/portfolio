@@ -963,7 +963,7 @@ export default function Home() {
                 aria-label={`${c.name}: my pull requests on GitHub`}
               >
                 <img
-                  src={`/icons/apps/${i === 0 ? "t3-code" : "vorssaint"}.png`}
+                  src={`/icons/apps/${i === 0 ? "t3-code" : "vorssaint"}-small.webp`}
                   alt=""
                   width="120"
                   height="120"

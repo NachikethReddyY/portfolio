@@ -1,15 +1,15 @@
 const artwork: Record<string, string> = {
-  vscode: "apps/vscode.png",
-  ghostty: "apps/ghostty.png",
-  xcode: "apps/xcode.png",
-  orbstack: "apps/orbstack.png",
-  codex: "apps/codex.png",
-  finder: "apps/finder.png",
-  swiftui: "apps/swiftui.png",
-  foundationmodels: "apps/foundationmodels.png",
-  coreml: "apps/coreml.png",
-  mlx: "apps/mlx.png",
-  lmstudio: "apps/lmstudio.png",
+  vscode: "apps/vscode-small.webp",
+  ghostty: "apps/ghostty-small.webp",
+  xcode: "apps/xcode-small.webp",
+  orbstack: "apps/orbstack-small.webp",
+  codex: "apps/codex-small.webp",
+  finder: "apps/finder-small.webp",
+  swiftui: "apps/swiftui-small.webp",
+  foundationmodels: "apps/foundationmodels-small.webp",
+  coreml: "apps/coreml-small.webp",
+  mlx: "apps/mlx-small.webp",
+  lmstudio: "apps/lmstudio-small.webp",
 };
 const abbreviations: Record<string, string> = {
   mlx: "MLX",
@@ -69,7 +69,13 @@ export function AppIcon({ id }: { id: string }) {
           <circle cx="16" cy="16" r="4" />
         </svg>
       ) : source ? (
-        <img src={"/icons/" + source} alt="" width="64" height="64" />
+        <img
+          src={"/icons/" + source}
+          alt=""
+          width="64"
+          height="64"
+          decoding="async"
+        />
       ) : (
         <span className="app-icon-monogram">{abbreviations[id] ?? "</>"}</span>
       )}

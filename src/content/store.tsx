@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import seed from "./seed.json";
 import { portfolioSchema } from "./validation";
 import type { PortfolioContent } from "./types";
+import { reconcileContent } from "./reconcile";
 
 export const localContent: PortfolioContent = portfolioSchema.parse(seed);
 export const sanityProjectId =
@@ -42,7 +43,10 @@ export function ContentProvider({
           return portfolioSchema.parse(await response.json());
         })
         .then((value) => {
-          if (!controller.signal.aborted) setContent(value);
+          if (!controller.signal.aborted) {
+            // A cache refresh must not rebuild every consumer when the snapshot is unchanged.
+            setContent((current) => reconcileContent(current, value));
+          }
         })
         .catch(() => {
           /* Keep local content readable when CMS is unavailable. */
