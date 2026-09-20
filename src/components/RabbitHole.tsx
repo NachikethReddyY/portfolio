@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { headingTransfer } from "../lib/headingTransfer";
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 function RabbitArtwork({ className }: { className: string }) {
@@ -195,30 +196,29 @@ export function RabbitHole() {
             ...target.querySelectorAll<HTMLElement>(":scope > span"),
           ];
           const reposition = () => {
-            sources.forEach((source, index) => {
+            // Read both lines first; collision avoidance must not force layout after a write.
+            const measurements = sources.map((source, index) => {
               const dest = destinations[index].getBoundingClientRect();
               const from = source.getBoundingClientRect();
-              const x = Number(gsap.getProperty(source, "x"));
-              const y = Number(gsap.getProperty(source, "y"));
-              gsap.set(source, {
-                x: (dest.left - from.left + x) * transfer.progress,
-                y: (dest.top - from.top + y) * transfer.progress,
-                scale:
-                  1 + (dest.width / source.offsetWidth - 1) * transfer.progress,
-              });
+              return {
+                left: from.left,
+                top: from.top,
+                width: from.width,
+                height: from.height,
+                x: Number(gsap.getProperty(source, "x")),
+                y: Number(gsap.getProperty(source, "y")),
+                scale: Number(gsap.getProperty(source, "scaleX")),
+                layoutWidth: source.offsetWidth,
+                targetLeft: dest.left,
+                targetTop: dest.top,
+                targetWidth: dest.width,
+              };
             });
-            // Keep the two lines readable while they converge onto one baseline.
-            const first = sources[0].getBoundingClientRect();
-            const second = sources[1].getBoundingClientRect();
-            if (second.left < first.right && second.top < first.bottom + 8) {
-              gsap.set(sources[1], {
-                y:
-                  Number(gsap.getProperty(sources[1], "y")) +
-                  first.bottom +
-                  8 -
-                  second.top,
-              });
-            }
+            headingTransfer(measurements, transfer.progress).forEach(
+              (pose, index) => {
+                gsap.set(sources[index], pose);
+              },
+            );
           };
           gsap
             .timeline({

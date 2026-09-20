@@ -6,7 +6,7 @@ export function modelFramePoints(model: THREE.Object3D): THREE.Vector3[] {
   model.updateMatrixWorld(true);
   model.traverse((object) => {
     if (!(object instanceof THREE.Mesh)) return;
-    object.geometry.computeBoundingBox();
+    if (!object.geometry.boundingBox) object.geometry.computeBoundingBox();
     const bounds = object.geometry.boundingBox;
     if (!bounds) return;
     for (let i = 0; i < 8; i++) {
@@ -29,23 +29,24 @@ export function fitModelCamera(
   direction = new THREE.Vector3(0.24, 0.29, 1).normalize(),
 ) {
   if (!points.length) return;
-  let near = 14;
-  let far = 100;
-  for (let pass = 0; pass < 18; pass++) {
-    const distance = (near + far) / 2;
-    camera.position.copy(target).addScaledVector(direction, distance);
-    camera.lookAt(target);
-    camera.updateMatrixWorld();
-    const extent = Math.max(
-      ...points.flatMap((point) => {
-        const projected = point.clone().project(camera);
-        return [Math.abs(projected.x), Math.abs(projected.y)];
-      }),
+  camera.position.copy(target).add(direction);
+  camera.lookAt(target);
+  camera.position.copy(target);
+  camera.updateMatrixWorld();
+  const projected = new THREE.Vector3();
+  const projection = camera.projectionMatrix.elements;
+  let distance = 14;
+  // Solve the same 90% framing constraint in camera space in one pass.
+  // Moving backwards changes depth only: abs(x * projectionX) / (d - z) <= .9.
+  for (const point of points) {
+    projected.copy(point).applyMatrix4(camera.matrixWorldInverse);
+    distance = Math.max(
+      distance,
+      projected.z + Math.abs(projected.x * projection[0]) / 0.9,
+      projected.z + Math.abs(projected.y * projection[5]) / 0.9,
     );
-    if (extent > 0.9) near = distance;
-    else far = distance;
   }
-  camera.position.copy(target).addScaledVector(direction, far);
+  camera.position.copy(target).addScaledVector(direction, Math.min(100, distance));
   camera.lookAt(target);
   camera.updateMatrixWorld();
 }

@@ -123,3 +123,51 @@ test("Air ports have recessed geometry on the correct sides", () => {
     "MagSafe 3, two USB-C, 3.5mm headphone",
   );
 });
+
+test("camera framing matches the original projection search throughout the entrance", async () => {
+  const { poseLaptopEntrance } = await import("../src/lib/laptopCamera.ts");
+  const hinge = model.getObjectByName("ScreenHingeRoot");
+  const openAngle = hinge.rotation.x;
+  const height = hinge.position.y;
+  for (const aspect of [2, 370 / 258, 320 / 200]) {
+    for (let step = 0; step <= 20; step++) {
+      const camera = new THREE.PerspectiveCamera(30, aspect, 0.1, 150);
+      poseLaptopEntrance(camera, model, hinge, step / 20, openAngle, height);
+      const frame = modelFramePoints(model);
+      const t = Math.min(1, step / 20 / 0.7);
+      const orbit = t * t * (3 - 2 * t);
+      const target = new THREE.Vector3(
+        0,
+        THREE.MathUtils.lerp(0.6, 2.8, orbit),
+        0,
+      );
+      const direction = new THREE.Vector3(0, 1, 0.035)
+        .lerp(new THREE.Vector3(0.24, 0.29, 1).normalize(), orbit)
+        .normalize();
+      const reference = new THREE.PerspectiveCamera(30, aspect, 0.1, 150);
+      let near = 14,
+        far = 100;
+      for (let pass = 0; pass < 18; pass++) {
+        const distance = (near + far) / 2;
+        reference.position.copy(target).addScaledVector(direction, distance);
+        reference.lookAt(target);
+        reference.updateMatrixWorld();
+        const extent = Math.max(
+          ...frame.flatMap((point) => {
+            const projected = point.clone().project(reference);
+            return [Math.abs(projected.x), Math.abs(projected.y)];
+          }),
+        );
+        if (extent > 0.9) near = distance;
+        else far = distance;
+      }
+      const difference = Math.abs(camera.position.distanceTo(target) - far);
+      assert.ok(
+        difference < 0.0004,
+        `aspect ${aspect}, step ${step}: ${difference}`,
+      );
+    }
+  }
+  hinge.rotation.x = openAngle;
+  hinge.position.y = height;
+});
