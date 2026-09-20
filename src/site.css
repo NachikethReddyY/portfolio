@@ -5180,15 +5180,10 @@ code, pre, kbd, samp { font-family: var(--font-mono); }
 /* Reserve both travelling title lines so their destination cannot collapse into the copy. */
 .teaching-destination { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
 .teaching-destination > span { line-height: 1.2; }
-.mark-one-composer .composer-draft { position: absolute; inset: 24px 24px auto; visibility: hidden; color: var(--text); }
-.mark-one-composer .composer-placeholder { min-height: 5.25em; }
+.mark-one-composer .composer-draft { display: none; margin-bottom: 44px; color: var(--text); }
 .illustrative-diff { font-family: var(--font-mono); white-space: nowrap; }
 .illustrative-diff > span:first-child { color: #9ad5ae; }
 .illustrative-diff > span:last-child { color: #f2aaa7; margin-left: 8px; }
-@media(max-width:700px) {
- .mark-one-composer .composer-draft { inset: 18px 18px auto; }
- .mark-one-composer .composer-placeholder { min-height: 9em; }
-}
 @media(prefers-reduced-motion:reduce) {
  .mark-one-prompt, .mark-one-response, .mark-one-composer { transform: none; }
 }
@@ -5200,5 +5195,6 @@ code, pre, kbd, samp { font-family: var(--font-mono); }
  .mark-one-demo .typed-char, .mark-one-changes, .composer-placeholder {
   visibility: visible !important; opacity: 1 !important; transform: none !important;
  }
- .mark-one-composer .composer-draft { visibility: hidden !important; }
+ .mark-one-composer .composer-draft { display: none !important; }
+ .mark-one-composer .composer-placeholder { display: block !important; }
 }

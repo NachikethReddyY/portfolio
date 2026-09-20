@@ -44,8 +44,8 @@ export function MarkOneDemo() {
           .timeline({ paused: true, defaults: { ease: "power2.out" } })
           .set(".mark-one-prompt, .mark-one-response", { autoAlpha: 0 })
           .set(composer, { y: () => -lift() + 60 })
-          .set(".composer-placeholder", { autoAlpha: 0 })
-          .set(".composer-draft", { autoAlpha: 1 })
+          .set(".composer-placeholder", { autoAlpha: 0, display: "none" })
+          .set(".composer-draft", { autoAlpha: 1, display: "block" })
           .from(
             ".composer-draft .typed-char, .composer-draft .mark-one-file-chip",
             {
@@ -56,8 +56,8 @@ export function MarkOneDemo() {
           )
           .to(".composer-send", { scale: 0.82, duration: 0.1 })
           .to(".composer-send", { scale: 1, duration: 0.12 })
-          .set(".composer-draft", { autoAlpha: 0 })
-          .set(".composer-placeholder", { autoAlpha: 1 })
+          .set(".composer-draft", { autoAlpha: 0, display: "none" })
+          .set(".composer-placeholder", { autoAlpha: 1, display: "block" })
           .fromTo(
             ".mark-one-prompt",
             { autoAlpha: 0, y: 60, rotation: 0, scale: 0.96 },
@@ -127,7 +127,7 @@ export function MarkOneDemo() {
         </p>
         <div className="mark-one-changes">
           <span className="changes-heading">
-            Files changed <span>Illustrative diff · 1 file</span>
+            Files changed <span>1 file</span>
           </span>
           <div>
             <FileChip />
