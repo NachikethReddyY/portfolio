@@ -5194,3 +5194,11 @@ code, pre, kbd, samp { font-family: var(--font-mono); }
 }
 
 .legion-story .legion-status { border-left: 2px solid var(--brand-text); padding: 14px 22px; background: #7ab8ff08; font-size: 19px; color: var(--text); }
+
+@media(prefers-reduced-motion:reduce) {
+ .mark-one-prompt, .mark-one-response, .mark-one-composer,
+ .mark-one-demo .typed-char, .mark-one-changes, .composer-placeholder {
+  visibility: visible !important; opacity: 1 !important; transform: none !important;
+ }
+ .mark-one-composer .composer-draft { visibility: hidden !important; }
+}
