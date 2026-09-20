@@ -299,22 +299,20 @@ export default function Home() {
             root.current?.querySelector<HTMLElement>(".hello-section");
           if (about) {
             // Translate the whole hero behind the opaque story, without DOM reparenting.
-            if (window.matchMedia("(min-width: 701px)").matches) {
-              gsap.to(".story-hero", {
-                y: () =>
-                  about.getBoundingClientRect().top -
-                  (root.current?.getBoundingClientRect().top ?? 0),
-                ease: "none",
-                scrollTrigger: {
-                  trigger: root.current,
-                  start: "top top",
-                  endTrigger: about,
-                  end: "top top",
-                  scrub: true,
-                  invalidateOnRefresh: true,
-                },
-              });
-            }
+            gsap.to(".story-hero", {
+              y: () =>
+                about.getBoundingClientRect().top -
+                (root.current?.getBoundingClientRect().top ?? 0),
+              ease: "none",
+              scrollTrigger: {
+                trigger: root.current,
+                start: "top top",
+                endTrigger: about,
+                end: "top top",
+                scrub: true,
+                invalidateOnRefresh: true,
+              },
+            });
             const handoff = gsap.timeline({
               scrollTrigger: {
                 trigger: about,
