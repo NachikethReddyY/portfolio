@@ -1,17 +1,17 @@
 node_modules/
 dist/
+artifacts/
+.evidence/
+*.tsbuildinfo
+.DS_Store
 .env
 .env.*
 !.env.example
-.DS_Store
-
+.vercel/
 .sanity/
-.claude/
-.codex/
-.cursor/
-.impeccable/
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
+__pycache__/
+*.pyc
+
+# Generated local design specimen
+/DESIGN.html

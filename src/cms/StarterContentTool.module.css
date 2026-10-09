@@ -1,0 +1,200 @@
+.page {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100%;
+  padding: 48px max(32px, calc((100% - 936px) / 2)) 96px;
+  background: #141820;
+  color: #eceef2;
+  font-family: system-ui, sans-serif;
+  line-height: 1.65;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  gap: 28px;
+  align-items: start;
+}
+.header h1 {
+  font-size: clamp(28px, 4vw, 42px);
+  line-height: 1.15;
+  letter-spacing: -0.045em;
+  margin: 12px 0 20px;
+}
+.header p {
+  max-width: 620px;
+  color: #aeb3c0;
+}
+.header a {
+  color: #8ce9d6;
+  white-space: nowrap;
+  font-size: 14px;
+  margin-top: 40px;
+}
+.eyebrow {
+  font-size: 13px;
+  margin: 0 !important;
+  color: #8ce9d6 !important;
+}
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  color: #aeb3c0;
+  font-size: 13px;
+  border-bottom: 1px solid #323640;
+  padding: 24px 0;
+}
+.meta strong {
+  color: #eceef2;
+  font-weight: 500;
+  margin-left: 8px;
+}
+.summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  padding: 36px 0;
+}
+.summary div {
+  display: grid;
+  gap: 8px;
+}
+.summary strong {
+  font-size: 36px;
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+}
+.summary span {
+  font-size: 14px;
+  color: #aeb3c0;
+}
+.action {
+  padding: 28px;
+  background: #20242c;
+  border: 1px solid #3c424f;
+  border-radius: 14px;
+}
+.page h2 {
+  font-size: 21px;
+  line-height: 1.4;
+  font-weight: 550;
+  letter-spacing: -0.025em;
+  margin: 0 0 12px;
+}
+.page p {
+  margin: 12px 0;
+  color: #b5bbc7;
+}
+.note {
+  font-size: 14px;
+}
+.confirm {
+  display: flex;
+  gap: 12px;
+  align-items: start;
+  margin: 24px 0;
+  font-size: 14px;
+}
+.confirm input {
+  width: 18px;
+  height: 18px;
+  accent-color: #63d8c0;
+  margin-top: 3px;
+}
+.buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+.buttons button {
+  font: 500 14px system-ui;
+  min-height: 44px;
+  padding: 12px 18px;
+  border: 1px solid #83e3d0;
+  background: #83e3d0;
+  color: #10221e;
+  border-radius: 7px;
+  cursor: pointer;
+}
+.buttons .secondary {
+  background: transparent;
+  color: #e4e8ef;
+  border-color: #505866;
+}
+.buttons button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.buttons button:focus-visible,
+.page a:focus-visible,
+.confirm input:focus-visible {
+  outline: 2px solid #a9fff0;
+  outline-offset: 5px;
+}
+.page .error {
+  color: #ffb5b5;
+  border-left: 3px solid #e78383;
+  padding-left: 14px;
+}
+.page .notice {
+  color: #97ecd9;
+  border-left: 3px solid #63d8c0;
+  padding-left: 14px;
+}
+.inventory {
+  padding: 40px 0;
+}
+.inventory ul {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0;
+}
+.inventory li {
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #323640;
+}
+.inventory small {
+  white-space: nowrap;
+  color: #9ca9b9;
+  font-size: 12px;
+}
+.help {
+  border-top: 1px solid #323640;
+  padding-top: 32px;
+}
+.help p {
+  font-size: 14px;
+}
+.page a {
+  color: #8ce9d6;
+}
+@media (max-width: 600px) {
+  .page {
+    padding: 28px 20px 60px;
+  }
+  .header {
+    display: block;
+  }
+  .header a {
+    display: inline-block;
+    margin: 0 0 18px;
+  }
+  .summary {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+  .action {
+    padding: 20px;
+  }
+  .inventory li {
+    font-size: 14px;
+  }
+  .inventory small {
+    font-size: 11px;
+  }
+}
