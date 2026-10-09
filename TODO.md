@@ -483,6 +483,64 @@ Failed criteria: architectural rooms did not explain the software; the previous 
 Changed locally: case-study liquid-glass back link and explicit light case-study text. Verified 46px touch target, blur/fallback styling, keyboard navigation to /projects, 1440px/390px layouts, typecheck and diff check. Revised public preview version 2: https://lbgn61lqdgsf.postplan.dev. Full template replacement and NDA access implementation remain pending selection; no production deployment this turn. Browser proof: `.evidence/case-redesign/glass-check.json`, `rebuild-check.json`, and corresponding screenshots.
 
 ## Vercel release and handoff — 18 September 2026
-- [ ] Run the current test/build pipeline and release the implemented case-study glass back link and contrast fix through the existing GitHub-connected Vercel project.
-- [ ] Verify the new deployment status, production routes, health endpoint and desktop/phone back navigation.
-- [ ] Write a local handoff with release evidence, the latest rejected/accepted design state, remaining redesign and whole-project NDA work, and next-agent entry points.
+- [x] Run the current test/build pipeline and release the implemented case-study glass back link and contrast fix through the existing GitHub-connected Vercel project.
+- [x] Verify the new deployment status, production routes, health endpoint and desktop/phone back navigation.
+- [x] Write a local handoff with release evidence, the latest rejected/accepted design state, remaining redesign and whole-project NDA work, and next-agent entry points.
+
+Production verified for `496c2ec` (Vercel success, production deployment 6526930784). Desktop/390px glass-link keyboard navigation and light text pass; homepage, VSMS, writing, health, RSS and sitemap return 200. Local handoff: `.evidence/release-handoff/HANDOFF.md`.
+
+
+## Case-study reference-led reset — 19 September 2026
+- [x] Inspect a focused reference set against result visibility, image/copy rhythm and decision evidence; record limits.
+- [x] Build distinct public-only Lumina compositions with a recommended direction; preserve existing application.
+- [x] Check preview desktop/mobile, keyboard controls, image framing and publication privacy.
+- [x] Publish revised comparison and report evidence; await visual selection before application changes.
+
+Latest correction: both earlier choices felt unconvincing. User asks agent to research other portfolios and choose stronger patterns. Classified as project guidance; no layout has been accepted yet.
+
+Published version 3: https://lbgn61lqdgsf.postplan.dev (public). Native Helium desktop and 390px checks; keyboard tabs and disclosure verified. Evidence: `.evidence/case-redesign/reference-reset-check.json`. No application edits. Visual selection and Lumina context discrepancy remain for final implementation.
+
+## Landing motion performance — 20 September 2026
+- [x] Capture a production-build baseline in native Safari, then native Helium.
+- [x] Experiment with focused optimizations preserving choreography and interactions.
+- [x] Compare the same scroll journey before/after; check reverse scrolling and responsive behavior.
+- [x] Run focused checks/build and record measured results and limitations; no publication in this experiment.
+
+Evidence: `.evidence/motion-performance/REPORT.md`. Native Safari then Helium baseline; clean after runs and 390px before/after geometry checks completed. Laptop camera math optimized without lowering quality; rabbit handoff reads batched. 55 tests and production build pass. No commit, push or deployment. Reported severe lag not reproduced on this Mac; physical low-end devices and reduced-motion runtime checks remain unverified.
+
+## Performance release, T3 panel and video application — 20 September 2026
+- [x] Commit and push the verified performance changes; verify Vercel production release (bfe18bc, cc05c8c).
+- [x] Close T3's persisted diff panel and check that reopening the thread leaves it closed.
+- [x] Retrieve the video's captions, identify relevant advice, and apply bounded improvements with focused verification.
+
+## Live overlap and composer sequence — 20 September 2026
+- [x] Reproduce heading overlap and reserve a stable two-line destination; verify forward/reverse scroll and refresh.
+- [x] Type prompt in composer, press send, lift submitted panel, then show a faster concise response and illustrative line counts.
+- [x] Run tests/build, push, wait for CI/Vercel, and verify production in Safari then Helium.
+- [x] Add training-data status above LAH; bring Latest writing heading in with its first article.
+- [x] Fix content CORS via existing same-origin API and support that API in Vite preview; verify fresh assets after rebuilding.
+- [x] Fix runtime reduced-motion switch leaving submitted prompt/response hidden; repeat live verification.
+
+Final release: `43c1a56`, Vercel production deployment `6547865655` success. 56 tests and 33-route build pass. Live Safari/Helium checks, 390px emulation, heading clearance, content endpoint and runtime reduced-motion fallback verified. Restored compact composer and removed visible illustrative prefix. Evidence: `.evidence/video-d-IaU9qcDGg/RELEASE.md`. Header warnings traced to matching uBlock privacy-filter rules, not website response headers; protections retained.
+
+## Production versus local performance — 20 September 2026
+- [x] Compare network/cache timings and browser rendering on the same build (reported difference not reproduced).
+- [x] Fix measured delivery/loading bottlenecks while preserving motion.
+- [x] Test, deploy, wait for Vercel, and verify production Safari → Helium (db31089).
+
+Production performance: delivery improvements live; 57 tests and 33-route build pass. Sustained production-only lag remains unconfirmed; awaiting affected device/browser and timing details. Evidence `.evidence/production-performance/REPORT.md`.
+
+## Entrance responsiveness and mobile corrections — 20 September 2026
+- [x] Inspect mobile hero, Work and scroll narrative for concrete layout/timing defects.
+- [x] Shorten entrance and scroll settling delays; fix observed mobile issues without redesign.
+- [x] Test desktop/mobile emulation, publish and verify final deployment (a3a2e66). iOS simulator follow-up below remains open.
+
+## iOS Hello and Work follow-up — 20 September 2026
+- [ ] Reproduce the reported Hello transition and Work gap in Device Hub’s iOS simulator.
+- [ ] Fix the confirmed iOS defects while preserving desktop choreography.
+- [ ] Verify the deployed result in the simulator.
+
+## Mobile Hello cover correction — 20 September 2026
+- [x] Confirm missing mobile hero-cover motion: desktop-only media guard.
+- [x] Enable the same bounded hero translation on mobile; verify forward/reverse scroll and reduced motion in browser emulation.
+- [x] Build, push, and verify connected Vercel deployment (96d1cac).
