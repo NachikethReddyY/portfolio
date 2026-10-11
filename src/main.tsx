@@ -7,6 +7,7 @@ import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Projects, { ProjectDetail } from "./pages/Projects";
 import Writing, { ArticleDetail } from "./pages/Writing";
+import AMRFanApp from "./pages/AMRFanApp";
 import NotFound from "./pages/NotFound";
 import { PageRecovery, RenderBoundary } from "./components/RenderBoundary";
 import "@fontsource-variable/geist/wght.css";
@@ -40,6 +41,7 @@ function App() {
                     <Routes location={location}>
                       <Route path="/" element={<Home />} />
                       <Route path="/projects" element={<Projects />} />
+                      <Route path="/projects/amr-fan-app" element={<AMRFanApp />} />
                       <Route
                         path="/projects/:slug"
                         element={<ProjectDetail />}

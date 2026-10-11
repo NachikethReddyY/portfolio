@@ -75,7 +75,12 @@
       "image": "/images/lah-cover.webp",
       "imageAlt": "LAH product brief showing an agent control room with chat above and prompt below.",
       "accent": "mint",
-      "stack": ["TypeScript", "Python", "Local agents", "CLI / Systems Tools"],
+      "stack": [
+        "TypeScript",
+        "Python",
+        "Local agents",
+        "CLI / Systems Tools"
+      ],
       "role": "Co-builder working on architecture, streaming, tools, and terminal interaction",
       "featured": true,
       "links": [],
@@ -1173,7 +1178,13 @@
       "image": "/images/lumina-cover.webp",
       "imageAlt": "Lumina landing page showing its AI-assisted support-ticket routing workflow.",
       "accent": "lavender",
-      "stack": ["TypeScript", "React", "Vite", "Express", "PostgreSQL"],
+      "stack": [
+        "TypeScript",
+        "React",
+        "Vite",
+        "Express",
+        "PostgreSQL"
+      ],
       "role": "Full-stack developer across frontend, backend, database, and workflow design",
       "featured": true,
       "links": [
@@ -1496,7 +1507,10 @@
       "image": "",
       "imageAlt": "Model Shelf project preview",
       "accent": "mint",
-      "stack": ["Python / Local AI", "CLI / Systems Tools"],
+      "stack": [
+        "Python / Local AI",
+        "CLI / Systems Tools"
+      ],
       "role": "CLI and local AI workflow designer",
       "featured": false,
       "links": [
@@ -1793,7 +1807,10 @@
       "image": "",
       "imageAlt": "Qwen3.5 Distill project preview",
       "accent": "blue",
-      "stack": ["Python / Local AI", "TypeScript"],
+      "stack": [
+        "Python / Local AI",
+        "TypeScript"
+      ],
       "role": "AI experimenter building local model training workflows",
       "featured": false,
       "links": [
@@ -2376,7 +2393,10 @@
       "image": "",
       "imageAlt": "CoreML Workshop project preview",
       "accent": "lavender",
-      "stack": ["Swift / SwiftUI", "Core ML / Vision"],
+      "stack": [
+        "Swift / SwiftUI",
+        "Core ML / Vision"
+      ],
       "role": "Created the workshop and built the SwiftUI image-classification app",
       "featured": false,
       "links": [
@@ -2657,7 +2677,10 @@
       "image": "",
       "imageAlt": "VoxScribe project preview",
       "accent": "mint",
-      "stack": ["Python / Local AI", "CLI / Systems Tools"],
+      "stack": [
+        "Python / Local AI",
+        "CLI / Systems Tools"
+      ],
       "role": "Local AI desktop-tool builder",
       "featured": false,
       "links": [
@@ -2954,7 +2977,10 @@
       "image": "",
       "imageAlt": "Keel project preview",
       "accent": "blue",
-      "stack": ["Go / Agent Systems", "CLI / Systems Tools"],
+      "stack": [
+        "Go / Agent Systems",
+        "CLI / Systems Tools"
+      ],
       "role": "Built the Go CLI, Markdown parser, safe storage layer, terminal interface, timers, recurrence, and agent workflow",
       "featured": false,
       "links": [
@@ -3235,7 +3261,11 @@
       "image": "",
       "imageAlt": "Clipper",
       "accent": "mint",
-      "stack": ["TypeScript", "React / Next.js", "MongoDB"],
+      "stack": [
+        "TypeScript",
+        "React / Next.js",
+        "MongoDB"
+      ],
       "role": "Built the browser extension, web library, API integration, and self-hosted Docker workflow",
       "featured": false,
       "links": [
@@ -3954,7 +3984,11 @@
       "image": "https://cdn.sanity.io/images/508uqyvi/production/f622a61da5cb86eee6f1e374f127d028dd05e2cc-1280x720.png",
       "imageAlt": "Cryptix game-store interface used for the secure coding analysis.",
       "accent": "mint",
-      "stack": ["Node.js / Express", "Secure Coding / OWASP", "MySQL"],
+      "stack": [
+        "Node.js / Express",
+        "Secure Coding / OWASP",
+        "MySQL"
+      ],
       "role": "OWASP analyst for A01 Broken Access Control and A09 Logging & Monitoring",
       "featured": false,
       "links": [
@@ -4307,7 +4341,10 @@
       "image": "",
       "imageAlt": "Imposter Game",
       "accent": "mint",
-      "stack": ["HTML / CSS", "JavaScript"],
+      "stack": [
+        "HTML / CSS",
+        "JavaScript"
+      ],
       "role": "Designed and built the complete browser game in one HTML file",
       "featured": false,
       "links": [
@@ -4654,7 +4691,11 @@
       "image": "",
       "imageAlt": "Iris Auth Lite",
       "accent": "lavender",
-      "stack": ["TypeScript", "Expo / Mobile", "Python / Local AI"],
+      "stack": [
+        "TypeScript",
+        "Expo / Mobile",
+        "Python / Local AI"
+      ],
       "role": "Mobile app and hardware-integration builder for a hackathon prototype",
       "featured": false,
       "links": [
@@ -5382,7 +5423,10 @@
       "image": "https://cdn.sanity.io/images/508uqyvi/production/e4c8e0de408d3112ca6086693ed3ccf1e1363b8b-3362x2100.jpg",
       "imageAlt": "LaunchCode landing page with a gradient hero, navigation, calls to action, and a code-editor visual.",
       "accent": "mint",
-      "stack": ["HTML / CSS", "JavaScript"],
+      "stack": [
+        "HTML / CSS",
+        "JavaScript"
+      ],
       "role": "Frontend developer responsible for the responsive interface and interactive site flows",
       "featured": false,
       "links": [
@@ -5739,7 +5783,9 @@
       "image": "",
       "imageAlt": "Midnight Code",
       "accent": "mint",
-      "stack": ["VS Code Extensions"],
+      "stack": [
+        "VS Code Extensions"
+      ],
       "role": "Designed and packaged the color system as a VS Code theme",
       "featured": false,
       "links": [
@@ -6072,7 +6118,11 @@
       "image": "",
       "imageAlt": "PromptForge",
       "accent": "lavender",
-      "stack": ["TypeScript", "React / Next.js", "Node.js / Express"],
+      "stack": [
+        "TypeScript",
+        "React / Next.js",
+        "Node.js / Express"
+      ],
       "role": "Built the React interface, Express generation API, prompt templates, validation, and provider configuration",
       "featured": false,
       "links": [
@@ -6419,7 +6469,10 @@
       "image": "https://cdn.sanity.io/images/508uqyvi/production/0bf65e55df258f4d66bc862a903f0f8bf80ed7e9-1440x900.png",
       "imageAlt": "QR Code Generator interface with a text input, generate button, and preview area.",
       "accent": "mint",
-      "stack": ["JavaScript", "HTML / CSS"],
+      "stack": [
+        "JavaScript",
+        "HTML / CSS"
+      ],
       "role": "Frontend developer across interface, generation, validation, and download behaviour",
       "featured": false,
       "links": [
@@ -7128,7 +7181,10 @@
       "image": "",
       "imageAlt": "Tab",
       "accent": "mint",
-      "stack": ["Swift / SwiftUI", "CLI / Systems Tools"],
+      "stack": [
+        "Swift / SwiftUI",
+        "CLI / Systems Tools"
+      ],
       "role": "Built the SwiftUI app, window manager, hotkey controller, fuzzy search, settings, and switcher interface",
       "featured": false,
       "links": [
@@ -7475,7 +7531,10 @@
       "image": "https://cdn.sanity.io/images/508uqyvi/production/ea304908997df7a54292869f6dc75090fbc758ba-3362x2090.png",
       "imageAlt": "Zero Waste Lifestyle landing page with sustainability copy, calls to action, and green-city illustrations.",
       "accent": "lavender",
-      "stack": ["HTML / CSS", "JavaScript"],
+      "stack": [
+        "HTML / CSS",
+        "JavaScript"
+      ],
       "role": "Frontend developer responsible for the responsive content, interactions, and visual storytelling",
       "featured": false,
       "links": [
@@ -7820,9 +7879,541 @@
           "caption": "Zero Waste Lifestyle homepage and sustainability introduction."
         }
       ]
+    },
+    {
+      "slug": "amr-fan-app",
+      "name": "AMR Fan App",
+      "category": "Native apps",
+      "summary": "A mobile app that turns F1 sustainability reporting into an engaging fan experience where users plan low-emission travel, prove sustainable actions with AI-verified photos, and earn points for driver challenges and impact tracking.",
+      "headline": "Built an AI-verified fan experience for Aston Martin Aramco F1 that converts sustainability actions into points, challenges, and personal impact reports.",
+      "status": "Hackathon MVP",
+      "year": "Oct 2026",
+      "accent": "warm",
+      "stack": [
+        "Swift",
+        "Kotlin",
+        "Supabase",
+        "PostgreSQL",
+        "Azure auth",
+        "Google Maps API",
+        "Luna + Jev",
+        "SHA-256"
+      ],
+      "role": "iOS Developer, Presentation Lead — Swift iOS app (primary client), travel emissions + Google Maps, AI verification pipeline",
+      "featured": true,
+      "links": [
+        {
+          "label": "Source",
+          "url": "https://github.com/NachikethReddyY/AMR-Fan-App"
+        },
+        {
+          "label": "Demo",
+          "url": "https://youtu.be/Fn2FTYSmvbQ?si=ImxEaU6fT8T73OCD"
+        }
+      ],
+      "body": [
+        {
+          "_type": "block",
+          "_key": "amr-brief-h",
+          "style": "h2",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "amr-brief-hs",
+              "text": "The brief",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "amr-brief-p",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "amr-brief-ps",
+              "text": "Aston Martin Aramco does real sustainability work under Make A Mark, but it reads like a 90-page report: dense, written for accountability, almost never read by fans. The hackathon brief was two jobs pulling opposite ways — convey that ESG information to fans in a way they get, and attract F1 fans who didn't open the app for sustainability in the first place.",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "amr-loop-h",
+          "style": "h2",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "amr-loop-hs",
+              "text": "Plan → Prove → Earn → See",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "amr-loop-p",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "amr-loop-ps",
+              "text": "An all-in-one fan hub running a simple loop. Plan low-emission travel to the race with Google Maps routing and side-by-side emissions estimates. Prove sustainable actions with a photo the backend verifies. Earn points for driver questions, dares, votes and perks. See an impact report that compares savings to a real circuit.",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "amr-built-h",
+          "style": "h2",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "amr-built-hs",
+              "text": "What I built",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "amr-built-p",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "amr-built-ps",
+              "text": "As the iOS developer I implemented the iOS app in Swift (primary client) and contributed Kotlin for Android: navigation, camera flow, driver theming, points UI and the impact report. I owned the travel emissions logic plus Google Maps routing integration, and the AI verification pipeline — image → SHA-256 duplicate check → Luna + Jev judge prompt → verdict with reasoning → points. Every feature is self-contained on a shared backend, so whole modules could be cut without breaking the rest.",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "amr-constraints-h",
+          "style": "h2",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "amr-constraints-hs",
+              "text": "Constraints",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "amr-constraints-p",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "amr-constraints-ps",
+              "text": "Students, ~$10 total for AI/API: existing APIs only, with calls tuned to fit the budget. Hackathon plus about two weeks after the first on-stage stage, refocused on environment-only and mobility-only after Cognizant mentors Joseph P K and Aleisya Fuad told the team it was spread too thin. Web development was my background; native mobile, backend security and an AI pipeline were new, so I read, ran and tested everything rather than vibe-coding.",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "amr-status-h",
+          "style": "h2",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "amr-status-hs",
+              "text": "Status",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "amr-status-p",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "amr-status-ps",
+              "text": "A hackathon MVP: working prototype presented to evaluators at roughly $10 of AI spend. The backend ran on a private server for the demo, structured Azure-ready. Honest gap: Maps, auth and model APIs can fail, and the prototype has no real fallbacks or caching; production would need them.",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        }
+      ],
+      "gallery": [],
+      "image": "",
+      "imageAlt": "AMR Fan App project preview"
     }
   ],
   "articles": [
+    {
+      "slug": "amr-fan-app-turning-sustainability-reporting-into-something-fans-actually-use",
+      "title": "AMR Fan App: Turning Sustainability Reporting Into Something Fans Actually Use",
+      "excerpt": "Aston Martin Aramco publishes serious sustainability work under Make A Mark. Almost no fan reads it. For this hackathon I carried the iOS build of the AMR Fan App and led the presentation.",
+      "category": "Building",
+      "publishedAt": "2026-10-11T08:00:00Z",
+      "readMinutes": 7,
+      "featured": true,
+      "sources": [
+        {
+          "label": "Watch the demo",
+          "url": "https://youtu.be/Fn2FTYSmvbQ"
+        },
+        {
+          "label": "GitHub repository",
+          "url": "https://github.com/NachikethReddyY/AMR-Fan-App"
+        }
+      ],
+      "body": [
+        {
+          "_type": "block",
+          "_key": "amr-wip",
+          "style": "blockquote",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "amr-wip-span",
+              "text": "Writing in progress — this article is still being expanded into the full build story. The complete case study lives on the AMR Fan App project page.",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "amr-tldr",
+          "style": "blockquote",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "amr-tldr-span",
+              "text": "TL;DR: Aston Martin Aramco publishes serious sustainability work under Make A Mark. Almost no fan reads it. For this hackathon I carried the mobile build of the AMR Fan App — iOS (Swift, primary) + Android (Kotlin) — where fans plan lower-emission race-weekend travel, prove sustainable actions with a photo verified by Luna + Jev, and turn that into points, driver challenges, and a personal impact report. Total AI spend: ~$10. We shipped because we cut scope twice.",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "amr-meta",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "amr-meta-role",
+              "text": "**Role:** iOS Developer, Presentation Lead — Swift iOS app (primary client), travel emissions + Google Maps, AI verification pipeline",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "amr-meta2",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "amr-meta-context",
+              "text": "**Context:** Aston Martin Aramco F1 hackathon, Make A Mark challenge",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "amr-meta3",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "amr-meta-team",
+              "text": "**Team:** Cognizant mentors Joseph P K and Aleisya Fuad; Anirudh Kumar (cloud, Android); Dylan Tsai; Kaung Nyi (Darius) Hein; Briana Kong; Sachita Thasil",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "amr-meta4",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "amr-meta-stack",
+              "text": "**Stack:** Swift (iOS main), Kotlin (Android), Supabase / PostgreSQL, Azure auth, Google Maps API, Luna + Jev, SHA-256",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "amr-meta5",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "amr-meta-outcome",
+              "text": "**Outcome:** Working prototype presented to evaluators",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "amr-owned",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "amr-owned-heading",
+              "text": "What I personally owned",
+              "marks": []
+            }
+          ],
+          "markDefs": [],
+          "listItem": "bullet",
+          "level": 0
+        },
+        {
+          "_type": "block",
+          "_key": "amr-owned1",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "amr-owned1-text",
+              "text": "Native mobile implementation (Swift main, Kotlin for Android) — navigation, camera flow, driver theming, points UI, impact report",
+              "marks": []
+            }
+          ],
+          "markDefs": [],
+          "listItem": "bullet",
+          "level": 1
+        },
+        {
+          "_type": "block",
+          "_key": "amr-owned2",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "amr-owned2-text",
+              "text": "Travel emissions logic + Google Maps routing integration",
+              "marks": []
+            }
+          ],
+          "markDefs": [],
+          "listItem": "bullet",
+          "level": 1
+        },
+        {
+          "_type": "block",
+          "_key": "amr-owned3",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "amr-owned3-text",
+              "text": "AI verification pipeline: image → SHA-256 duplicate check → Luna + Jev judge prompt → verdict + points",
+              "marks": []
+            }
+          ],
+          "markDefs": [],
+          "listItem": "bullet",
+          "level": 1
+        },
+        {
+          "_type": "block",
+          "_key": "amr-owned4",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "amr-owned4-text",
+              "text": "Prompt rewrites when the first version judged too harshly",
+              "marks": []
+            }
+          ],
+          "markDefs": [],
+          "listItem": "bullet",
+          "level": 1
+        },
+        {
+          "_type": "block",
+          "_key": "amr-owned5",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "amr-owned5-text",
+              "text": "Scope cuts that saved the demo: killing ESG auto-ingestion, admin dashboard, hotel marketplace",
+              "marks": []
+            }
+          ],
+          "markDefs": [],
+          "listItem": "bullet",
+          "level": 1
+        },
+        {
+          "_type": "block",
+          "_key": "amr-section1-heading",
+          "style": "h2",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "amr-section1-heading-text",
+              "text": "1. The brief was two jobs pulling opposite ways",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "amr-section1-content",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "amr-section1-content-text",
+              "text": "Aston Martin Aramco does real sustainability work under Make A Mark — Environment, Belong, Community. But it's a 90-page report. Dense. Written for accountability, not for fans.\n\nWe had two jobs:\n\n1. Convey that ESG information to fans in a way they get.\n2. Attract and engage F1 fans who didn't open the app for sustainability in the first place.\n\nThat's the tension behind every decision. Push engagement too hard — points, streaks, rewards — and you lose credibility. Push credibility too hard — PDF charts — and nobody opens it twice.\n\nMy take never changed: don't build a sustainability app with F1 stickers on it. Build a fan app where sustainable behaviour happens to earn you something.",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "amr-section2-heading",
+          "style": "h2",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "amr-section2-heading-text",
+              "text": "2. What we shipped: Plan → Prove → Earn → See",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "amr-section2-content",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "amr-section2-content-text",
+              "text": "We called it AMR Fan App. All-in-one fan hub. Simple loop:\n\n1. **Plan:** pick how you get to the race — public transport, cycle, walk, car — see estimated emissions side-by-side.\n2. **Prove:** snap a photo of the action. Backend verifies it.\n3. **Earn:** verified actions earn points. Spend points to ask drivers questions/dares, vote, unlock perks.\n4. **See:** impact report compares your savings to something you actually understand — a real circuit.\n\nI built it modular on purpose. Each feature is self-contained on a shared backend. That meant we could kill a whole module without breaking the rest. We needed that.",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "amr-section3-heading",
+          "style": "h2",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "amr-section3-heading-text",
+              "text": "3. Constraints that decided more than ideas did",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "amr-section3-content",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "amr-section3-content-text",
+              "text": "**Time:** Hackathon + ~2 weeks after first on-stage. After that first stage we were spread way too thin. Our Cognizant mentors Joseph P K and Aleisya Fuad carried the team and told us straight. That's when we refocused on environment-only and mobility-only for the POC.\n\n**Budget:** Students. ~$10 total for AI/API. That ruled out training anything, ruled out big-model-on-every-call. We used existing APIs only — Luna + Jev as judges — and tuned calls to fit the budget.\n\n**Background:** My thing was web dev. I'm president of Apple Developer Society at Singapore Poly, but I'd never shipped native mobile + backend security + AI pipeline from scratch. I'd been using AI-assisted coding for 6-7 months, so I used it to move fast. Not vibe-coding — I read, ran, and tested everything.\n\n**No licensed assets:** No proper F1 image kit. All driver imagery public-source. Shaped the theming approach.",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "amr-section4-heading",
+          "style": "h2",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "amr-section4-heading-text",
+              "text": "4. Architecture — boring on purpose",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "amr-section4-content",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "amr-section4-content-text",
+              "text": "```\nMobile clients (Swift iOS main, Kotlin Android)\n  ├─ Maps / routing ───────> Google Maps API\n  ├─ Auth ─────────────────> Azure auth\n  ├─ App data (REST) ──────> Supabase ──> PostgreSQL\n  └─ Image submission ─────> Backend (private server for demo, Azure-ready)\n                               ├─ SHA-256 hash → duplicate check in DB\n                               └─ Luna + Jev → verdict + reasoning → points\n```\n\nSupabase + Postgres holds users, points, challenges, votes, submission hashes. Fast to iterate, relational where we needed it. Azure handles auth so credentials never lived in our code — mattered a lot since securing a backend was new to me.\n\nBackend ran on a private server for the demo but structured Azure-ready. Full deploy is config, not rewrite.\n\nHonest gap: Maps, auth, and model APIs can fail. Prototype has no real fallbacks or caching. Production would need them.",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "amr-section9-heading",
+          "style": "h2",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "amr-section9-heading-text",
+              "text": "9. Outcome + learnings",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "amr-section9-content",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "amr-section9-content-text",
+              "text": "Shipped: route planning + AI-verified camera + points + driver theming + impact report, presented to evaluators. ~$10 spend.\n\nWhat stuck with me:\n\n1. **Scope is engineering.** Cut list shipped the demo.\n2. **Design the weak point first.** Verification/anti-cheat deserved time before UI polish.\n3. **Say what's estimated.** Credibility *is* the product here.\n4. **Stretch was worth it.** Web → native + backend security + AI pipelines taught me more than tutorials.",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        }
+      ]
+    },
     {
       "slug": "fleet-a-working-system",
       "title": "Fleet: giving my agents a way to work",
@@ -8781,7 +9372,9 @@
             {
               "_key": "595b734e7782",
               "_type": "span",
-              "marks": ["878843ac5d20"],
+              "marks": [
+                "878843ac5d20"
+              ],
               "text": "realistically"
             },
             {
@@ -9017,7 +9610,9 @@
             {
               "_key": "c28c05e3fa67-part-0",
               "_type": "span",
-              "marks": ["code"],
+              "marks": [
+                "code"
+              ],
               "text": "design-ui"
             },
             {
@@ -9029,7 +9624,9 @@
             {
               "_key": "c28c05e3fa67-part-1",
               "_type": "span",
-              "marks": ["c28c05e3fa67-link-1"],
+              "marks": [
+                "c28c05e3fa67-link-1"
+              ],
               "text": "LAH concept preview"
             },
             {
@@ -9089,7 +9686,9 @@
             {
               "_key": "534b84dbfbed-part-0",
               "_type": "span",
-              "marks": ["534b84dbfbed-link-0"],
+              "marks": [
+                "534b84dbfbed-link-0"
+              ],
               "text": "Cheng Jun Tee"
             },
             {
@@ -9101,7 +9700,9 @@
             {
               "_key": "534b84dbfbed-part-1",
               "_type": "span",
-              "marks": ["534b84dbfbed-link-1"],
+              "marks": [
+                "534b84dbfbed-link-1"
+              ],
               "text": "Chong Hao Ooi"
             },
             {

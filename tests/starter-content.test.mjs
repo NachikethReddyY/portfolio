@@ -29,7 +29,7 @@ test("starter documents preserve the exporter output and keys", () => {
 
     const exported = readFileSync(outputPath, "utf8");
     const starters = createStarterDocuments(seed);
-    assert.equal(starters.length, 32);
+    assert.equal(starters.length, 34);
     assert.equal(
       exported,
       starters.map((document) => JSON.stringify(document)).join("\n") + "\n",

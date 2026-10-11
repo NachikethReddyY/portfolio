@@ -6,6 +6,7 @@ import type { PortfolioContent } from "./content/types";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import Projects, { ProjectDetail } from "./pages/Projects";
+import AMRFanApp from "./pages/AMRFanApp";
 import Writing, { ArticleDetail } from "./pages/Writing";
 export async function render(path: string, content?: PortfolioContent) {
   const element = (
@@ -15,6 +16,7 @@ export async function render(path: string, content?: PortfolioContent) {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/projects" element={<Projects />} />
+            <Route path="/projects/amr-fan-app" element={<AMRFanApp />} />
             <Route path="/projects/:slug" element={<ProjectDetail />} />
             <Route path="/writing" element={<Writing />} />
             <Route path="/writing/:slug" element={<ArticleDetail />} />

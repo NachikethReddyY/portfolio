@@ -573,5 +573,30 @@
         "body": "Flip cards, a timeline, counters and scroll reveals add pacing to the educational content. The underlying HTML still needs to remain useful when scripting is unavailable. That progressive-enhancement boundary is more important than the animation itself; reducing large assets and replacing scroll polling are practical next improvements."
       }
     ]
+  },
+  "amr-fan-app": {
+    "title": "Follow the fan through the loop, not the report.",
+    "summary": "Sustainability reaches fans when it rides along with something they already do. The build keeps plan, prove, earn and see separable, so scope cuts never break the demo.",
+    "limit": "Hackathon MVP: Maps, auth and model APIs have no real fallbacks or caching, and the Azure-ready backend has only run on a private demo server.",
+    "steps": [
+      {
+        "label": "Plan",
+        "detail": "Travel · emissions",
+        "title": "Let the fan's trip set the story.",
+        "body": "Route planning compares public transport, cycling, walking and driving with estimated emissions side-by-side. Google Maps routing feeds the travel emissions logic, so the sustainable choice appears inside a decision the fan was already making rather than a separate ESG tab."
+      },
+      {
+        "label": "Prove",
+        "detail": "Photo · verification",
+        "title": "Turn an action into evidence the backend can trust.",
+        "body": "A photo submission runs through a SHA-256 duplicate check in PostgreSQL, then the Luna + Jev judge prompt returns a verdict with reasoning that feeds the points engine. When the first judge version ruled too harshly, prompt rewrites brought verdicts back in line. Anti-cheat got design time before UI polish."
+      },
+      {
+        "label": "Earn & see",
+        "detail": "Points · impact",
+        "title": "Close the loop with something fans understand.",
+        "body": "Verified actions earn points that spend on driver questions, dares, votes and perks, and the impact report compares savings to a real circuit. Each feature is self-contained on a shared backend, so the team could cut whole modules — ESG ingestion, admin dashboard, hotel marketplace — without breaking the demo."
+      }
+    ]
   }
 }
