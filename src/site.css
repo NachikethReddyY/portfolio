@@ -5465,6 +5465,9 @@ code, pre, kbd, samp { font-family: var(--font-mono); }
 
 .amr-body { grid-column: 2; width: 100%; }
 .amr-body section + section { margin-top: clamp(56px, 8vw, 84px); }
+/* The problem statement opens the story proper — give it room to breathe
+   before the brief arrives. */
+#amr-problem { margin-top: clamp(84px, 11vw, 124px); }
 /* Heading hierarchy: chapters, sections, sub-steps — distinct type, colour and
    rule so the page reads as a document rather than a list of equal-looking
    blocks. */
@@ -5622,6 +5625,173 @@ code, pre, kbd, samp { font-family: var(--font-mono); }
 .amr-body p a:hover { text-decoration-color: currentColor; }
 
 .amr-demo { margin: 34px 0 0; }
+/* The weekend-in-photos carousel: swipeable track, one frame at a time. */
+.amr-photos { margin: 30px 0 4px; }
+.amr-photos-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.amr-photos-kicker {
+  font: 600 11px/1.6 var(--font-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #7b8796;
+}
+.amr-photos-nav { display: flex; align-items: center; gap: 8px; }
+.amr-photos-btn {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  line-height: 1;
+  color: var(--text);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  cursor: pointer;
+}
+.amr-photos-btn:hover:not(:disabled) { border-color: var(--brand); color: var(--brand-text); }
+.amr-photos-btn:disabled { opacity: 0.35; cursor: default; }
+.amr-photos-btn:focus-visible { outline: 2px solid #9ac8ff; outline-offset: 2px; }
+.amr-photos-count {
+  font: 500 12px/1.6 var(--font-mono);
+  color: #7b8796;
+  min-width: 44px;
+  text-align: center;
+}
+.amr-photo-track {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  padding-bottom: 6px;
+}
+.amr-photo {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+}
+.amr-photo-expand {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+.amr-photo-expand:focus-visible { outline: 2px solid #9ac8ff; outline-offset: 3px; border-radius: 12px; }
+.amr-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 560px;
+  object-fit: contain;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #0b0e13;
+}
+.amr-photo-cap {
+  margin: 10px 2px 0;
+  font: 12.5px/1.6 var(--font-mono);
+  color: #7b8796;
+}
+/* Click-to-expand viewer. A native dialog, so it lands in the browser's top
+   layer: above every section and unaffected by any transformed ancestor, with
+   a real ::backdrop to blur and free Escape + focus handling. */
+.amr-lightbox {
+  width: 100vw;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 24px;
+  border: 0;
+  color: var(--text);
+  background: transparent;
+  overflow: hidden;
+}
+.amr-lightbox[open] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.amr-lightbox::backdrop {
+  background: rgba(3, 5, 8, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.amr-lightbox-figure { margin: 0; max-width: min(1000px, 100%); }
+.amr-lightbox-figure img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 72vh;
+  margin: 0 auto;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #0b0e13;
+}
+.amr-lightbox-figure figcaption {
+  margin-top: 12px;
+  text-align: center;
+  font: 12.5px/1.6 var(--font-mono);
+  color: #aeb8c4;
+}
+.amr-lightbox-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  font-size: 16px;
+  color: var(--text);
+  background: #080a0bd9;
+  border: 1px solid #ffffff2e;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.amr-lightbox-close:hover { border-color: var(--brand); color: var(--brand-text); }
+.amr-lightbox-close:focus-visible { outline: 2px solid #9ac8ff; outline-offset: 2px; }
+.amr-lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--text);
+  background: #080a0bd9;
+  border: 1px solid #ffffff2e;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.amr-lightbox-nav:hover { border-color: var(--brand); color: var(--brand-text); }
+.amr-lightbox-nav:focus-visible { outline: 2px solid #9ac8ff; outline-offset: 2px; }
+.amr-lightbox-prev { left: 16px; }
+.amr-lightbox-next { right: 16px; }
+@media (max-width: 640px) {
+  .amr-photo { flex-basis: 100%; }
+  .amr-lightbox-nav { top: auto; bottom: 24px; transform: none; }
+  .amr-lightbox-prev { left: 24px; }
+  .amr-lightbox-next { right: 24px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .amr-lightbox-figure img { animation: amr-lightbox-in 0.18s ease; }
+}
+@keyframes amr-lightbox-in {
+  from { transform: scale(0.97); opacity: 0.4; }
+}
 .amr-demo-facade {
   position: relative;
   display: block;
@@ -5705,29 +5875,6 @@ code, pre, kbd, samp { font-family: var(--font-mono); }
   color: var(--text);
   max-width: 58ch;
 }
-/* Three one-line rules — a plain list, not a card row. */
-.amr-rules {
-  margin: 34px 0 34px;
-  display: grid;
-  gap: 12px;
-}
-.amr-rules li {
-  display: flex;
-  gap: 12px;
-  margin: 0;
-  padding: 0;
-  font-size: 15.5px;
-  line-height: 1.6;
-  color: #a9b0bc;
-}
-.amr-rules li::before { content: none; }
-.amr-rule-num {
-  flex: none;
-  font: 500 11px/1.6 var(--font-mono);
-  letter-spacing: 0.12em;
-  color: var(--brand-text);
-}
-.amr-rules strong { color: var(--text); font-weight: 600; }
 /* Decisions: ruled rows, not cards. */
 .amr-decisions {
   display: grid;
@@ -5764,6 +5911,7 @@ code, pre, kbd, samp { font-family: var(--font-mono); }
 .amr-chip.is-killed { color: #e3a1a1; border-color: #e3a1a13d; }
 .amr-chip.is-rewrote { color: #d9c08c; border-color: #d9c08c3d; }
 .amr-chip.is-shipped { color: #9ac8ff; border-color: #8fa4ff44; }
+.amr-chip.is-future { color: #e7d57f; border-color: #e7d57f3d; }
 /* Callout: a quiet left rule with room above and below, so it never crowds
    the block it follows. */
 .amr-callout {
@@ -5780,6 +5928,15 @@ code, pre, kbd, samp { font-family: var(--font-mono); }
   font-size: 15.5px;
   line-height: 1.65;
   color: #ced3dd;
+}
+/* Who said it — quieter than the quote itself. */
+.amr-callout-src {
+  display: block;
+  margin-top: 8px;
+  font: 500 11px/1.5 var(--font-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #7f8798;
 }
 .amr-lessons-list {
   margin: 28px 0 0;
@@ -5920,11 +6077,11 @@ code, pre, kbd, samp { font-family: var(--font-mono); }
 }
 /* Its arrow reaches back across the gap to the quote's edge. */
 .amr-brief .amr-note::before {
-  left: -46px;
-  top: 6px;
-  width: 72px;
-  height: 30px;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 72 30' fill='none'%3E%3Cpath d='M70 5C58 2 42 4 28 11C20 15 12 20 5 25' stroke='%23a9c4ee' stroke-width='1.7' stroke-linecap='round'/%3E%3Cpath d='M15 20L5 25L16 28' stroke='%23a9c4ee' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+  left: -48px;
+  top: 4px;
+  width: 78px;
+  height: 38px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 78 38' fill='none'%3E%3Cpath d='M74 6C59 3 45 8 31 16C23 21 14 26 5 27' stroke='%23b3cbf2' stroke-width='2.1' stroke-linecap='round'/%3E%3Cpath d='M17 22L5 27L17 33' stroke='%23b3cbf2' stroke-width='2.1' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
     no-repeat center / contain;
 }
 .amr-brief p {
@@ -5957,11 +6114,11 @@ code, pre, kbd, samp { font-family: var(--font-mono); }
   position: absolute;
   left: 4px;
   top: 2px;
-  width: 34px;
-  height: 26px;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 26' fill='none'%3E%3Cpath d='M32 4C25 1 13 6 4 19' stroke='%23a9c4ee' stroke-width='1.7' stroke-linecap='round'/%3E%3Cpath d='M12 13L4 19L14 23' stroke='%23a9c4ee' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+  width: 36px;
+  height: 28px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 28' fill='none'%3E%3Cpath d='M33 5C26 3 16 8 5 17' stroke='%23b3cbf2' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M16 13L5 17L16 22' stroke='%23b3cbf2' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
     no-repeat center / contain;
-  opacity: 0.9;
+  opacity: 0.95;
 }
 .amr-note-text { display: block; margin-top: 4px; }
 /* Wide desktops: the note leaves the column and hangs in the right margin,
@@ -5994,6 +6151,20 @@ code, pre, kbd, samp { font-family: var(--font-mono); }
   outline: 2px solid #9ac8ff;
   outline-offset: 3px;
   border-radius: 3px;
+}
+/* A note that must sit level with the paragraph it comments on instead of
+   below it. The paragraph is the anchor: the note leaves the flow and hangs in
+   the margin beside its opening lines, so the drawn arrow lands on the
+   sentence rather than on whatever follows. Below 1281px it returns to the
+   column and flows underneath as usual. */
+@media (min-width: 1281px) {
+  .amr-note-beside { position: relative; }
+  .amr-note-beside .amr-note {
+    position: absolute;
+    top: 10px;
+    right: calc(-1 * min((100vw - 688px) / 2 - 24px, 300px));
+    margin: 0;
+  }
 }
 /* On tight desktops the note joins the column; the arrow stays, smaller. */
 @media (max-width: 1280px) {
@@ -6517,7 +6688,23 @@ code, pre, kbd, samp { font-family: var(--font-mono); }
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 12px;
 }
-.amr-highlight { display: block; text-decoration: none; }
+.amr-highlight {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  text-decoration: none;
+  cursor: zoom-in;
+}
+.amr-highlight:focus-visible {
+  outline: 2px solid #9ac8ff;
+  outline-offset: 3px;
+  border-radius: 12px;
+}
 .amr-highlight img {
   display: block;
   width: 100%;

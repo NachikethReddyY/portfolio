@@ -7962,7 +7962,7 @@
             {
               "_type": "span",
               "_key": "amr-loop-ps",
-              "text": "An all-in-one fan hub running a simple loop. Plan low-emission travel to the race with Google Maps routing and side-by-side emissions estimates. Prove sustainable actions with a photo the backend verifies. Earn points for driver questions, dares, votes and perks. See an impact report that compares savings to a real circuit.",
+              "text": "An all-in-one fan hub running a simple loop. Plan a trip with Google Maps routing and side-by-side emissions estimates — compare the ways to get there. Prove sustainable actions with a photo the backend verifies. Earn points for driver questions, dares, votes and perks. See an impact report that compares savings to a real circuit.",
               "marks": []
             }
           ],
@@ -8100,7 +8100,7 @@
             {
               "_type": "span",
               "_key": "amr-tldr-span",
-              "text": "TL;DR: Aston Martin Aramco publishes serious sustainability work under Make A Mark. Almost no fan reads it. For this hackathon I carried the mobile build of the AMR Fan App — iOS (Swift, primary) + Android (Kotlin) — where fans plan lower-emission race-weekend travel, prove sustainable actions with a photo verified by Luna + Jev, and turn that into points, driver challenges, and a personal impact report. Total AI spend: ~$10. We shipped because we cut scope twice.",
+              "text": "TL;DR: Aston Martin Aramco publishes serious sustainability work under Make A Mark. Almost no fan reads it. For this hackathon I carried the mobile build of the AMR Fan App — iOS (Swift, primary) + Android (Kotlin) — where fans compare lower-emission ways to make a trip, prove sustainable actions with a photo verified by Luna + Jev, and turn that into points, driver challenges, and a personal impact report. Model spend: over $10,000 during development, $0.065 for the shipped build's own calls. We shipped because we cut scope twice.",
               "marks": []
             }
           ],
@@ -8322,7 +8322,7 @@
             {
               "_type": "span",
               "_key": "amr-section2-content-text",
-              "text": "We called it AMR Fan App. All-in-one fan hub. Simple loop:\n\n1. **Plan:** pick how you get to the race — public transport, cycle, walk, car — see estimated emissions side-by-side.\n2. **Prove:** snap a photo of the action. Backend verifies it.\n3. **Earn:** verified actions earn points. Spend points to ask drivers questions/dares, vote, unlock perks.\n4. **See:** impact report compares your savings to something you actually understand — a real circuit.\n\nI built it modular on purpose. Each feature is self-contained on a shared backend. That meant we could kill a whole module without breaking the rest. We needed that.",
+              "text": "We called it AMR Fan App. All-in-one fan hub. Simple loop:\n\n1. **Plan:** pick where you're going and how you get there — public transport, cycle, walk, car — see estimated emissions side-by-side.\n2. **Prove:** snap a photo of the action. Backend verifies it.\n3. **Earn:** verified actions earn points. Spend points to ask drivers questions/dares, vote, unlock perks.\n4. **See:** impact report compares your savings to something you actually understand — a real circuit.\n\nI built it modular on purpose. Each feature is self-contained on a shared backend. That meant we could kill a whole module without breaking the rest. We needed that.",
               "marks": []
             }
           ],
