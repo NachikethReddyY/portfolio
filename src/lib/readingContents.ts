@@ -19,8 +19,11 @@ export function currentSection(
   headings: { id: string; top: number }[],
   offset = 140,
 ) {
-  let active = headings[0]?.id;
-  for (const heading of headings) {
+  // Sort by viewport position first: callers may pass ids in reading order
+  // while the page places some of them (meta bands) above earlier chapters.
+  const sorted = [...headings].sort((a, b) => a.top - b.top);
+  let active = sorted[0]?.id;
+  for (const heading of sorted) {
     if (heading.top > offset) break;
     active = heading.id;
   }

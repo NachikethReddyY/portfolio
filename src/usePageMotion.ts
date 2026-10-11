@@ -10,7 +10,7 @@ export function usePageMotion(key?: string) {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         const headings = scope.current?.querySelectorAll(
-          ".page-heading h1, .case-heading h1, .article-heading h1",
+          ".page-heading h1, .case-heading h1, .article-heading h1, .amr-hero h1",
         );
         if (headings?.length)
           gsap.from(headings, {
