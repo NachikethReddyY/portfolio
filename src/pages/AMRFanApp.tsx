@@ -707,7 +707,7 @@ function TreeLevel({
             <a
               href={`#${branch.id}`}
               className={`amr-tree-link${branch.children ? " is-branch" : ""}`}
-              style={{ paddingLeft: depth * 18 }}
+              style={{ paddingLeft: depth * 9 }}
               aria-current={activeHeading === branch.id ? "location" : undefined}
               aria-expanded={branch.children ? open : undefined}
             >
@@ -1085,12 +1085,12 @@ export default function AMRFanApp() {
               We came up with a solid Minimum Viable Product (MVP) that
               presented the app&rsquo;s true intention and complete purpose —
               business logic included — and while getting there cost real model
-              money, the final build itself was kept as lean as possible:
-              $0.065 of model API calls for the entire week. Throughout this case
-              study you&rsquo;ll follow our thought process the same way it
-              happened — deciphering the problem statement, iterating through
-              our different versions, and how each feature became what it is in
-              the final build.
+              money, the final build itself was kept as lean as possible: $0.065
+              of model API calls for the entire week. Throughout this case study
+              you&rsquo;ll follow our thought process the same way it happened —
+              deciphering the problem statement, iterating through our different
+              versions, and how each feature became what it is in the final
+              build.
             </p>
             <PhotoCarousel onExpand={openViewer} />
             <p>
@@ -1210,14 +1210,14 @@ export default function AMRFanApp() {
             </blockquote>
             <p>
               The problem statement breaks down into two parts. First, take
-              Aston Martin&rsquo;s sustainability data and turn it into something
-              trustworthy and current. Second, deliver it in a way that reaches
-              people who would never go looking for it.
+              Aston Martin&rsquo;s sustainability data and turn it into
+              something trustworthy and current. Second, deliver it in a way
+              that reaches people who would never go looking for it.
             </p>
             <p>
-              The second part is where the actual problem is. Nobody opens an app
-              to read a sustainability report, so the report can&rsquo;t be the
-              reason a fan opens it. The app has to be entertaining first —
+              The second part is where the actual problem is. Nobody opens an
+              app to read a sustainability report, so the report can&rsquo;t be
+              the reason a fan opens it. The app has to be entertaining first —
               something a fan wants to open, and wants to come back to the next
               day — while still saying everything the report was meant to say.
               That left us with one question: where does a fan&rsquo;s own
@@ -1319,15 +1319,15 @@ export default function AMRFanApp() {
               points, streaks, rewards — and you lose credibility. Push
               credibility too hard — charts, citations, caveats — and nobody
               opens it twice. Every decision in the build is a vote on that
-              tension.
+              tension. Our Mentors said:
             </p>
             <aside className="amr-callout" data-reveal>
               <p>
                 Don&rsquo;t build a sustainability app with F1 stickers on it.
                 Build a fan app where sustainable behaviour happens to earn you
-                something.
+                something. Build an experience for fans to give them a reason to
+                keep coming back to the app.
               </p>
-              <span className="amr-callout-src">our mentor</span>
             </aside>
             <p>
               One scope call came early. The brief spans all of ESG —
@@ -1365,20 +1365,35 @@ export default function AMRFanApp() {
             </div>
             <h3 id="amr-kept">What we kept</h3>
             <p>
-              The whole app came down to a green travel calculator and a curated
-              fan experience around it. The calculator is the first part: type in
-              where you&rsquo;re going and it compares the ways to get there —
-              the one carbon decision a fan actually makes. The fan experience
-              is the layer that brings people back: driver theming, challenges,
-              rewards, the daily streak, the quiz.
+              Initially, we decided to build the entire MVP around the green
+              travel calculator and design a curated experience around it. The
+              main part is the calculation of the carbon dioxide emissions. All
+              the fan has to do is what they already know how to do: search the
+              two locations they want to travel between, pick the mode of
+              transport, and the app gives back the time, the route, and how
+              much carbon dioxide each option produces. We took the averages
+              and baked them into the calculator.
             </p>
             <p>
-              Two more pieces keep the whole thing honest. A sustainability
-              camera, because a claim needs evidence. An impact dashboard,
-              because grams mean nothing and laps do. And driver theming
-              deserves its own line — it arrived embarrassingly late and turned
-              out to be the reason the app felt like a fan app instead of a
-              utility.
+              Transport only covers the trip, though. Everything else a fan
+              does in a day needed its own way in, and a typed claim is worth
+              nothing without proof — so the second feature became the
+              sustainability camera: photograph the action, let a model judge
+              what it can actually see, get points.
+            </p>
+            <p>
+              Then came the question the calculator couldn&rsquo;t answer: so
+              what? Grams of carbon dioxide mean nothing to a fan. The third
+              feature, the impact dashboard, sets your savings against
+              something you can picture — laps of Marina Bay — next to the
+              team&rsquo;s official numbers.
+            </p>
+            <p>
+              And around all of it, the curated fan experience — the layer that
+              brings people back: driver theming, challenges, rewards, the
+              daily streak, the quiz. Theming arrived embarrassingly late and
+              turned out to be the reason the app felt like a fan app instead
+              of a utility.
             </p>
             <figure className="amr-kept-fig" data-reveal>
               <div className="amr-kept-shots">
@@ -1743,19 +1758,19 @@ export default function AMRFanApp() {
             </p>
             <p>
               So it became a camera. You open it and pick the action
-              you&rsquo;re claiming — reusing, refilling, repairing,
-              recycling, planting. You take the photo and confirm it.
-              The app shows it going out with a plain <em>Sending…</em> — no
-              fake progress bar, no pretending it&rsquo;s instant. On the other
-              side, the image is hashed with SHA-256 before anything else
-              happens; a hash that&rsquo;s already in the database means a
-              reused photo and scores zero. A new hash gets sent to Luna + Jev
-              with one structured instruction: does this visibly show the
-              claimed action, judge only what is visible. The verdict, the
-              score, the confidence level and a written reason all come back and
-              land on screen together. Pass and 100 points are minted — capped
-              at 2000 per action, so one photo of &ldquo;recycled a hundred
-              cans&rdquo; can&rsquo;t farm the ledger.
+              you&rsquo;re claiming — reusing, refilling, repairing, recycling,
+              planting. You take the photo and confirm it. The app shows it
+              going out with a plain <em>Sending…</em> — no fake progress bar,
+              no pretending it&rsquo;s instant. On the other side, the image is
+              hashed with SHA-256 before anything else happens; a hash
+              that&rsquo;s already in the database means a reused photo and
+              scores zero. A new hash gets sent to Luna + Jev with one
+              structured instruction: does this visibly show the claimed action,
+              judge only what is visible. The verdict, the score, the confidence
+              level and a written reason all come back and land on screen
+              together. Pass and 100 points are minted — capped at 2000 per
+              action, so one photo of &ldquo;recycled a hundred cans&rdquo;
+              can&rsquo;t farm the ledger.
             </p>
             <p>
               Prompt iteration was the real work. The first judge ruled too
@@ -1821,9 +1836,9 @@ export default function AMRFanApp() {
             </figure>
             <h3 id="amr-see">Impact report</h3>
             <p>
-              Nobody feels &ldquo;120g CO₂ saved.&rdquo; So the report sets
-              your savings against Marina Bay — the circuit we had the SVG
-              track for — so the number lands somewhere you can picture.
+              Nobody feels &ldquo;120g CO₂ saved.&rdquo; So the report sets your
+              savings against Marina Bay — the circuit we had the SVG track for
+              — so the number lands somewhere you can picture.
             </p>
             <figure className="amr-fig" data-reveal>
               <div className="amr-fig-frames is-solo">
@@ -1909,13 +1924,20 @@ export default function AMRFanApp() {
               one codebase that behaves natively on neither.
             </p>
             <h3 id="amr-inspiration">The inspiration</h3>
-            <p>
-              The clearest statement of why that trade changed came from{" "}
-              <a href={SHOPIFY_URL} target="_blank" rel="noopener noreferrer">
-                Shopify&rsquo;s engineering write-up on moving back to native
-              </a>{" "}
-              — published in September 2026, while we were mid-build.
-            </p>
+            <div className="amr-note-beside">
+              <p>
+                The clearest statement of why that trade changed came from{" "}
+                <a href={SHOPIFY_URL} target="_blank" rel="noopener noreferrer">
+                  Shopify&rsquo;s engineering write-up on moving back to native
+                </a>{" "}
+                — published in September 2026, while we were mid-build.
+              </p>
+              <Note
+                text="The piece that made us feel less alone in throwing away the React build."
+                href={SHOPIFY_URL}
+                label="Shopify: back to native"
+              />
+            </div>
             <p>
               They had gone all-in on React Native in 2020 for the same reasons
               we did, and in 2026 they moved back to Swift and Kotlin because
@@ -1925,11 +1947,6 @@ export default function AMRFanApp() {
               Shop app went from proof of concept to published native app in
               twelve weeks.
             </p>
-            <Note
-              text="The piece that made us feel less alone in throwing away the React build."
-              href={SHOPIFY_URL}
-              label="Shopify: back to native"
-            />
             <p>
               Same motion, student scale: the Swift app is the source of truth,
               Kotlin is the port, and both apps stay on one product loop while
@@ -1984,11 +2001,99 @@ export default function AMRFanApp() {
               engagement data a sponsor can actually price.
             </p>
             <p>
-              The sizing in our final deck was a model, not a measurement: 2.4M
-              fans, 5% adoption, ~120K active users, ~$1.8M of illustrative
-              yearly revenue at ~$1.25 revenue per active user against ~$0.16 to
-              serve. <em>Illustrative — to be validated in a pilot.</em> The
-              only number from this build I&rsquo;d defend: $0.065 of model
+              The sizing in our final deck was a model, not a measurement. This
+              is the whole calculation:
+            </p>
+            <figure className="amr-fig" data-reveal>
+              <div className="amr-finance">
+                <div className="amr-finance-funnel">
+                  <div className="amr-finance-funnel-step">
+                    <span className="amr-finance-big">2.4M</span>
+                    <span className="amr-finance-sub">potential fans</span>
+                  </div>
+                  <span className="amr-finance-arrow" aria-hidden="true">
+                    &rarr;
+                  </span>
+                  <div className="amr-finance-funnel-step">
+                    <span className="amr-finance-big">5%</span>
+                    <span className="amr-finance-sub">assumed adoption</span>
+                  </div>
+                  <span className="amr-finance-arrow" aria-hidden="true">
+                    &rarr;
+                  </span>
+                  <div className="amr-finance-funnel-step">
+                    <span className="amr-finance-big">120K</span>
+                    <span className="amr-finance-sub">active users</span>
+                  </div>
+                </div>
+                <div className="amr-finance-revenue">
+                  <p className="amr-finance-kicker">
+                    Illustrative revenue, per year
+                  </p>
+                  <div className="amr-finance-bar-row">
+                    <span className="amr-finance-bar-label">Merchandise</span>
+                    <span className="amr-finance-bar-track">
+                      <span
+                        className="amr-finance-bar"
+                        style={{ width: "40%" }}
+                      />
+                    </span>
+                    <span className="amr-finance-bar-value">$720K</span>
+                  </div>
+                  <p className="amr-finance-assume">
+                    120K users × 10% buy × $60 average order
+                  </p>
+                  <div className="amr-finance-bar-row">
+                    <span className="amr-finance-bar-label">
+                      Partner commission
+                    </span>
+                    <span className="amr-finance-bar-track">
+                      <span
+                        className="amr-finance-bar is-main"
+                        style={{ width: "60%" }}
+                      />
+                    </span>
+                    <span className="amr-finance-bar-value">$1.08M</span>
+                  </div>
+                  <p className="amr-finance-assume">
+                    120K users × 6 bookings/yr × $1.50
+                  </p>
+                  <div className="amr-finance-total">
+                    <span>Total</span>
+                    <span className="amr-finance-total-value">~$1.8M</span>
+                  </div>
+                </div>
+                <div className="amr-finance-units">
+                  <p className="amr-finance-kicker">
+                    Unit economics, per active fan per month
+                  </p>
+                  <div className="amr-finance-unit-grid">
+                    <div className="amr-finance-unit">
+                      <span className="amr-finance-big is-revenue">~$1.25</span>
+                      <span className="amr-finance-sub">revenue</span>
+                    </div>
+                    <div className="amr-finance-unit">
+                      <span className="amr-finance-big">~$0.16</span>
+                      <span className="amr-finance-sub">cost to serve</span>
+                    </div>
+                  </div>
+                  <p className="amr-finance-assume">
+                    4 × $0.01 photo checks + 20 × $0.005 route lookups + $0.02
+                    hosting
+                  </p>
+                </div>
+              </div>
+              <figcaption>
+                <span className="amr-fig-num">Fig 08</span>
+                Illustrative model from our final deck — assumed adoption,
+                buying and booking behaviour; every input needs a pilot to
+                validate. Sponsorship upside excluded. The $0.065 prototype
+                spend below is separate: what the demo cost to run, not what
+                each user costs to serve.
+              </figcaption>
+            </figure>
+            <p>
+              The only number from this build I&rsquo;d defend: $0.065 of model
               spend for a working prototype.
             </p>
             <h3 id="amr-trust">Trust and governance</h3>
@@ -2005,9 +2110,9 @@ export default function AMRFanApp() {
           <section id="amr-decisions" data-reveal>
             <h2>Decisions</h2>
             <p>
-              Modularity is what made cutting cheap. Three killed, one
-              deferred, two rewritten, two shipped — and the modules that died
-              did it without breaking the ones that didn&rsquo;t.
+              Modularity is what made cutting cheap. Three killed, one deferred,
+              two rewritten, two shipped — and the modules that died did it
+              without breaking the ones that didn&rsquo;t.
             </p>
             <div className="amr-decisions">
               {DECISIONS.map((decision) => (
@@ -2102,10 +2207,10 @@ export default function AMRFanApp() {
             <p>
               What it isn&rsquo;t is finished. The UI is rough — it&rsquo;s not
               a bad design, it&rsquo;s a design that ran out of runway. Maps,
-              auth and model APIs have no fallbacks or caching. SHA-256 stops casual
-              reuse only. Uploaded photos have no retention policy behind them.
-              And no environmental outcome has been measured — the app proves a
-              loop, not a carbon result.
+              auth and model APIs have no fallbacks or caching. SHA-256 stops
+              casual reuse only. Uploaded photos have no retention policy behind
+              them. And no environmental outcome has been measured — the app
+              proves a loop, not a carbon result.
             </p>
             <figure className="amr-fig" data-reveal>
               <div className="amr-fig-frames is-pair">
@@ -2169,8 +2274,8 @@ export default function AMRFanApp() {
                 the fans. The prototype is not polished, but the loop works, the
                 numbers are honest, and with a small push this could be a
                 genuinely great product — a place where 2.4 million fans can see
-                what their travel actually costs the planet, and what
-                it&rsquo;s worth.
+                what their travel actually costs the planet, and what it&rsquo;s
+                worth.
               </p>
             </aside>
             <div className="amr-more">

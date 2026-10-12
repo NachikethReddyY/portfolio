@@ -5387,7 +5387,7 @@ code, pre, kbd, samp { font-family: var(--font-mono); }
   grid-template-rows: 0fr;
   opacity: 0;
   transform: translateY(-4px);
-  padding: 0 0 0 16px;
+  padding: 0 0 0 8px;
   transition:
     grid-template-rows 0.38s var(--ease),
     opacity 0.26s ease,
@@ -5398,7 +5398,7 @@ code, pre, kbd, samp { font-family: var(--font-mono); }
   grid-template-rows: 1fr;
   opacity: 1;
   transform: none;
-  padding: 2px 0 6px 16px;
+  padding: 2px 0 6px 8px;
 }
 .amr-children-clip {
   min-height: 0;
@@ -5891,7 +5891,16 @@ code, pre, kbd, samp { font-family: var(--font-mono); }
   align-items: center;
   gap: 12px;
 }
-.amr-decision-head h3 { margin: 0; }
+/* Decision titles are ledger entries, not sub-sections: they keep their h3
+   anchors for the tree, but set quieter than a real h3 so eight of them in a
+   row don't shout over the chapter headings. */
+.amr-decision-head h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.45;
+  letter-spacing: 0;
+}
 .amr-decision p {
   margin: 10px 0 0;
   font-size: 15px;
@@ -6153,17 +6162,22 @@ code, pre, kbd, samp { font-family: var(--font-mono); }
   border-radius: 3px;
 }
 /* A note that must sit level with the paragraph it comments on instead of
-   below it. The paragraph is the anchor: the note leaves the flow and hangs in
-   the margin beside its opening lines, so the drawn arrow lands on the
-   sentence rather than on whatever follows. Below 1281px it returns to the
-   column and flows underneath as usual. */
+   below it. The paragraph is the anchor: the note leaves the flow and hangs
+   beside its opening lines. The left edge sits 24px inside the column so the
+   drawn arrow lands on the text rather than floating in the margin — the
+   slight overlap is intended. The 10px top drop plus the arrow's own 19px tip
+   drop puts the tip on the paragraph's second line, where the annotated
+   words sit. Below 1281px the note returns to the column and flows
+   underneath as usual. */
 @media (min-width: 1281px) {
   .amr-note-beside { position: relative; }
   .amr-note-beside .amr-note {
     position: absolute;
     top: 10px;
-    right: calc(-1 * min((100vw - 688px) / 2 - 24px, 300px));
+    left: calc(100% - 24px);
     margin: 0;
+    /* More air: the handwriting was set too tight for the margin size. */
+    line-height: 1.45;
   }
 }
 /* On tight desktops the note joins the column; the arrow stays, smaller. */
@@ -6747,6 +6761,120 @@ code, pre, kbd, samp { font-family: var(--font-mono); }
 }
 .amr-fig-num { color: var(--brand-text); margin-right: 8px; }
 
+/* Fig 08: the deck's sizing as a visual financial model — the audience
+   funnel, two revenue bars on a shared scale, and monthly unit economics.
+   Static widths, no animation: the figure reads identically with JS off and
+   under reduced motion. Numbers stay as real text next to their visuals so
+   nothing is hidden from assistive tech. */
+.amr-finance {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #0d1218;
+  padding: 24px 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.amr-finance p { margin: 0; }
+.amr-finance-kicker {
+  font: 500 11px/1.5 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #7b8796;
+}
+.amr-finance-funnel {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.amr-finance-big {
+  display: block;
+  font-size: 34px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  color: var(--text);
+}
+.amr-finance-big.is-revenue { color: var(--brand-text); }
+.amr-finance-sub {
+  display: block;
+  margin-top: 4px;
+  font: 500 11px/1.5 var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #7b8796;
+}
+.amr-finance-arrow {
+  font-size: 22px;
+  color: #3d4753;
+}
+.amr-finance-revenue,
+.amr-finance-units {
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.amr-finance-bar-row {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+}
+.amr-finance-bar-label {
+  font-size: 14px;
+  color: var(--text);
+}
+.amr-finance-bar-track {
+  display: block;
+  height: 14px;
+  border-radius: 7px;
+  background: #1a212b;
+  overflow: hidden;
+}
+.amr-finance-bar {
+  display: block;
+  height: 100%;
+  border-radius: 7px;
+  background: #3f648c;
+}
+.amr-finance-bar.is-main { background: var(--brand-text); }
+.amr-finance-bar-value {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+.amr-finance-assume {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.amr-finance-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-top: 4px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--line);
+  font-size: 14px;
+  color: var(--text);
+}
+.amr-finance-total-value {
+  font-family: var(--font-mono);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--brand-text);
+}
+.amr-finance-unit-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
 /* Screens of the four kept features, under "What we kept". */
 .amr-kept-fig { margin: 30px 0 0; }
 .amr-kept-shots {
@@ -6792,6 +6920,12 @@ code, pre, kbd, samp { font-family: var(--font-mono); }
   .amr-fig-frames img { border-radius: 12px; }
   .amr-fig-frames.is-pair img,
   .amr-fig-frames.is-trio img { width: calc((100% - 10px) / 2); }
+  .amr-finance { padding: 18px 16px 16px; gap: 18px; border-radius: 12px; }
+  .amr-finance-big { font-size: 25px; }
+  .amr-finance-funnel { gap: 10px; }
+  .amr-finance-arrow { font-size: 18px; }
+  .amr-finance-bar-row { grid-template-columns: 1fr auto; row-gap: 8px; }
+  .amr-finance-bar-track { grid-column: 1 / -1; order: 3; }
   .amr-rolebox { margin-top: 22px; padding-top: 16px; }
   .amr-body .amr-owned li,
   .amr-body .amr-team li { font-size: 14px; }
