@@ -100,7 +100,6 @@ const SECTIONS: TreeBranch[] = [
   {
     id: "amr-business",
     label: "Business benefits",
-    children: [{ id: "amr-trust", label: "Trust and governance" }],
   },
   {
     id: "amr-decisions",
@@ -112,11 +111,13 @@ const SECTIONS: TreeBranch[] = [
   },
   {
     id: "amr-constraints",
-    label: "Constraints",
+    label: "Trade-offs and honest limits",
     children: [
+      { id: "amr-trust", label: "Trust and governance" },
       { id: "amr-time", label: "Time" },
       { id: "amr-cost", label: "Cost" },
       { id: "amr-platform", label: "The platform rewrite" },
+      { id: "amr-limits", label: "What it isn't yet" },
     ],
   },
   { id: "amr-lessons", label: "Lessons learned" },
@@ -151,12 +152,12 @@ const PROBLEMS = [
   {
     num: "02",
     title: "Fans can't see themselves in it",
-    text: "The report talks about the team. The fan has no line in it — nothing tells them what their behaviour has to do with a Scope 3 target.",
+    text: "The report talks about the team. The fan has no line in it. Nothing tells them what their behaviour has to do with a Scope 3 target.",
   },
   {
     num: "03",
     title: "Green advice skips the trip itself",
-    text: "Carbon tools are built around a home and a commute. The journey a fan actually makes — wherever they are going today, and which way they take — is the one decision they can compare and change, and nothing was speaking to it.",
+    text: "Carbon tools are built around a home and a commute. The journey a fan actually makes, wherever they are going today and which way they take, is the one decision they can compare and change, and nothing was speaking to it.",
   },
   {
     num: "04",
@@ -167,12 +168,12 @@ const PROBLEMS = [
 
 const IDEA_BOARD = [
   { note: "ESG dashboard", state: "kept", text: "We focused on the environment side of the ESG reporting and showed it to the fans. That focus became the impact dashboard." },
-  { note: "Auto-ingest the report", state: "future", text: "Future scope, not the MVP — the MVP had to work on the day. The idea: upload the whole report and let a model build the view out the way we think fans will read it best. Because it generates custom components rather than one fixed screen, those pieces can be composed into views that present the sustainability figures well." },
+  { note: "Auto-ingest the report", state: "future", text: "Future scope, not the MVP. The MVP had to work on the day. The idea: upload the whole report and let a model build the view out the way we think fans will read it best. Because it generates custom components rather than one fixed screen, those pieces can be composed into views that present the sustainability figures well." },
   { note: "Food + stay marketplace", state: "dropped", text: "Needed partners and commission logic. Slides only." },
   { note: "Community feed", state: "dropped", text: "Moderation and scale we didn't have time to earn." },
   { note: "Travel calculator", state: "kept", text: "Public transport vs car, same route, side by side." },
   { note: "Sustainability camera", state: "kept", text: "Photograph the action, let a model judge it, pay out points." },
-  { note: "Impact dashboard", state: "kept", text: "Your savings against a real circuit — Marina Bay." },
+  { note: "Impact dashboard", state: "kept", text: "Your savings against a real circuit: Marina Bay." },
   { note: "Driver theming", state: "kept", text: "Added late. It's the reason it felt like a fan app." },
 ];
 
@@ -192,7 +193,7 @@ const DECISIONS: Array<{
     status: "Deferred",
     tone: "is-future",
     title: "ESG auto-ingestion",
-    text: "Upload the report and let a model build the views from it. Out of MVP scope — the MVP had to work on the day — but it is still where a next version starts.",
+    text: "Upload the report and let a model build the views from it. Out of MVP scope because the MVP had to work on the day, but it is still where a next version starts.",
   },
   {
     status: "Killed",
@@ -849,7 +850,7 @@ export default function AMRFanApp() {
             </div>
             <div>
               <dt>Reading time</dt>
-              <dd>3 min read + 3:30 demo</dd>
+              <dd>27 min read + 3:30 demo</dd>
             </div>
           </dl>
         </div>
@@ -876,7 +877,7 @@ export default function AMRFanApp() {
             <div>
               <dt>Status</dt>
               <dd>
-                Working prototype, presented to evaluators — hackathon MVP, not
+                Working prototype, presented to evaluators: hackathon MVP, not
                 production
               </dd>
             </div>
@@ -890,12 +891,12 @@ export default function AMRFanApp() {
           <h2 className="amr-facts-title">What I owned</h2>
           <ul className="amr-owned">
             <li>
-              The iOS app in Swift — navigation, camera flow, driver theming,
+              The iOS app in Swift: navigation, camera flow, driver theming,
               points UI, impact report
             </li>
             <li>Travel emissions logic + Google Maps routing</li>
             <li>
-              The AI verification pipeline — photo → SHA-256 duplicate check →
+              The AI verification pipeline: photo → SHA-256 duplicate check →
               Luna + Jev judge prompt → verdict + points
             </li>
             <li>Judge prompt rewrites, when v1 ruled too harshly</li>
@@ -1055,23 +1056,21 @@ export default function AMRFanApp() {
             <p className="amr-lede">
               Recently, I got the opportunity to participate in the Cognizant
               &times; Aston Martin Aramco Gen-AI idea-thon, representing
-              Singapore Polytechnic — and we won first place! 🏆🎉 In this case
-              study, I&rsquo;ll break down how it came together, how I carried
-              my team through the iOS build of the fan app that turns
-              sustainability reporting into something fans actually do — plan a
+              Singapore Polytechnic and we won first place! In this case
+              study, I&rsquo;ll break down how it came together, how our team
+              shaped the idea and how I built the iOS fan app that turns
+              sustainability reporting into something fans actually do: plan a
               greener route, prove an action with a photo, earn points, and
               spend them on rewards.
             </p>
             <p>
-              This project wasn&rsquo;t cheap to build, either: the development
-              process alone took over $10,000 of model usage — GPT-6 Astra,
-              GPT-6 Sol, GPT-6.1 Sol, GPT-6 Luna, DeepSeek v4.1 Flash and Muse
-              Spark 1.3. I&rsquo;ve made a bunch of mistakes using these models
-              for development, and in the past two weeks I&rsquo;ve changed a
-              lot about how I work with AI agents — in a good way.
+              We came up with a solid Minimum Viable Product (MVP) that
+              presented the app&rsquo;s true intention and complete purpose
+              (business logic included), and the final build itself was kept as
+              lean as possible: $0.065 of model API calls.
             </p>
             <p className="amr-read-links">
-              During the read, if this interests you —{" "}
+              During the read, if this interests you:{" "}
               <a href={REPO_URL} target="_blank" rel="noopener noreferrer">
                 read the code
               </a>{" "}
@@ -1082,20 +1081,8 @@ export default function AMRFanApp() {
               .
             </p>
             <p>
-              We came up with a solid Minimum Viable Product (MVP) that
-              presented the app&rsquo;s true intention and complete purpose —
-              business logic included — and while getting there cost real model
-              money, the final build itself was kept as lean as possible: $0.065
-              of model API calls for the entire week. Throughout this case study
-              you&rsquo;ll follow our thought process the same way it happened —
-              deciphering the problem statement, iterating through our different
-              versions, and how each feature became what it is in the final
-              build.
-            </p>
-            <PhotoCarousel onExpand={openViewer} />
-            <p>
               Right here is a full video demo of the entire app in action. This
-              app was not meant to be pretty first — it was meant to highlight
+              app was not meant to be pretty first. It was meant to highlight
               the functionality, so it is not as polished as one would hope. But
               it is a MVP.
             </p>
@@ -1203,7 +1190,7 @@ export default function AMRFanApp() {
                 more tangible and relevant to Formula One audiences?&rdquo;
               </p>
               <Note
-                text="This is the real programme the app had to serve — not a marketing brief, an annual report with numbers in it."
+                text="This is the real programme the app had to serve: not a marketing brief, an annual report with numbers in it."
                 href={MAKE_A_MARK_URL}
                 label="Make A Mark"
               />
@@ -1217,16 +1204,16 @@ export default function AMRFanApp() {
             <p>
               The second part is where the actual problem is. Nobody opens an
               app to read a sustainability report, so the report can&rsquo;t be
-              the reason a fan opens it. The app has to be entertaining first —
+              the reason a fan opens it. The app has to be entertaining first:
               something a fan wants to open, and wants to come back to the next
-              day — while still saying everything the report was meant to say.
+              day, while still saying everything the report was meant to say.
               That left us with one question: where does a fan&rsquo;s own
-              behaviour actually touch the team&rsquo;s footprint — and can you
+              behaviour actually touch the team&rsquo;s footprint, and can you
               show them that on a phone, on an ordinary day?
             </p>
             <h3 id="amr-fan">Who we built for</h3>
             <p>
-              We curated the entire app around a single person — our target
+              We curated the entire app around a single person: our target
               persona, Freddy, 35. The age was deliberate, not a guess: 35 is
               the average age of an Aston Martin fan, which puts Freddy in the
               middle of the audience we actually had to convince. Every feature
@@ -1239,8 +1226,8 @@ export default function AMRFanApp() {
               </div>
               <p className="amr-persona-line">
                 He follows the team daily and drives past the circuit regularly,
-                but has no way to see whether greener choices make a difference
-                — and he can&rsquo;t read an ESG report.
+                but has no way to see whether greener choices make a difference.
+                He can&rsquo;t read an ESG report.
               </p>
               <div className="amr-persona-needs">
                 <p className="amr-owned-label">Needs</p>
@@ -1255,7 +1242,7 @@ export default function AMRFanApp() {
             </div>
             <p>
               The idea behind him was simple. Make something engaging, and make
-              it translated — a fan has to want to open this, and then be able
+              it translated: a fan has to want to open this, and then be able
               to read what&rsquo;s inside it.
             </p>
             <p>
@@ -1268,7 +1255,7 @@ export default function AMRFanApp() {
           <section id="amr-decoding" data-reveal>
             <h2>Decoding the brief</h2>
             <p>
-              Before anything else, we broke the brief apart out loud — a long,
+              Before anything else, we broke the brief apart out loud: a long,
               messy session where we said every obvious answer and then argued
               it down.
             </p>
@@ -1302,24 +1289,24 @@ export default function AMRFanApp() {
             </ol>
             <p>
               So the answer couldn&rsquo;t be a prettier report. That is where
-              the dashboard idea came from — keep the report&rsquo;s numbers,
-              throw away its format — and those four problems are what it had to
+              the dashboard idea came from: keep the report&rsquo;s numbers,
+              throw away its format. Those four problems are what it had to
               answer: readability, a line for the fan, a trip they can actually
               change, and a reason to come back.
             </p>
             <h3 id="amr-tension">Two jobs, one app</h3>
             <p>
-              Make the Environment report readable — short, simple, neatly
+              Make the Environment report readable: short, simple, neatly
               organised, not a PDF with a hero image on top. And give fans
               something worth returning to, because nobody contributes to a
               sustainability effort they don&rsquo;t know they&rsquo;re part of.
             </p>
             <p>
-              Those two pull against each other. Push engagement too hard —
-              points, streaks, rewards — and you lose credibility. Push
-              credibility too hard — charts, citations, caveats — and nobody
+              Those two pull against each other. Push engagement too hard
+              (points, streaks, rewards) and you lose credibility. Push
+              credibility too hard (charts, citations, caveats) and nobody
               opens it twice. Every decision in the build is a vote on that
-              tension. Our Mentors said:
+              tension. Our mentors said:
             </p>
             <aside className="amr-callout" data-reveal>
               <p>
@@ -1330,8 +1317,8 @@ export default function AMRFanApp() {
               </p>
             </aside>
             <p>
-              One scope call came early. The brief spans all of ESG —
-              environment, social and governance — and we couldn&rsquo;t do all
+              One scope call came early. The brief spans all of ESG
+              (environment, social and governance), and we couldn&rsquo;t do all
               of it justice, so we didn&rsquo;t pretend to. We took the
               environment pillar and went deep, because it&rsquo;s the one a
               fan&rsquo;s own behaviour can already move: the journey, the
@@ -1377,7 +1364,7 @@ export default function AMRFanApp() {
             <p>
               Transport only covers the trip, though. Everything else a fan
               does in a day needed its own way in, and a typed claim is worth
-              nothing without proof — so the second feature became the
+              nothing without proof. So the second feature became the
               sustainability camera: photograph the action, let a model judge
               what it can actually see, get points.
             </p>
@@ -1385,11 +1372,11 @@ export default function AMRFanApp() {
               Then came the question the calculator couldn&rsquo;t answer: so
               what? Grams of carbon dioxide mean nothing to a fan. The third
               feature, the impact dashboard, sets your savings against
-              something you can picture — laps of Marina Bay — next to the
+              something you can picture (laps of Marina Bay) next to the
               team&rsquo;s official numbers.
             </p>
             <p>
-              And around all of it, the curated fan experience — the layer that
+              And around all of it, the curated fan experience: the layer that
               brings people back: driver theming, challenges, rewards, the
               daily streak, the quiz. Theming arrived embarrassingly late and
               turned out to be the reason the app felt like a fan app instead
@@ -1448,7 +1435,7 @@ export default function AMRFanApp() {
             </figure>
             <p>
               Everything else stayed on the slide deck as future scope, and some
-              of it — the community feed, leaderboards, hotel booking — stayed
+              of it (the community feed, leaderboards, hotel booking) stayed
               there permanently.
             </p>
           </section>
@@ -1457,20 +1444,20 @@ export default function AMRFanApp() {
             <h2>v1: React Native</h2>
             <p>
               The original platform plan was React Native. One codebase, both
-              stores, no rebuilding the same screen twice — and for a student
+              stores, no rebuilding the same screen twice. For a student
               team with no native experience that was a sensible bet, not a lazy
               one. I set up the repository, the branches, and the first build.
             </p>
             <h3 id="amr-react-wrong">Why we dropped it</h3>
             <p>
-              It wasn&rsquo;t one thing going wrong, it was a pile of them, and
-              none of them were about cost.
+              It was a pile of things going wrong at once, and none of them
+              were about cost.
             </p>
             <ul className="amr-owned">
               <li>
-                <strong>It wasn&rsquo;t designing well.</strong> Even with the
-                strongest model we had access to at the time, the output didn
-                &ldquo; get it&rdquo; — layouts looked like a website pretending
+                <strong>The design never landed.</strong> Even with the
+                strongest model we had access to at the time, the output
+                didn&rsquo;t get it. Layouts looked like a website pretending
                 to be an app.
               </li>
               <li>
@@ -1481,23 +1468,26 @@ export default function AMRFanApp() {
               </li>
               <li>
                 <strong>Functionality didn&rsquo;t translate.</strong> Sensors,
-                camera behaviour and gestures — the exact parts the
-                sustainability camera needed — were where it fell apart.
+                camera behaviour and gestures (the exact parts the
+                sustainability camera needed) were where it fell apart.
               </li>
               <li>
                 <strong>The codebase got too big for us to hold.</strong> As it
                 grew, the AI started going rogue: drifting intent, changing
                 things nobody asked it to change, and losing track of what it
-                had already done.
+                had already done. We tried to optimise around it: added
+                skills, tidied the edges, but none of us could go in and fix
+                it by hand any more. Pushing through just burned tokens until
+                we ran out.
               </li>
             </ul>
             <p>
-              The one genuine win was Expo — real sensor access and fast phone
+              The one genuine win was Expo: real sensor access and fast phone
               tooling. It just stopped being worth what it cost us.
             </p>
             <aside className="amr-callout" data-reveal>
               <p>
-                At some point I decided to rewrite the whole thing in Swift — a
+                At some point I decided to rewrite the whole thing in Swift, a
                 language I&rsquo;d learned properly through the{" "}
                 <a
                   href={ADS_IG_URL || undefined}
@@ -1516,12 +1506,23 @@ export default function AMRFanApp() {
           <section id="amr-swift" data-reveal>
             <h2>Rewriting it in Swift</h2>
             <p>
-              I wrote it myself, in Swift, with an AI-assisted workflow
-              I&rsquo;d been refining for six months. Not vibe-coding — plans
+              Getting there wasn&rsquo;t cheap: I spent close to $10,000 of my
+              own on AI inference alone (GPT-6 Astra, GPT-6 Sol, GPT-6.1 Sol,
+              GPT-6 Luna, DeepSeek v4.1 Flash and Muse Spark 1.3). I&rsquo;ve
+              made a bunch of mistakes using these models for development, and
+              in the past two weeks I&rsquo;ve changed a lot about how I work
+              with AI agents, in a good way.
+            </p>
+            <p>
+              I built the iOS app in Swift, with an AI-assisted workflow
+              I&rsquo;d been refining for six months. Not vibe-coding: plans
               and specs first, generated second, and then I read, ran and tested
-              everything it produced. That loop is what let me learn camera
-              permission flows, state management under a live theme, and how to
-              talk to a backend without shipping a security hole alongside it.
+              everything it produced. I wrote the AI verification pipeline and
+              the sign-in and sign-up pipelines myself; the models helped me
+              connect them to our backend cloud infrastructure. That loop is what
+              let me learn camera permission flows, state management under a
+              live theme, and how to talk to a backend without shipping a
+              security hole alongside it.
             </p>
             <h3 id="amr-society">Where the Swift came from</h3>
             <p>
@@ -1537,14 +1538,14 @@ export default function AMRFanApp() {
             <p>
               Once I started writing features, the thing that mattered most
               became obvious: the app should never lock you into its features.
-              Modularity by design — every feature a self-contained module on a
+              Modularity by design: every feature a self-contained module on a
               shared backend, so you can swap one in or out without rethinking
               the app around it.
             </p>
             <p>
               That decision came straight out of the refocus. We were told, flat
               out, that the scope was too big, and the answer was not to write
-              smaller features — it was to write features that could be removed
+              smaller features. It was to write features that could be removed
               on a Tuesday without breaking anything else. Killing a module had
               to cost an hour, not a weekend.
             </p>
@@ -1569,7 +1570,7 @@ export default function AMRFanApp() {
               </div>
               <figcaption>
                 <span className="amr-fig-num">Fig 01</span>
-                The Swift build, late in the project — home surface and the
+                The Swift build, late in the project: home surface and the
                 driver-themed account, both swapping on the same module set.
               </figcaption>
             </figure>
@@ -1581,7 +1582,7 @@ export default function AMRFanApp() {
               The first Swift build worked and looked like nothing: a blank
               page, no styling, no point of view. I opened Figma to work around
               it and find a UI that actually suited the app, and built an Aston
-              Martin design language for it — a liquid-glass treatment with the
+              Martin design language for it: a liquid-glass treatment with the
               team&rsquo;s aesthetic running through the whole surface.
             </p>
             <p>
@@ -1595,7 +1596,7 @@ export default function AMRFanApp() {
               Drivers have numbers, and a fan&rsquo;s driver is the one thing
               they already love about this team. That number became the
               app&rsquo;s spine: pick Alonso or Stroll and the entire interface
-              restyles around them — colour, imagery, and a giant number on the
+              restyles around them: colour, imagery, and a giant number on the
               home screen that reads from across a room.
             </p>
             <figure className="amr-fig" data-reveal>
@@ -1619,7 +1620,7 @@ export default function AMRFanApp() {
               </div>
               <figcaption>
                 <span className="amr-fig-num">Fig 02</span>
-                Pick your driver, get their app. The number is the aesthetic —
+                Pick your driver, get their app. The number is the aesthetic:
                 before and after theming, same modules underneath.
               </figcaption>
             </figure>
@@ -1643,8 +1644,8 @@ export default function AMRFanApp() {
             </p>
             <h4 id="amr-plan">Plan</h4>
             <p>
-              Pick where you&rsquo;re going and how you get there — public
-              transport, cycle, walk, car — and see estimated emissions side by
+              Pick where you&rsquo;re going and how you get there (public
+              transport, cycle, walk, car) and see estimated emissions side by
               side for the same journey.
             </p>
             <h4 id="amr-prove">Prove</h4>
@@ -1727,7 +1728,7 @@ export default function AMRFanApp() {
               Why transport, and not recycling or food? Because the emissions a
               fan actually controls are the ones in the journey, and the journey
               is a decision they make every day rather than once a season.
-              It&rsquo;s also the one decision with a clean, comparable answer —
+              It&rsquo;s also the one decision with a clean, comparable answer:
               the same route, four ways to travel it, four different numbers.
             </p>
             <p>
@@ -1735,8 +1736,8 @@ export default function AMRFanApp() {
               goes through Google Maps, so the same code works in any race city
               rather than one hard-coded track. I used AI to research and
               cross-check the factors, and the UI labelled every number{" "}
-              <em>estimated</em> — occupancy, traffic and vehicle mix all move
-              it. Points represent participation, not verified kilograms
+              <em>estimated</em> (occupancy, traffic and vehicle mix all move
+              it). Points represent participation, not verified kilograms
               avoided.
             </p>
             <p>
@@ -1758,9 +1759,9 @@ export default function AMRFanApp() {
             </p>
             <p>
               So it became a camera. You open it and pick the action
-              you&rsquo;re claiming — reusing, refilling, repairing, recycling,
-              planting. You take the photo and confirm it. The app shows it
-              going out with a plain <em>Sending…</em> — no fake progress bar,
+              you&rsquo;re claiming (reusing, refilling, repairing, recycling,
+              planting). You take the photo and confirm it. The app shows it
+              going out with a plain <em>Sending…</em>. No fake progress bar,
               no pretending it&rsquo;s instant. On the other side, the image is
               hashed with SHA-256 before anything else happens; a hash
               that&rsquo;s already in the database means a reused photo and
@@ -1768,13 +1769,13 @@ export default function AMRFanApp() {
               structured instruction: does this visibly show the claimed action,
               judge only what is visible. The verdict, the score, the confidence
               level and a written reason all come back and land on screen
-              together. Pass and 100 points are minted — capped at 2000 per
-              action, so one photo of &ldquo;recycled a hundred cans&rdquo;
-              can&rsquo;t farm the ledger.
+              together. A pass mints points (50 for the 96 in the screenshot
+              below, capped at 2000 per action), so one photo of
+              &ldquo;recycled a hundred cans&rdquo; can&rsquo;t farm the ledger.
             </p>
             <p>
               Prompt iteration was the real work. The first judge ruled too
-              harshly — it read emotion and context into photos, so a far-away
+              harshly. It read emotion and context into photos, so a far-away
               bus shot correctly failed while a legitimate inside-the-bus shot
               sat on the line. I rewrote it to weigh only visible evidence for
               the specific claim, and verdicts started holding up.
@@ -1797,7 +1798,7 @@ export default function AMRFanApp() {
             </p>
             <h3 id="amr-theming">Driver theming</h3>
             <p>
-              Pick Alonso or Stroll and the app restyles — colours, imagery and
+              Pick Alonso or Stroll and the app restyles: colours, imagery and
               a giant number on the home screen. Theming is data-driven, so the
               design work is a data file, not a rebuild.
             </p>
@@ -1837,8 +1838,8 @@ export default function AMRFanApp() {
             <h3 id="amr-see">Impact report</h3>
             <p>
               Nobody feels &ldquo;120g CO₂ saved.&rdquo; So the report sets your
-              savings against Marina Bay — the circuit we had the SVG track for
-              — so the number lands somewhere you can picture.
+              savings against Marina Bay (the circuit we had the SVG track for),
+              so the number lands somewhere you can picture.
             </p>
             <figure className="amr-fig" data-reveal>
               <div className="amr-fig-frames is-solo">
@@ -1894,18 +1895,12 @@ export default function AMRFanApp() {
               it, and free at our scale.
             </p>
             <p>
-              Azure handles auth so credentials never lived in our code — which
-              mattered, because securing a backend was new to me. The backend
+              Azure handles auth so credentials never lived in our code, which
+              mattered because securing a backend was new to me. The backend
               ran on a private machine for the demo but was structured
               Azure-ready: finishing the cloud deploy is configuration, not a
               rewrite.
             </p>
-            <aside className="amr-callout" data-reveal>
-              <p>
-                Maps, auth and model APIs can all fail, and the prototype has no
-                real fallbacks or caching. A production build needs them.
-              </p>
-            </aside>
           </section>
 
           <section id="amr-port" data-reveal>
@@ -1914,7 +1909,7 @@ export default function AMRFanApp() {
               Once the iOS build was real, Android stopped being a second
               codebase to maintain and became a port. Anirudh took the Kotlin
               side; I handed over the Swift source, the specs and the
-              screenshots, and Astra did the translation work between them —
+              screenshots, and Astra did the translation work between them,
               implementing the Android version with the iOS version as the
               reference.
             </p>
@@ -1930,7 +1925,7 @@ export default function AMRFanApp() {
                 <a href={SHOPIFY_URL} target="_blank" rel="noopener noreferrer">
                   Shopify&rsquo;s engineering write-up on moving back to native
                 </a>{" "}
-                — published in September 2026, while we were mid-build.
+                (published in September 2026, while we were mid-build).
               </p>
               <Note
                 text="The piece that made us feel less alone in throwing away the React build."
@@ -2085,8 +2080,8 @@ export default function AMRFanApp() {
               </div>
               <figcaption>
                 <span className="amr-fig-num">Fig 08</span>
-                Illustrative model from our final deck — assumed adoption,
-                buying and booking behaviour; every input needs a pilot to
+                Illustrative model from our final deck (assumed adoption,
+                buying and booking behaviour). Every input needs a pilot to
                 validate. Sponsorship upside excluded. The $0.065 prototype
                 spend below is separate: what the demo cost to run, not what
                 each user costs to serve.
@@ -2096,22 +2091,13 @@ export default function AMRFanApp() {
               The only number from this build I&rsquo;d defend: $0.065 of model
               spend for a working prototype.
             </p>
-            <h3 id="amr-trust">Trust and governance</h3>
-            <p>
-              Every gameable part had a designed answer. Faked photos meet a
-              confidence score and activity rules. Inaccurate emissions are
-              labelled, and unavailable numbers show as unavailable rather than
-              guessed. Official figures stay admin-approved with a source and a
-              reporting period. Uploaded photos are personal data with retention
-              rules, not free stock. Points abuse gets rate limits.
-            </p>
           </section>
 
           <section id="amr-decisions" data-reveal>
             <h2>Decisions</h2>
             <p>
               Modularity is what made cutting cheap. Three killed, one deferred,
-              two rewritten, two shipped — and the modules that died did it
+              two rewritten, two shipped, and the modules that died did it
               without breaking the ones that didn&rsquo;t.
             </p>
             <div className="amr-decisions">
@@ -2130,7 +2116,16 @@ export default function AMRFanApp() {
           </section>
 
           <section id="amr-constraints" data-reveal>
-            <h2>Constraints</h2>
+            <h2>Trade-offs and honest limits</h2>
+            <h3 id="amr-trust">Trust and governance</h3>
+            <p>
+              Every gameable part had a designed answer. Faked photos meet a
+              confidence score and activity rules. Inaccurate emissions are
+              labelled, and unavailable numbers show as unavailable rather than
+              guessed. Official figures stay admin-approved with a source and a
+              reporting period. Uploaded photos are personal data with retention
+              rules, not free stock. Points abuse gets rate limits.
+            </p>
             <ol className="amr-lessons-list amr-constraints-list">
               <li id="amr-time">
                 <strong>Time — 15 Sep to 8 Oct 2026.</strong> The idea-thon, two
@@ -2140,20 +2135,58 @@ export default function AMRFanApp() {
                 cut to environment-only and mobility-only.
               </li>
               <li id="amr-cost">
-                <strong>Cost — $0.065, against a pooled ~$10.</strong> That
-                ruled out training anything and ruled out a big model on every
-                call, so Luna + Jev were picked as judges specifically for cost,
-                and every call was tuned to fit. Gemini was the cheap
-                alternative on the table and wasn&rsquo;t used for verification.
+                <strong>Cost — $0.065 of shipped demo calls, against a pooled ~$10
+                team budget.</strong> That ruled out training anything and ruled
+                out a big model on every call, so Luna + Jev were picked as
+                judges specifically for cost, and every call was tuned to fit.
+                The close to $10,000 I spent on inference while learning and
+                experimenting is separate: the price of getting there, not of
+                running the demo. Gemini was the cheap alternative on the table
+                and wasn&rsquo;t used for verification.
               </li>
               <li id="amr-platform">
                 <strong>The platform rewrite.</strong> Mid-build, the React
                 Native codebase stopped being maintainable, and the whole thing
-                was rewritten in Swift — the single biggest constraint on the
+                was rewritten in Swift. It was the single biggest constraint on the
                 schedule, and the reason a modular, swappable architecture was
                 not optional.
               </li>
             </ol>
+            <h3 id="amr-limits">What it isn&rsquo;t yet</h3>
+            <p>
+              The UI is rough. It&rsquo;s not a bad design, it&rsquo;s a design
+              that ran out of runway. Maps, auth and model APIs have no
+              fallbacks or caching. SHA-256 stops casual reuse only. Uploaded
+              photos have no retention policy behind them. And no environmental
+              outcome has been measured. The app proves a loop, not a carbon
+              result.
+            </p>
+            <figure className="amr-fig" data-reveal>
+              <div className="amr-fig-frames is-pair">
+                <img
+                  src="/images/amr/amr-cam-loading.webp"
+                  alt="Verification in progress: a submitted photo shown with a 'Sending…' status"
+                  width="720"
+                  height="1566"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <img
+                  src="/images/amr/amr-cam-error.webp"
+                  alt="Failed verification: 'Could not process photo' with a Try again button"
+                  width="720"
+                  height="1566"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <figcaption>
+                <span className="amr-fig-num">Fig 07</span>
+                What failure looked like — a plain &ldquo;Sending&hellip;&rdquo;
+                and, when a request failed, an honest error with a manual retry.
+                No silent fallbacks behind it.
+              </figcaption>
+            </figure>
           </section>
 
           <section id="amr-lessons" data-reveal>
@@ -2161,8 +2194,8 @@ export default function AMRFanApp() {
             <ol className="amr-lessons-list">
               <li>
                 <strong>Cognizant taught us design thinking properly.</strong>{" "}
-                The coaching around the brief — persona first, reframe the
-                problem, then solutions — is the part I still use. We arrived
+                The coaching around the brief (persona first, reframe the
+                problem, then solutions) is the part I still use. We arrived
                 with a dashboard idea and left with a fan loop.
               </li>
               <li>
@@ -2174,7 +2207,7 @@ export default function AMRFanApp() {
               <li>
                 <strong>Planning is the whole game with AI.</strong> When the
                 codebase outgrew what a model could hold, the cost was not the
-                model — it was the missing plan. Vague instructions are how
+                model. It was the missing plan. Vague instructions are how
                 agents go rogue.
               </li>
               <li>
@@ -2204,40 +2237,6 @@ export default function AMRFanApp() {
               presented to evaluators, built for $0.065 of model spend. The
               backend runs on a private machine, structured Azure-ready.
             </p>
-            <p>
-              What it isn&rsquo;t is finished. The UI is rough — it&rsquo;s not
-              a bad design, it&rsquo;s a design that ran out of runway. Maps,
-              auth and model APIs have no fallbacks or caching. SHA-256 stops
-              casual reuse only. Uploaded photos have no retention policy behind
-              them. And no environmental outcome has been measured — the app
-              proves a loop, not a carbon result.
-            </p>
-            <figure className="amr-fig" data-reveal>
-              <div className="amr-fig-frames is-pair">
-                <img
-                  src="/images/amr/amr-cam-loading.webp"
-                  alt="Verification in progress: a submitted photo shown with a 'Sending…' status"
-                  width="720"
-                  height="1566"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <img
-                  src="/images/amr/amr-cam-error.webp"
-                  alt="Failed verification: 'Could not process photo' with a Try again button"
-                  width="720"
-                  height="1566"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <figcaption>
-                <span className="amr-fig-num">Fig 07</span>
-                What failure looked like — a plain &ldquo;Sending&hellip;&rdquo;
-                and, when a request failed, an honest error with a manual retry.
-                No silent fallbacks behind it.
-              </figcaption>
-            </figure>
             <div className="amr-prose-links">
               <a href={REPO_URL} target="_blank" rel="noopener noreferrer">
                 Read the code <Arrow diagonal />
@@ -2256,9 +2255,9 @@ export default function AMRFanApp() {
             <p>
               We set out to make a sustainability report readable for fans, and
               what we learned is that you don&rsquo;t get there by presenting
-              the report better. You get there by giving fans something to do —
+              the report better. You get there by giving fans something to do:
               plan a greener route, prove an action, earn a point, see it
-              against a real circuit — and keeping the numbers honest the entire
+              against a real circuit, and keeping the numbers honest the entire
               way.
             </p>
             <p>
@@ -2273,11 +2272,12 @@ export default function AMRFanApp() {
                 I hope Aston Martin does pursue this idea and hands it back to
                 the fans. The prototype is not polished, but the loop works, the
                 numbers are honest, and with a small push this could be a
-                genuinely great product — a place where 2.4 million fans can see
-                what their travel actually costs the planet, and what it&rsquo;s
-                worth.
+                genuinely great product: a place where 2.4 million potential
+                fans can see what their travel actually costs the planet, and
+                what it&rsquo;s worth.
               </p>
             </aside>
+            <PhotoCarousel onExpand={openViewer} />
             <div className="amr-more">
               <h3 className="amr-boxlabel">More projects</h3>
               <div className="amr-more-grid">

@@ -5847,17 +5847,37 @@ code, pre, kbd, samp { font-family: var(--font-mono); }
   gap: 4px;
 }
 .amr-demo figcaption a svg { width: 12px; height: 12px; }
-/* The tree drops to a top nav below 1200px: at 50px from the edge the
-   sticky tree would crowd the centered column on narrower desktops. */
+/* Below 1200px the chapter tree is replaced by a tiny sticky read-progress
+   strip: the wrapped link rows crowded small screens and duplicated heading
+   navigation, so only the progress track survives — pinned to the viewport
+   top for the whole article, since the tall layout is its sticky parent.
+   Source/Demo stay reachable through the overview and Current-version links,
+   so the rail links go with the tree. Native dialog uses the top layer, so
+   the strip's modest z-index can never cover the viewer. */
 @media (max-width: 1200px) {
   .amr-layout { display: flex; flex-direction: column; gap: 44px; padding-inline: 24px; }
-  .amr-tree { position: static; width: 100%; margin-left: 0; max-width: none; }
-  .amr-tree nav { flex-direction: row; flex-wrap: wrap; gap: 4px 18px; }
-  .amr-tree .amr-children { display: none; }
-  .amr-tree nav a { padding: 6px 0; }
-  .amr-tree nav a[aria-current="location"] { color: var(--brand-text); }
-  .amr-progress { max-width: 340px; }
-  .amr-tree-links { margin-top: 30px; }
+  .amr-tree {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    width: auto;
+    min-width: 0;
+    max-width: none;
+    max-height: none;
+    margin: 0 -24px;
+    padding: 0;
+    background: var(--bg);
+  }
+  .amr-tree-title,
+  .amr-tree-label,
+  .amr-tree nav,
+  .amr-tree .amr-hint,
+  .amr-tree .amr-tree-spacer,
+  .amr-tree .amr-tree-links { display: none; }
+  .amr-progress { margin: 0; max-width: none; }
+  .amr-progress-track { border-radius: 0; height: 3px; }
+  .amr-page.is-past-hero .amr-progress-track { height: 3px; }
+  .amr-progress-num { display: none; }
 }
 @media (max-width: 1100px) {
   .amr-hero .shell { display: flex; flex-direction: column; align-items: flex-start; }
@@ -6180,20 +6200,30 @@ code, pre, kbd, samp { font-family: var(--font-mono); }
     line-height: 1.45;
   }
 }
-/* On tight desktops the note joins the column; the arrow stays, smaller. */
+/* Below the column the note sits underneath its paragraph, so the arrow
+   points up at the text it comments on instead of sideways — sideways is
+   what pushed it off the screen edge on phones. The top padding makes room
+   for the turned glyph. */
 @media (max-width: 1280px) {
   .amr-note {
     width: auto;
     max-width: none;
-    margin: 16px 0 22px;
-    padding: 0 0 0 36px;
+    margin: 34px 0 22px;
+    padding: 30px 0 0;
     rotate: -1deg;
   }
-  .amr-note::before { left: 0; top: 6px; width: 27px; height: 22px; }
-  /* The brief's note escapes the quote block and flows below it. */
+  .amr-note::before {
+    left: 6px;
+    top: 0;
+    width: 27px;
+    height: 22px;
+    transform: rotate(90deg);
+  }
+  /* The brief's note stays inside the quote block; the old -24px escape is
+     what carried its arrow past the viewport edge. */
   .amr-brief .amr-note {
     position: static;
-    margin: 14px 0 0 -24px;
+    margin: 34px 0 0;
   }
 }
 @media (prefers-reduced-motion: reduce) {
